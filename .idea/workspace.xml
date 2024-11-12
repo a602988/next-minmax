@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
+      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/global.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messages/de.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/playwright.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Login.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/NavLink.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigation.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigationLocaleSwitcher.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/about/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/AppNavigation.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/AppNavigationLocaleSwitcher.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/Logout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/NavLink.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/profile/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/app/updateLocale.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/not-found.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Document.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/PageTitle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/globals.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/db.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/i18n/request.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/i18n/routing.public.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/custom-base-styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/custom-components.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/custom-utilities.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/exclude.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/globals.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/styles/minmax.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;a602988&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
+    &quot;accountId&quot;: &quot;9f6eecd6-a281-490f-8010-6a13656f8514&quot;
+  }
+}</component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/Cellar/php/8.2.8/bin/php" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2n8XIa4NuZFdKnt6YnN0qIPw75m" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.github.tuchg.nonasciicodecompletionhelper.config.PluginSettingsController",
+    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/(public)/[locale]" />
+      <recent name="$PROJECT_DIR$/src/components/layout" />
+      <recent name="$PROJECT_DIR$/src/app/app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/app/error" />
+      <recent name="$PROJECT_DIR$/app/not-found" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.23339.16" />
+        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.23339.16" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="" />
+      <created>1728355598349</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728355598349</updated>
+      <workItem from="1728355599515" duration="10837000" />
+      <workItem from="1728442421061" duration="3047000" />
+      <workItem from="1731394601183" duration="272000" />
+      <workItem from="1731395524384" duration="1106000" />
+      <workItem from="1731396936500" duration="6322000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
