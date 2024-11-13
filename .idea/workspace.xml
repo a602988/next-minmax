@@ -5,54 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/global.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/messages/de.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/playwright.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Login.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/NavLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigation.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigationLocaleSwitcher.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/about/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/AppNavigation.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/AppNavigationLocaleSwitcher.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/Logout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/NavLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/profile/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/app/updateLocale.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/not-found.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Document.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/PageTitle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/globals.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/db.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/i18n/request.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/i18n/routing.public.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/custom-base-styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/custom-components.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/custom-utilities.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/exclude.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/globals.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/minmax.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/demo/database.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/demo/languages/route.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/demo/layout/route.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/api/demo/system-menus/route.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config/apiConfig.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/apiService.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/fetchLanguages.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/languageConfigService.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/LanguageType.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,14 +64,14 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/messages",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
     "settings.editor.selected.configurable": "com.github.tuchg.nonasciicodecompletionhelper.config.PluginSettingsController",
     "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
@@ -109,11 +79,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/messages" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/(public)/[locale]" />
-      <recent name="$PROJECT_DIR$/src/components/layout" />
-      <recent name="$PROJECT_DIR$/src/app/app" />
+      <recent name="$PROJECT_DIR$/src/types" />
+      <recent name="$PROJECT_DIR$/src/services" />
+      <recent name="$PROJECT_DIR$/src/config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app" />
@@ -143,7 +113,10 @@
       <workItem from="1728442421061" duration="3047000" />
       <workItem from="1731394601183" duration="272000" />
       <workItem from="1731395524384" duration="1106000" />
-      <workItem from="1731396936500" duration="6322000" />
+      <workItem from="1731396936500" duration="7010000" />
+      <workItem from="1731473688023" duration="5260000" />
+      <workItem from="1731481800628" duration="759000" />
+      <workItem from="1731483556222" duration="2530000" />
     </task>
     <servers />
   </component>
