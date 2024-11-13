@@ -13,3 +13,6 @@ https://lucid.app/lucidchart/c180264e-1318-4ee5-80dc-4e0bfab293fc/edit?invitatio
 
 在網站一進時，透過fetchLanguages撈取到作為i18n中export const routing 的locales與defaultLocale
 
+# 待解決問題
+
+透過Api 撈取語系資料

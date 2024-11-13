@@ -1,5 +1,9 @@
-export const locales = ['en', 'de'] as const;
+const availableLocalesRaw = process.env.AVAILABLE_LOCALES
+  ? process.env.AVAILABLE_LOCALES.split(/\s+/)
+  : ['zh-TW'];
 
-export const defaultLocale: Locale = 'en';
+export const locales: ReadonlyArray<string> = availableLocalesRaw;
 
-export type Locale = (typeof locales)[number];
+export const defaultLocale = process.env.DEFAULT_LOCALE  || 'zh-TW';
+
+export type Locale = typeof locales[number];

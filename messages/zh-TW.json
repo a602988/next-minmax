@@ -24,5 +24,21 @@
   },
   "Profile": {
     "title": "Profile"
+  },
+  "HomePage": {
+    "title": "您好",
+    "about": "關於我們"
+  },
+  "common": {
+    "messageLoading": "'載入中...",
+    "messageError": "載入資料錯誤"
+  },
+  "LanguageSelector": {
+    "selectLanguage": "選擇語言",
+    "currentLanguage": "當前語言"
+  },
+  "DarkModeToggle": {
+    "switchToLightMode": "切換到淺色模式",
+    "switchToDarkMode": "切換到深色模式"
   }
 }

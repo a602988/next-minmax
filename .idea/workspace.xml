@@ -5,24 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/api/demo/database.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/api/demo/languages/route.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/api/demo/layout/route.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/api/demo/system-menus/route.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/apiConfig.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/apiService.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/fetchLanguages.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/languageConfigService.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/LanguageType.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/zh-TW.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/languageConfigService.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +105,7 @@
       <workItem from="1731396936500" duration="7010000" />
       <workItem from="1731473688023" duration="5260000" />
       <workItem from="1731481800628" duration="759000" />
-      <workItem from="1731483556222" duration="2530000" />
+      <workItem from="1731483556222" duration="4514000" />
     </task>
     <servers />
   </component>

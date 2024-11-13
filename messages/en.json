@@ -24,5 +24,21 @@
   },
   "Profile": {
     "title": "Profile"
+  },
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "common": {
+    "messageLoading": "'Loading...",
+    "messageError": "Error loading"
+  },
+  "LanguageSelector": {
+    "selectLanguage": "Select language",
+    "currentLanguage": "Current Language"
+  },
+  "DarkModeToggle": {
+    "switchToLightMode": "Switch to light mode",
+    "switchToDarkMode": "Switch to dark mode"
   }
 }
