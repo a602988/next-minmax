@@ -6,9 +6,14 @@
  * @last-modified 2024-10-23
  */
 
-import { newConnection, apiGetAll } from "../database";
-import { SystemMenuModel } from "@/models/system-menu";
 import { NextRequest } from "next/server";
+import { SystemMenuType } from "@/types/systemMenus";
+import { apiGetAll, newConnection } from "../database";
+
+// Update the SystemMenuType to include the 'parent' property
+interface ExtendedSystemMenuType extends SystemMenuType {
+  parent: string | null;
+}
 
 /**
  * 遞歸構建菜單樹
@@ -16,8 +21,8 @@ import { NextRequest } from "next/server";
  * @param allMenus 所有菜單項的數組
  * @returns 構建好的菜單樹
  */
-const getMenuTree = (root: string | null, allMenus: SystemMenuModel[] = []): SystemMenuModel[] => {
-  if (allMenus === null || allMenus.length === 0) return [];
+function getMenuTree(root: string | null, allMenus: Array<ExtendedSystemMenuType> = []): Array<ExtendedSystemMenuType> {
+  if (allMenus.length === 0) return [];
 
   return allMenus
     .filter(menu => menu.parent === root)
@@ -28,7 +33,7 @@ const getMenuTree = (root: string | null, allMenus: SystemMenuModel[] = []): Sys
       // 遞歸獲取子菜單
       children: getMenuTree(menu.code, allMenus)
     }));
-};
+}
 
 // 建立數據庫連接
 const connection = newConnection('page-seeder-import.sqlite3');
@@ -49,14 +54,13 @@ export async function GET(req: NextRequest): Promise<Response> {
 
     // 檢查特定語言的表是否存在
     const tableExistsQuery = `
-      SELECT name FROM sqlite_master 
-      WHERE type='table' AND name='${specificTableName}'
+        SELECT name FROM sqlite_master
+        WHERE type='table' AND name='${specificTableName}'
     `;
 
     try {
-      // 使用類型斷言來明確 tableExists 的類型
-      const tableExists = await apiGetAll(connection, tableExistsQuery) as { name: string }[];
-      if (tableExists && tableExists.length > 0) {
+      const tableExists = await apiGetAll(connection, tableExistsQuery) as Array<{ name: string }>;
+      if (tableExists.length > 0) {
         tableName = specificTableName;
       }
     } catch (err) {
@@ -69,10 +73,10 @@ export async function GET(req: NextRequest): Promise<Response> {
   query = `SELECT * FROM ${tableName}`;
 
   let status: number;
-  let respBody: SystemMenuModel[] | { error: string };
+  let respBody: Array<ExtendedSystemMenuType> | { error: string };
 
   try {
-    const resp = await apiGetAll(connection, query) as SystemMenuModel[];
+    const resp = await apiGetAll(connection, query) as Array<ExtendedSystemMenuType>;
     status = 200;
     respBody = getMenuTree(null, resp);
   } catch (err) {

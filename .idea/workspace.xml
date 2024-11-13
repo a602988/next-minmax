@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/layout/header/headerBlog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/loading/LoadingBlock.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/loading/loadingBlock.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/types/systemMenus.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/zh-TW.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/languageConfigService.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigationLocaleSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigationLocaleSwitcher.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/demo/system-menus/route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/demo/system-menus/route.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/AppNavigationLocaleSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/AppNavigationLocaleSwitcher.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/i18n/routing.public.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/routing.public.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +61,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/messages",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/types",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,18 +75,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/types" />
+      <recent name="$PROJECT_DIR$/src/components/layout/header" />
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/messages" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/types" />
-      <recent name="$PROJECT_DIR$/src/services" />
-      <recent name="$PROJECT_DIR$/src/config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/i18n" />
       <recent name="$PROJECT_DIR$/src/app" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/error" />
-      <recent name="$PROJECT_DIR$/app/not-found" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -105,7 +112,7 @@
       <workItem from="1731396936500" duration="7010000" />
       <workItem from="1731473688023" duration="5260000" />
       <workItem from="1731481800628" duration="759000" />
-      <workItem from="1731483556222" duration="4514000" />
+      <workItem from="1731483556222" duration="5369000" />
     </task>
     <servers />
   </component>

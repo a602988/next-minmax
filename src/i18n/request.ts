@@ -1,5 +1,5 @@
 import {getRequestConfig} from 'next-intl/server';
-import {defaultLocale, locales} from '../config';
+import {defaultLocale, locales} from './config';
 import {getUserLocale} from '../db';
 
 export default getRequestConfig(async ({requestLocale}) => {

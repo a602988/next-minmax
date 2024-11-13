@@ -1,5 +1,5 @@
 import {cookies} from 'next/headers';
-import {defaultLocale} from './config';
+import {defaultLocale} from './i18n/config';
 
 // This cookie name is used by `next-intl` on the public pages too. By
 // reading/writing to this locale, we can ensure that the user's locale

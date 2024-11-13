@@ -1,7 +1,7 @@
 'use client';
 
 import {useLocale} from 'next-intl';
-import {Locale} from '@/config';
+import {Locale} from '@/i18n/config';
 import {Link, usePathname} from '@/i18n/routing.public';
 
 export default function PublicNavigationLocaleSwitcher() {

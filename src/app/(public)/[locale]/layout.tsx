@@ -4,7 +4,7 @@ import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {ReactNode} from 'react';
 import Document from '@/components/Document';
-import {locales} from '@/config';
+import {locales} from '@/i18n/config';
 import PublicNavigation from './PublicNavigation';
 import PublicNavigationLocaleSwitcher from './PublicNavigationLocaleSwitcher';
 
@@ -33,8 +33,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
+
   const messages = await getMessages();
 
   return (
