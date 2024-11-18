@@ -6,13 +6,12 @@
  * @last-modified 2024-10-23
  */
 
-import { newConnection, apiGetOne } from "../database";
 import { NextRequest, NextResponse } from "next/server";
+import { apiGetOne, newConnection } from "../database";
 
 // 連接到數據庫
 // 注意：在生產環境中，應考慮使用環境變量來存儲數據庫連接信息
 const dbBase = newConnection('project-base-seeder.sqlite3');
-
 /**
  * 定義網頁數據的結構
  * @interface WebData
@@ -44,7 +43,7 @@ interface WebDataResponse {
  * @param {NextRequest} req - NextRequest 對象，包含請求信息
  * @returns {Promise<WebDataResponse>} 包含狀態碼和數據或錯誤信息的響應
  */
-const getWebData = async (req: NextRequest): Promise<WebDataResponse> => {
+async function getWebData(req: NextRequest): Promise<WebDataResponse> {
   // 從 URL 查詢參數中獲取語言設置
   const language = req.nextUrl.searchParams.get('language');
 

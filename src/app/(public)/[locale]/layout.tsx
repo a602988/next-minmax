@@ -39,11 +39,9 @@ export default async function LocaleLayout({
   return (
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
-        <div className="m-auto max-w-[60rem] p-4">
           <PublicNavigation />
-          <div className="-mx-4 min-h-[200px] bg-slate-100 p-4">{children}</div>
+          {children}
           <PublicNavigationLocaleSwitcher />
-        </div>
       </NextIntlClientProvider>
     </Document>
   );

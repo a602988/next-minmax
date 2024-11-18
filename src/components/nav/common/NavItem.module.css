@@ -1,0 +1,37 @@
+.listItem{
+
+}
+.link{
+    @apply text-[var(--m-navMain-text)] px-0.5;
+    @apply relative;
+    &[aria-current=page],&.current{
+        @apply text-[var(--m-navMain-text-active)];
+        &::after{
+            @apply content-[''] absolute left-1/2 top-1/2 w-0 h-0.5 bg-primary/50;
+            animation: navMainLine .5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+    }
+}
+.title{
+
+}
+a.link{
+    @apply transition-colors duration-700 ease-out;
+    &:hover,&:focus{
+        @apply text-primary;
+    }
+    span{
+        @apply relative z-10;
+    }
+}
+
+@keyframes navMainLine {
+    from {
+        width: 0;
+        left: 50%;
+    }
+    to {
+        width: 100%;
+        left: 0;
+    }
+}

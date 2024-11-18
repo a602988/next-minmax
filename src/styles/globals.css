@@ -7,4 +7,4 @@
 @import "tailwindcss/utilities";
 @import "./custom-utilities.css";
 
-/*@import "./minmax.css";*/
+@import "./minmax.css";

@@ -8,7 +8,7 @@ export default function PublicNavigationLocaleSwitcher() {
   return (
     <div className="flex gap-3 py-5">
       <LocaleLink locale="en" />
-      <LocaleLink locale="de" />
+      <LocaleLink locale="zh-TW" />
       <LocaleLink locale="ja" />
     </div>
   );

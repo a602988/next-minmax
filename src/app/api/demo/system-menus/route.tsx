@@ -7,7 +7,7 @@
  */
 
 import { NextRequest } from "next/server";
-import { SystemMenuType } from "@/types/systemMenus";
+import { SystemMenuType } from "@/types/systemMenuType";
 import { apiGetAll, newConnection } from "../database";
 
 // Update the SystemMenuType to include the 'parent' property
