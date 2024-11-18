@@ -5,42 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/public/upload/images/common/logo-mobile.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/upload/images/common/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/blog/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/blog/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/BlogHeader.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/BlogHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/BlogLayout.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/BlogLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/nav/MainNav.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/nav/MainNav.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/nav/common/Nav.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/nav/common/NavItem.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/nav/common/NavItem.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/getSystemMenu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/getWebData.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/WebDataType.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2670adee-be74-45cc-acaa-1187b389cd09.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2670adee-be74-45cc-acaa-1187b389cd09.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c9ed7c08-6014-4d2a-b205-57ac5374a6bf.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c9ed7c08-6014-4d2a-b205-57ac5374a6bf.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigationLocaleSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/PublicNavigationLocaleSwitcher.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/demo/database.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/demo/database.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/demo/layout/route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/demo/layout/route.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/api/demo/system-menus/route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/demo/system-menus/route.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/header/headerBlog.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/apiConfig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/apiConfig.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/apiService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/getApi.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/fetchLanguages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/getLanguages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/minmax.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/minmax.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/systemMenus.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/systemMenuType.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +107,7 @@
       <workItem from="1731551943468" duration="586000" />
       <workItem from="1731553620907" duration="9468000" />
       <workItem from="1731906938185" duration="2215000" />
-      <workItem from="1731910469958" duration="4034000" />
+      <workItem from="1731910469958" duration="6673000" />
     </task>
     <servers />
   </component>
