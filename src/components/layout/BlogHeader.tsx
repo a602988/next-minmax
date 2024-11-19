@@ -6,7 +6,7 @@ import styles from './BlogHeader.module.css';
 export default function blogHeader() {
     return (
        <div className={styles.header}>
-         <LogoIndex />
+         <LogoIndex height={51} width={234} />
          <MainNav />
        </div>
     )

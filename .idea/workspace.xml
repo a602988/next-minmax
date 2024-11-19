@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/public/static/images/common/logo2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/img/SVGEmbedder.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex-.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2670adee-be74-45cc-acaa-1187b389cd09.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/2670adee-be74-45cc-acaa-1187b389cd09.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useLogoData.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/images/common/logo-mobile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/common/logo-mobile.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/upload/images/common/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/static/images/common/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/img/SVGEmbedder.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/BlogHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/BlogHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex-.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +32,12 @@
     &quot;assignee&quot;: &quot;a602988&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
-    &quot;accountId&quot;: &quot;9f6eecd6-a281-490f-8010-6a13656f8514&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/a602988/next-minmax.git",
+    "accountId": "664971d2-a866-4b26-841f-b3d320325559"
   }
-}</component>
+}]]></component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/Cellar/php/8.2.8/bin/php" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -68,9 +62,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
+    "prettierjs.PrettierConfiguration.Package": "/Users/jean/Documents/GitHub/next-minmax/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -83,11 +77,11 @@
       <recent name="$PROJECT_DIR$/src/services" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/common" />
       <recent name="$PROJECT_DIR$/src/components/nav/common" />
       <recent name="$PROJECT_DIR$/src/components/layout" />
       <recent name="$PROJECT_DIR$/src/i18n" />
       <recent name="$PROJECT_DIR$/src/app" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -123,6 +117,7 @@
       <workItem from="1732002897917" duration="110000" />
       <workItem from="1732003460313" duration="212000" />
       <workItem from="1732003691463" duration="4424000" />
+      <workItem from="1732016832768" duration="3969000" />
     </task>
     <servers />
   </component>

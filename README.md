@@ -20,7 +20,13 @@ https://lucid.app/lucidchart/c180264e-1318-4ee5-80dc-4e0bfab293fc/edit?invitatio
 [{"path":"static/images/common/logo.svg", "width": 234, "height": 51}]
 
 
+# 檔案說明
 
+- src
+  - components
+    - common
+      - img
+        - ImageWithSVG.tsx 當圖片需要判斷是否為svg時
 
 # 檔案命名規則
 
