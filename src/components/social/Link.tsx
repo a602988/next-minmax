@@ -2,15 +2,22 @@ import Link from 'next/link'
 import { CSSProperties, ReactNode } from 'react'
 
 interface SocialLinkProps {
+  children: ReactNode
+  className?: string
   href: string
-  icon?: ReactNode
   label: string
   style?: CSSProperties
-  className?: string
   target?: '_blank' | '_self'
 }
 
-export default function SocialLink({ className, href, icon, label, style, target = '_blank' }: SocialLinkProps) {
+export default function SocialLink({
+  children,
+  className,
+  href,
+  label,
+  style,
+  target = '_blank',
+}: SocialLinkProps) {
   return (
     <Link
       className={`social-link ${className || ''}`}
@@ -18,9 +25,8 @@ export default function SocialLink({ className, href, icon, label, style, target
       rel={target === '_blank' ? 'noopener noreferrer' : undefined}
       style={style}
       target={target}
-
     >
-      {icon && <span className="social-link-icon">{icon}</span>}
+      {children}
       <span className="social-link-label">{label}</span>
     </Link>
   )

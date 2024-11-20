@@ -5,26 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/Link.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/widgets/LiveSupportWidget.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/widgets/LiveSupportWidget.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/about/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/BlogHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/BlogHeader.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/BlogHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/BlogHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/BlogLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/BlogLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/custom-base-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/custom-base-styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/custom-components.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/custom-components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/Link.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/Link.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +60,7 @@
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -151,7 +136,6 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
