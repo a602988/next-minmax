@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import HeaderBlog from '@/components/layout/BlogHeader';
+import HeaderBlog from '@/components/header/BlogHeader';
 
 type Props = {
   children: ReactNode;

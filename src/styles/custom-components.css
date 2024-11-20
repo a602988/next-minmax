@@ -10,4 +10,7 @@
         active:bg-transparent active:text-inherit active:border-transparent
         disabled:opacity-100 disabled:cursor-not-allowed;
     }
+    .container{
+        @apply max-w-full	 px-3 tablet:px-5 desktop:px-7 3xl:px-0 3xl:max-w-3xl mx-auto;
+    }
 }

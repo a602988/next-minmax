@@ -1,0 +1,4 @@
+.header{
+    @apply max-w-3xl container;
+    @apply flex justify-between items-center;
+}
