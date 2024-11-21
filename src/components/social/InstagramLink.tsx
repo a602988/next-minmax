@@ -1,19 +1,19 @@
-import { FaFacebookF } from 'react-icons/fa';
+import { FaInstagram } from "react-icons/fa6";
 import SocialLink from '@/components/social/common/SocialLink';
 
 const PROPS = {
-  name: 'facebook',
-  className: 'social-facebook',
-  label: 'FB',
-  title: 'Facebook',
-  dataKey: 'social_facebook'
+  name: 'instagram"',
+  className: 'social-instagram"',
+  label: 'IG"',
+  title: 'instagram',
+  dataKey: 'social_instagram"'
 };
 
 interface Props {
   className?: string;
 }
 
-export default function FacebookLink({ className = '' }: Props) {
+export default function InstagramLink({ className = '' }: Props) {
   return (
     <SocialLink
       className={`${PROPS.className} ${className}`.trim()}
@@ -21,7 +21,7 @@ export default function FacebookLink({ className = '' }: Props) {
       label={PROPS.label}
       title={PROPS.title}
     >
-      <FaFacebookF />
+      <FaInstagram />
     </SocialLink>
   );
 }

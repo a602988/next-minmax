@@ -1,22 +1,16 @@
-import SocialLink from '@/components/social/Link'
-import { FaTwitter, FaFacebook, FaLinkedin } from 'react-icons/fa'
+import FacebookLink from '@/components/social/FacebookLink';
+import InstagramLink from '@/components/social/InstagramLink';
+import LineLink from '@/components/social/LineLink';
+import YoutubeLink from '@/components/social/YoutubeLink';
 
 export default function SocialLinks() {
-  const socialData = [
-    { href: 'https://twitter.com/youraccount', icon: <FaTwitter />, label: 'Twitter' },
-    { href: 'https://facebook.com/yourpage', icon: <FaFacebook />, label: 'Facebook' },
-    { href: 'https://linkedin.com/in/yourprofile', icon: <FaLinkedin />, label: 'LinkedIn' },
-  ]
 
   return (
     <div className="social-links">
-        <SocialLink
-          className="mr-4 text-blue-500 hover:text-blue-700"
-          href={social.href}
-          icon={social.icon}
-          key={index}
-          label={social.label}
-        />
+        <FacebookLink />
+        <InstagramLink />
+        <YoutubeLink />
+        <LineLink />
     </div>
   )
 }

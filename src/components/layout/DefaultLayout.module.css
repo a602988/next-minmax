@@ -1,4 +1,7 @@
 .defaultLayout{
-    @apply flex flex-col ;
+    @apply flex flex-col min-h-screen;
 
+    body:has(&){
+        @apply bg-[var(--m-body)];
+    }
 }

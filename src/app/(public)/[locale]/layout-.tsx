@@ -5,7 +5,8 @@ import {getMessages, setRequestLocale} from 'next-intl/server';
 import {ReactNode} from 'react';
 import Document from '@/components/Document';
 import {locales} from '@/i18n/config';
-
+import PublicNavigation from './PublicNavigation';
+import PublicNavigationLocaleSwitcher from './PublicNavigationLocaleSwitcher';
 
 type Props = {
   children: ReactNode;
@@ -38,7 +39,9 @@ export default async function LocaleLayout({
   return (
     <Document locale={locale}>
       <NextIntlClientProvider messages={messages}>
+          <PublicNavigation />
           {children}
+          <PublicNavigationLocaleSwitcher />
       </NextIntlClientProvider>
     </Document>
   );

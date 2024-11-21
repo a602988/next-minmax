@@ -1,19 +1,19 @@
-import { FaFacebookF } from 'react-icons/fa';
+import { FaYoutube } from "react-icons/fa";
 import SocialLink from '@/components/social/common/SocialLink';
 
 const PROPS = {
-  name: 'facebook',
-  className: 'social-facebook',
-  label: 'FB',
-  title: 'Facebook',
-  dataKey: 'social_facebook'
+  name: 'youtube"',
+  className: 'social-youtube"',
+  label: 'YT"',
+  title: 'youtube',
+  dataKey: 'social_youtube"'
 };
 
 interface Props {
   className?: string;
 }
 
-export default function FacebookLink({ className = '' }: Props) {
+export default function YoutubeLink({ className = '' }: Props) {
   return (
     <SocialLink
       className={`${PROPS.className} ${className}`.trim()}
@@ -21,7 +21,7 @@ export default function FacebookLink({ className = '' }: Props) {
       label={PROPS.label}
       title={PROPS.title}
     >
-      <FaFacebookF />
+      <FaYoutube />
     </SocialLink>
   );
 }

@@ -37,8 +37,8 @@
 
 
         /*主色*/
-        --m-primary:rgb(10 20 52);
-        --m-primary-rgb:10 20 52;
+        --m-primary:rgb(243  29 61);
+        --m-primary-rgb:243  29 61;
         --m-primary-light:rgb(147, 197, 253);
         --m-primary-light-rgb:147 197 253;
         --m-primary-subtlet: rgb(177, 214, 255);
@@ -49,8 +49,8 @@
         --m-primary-dark-rgb:43 136 248;
 
         /*次要色*/
-        --m-secondary:rgb(148 163 184);
-        --m-secondary-rgb:148 163 184;
+        --m-secondary:rgb(133 133 133);
+        --m-secondary-rgb:133 133 133;
         --m-secondary-light:rgb(203 213 225);
         --m-secondary-light-rgb:203 213 225;
         --m-secondary-dark:rgb(100 116 139);

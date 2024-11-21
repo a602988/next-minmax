@@ -35,12 +35,11 @@ export default function ImageWithSVG({
 
   if (isSvg) {
     return (
-      <div 
+      <div
         aria-label={alt}
         className={className}
         dangerouslySetInnerHTML={{ __html: svgContent }}
         role="img"
-        style={{ width: `${width}px`, height: `${height}px` }}
       />
     );
   }

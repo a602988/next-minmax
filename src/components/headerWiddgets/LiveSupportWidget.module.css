@@ -1,0 +1,21 @@
+.LiveSupportWidget{
+    @apply flex rounded-full overflow-hidden;
+    :global(.social-link) {
+        @apply flex items-center;
+    }
+    :global(.social-link-label) {
+        @apply !ms-1 lg:!ms-1.5 sr-only md:not-sr-only;
+    }
+    :global(svg) {
+        @apply text-base;
+    }
+    & > *{
+        @apply px-3 lg:px-4 py-1 lg:py-2 text-sm;
+    }
+    .facebook{
+        @apply bg-white text-secondary;
+    }
+    .line{
+        @apply bg-primary text-white;
+    }
+}

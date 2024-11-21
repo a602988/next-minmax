@@ -14,10 +14,10 @@ export interface WebDataType {
   contact_email: string;
   contact_address: string;
   contact_map: string;
-  social_facebook: string;
+  social_facebook: string | null;
   social_instagram: string | null;
   social_youtube: string | null;
-  social_line: string;
+  social_line: string | null;
   meta_description: string | null;
   meta_keywords: string | null;
   custom_head: string | null;
@@ -25,4 +25,5 @@ export interface WebDataType {
   custom_foot: string | null;
   cookie_consent: string | null;
   offline_text: string | null;
+  [key: string]: string | null; // 添加索引簽名
 }
