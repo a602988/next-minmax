@@ -1,6 +1,5 @@
-.logo-svg-img{
 
-}
-.logo-svg svg path{
+.logo > *{
         /*fill: #000;*/
+    @apply max-w-full;
 }

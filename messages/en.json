@@ -31,7 +31,9 @@
   },
   "common": {
     "messageLoading": "'Loading...",
-    "messageError": "Error loading"
+    "messageError": "Error loading",
+    "returnTo": "Return to",
+    "home": "Home"
   },
   "LanguageSelector": {
     "selectLanguage": "Select language",

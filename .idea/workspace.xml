@@ -5,31 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout-.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Document-.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/headerWiddgets/LiveSupportWidget.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/InstagramLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/LineLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/YoutubeLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/nav/NavToggle.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/nav/NavToggle.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Document.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/zh-TW.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/Link.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/common/SocialLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/widgets/LiveSupportWidget.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/headerWiddgets/LiveSupportWidget.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/widgets/LiveSupportWidget.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/custom-base-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/custom-base-styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/custom-components.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/custom-components.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/minmax.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/minmax.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/WebDataType.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/WebDataType.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,23 +53,23 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/src/components&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components" />
@@ -135,7 +121,8 @@
       <workItem from="1732003691463" duration="4424000" />
       <workItem from="1732016832768" duration="3969000" />
       <workItem from="1732153760601" duration="11092000" />
-      <workItem from="1732176312851" duration="2703000" />
+      <workItem from="1732176312851" duration="3843000" />
+      <workItem from="1732237112902" duration="9210000" />
     </task>
     <servers />
   </component>

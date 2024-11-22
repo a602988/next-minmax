@@ -2,12 +2,9 @@
     @apply flex justify-between items-center container mx-auto;
     @apply max-w-3xl pt-10;
 }
-.logo{
+.headerLogo{
     @apply max-w-[200px] lg:max-w-[234px];
-    & > div{
-        @apply w-full h-auto;
-        svg{
-            @apply max-w-full;
-        }
+    & > *{
+        @apply w-full h-auto max-w-full;
     }
 }

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import ImageWithSVGSupport from '@/components/common/img/ImageWithSVG';
 import { useLogoData } from '@/hooks/useLogoData';
@@ -22,22 +23,21 @@ export default function LogoIndex({
     link = true,
     width = 234
   }: LogoIndexProps) {
+
   const { isLoading, logoSrc, webData } = useLogoData(defaultLogo);
   const params = useParams();
+  const t = useTranslations('common');
+  const ariaLabel = t('returnTo') + t('home');
+  const titleText = t('returnTo') + ` ${webData?.site_title || "logo"} ` + t('home');
 
   function getHomeHref() {
     const locale = params.locale as string;
     return locale ? `/${locale}` : '/';
   }
 
-  const logoElement = isLoading ? (
-    <div
-      className={`${styles['logo-placeholder']} ${className}`}
-    />
-  ) : (
+  const logoContent = isLoading ? null : (
     <ImageWithSVGSupport
-      alt={webData?.site_title || "Logo"}
-      className={className}
+      alt={webData?.site_title || "logo"}
       height={height}
       priority
       src={logoSrc}
@@ -45,22 +45,20 @@ export default function LogoIndex({
     />
   );
 
-  const wrappedLogo = (
-    <div className={styles['logo-svg']}>
-      {logoElement}
+
+  const innerContent = link ? (
+    <Link
+      aria-label={ariaLabel}
+      href={getHomeHref()}
+      title={titleText}
+    >
+      {logoContent}
+    </Link>
+  ) : logoContent;
+
+  return (
+    <div className={`${styles.logo} ${className}`}>
+      {innerContent}
     </div>
   );
-
-  if (link) {
-    return (
-      <Link
-        aria-label={`Return to ${webData?.site_title || "home"}`}
-        href={getHomeHref()}
-      >
-        {wrappedLogo}
-      </Link>
-    );
-  }
-
-  return wrappedLogo;
 }

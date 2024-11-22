@@ -31,7 +31,9 @@
   },
   "common": {
     "messageLoading": "'載入中...",
-    "messageError": "載入資料錯誤"
+    "messageError": "載入資料錯誤",
+    "returnTo": "返回",
+    "home": "首頁"
   },
   "LanguageSelector": {
     "selectLanguage": "選擇語言",

@@ -1,0 +1,31 @@
+.navToggle{
+    @apply fixed top-0 end-0 block w-[87px] h-[87px] z-[100] cursor-pointer flex flex-row items-center justify-center;
+    .icon{
+        @apply w-[30px] h-[19px]  flex flex-col gap-1 justify-between items-end;
+    }
+    .iconBar{
+        @apply h-[3px] block bg-white transition-all ;
+        &:nth-child(1){
+            @apply w-full;
+        }
+        &:nth-child(2){
+            @apply w-full;
+        }
+        &:nth-child(3){
+            @apply w-1/2;
+        }
+    }
+    &:hover{
+        .iconBar{
+            &:nth-child(1){
+                @apply w-full;
+            }
+            &:nth-child(2){
+                @apply w-2/3;
+            }
+            &:nth-child(3){
+                @apply w-1/3;
+            }
+        }
+    }
+}
