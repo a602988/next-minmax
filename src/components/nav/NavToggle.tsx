@@ -1,39 +1,34 @@
 "use client"
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useNav } from '@/context/NavContext';
 import styles from './NavToggle.module.css'
 
-
 interface NavToggleProps {
-  desktopBreakpoint?: number;  // 桌機的大小判斷
-  autoCloseOnDesktop?: boolean; // 是否桌機時自動關閉選單
+  desktopBreakpoint?: number;
+  autoCloseOnDesktop?: boolean;
 }
 
 export default function NavToggle({
   autoCloseOnDesktop = true,
   desktopBreakpoint = 1280
 }: NavToggleProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isNavOpen, toggleNav } = useNav();
 
-  const toggleNav = useCallback(() => {
-    setIsOpen(prevState => {
-      const newState = !prevState;
-      document.body.classList.toggle('nav-open', newState);
-      return newState;
-    });
-  }, []);
+  const handleToggle = () => {
+    toggleNav();
+    console.log('toggleNav');
+  }
 
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape' && isOpen) {
-        toggleNav();
+      if (event.key === 'Escape' && isNavOpen) {
+        handleToggle();
       }
     }
 
     function handleResize(e: MediaQueryList | MediaQueryListEvent) {
-      if (e.matches && autoCloseOnDesktop) {
-        // 只有在 autoCloseOnDesktop 為 true 時才自動關閉
-        document.body.classList.remove('nav-open');
-        setIsOpen(false);
+      if (e.matches && autoCloseOnDesktop && isNavOpen) {
+        handleToggle();
       }
     }
 
@@ -48,18 +43,19 @@ export default function NavToggle({
     return () => {
       document.removeEventListener('keydown', handleEscape);
       mediaQuery.removeEventListener('change', handleResize);
-      document.body.classList.remove('nav-open');
     };
-  }, [isOpen, toggleNav, desktopBreakpoint, autoCloseOnDesktop]);
+  }, [isNavOpen, handleToggle, desktopBreakpoint, autoCloseOnDesktop]);
 
   return (
     <button
-      aria-expanded={isOpen}
+      aria-expanded={isNavOpen}
       aria-label="Toggle navigation"
-      className={`${styles.navToggle} ${isOpen ? styles.isOpen : ''}`}
+      className={`${styles.navToggle} ${isNavOpen ? styles.isOpen : ''}`}
       onClick={toggleNav}
       type="button"
     >
+      <p className="text-white">{isNavOpen ? 'Close Nav' : 'Open Nav'}</p>
+
       <span className={styles.icon}>
         <span className={styles.iconBar} />
         <span className={styles.iconBar} />

@@ -4,7 +4,8 @@
         @apply w-[30px] h-[19px]  flex flex-col gap-1 justify-between items-end;
     }
     .iconBar{
-        @apply h-[3px] block bg-white transition-all ;
+        @apply h-[3px] block bg-white;
+        transition: width 0.5s ease-out;
         &:nth-child(1){
             @apply w-full;
         }
@@ -18,14 +19,35 @@
     &:hover{
         .iconBar{
             &:nth-child(1){
-                @apply w-full;
+                animation: secondBarAnimation 3s infinite;
             }
             &:nth-child(2){
-                @apply w-2/3;
+                animation: secondBarAnimation2 3s infinite;
             }
             &:nth-child(3){
-                @apply w-1/3;
+                animation: secondBarAnimation3 3s infinite;
             }
         }
     }
+}
+@keyframes secondBarAnimation {
+    0% { width: 100%; }
+    25% { width: 50%; }
+    50% { width: 100%; }
+    75% { width: 0%; }
+    100% { width: 100%; }
+}
+@keyframes secondBarAnimation2 {
+    0% { width: 100%; }
+    25% { width: 0%; }
+    50% { width: 50%; }
+    75% { width: 0%; }
+    100% { width: 100%; }
+}
+@keyframes secondBarAnimation3 {
+    0% { width: 50%; }
+    25% { width: 0%; }
+    50% { width: 100%; }
+    75% { width: 0%; }
+    100% { width: 50%; }
 }

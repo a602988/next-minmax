@@ -1,13 +1,16 @@
+import LiveSupportWidget from '@/components/headerWiddgets/LiveSupportWidget';
 import LogoIndex from "@/components/logo/LogoIndex";
 import MainNav from "@/components/nav/MainNav";
-import styles from './BlogHeader.module.css';
+import NavToggle from '@/components/nav/NavToggle';
+import styles from './DefaultHeader.module.css';
 
-
-export default function blogHeader() {
-    return (
-       <div className={styles.header}>
-         <LogoIndex height={51} width={234} />
-         <MainNav />
-       </div>
-    )
-};
+export default function BlogHeader() {
+  return (
+    <header className={`${styles.header} container-px`}>
+      <LogoIndex className={styles.headerLogo} height={51} width={234} />
+      <MainNav />
+      <LiveSupportWidget />
+      <NavToggle />
+    </header>
+  )
+}

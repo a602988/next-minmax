@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/components/nav/NavToggle.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/nav/NavToggle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/layout/ClientDocument.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/layout/Document.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/NavContext.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/zh-TW.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/layout-.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout-.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/not-found.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/not-found.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Document.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/BlogHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/BlogHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav/NavToggle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/NavToggle.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav/NavToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/NavToggle.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,11 +82,11 @@
       <recent name="$PROJECT_DIR$/src/components/header" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/layout" />
       <recent name="$PROJECT_DIR$/src/components/headerWiddgets" />
       <recent name="$PROJECT_DIR$/src/components/header/widgets" />
       <recent name="$PROJECT_DIR$/src/components/social/common" />
       <recent name="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)" />
-      <recent name="$PROJECT_DIR$/src/components/header" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -123,6 +126,8 @@
       <workItem from="1732153760601" duration="11092000" />
       <workItem from="1732176312851" duration="3843000" />
       <workItem from="1732237112902" duration="9210000" />
+      <workItem from="1732510901147" duration="31000" />
+      <workItem from="1732510939860" duration="6621000" />
     </task>
     <servers />
   </component>

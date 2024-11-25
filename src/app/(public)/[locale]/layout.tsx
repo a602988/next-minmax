@@ -3,8 +3,9 @@ import {notFound} from 'next/navigation';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {ReactNode} from 'react';
-import Document from '@/components/Document';
+import Document from '@/components/layout/Document';
 import {locales} from '@/i18n/config';
+import { NavProvider } from '@/context/NavContext';
 
 
 type Props = {
@@ -36,10 +37,12 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <Document locale={locale}>
-      <NextIntlClientProvider messages={messages}>
-          {children}
-      </NextIntlClientProvider>
-    </Document>
+    <NavProvider>
+      <Document locale={locale}>
+        <NextIntlClientProvider messages={messages}>
+            {children}
+        </NextIntlClientProvider>
+      </Document>
+    </NavProvider>
   );
 }

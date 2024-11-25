@@ -2,7 +2,7 @@ import {Metadata} from 'next';
 import {NextIntlClientProvider} from 'next-intl';
 import {getLocale, getMessages} from 'next-intl/server';
 import {ReactNode} from 'react';
-import Document from '@/components/Document';
+import Document from '@/components/layout/Document';
 import AppNavigation from './AppNavigation';
 import AppNavigationLocaleSwitcher from './AppNavigationLocaleSwitcher';
 import Logout from './Logout';
