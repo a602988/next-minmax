@@ -42,5 +42,9 @@
   "DarkModeToggle": {
     "switchToLightMode": "切換到淺色模式",
     "switchToDarkMode": "切換到深色模式"
+  },
+  "NavToggle": {
+    "closeNav": "關閉導航選單",
+    "openNav": "開啟導航選單"
   }
 }

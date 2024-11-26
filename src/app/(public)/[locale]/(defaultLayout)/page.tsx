@@ -11,6 +11,7 @@ export default function Index({params: {locale}}: Props) {
   return (
     <div>
       <p className="text-white">index</p>
+      <p className="fancy">test not</p>
     </div>
   );
 }

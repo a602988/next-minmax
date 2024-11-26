@@ -1,5 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
+import styles from '@/components/navToggle/NavToggle.module.css';
 import { useNav } from '@/context/NavContext';
 
 type Props = {
@@ -9,9 +10,16 @@ type Props = {
 
 export default function ClientDocument({ bodyClassName = '', children }: Props) {
   const { isNavOpen } = useNav();
-  // console.log(isNavOpen)
 
-  const bodyClass = `${bodyClassName} ${isNavOpen ? 'nav-open' : ''}`.trim();
+  const bodyClass = [
+    bodyClassName,
+    isNavOpen ? 'nav-open' : '',
+    isNavOpen ? styles.isOpen : ''
+  ].filter(Boolean).join(' ');
 
-  return <body className={bodyClass}>{children}</body>;
+  return (
+    <body className={bodyClass}>
+      {children}
+    </body>
+  );
 }

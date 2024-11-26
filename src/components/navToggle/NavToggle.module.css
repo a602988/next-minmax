@@ -1,0 +1,83 @@
+.navToggle{
+    @apply  w-[50px] h-[87px] z-[100] cursor-pointer flex flex-row items-center justify-end;
+
+    .icon{
+        @apply w-[30px] h-[19px]  flex flex-col gap-1 justify-between items-end;
+        .iconBar{
+            @apply h-[3px] block bg-white;
+            @apply transition-all ease-out duration-500;
+            &:nth-child(1){
+                @apply w-full;
+            }
+            &:nth-child(2){
+                @apply w-full;
+            }
+            &:nth-child(3){
+                @apply w-1/2;
+            }
+        }
+    }
+
+
+}
+/* 打開後形狀(x) */
+:global(body.nav-open) .navToggle {
+    .icon {
+        @apply relative;
+        .iconBar {
+            @apply absolute w-full;
+            &:nth-child(1) {
+                @apply rotate-45 top-[8px];
+            }
+            &:nth-child(2) {
+                @apply opacity-0;
+            }
+            &:nth-child(3) {
+                @apply -rotate-45 top-[8px] w-full;
+            }
+        }
+    }
+
+}
+/* 滑過去效果 */
+:global(body:not(.nav-open)) .navToggle:hover{
+    .iconBar{
+        &:nth-child(1){
+            animation: secondBarAnimation 3s infinite;
+        }
+        &:nth-child(2){
+            animation: secondBarAnimation2 3s infinite;
+        }
+        &:nth-child(3){
+            animation: secondBarAnimation3 3s infinite;
+        }
+    }
+}
+
+
+@keyframes secondBarAnimation {
+    0% { width: 100%; }
+    25% { width: 50%; }
+    50% { width: 100%; }
+    75% { width: 0%; }
+    100% { width: 100%; }
+}
+@keyframes secondBarAnimation2 {
+    0% { width: 100%; }
+    25% { width: 0%; }
+    50% { width: 50%; }
+    75% { width: 0%; }
+    100% { width: 100%; }
+}
+@keyframes secondBarAnimation3 {
+    0% { width: 50%; }
+    25% { width: 0%; }
+    50% { width: 100%; }
+    75% { width: 0%; }
+    100% { width: 50%; }
+}
+
+
+.iconTwo{
+
+}

@@ -42,5 +42,10 @@
   "DarkModeToggle": {
     "switchToLightMode": "Switch to light mode",
     "switchToDarkMode": "Switch to dark mode"
+  },
+  "NavToggle": {
+    "closeNav": "close navigation menu",
+    "openNav": "open navigation menu"
   }
+
 }

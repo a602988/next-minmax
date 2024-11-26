@@ -1,8 +1,9 @@
 import LiveSupportWidget from '@/components/headerWiddgets/LiveSupportWidget';
 import LogoIndex from "@/components/logo/LogoIndex";
-import MainNav from "@/components/nav/MainNav";
-import NavToggle from '@/components/nav/NavToggle';
+import MainNav from "@/components/nav/variants/MainNav";
+import NavToggle from '@/components/navToggle/NavToggle';
 import styles from './DefaultHeader.module.css';
+import FacebookLink from '@/components/social/FacebookLink';
 
 export default function BlogHeader() {
   return (
@@ -10,7 +11,9 @@ export default function BlogHeader() {
       <LogoIndex className={styles.headerLogo} height={51} width={234} />
       <MainNav />
       <LiveSupportWidget />
-      <NavToggle />
+      <NavToggle className={styles.headerNavToggle} variant="icon">
+        <FacebookLink />
+      </NavToggle>
     </header>
   )
 }

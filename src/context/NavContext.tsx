@@ -1,19 +1,20 @@
 'use client';
-import React, { ReactNode, createContext, useCallback, useContext, useState } from 'react';
 
-type NavContextType = {
+import React, { ReactNode, createContext, useContext, useState } from 'react';
+
+interface NavContextType {
+  toggleNav: () => void;
   isNavOpen: boolean;
-  toggleNav(): void; // 使用方法簡寫
-};
+}
 
 const NavContext = createContext<NavContextType | undefined>(undefined);
 
 export function NavProvider({ children }: { children: ReactNode }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const toggleNav = useCallback(() => {
+  const toggleNav = () => {
     setIsNavOpen(prev => !prev);
-  }, []);
+  };
 
   return (
     <NavContext.Provider value={{ isNavOpen, toggleNav }}>

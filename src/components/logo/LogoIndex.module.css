@@ -1,5 +1,4 @@
 
-.logo > *{
-        /*fill: #000;*/
+.logo > *,.logo > a > *{
     @apply max-w-full;
 }
