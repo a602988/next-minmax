@@ -14,8 +14,8 @@ function Nav({
     className = "flex",
     id,
     items
-}: NavProps): JSX.Element {
-    function renderMenuItem(item: SystemMenuType, depth: number): React.ReactNode {
+}: NavProps){
+    function renderMenuItem(item: SystemMenuType, depth: number) {
         return (
             <React.Fragment key={item.code}>
                 <NavItem item={item} />

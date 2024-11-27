@@ -1,13 +1,14 @@
 .header{
     @apply flex justify-between items-center container mx-auto;
     @apply max-w-3xl h-[80px] lg:h-[180px];
+    .headerNavToggle{
+        @apply  lg:hidden;
+    }
+
 }
 .headerLogo{
     @apply max-w-[150px] xl:max-w-[234px] pt-1;
     & > *{
         @apply w-full h-auto max-w-full;
     }
-}
-.headerNavToggle{
-    @apply  lg:hidden;
 }

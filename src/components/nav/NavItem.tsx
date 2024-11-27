@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react';
 import { Option, SystemMenuType } from '@/types/systemMenuType';
-import styles from './NavItem.module.css';
 
 interface NavItemProps {
   item: SystemMenuType;
@@ -43,27 +42,27 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
   const { class: optionClass, ...commonProps } = optionsAttributes;
 
   // 組合所有的 className
-  const combinedClassName = `${styles.listItem} ${className || ''} ${optionClass || ''}`.trim();
+  const combinedClassName = `listItem ${className || ''} ${optionClass || ''}`.trim();
 
     return (
     <li className={combinedClassName} {...commonProps}>
       {item.url && !isActive ? (
         <>
           <Link
-            className={styles.link}
+            className="link"
             href={item.url}
             target={item.target || '_self'}
           >
-            <span className={styles.title}>{item.title}</span>
+            <span className="title">{item.title}</span>
           </Link>
           {children}
         </>
       ) : (
         <div
           aria-current={isActive ? 'page' : undefined}
-          className={styles.link}
+          className="link"
         >
-          <span className={styles.title}>{item.title}</span>
+          <span className="title">{item.title}</span>
           {children}
         </div>
       )}

@@ -1,28 +1,32 @@
 .navToggle{
     @apply  w-[50px] h-[87px] z-[100] cursor-pointer flex flex-row items-center justify-end;
 
-    .icon{
-        @apply w-[30px] h-[19px]  flex flex-col gap-1 justify-between items-end;
-        .iconBar{
-            @apply h-[3px] block bg-white;
-            @apply transition-all ease-out duration-500;
-            &:nth-child(1){
-                @apply w-full;
-            }
-            &:nth-child(2){
-                @apply w-full;
-            }
-            &:nth-child(3){
-                @apply w-1/2;
-            }
-        }
-    }
-
 
 }
+/** -----------------------
+ # 預設iconBox
+/** ----------------------- */
+
+.iconBox{
+    @apply w-[30px] h-[19px]  flex flex-col gap-1 justify-between items-end;
+    .iconBar{
+        @apply h-[3px] block bg-white;
+        @apply transition-all ease-out duration-500;
+        &:nth-child(1){
+            @apply w-full;
+        }
+        &:nth-child(2){
+            @apply w-full;
+        }
+        &:nth-child(3){
+            @apply w-1/2;
+        }
+    }
+}
+
 /* 打開後形狀(x) */
-:global(body.nav-open) .navToggle {
-    .icon {
+:global(body.nav-open) {
+    .iconBox {
         @apply relative;
         .iconBar {
             @apply absolute w-full;
@@ -40,7 +44,7 @@
 
 }
 /* 滑過去效果 */
-:global(body:not(.nav-open)) .navToggle:hover{
+:global(body:not(.nav-open)) .navToggle:hover .iconBox{
     .iconBar{
         &:nth-child(1){
             animation: secondBarAnimation 3s infinite;
@@ -77,7 +81,47 @@
     100% { width: 50%; }
 }
 
+/** -----------------------
+ # iconBoxTwo
+/** ----------------------- */
+.iconBoxTwo{
+    @apply w-[30px] h-[13px]  flex flex-col gap-1 justify-between items-end;
+    .iconBar{
+        @apply h-[3px] block bg-white;
+        @apply transition-all ease-out duration-500;
+        &:nth-child(1){
+            @apply w-full;
+        }
+        &:nth-child(2){
+            @apply w-1/2;
+        }
+    }
+}
+/* 打開後形狀(x) */
+:global(body.nav-open){
+    .iconBoxTwo {
+        @apply relative;
+        .iconBar {
+            @apply absolute w-full;
+            &:nth-child(1) {
+                @apply rotate-45 top-[8px];
+            }
+            &:nth-child(2) {
+                @apply -rotate-45 top-[8px] w-full;
+            }
+        }
+    }
 
-.iconTwo{
+}
+/* 滑過去效果 */
+:global(body:not(.nav-open)) .navToggle:hover .iconBoxTwo{
+    .iconBar{
+        &:nth-child(1){
+            animation: secondBarAnimation 3s infinite;
+        }
+        &:nth-child(2){
+            animation: secondBarAnimation3 3s infinite;
+        }
 
+    }
 }

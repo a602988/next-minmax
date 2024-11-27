@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { getSystemMenu } from '@/services/getSystemMenu';
 import { SystemMenuType } from '@/types/systemMenuType';
 import Nav from '../Nav';
+import styles from './MainNav.module.css';
 
 const CODE = 'web-header';
 
@@ -24,7 +25,7 @@ function MainNav() {
 
     if (!mainMenu?.children?.length) return null;
 
-    return <Nav ariaLabel={mainMenu.title} items={mainMenu.children} />;
+    return <Nav ariaLabel={mainMenu.title}  className={styles.MainNav} items={mainMenu.children}/>;
 }
 
 export default MainNav;

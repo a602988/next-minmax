@@ -11,7 +11,7 @@ export default function DefaultHeader() {
         <LogoIndex className={styles.headerLogo} height={51} width={234} />
         <MainNav />
         <LiveSupportWidget />
-        <NavToggle />
+        <NavToggle className={styles.headerNavToggle} />
       </header>
     )
 }

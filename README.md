@@ -51,3 +51,11 @@ https://lucid.app/lucidchart/c180264e-1318-4ee5-80dc-4e0bfab293fc/edit?invitatio
 常量或配置文件：
 通常全大寫（SCREAMING_SNAKE_CASE）
 例如：API_ENDPOINTS.ts, CONSTANTS.ts
+
+
+## 動畫參考
+
+選單
+https://www.maman-corp.com/
+https://www.utsubo.com/
+https://www.thoughtlab.com/
