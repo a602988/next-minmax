@@ -5,20 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
+      <change afterPath="$PROJECT_DIR$/src/assets/images/logo-mobile.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/BlogHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/BlogHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Document-.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Document-.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/Nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/NavItem.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/NavItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/variants/MainNav.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/variants/MainNav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navToggle/NavToggle--.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navToggle/NavToggle-.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navToggle/NavToggle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navToggle/NavToggle.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navToggle/NavToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navToggle/NavToggle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/Document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Document.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/custom-base-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/custom-base-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/custom-components.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/custom-components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/custom-utilities.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/custom-utilities.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/exclude.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/exclude.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/minmax.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/minmax.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,37 +53,37 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/src/components/navToggle&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/assets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/components/navToggle" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/app/(public)/[locale]" />
       <recent name="$PROJECT_DIR$/src/components/social" />
-      <recent name="$PROJECT_DIR$/src/hooks" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
+      <recent name="$PROJECT_DIR$/src/assets/images" />
       <recent name="$PROJECT_DIR$/src/components/nav" />
       <recent name="$PROJECT_DIR$/src/components/nav/variants" />
       <recent name="$PROJECT_DIR$/src/components/NavToggle" />
-      <recent name="$PROJECT_DIR$/src/components/layout" />
-      <recent name="$PROJECT_DIR$/src/components/headerWiddgets" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -129,7 +126,7 @@
       <workItem from="1732510901147" duration="31000" />
       <workItem from="1732510939860" duration="9811000" />
       <workItem from="1732598357802" duration="12978000" />
-      <workItem from="1732694665169" duration="2755000" />
+      <workItem from="1732694665169" duration="4698000" />
     </task>
     <servers />
   </component>

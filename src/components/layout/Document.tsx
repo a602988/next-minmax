@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import '@/styles/globals.css';
+import '@/assets/styles/globals.css';
 import ClientDocument from './ClientDocument';
 
 type Props = {

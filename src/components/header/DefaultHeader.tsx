@@ -4,14 +4,17 @@ import LogoIndex from "@/components/logo/LogoIndex";
 import MainNav from "@/components/nav/variants/MainNav";
 import NavToggle from '@/components/navToggle/NavToggle';
 import styles from './DefaultHeader.module.css';
-
+import sLogo from "@/assets/logo.svg";
 export default function DefaultHeader() {
     return (
-      <header className={`${styles.header} container-px`}>
-        <LogoIndex className={styles.headerLogo} height={51} width={234} />
-        <MainNav />
-        <LiveSupportWidget />
-        <NavToggle className={styles.headerNavToggle} />
-      </header>
+        <header className={`${styles.header} container-px`}>
+            <LogoIndex className={styles.headerLogo} height={51} width={234} />
+            <MainNav />
+            <LiveSupportWidget />
+            <NavToggle className={styles.headerNavToggle} />
+            <div className={styles.headerFooter}>
+
+            </div>
+        </header>
     )
 }

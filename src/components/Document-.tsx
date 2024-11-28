@@ -1,6 +1,6 @@
 import { Inter, Kdam_Thmor_Pro} from 'next/font/google';
 import {ReactNode} from 'react';
-import '@/styles/globals.css';
+import '@/assets/styles/globals.css';
 
 // const inter = Inter({
 //   subsets: ['latin'],
