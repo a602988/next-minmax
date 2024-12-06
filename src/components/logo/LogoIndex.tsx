@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import ImageWithSVGSupport from '@/components/common/img/ImageWithSVG';
+import LogoIndexCustom from '@/components/logo/variants/LogoIndexCustom';
 import { useLogoData } from '@/hooks/useLogoData';
 import styles from './LogoIndex.module.css';
 
@@ -18,15 +19,19 @@ interface LogoIndexProps {
 
 export default function LogoIndex({
     className = '',
-    defaultLogo = '/static/images/common/logo.png',
+    defaultLogo = '',
     height = 51,
     link = true,
     width = 234
   }: LogoIndexProps) {
-
   const { isLoading, logoSrc, webData } = useLogoData(defaultLogo);
   const params = useParams();
   const t = useTranslations('common');
+
+  if (defaultLogo === '') {
+    return <LogoIndexCustom />;
+  }
+
   const ariaLabel = t('returnTo') + t('home');
   const titleText = t('returnTo') + ` ${webData?.site_title || "logo"} ` + t('home');
 
@@ -44,7 +49,6 @@ export default function LogoIndex({
       width={width}
     />
   );
-
 
   const innerContent = link ? (
     <Link

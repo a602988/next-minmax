@@ -4,7 +4,7 @@ import LogoIndex from "@/components/logo/LogoIndex";
 import MainNav from "@/components/nav/variants/MainNav";
 import NavToggle from '@/components/navToggle/NavToggle';
 import styles from './DefaultHeader.module.css';
-import sLogo from "@/assets/logo.svg";
+
 export default function DefaultHeader() {
     return (
         <header className={`${styles.header} container-px`}>
