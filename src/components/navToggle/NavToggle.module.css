@@ -1,7 +1,6 @@
 .navToggle{
-    @apply  w-[50px] h-[87px] z-[100] cursor-pointer flex flex-row items-center justify-end;
-
-
+    @apply  w-[50px] h-[50px] xl:h-[87px] z-[100] cursor-pointer flex flex-row items-center justify-end;
+    @apply transition-all ease-out duration-500;
 }
 /** -----------------------
  # 預設iconBox
@@ -26,6 +25,9 @@
 
 /* 打開後形狀(x) */
 :global(body.nav-open) {
+    .navToggle{
+        @apply bg-primary justify-center;
+    }
     .iconBox {
         @apply relative;
         .iconBar {

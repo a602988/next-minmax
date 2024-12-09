@@ -5,6 +5,7 @@ import NavItem from './NavItem';
 interface NavProps {
     ariaLabel?: string;
     className?: string;
+    classNameWp?: string;
     id?: string;
     items: Array<SystemMenuType>;
 }
@@ -12,6 +13,7 @@ interface NavProps {
 function Nav({
     ariaLabel = "Main Navigation",
     className = "flex",
+    classNameWp = "",
     id,
     items
 }: NavProps){
@@ -29,7 +31,7 @@ function Nav({
     }
 
     return (
-        <nav aria-label={ariaLabel}>
+        <nav aria-label={ariaLabel} className={classNameWp}>
             <ul className={className} id={id}>
                 {items.map((item) => renderMenuItem(item, 0))}
             </ul>

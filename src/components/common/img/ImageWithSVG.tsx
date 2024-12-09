@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 interface UniversalImageProps {
   alt: string;
   className?: string;
   height: number;
   priority?: boolean;
-  src: string;
+  src: string | React.ComponentType<React.SVGProps<SVGSVGElement>>;
   width: number;
 }
 
@@ -18,56 +18,46 @@ export default function ImageWithSVG({
   src,
   width
 }: UniversalImageProps) {
-  const [svgContent, setSvgContent] = useState<React.ReactElement | null>(null);
-  const isSvg = src.toLowerCase().endsWith('.svg');
-
-  useEffect(() => {
-    if (isSvg) {
-      fetch(src)
-        .then((res) => {
-          if (!res.ok) throw new Error(`Failed to fetch SVG: ${res.statusText}`);
-          return res.text();
-        })
-        .then((svg) => {
-          // 解析 SVG 字符串為 DOM
-          const parser = new DOMParser();
-          const svgDoc = parser.parseFromString(svg, 'image/svg+xml');
-          const svgElement = svgDoc.documentElement;
-
-          // 只有當 className 有值時才添加 class 屬性
-          if (className) {
-            svgElement.setAttribute('class', className);
-          }
-          svgElement.setAttribute('role', 'img');
-          svgElement.setAttribute('aria-label', alt);
-
-          // 轉換為 React 元素
-          setSvgContent(
-            <svg
-              {...Array.from(svgElement.attributes).reduce((acc, attr) => ({
-                ...acc,
-                [attr.name]: attr.value
-              }), {})}
-              dangerouslySetInnerHTML={{ __html: svgElement.innerHTML }}
-            />
-          );
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [src, isSvg, className, alt]);
-
-  if (isSvg) {
-    return svgContent;
+  if (typeof src === 'function') {
+    // 如果 src 是一個 React 組件（導入的 SVG），直接渲染它
+    const SvgComponent = src;
+    return (
+      <SvgComponent
+        role="img"
+        aria-label={alt}
+        className={className}
+        width={width}
+        height={height}
+      />
+    );
   }
 
-  return (
-    <Image
-      alt={alt}
-      {...(className ? { className } : {})}
-      height={height}
-      priority={priority}
-      src={src}
-      width={width}
-    />
-  );
+  if (typeof src === 'string') {
+    if (src.toLowerCase().endsWith('.svg')) {
+      // 如果是 SVG 文件，使用 img 標籤
+      return (
+        <img
+          src={src}
+          alt={alt}
+          className={className}
+          width={width}
+          height={height}
+        />
+      );
+    } else {
+      // 對於其他類型的圖片，使用 Next.js 的 Image 組件
+      return (
+        <Image
+          src={src}
+          alt={alt}
+          className={className}
+          width={width}
+          height={height}
+          priority={priority}
+        />
+      );
+    }
+  }
+
+  return null;
 }

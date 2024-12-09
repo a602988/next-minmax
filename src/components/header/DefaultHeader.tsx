@@ -8,13 +8,13 @@ import styles from './DefaultHeader.module.css';
 export default function DefaultHeader() {
     return (
         <header className={`${styles.header} container-px`}>
-            <LogoIndex className={styles.headerLogo} height={51} width={234} />
+            <LogoIndex/>
             <MainNav />
-            <LiveSupportWidget />
-            <NavToggle className={styles.headerNavToggle} />
-            <div className={styles.headerFooter}>
-
+            <div className="max-xl:ms-auto">
+              <LiveSupportWidget />
             </div>
+            <NavToggle className={styles.headerNavToggle} />
+
         </header>
     )
 }

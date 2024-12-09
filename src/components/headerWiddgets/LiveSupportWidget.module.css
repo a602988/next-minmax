@@ -10,7 +10,7 @@
         @apply text-base;
     }
     & > *{
-        @apply px-2 lg:px-4 py-2 lg:py-2 text-xs lg:text-sm;
+        @apply px-2 xl:px-4 py-2 xl:py-2 text-xs lg:text-sm;
     }
     .facebook{
         @apply bg-white text-secondary;

@@ -1,2 +1,12 @@
-.logoImage{}
-.logoText{}
+.logo{
+    @apply flex items-center gap-3 xl:gap-4 w-[234px] h-[51px];
+}
+.logoImage{
+    @apply w-[35px] md:w-[40px] xl:w-[52px];
+}
+.logoText{
+    @apply sr-only md:not-sr-only md:w-[130px] xl:w-[168px];
+    path{
+        @apply fill-white opacity-50
+    }
+}

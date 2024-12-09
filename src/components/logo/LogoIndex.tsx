@@ -27,8 +27,7 @@ export default function LogoIndex({
   const { isLoading, logoSrc, webData } = useLogoData(defaultLogo);
   const params = useParams();
   const t = useTranslations('common');
-
-  if (defaultLogo === '') {
+  if (logoSrc === '') {
     return <LogoIndexCustom />;
   }
 
