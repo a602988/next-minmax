@@ -113,6 +113,11 @@
         --m-navMain-text-hover: rgb(255, 255, 255, 1);
         --m-navMain-text-active: rgb(255, 255, 255, 0.5);
 
+        /* vr */
+        --m-vr-border-width: 1px;
+        --m-vr-opacity:0.5;
+        --m-vr-bg: #ffffff;
+
     }
 
 

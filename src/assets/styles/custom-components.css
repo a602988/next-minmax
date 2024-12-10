@@ -16,4 +16,8 @@
     .container-px{
         @apply px-3 tablet:px-5 desktop:px-7 3xl:px-0 3xl:max-w-3xl;
     }
+    .vr{
+        @apply inline-block self-stretch min-h-4 ;
+        @apply w-[var(--m-vr-border-width)] bg-[var(--m-vr-bg)] opacity-[var(--m-vr-opacity)];
+    }
 }

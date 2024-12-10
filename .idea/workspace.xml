@@ -11,6 +11,8 @@
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/images/logo-mobile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/logo-mobile.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assets/images/logoText.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/logoText.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/custom-base-styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/custom-base-styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/custom-components.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/custom-components.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
@@ -133,7 +135,7 @@
       <workItem from="1732510901147" duration="31000" />
       <workItem from="1732510939860" duration="9811000" />
       <workItem from="1732598357802" duration="12978000" />
-      <workItem from="1732694665169" duration="19479000" />
+      <workItem from="1732694665169" duration="23012000" />
     </task>
     <servers />
   </component>
