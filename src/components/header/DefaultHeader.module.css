@@ -26,3 +26,12 @@
 .siteTitle{
     @apply flex flex-col me-auto;
 }
+.boxTitle{
+    @apply text-xs  mb-1;
+}
+
+.socialBox{
+    :global .social-link-label{
+        @apply sr-only;
+    }
+}

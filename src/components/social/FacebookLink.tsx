@@ -1,5 +1,5 @@
 import { FaFacebookF } from 'react-icons/fa';
-import SocialLink from '@/components/social/common/SocialLink';
+import SocialLink from '@/components/social/SocialLink';
 
 const PROPS = {
   name: 'facebook',

@@ -2,7 +2,7 @@ import React from 'react';
 import { SystemMenuType } from '@/types/systemMenuType';
 import NavItem from './NavItem';
 
-interface NavProps {
+interface Props {
     ariaLabel?: string;
     className?: string;
     classNameWp?: string;
@@ -16,7 +16,7 @@ function Nav({
     classNameWp = "",
     id,
     items
-}: NavProps){
+}: Props){
     function renderMenuItem(item: SystemMenuType, depth: number) {
         return (
             <React.Fragment key={item.code}>
