@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
+      <change afterPath="$PROJECT_DIR$/src/app/manifest.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/Nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/InstagramLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/InstagramLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/LineLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/LineLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/YoutubeLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/YoutubeLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/common/SocialLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/SocialLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/favicon.ico" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,12 +28,12 @@
     &quot;assignee&quot;: &quot;a602988&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
-    &quot;accountId&quot;: &quot;9f6eecd6-a281-490f-8010-6a13656f8514&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/a602988/next-minmax.git",
+    "accountId": "664971d2-a866-4b26-841f-b3d320325559"
   }
-}</component>
+}]]></component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/Cellar/php/8.2.8/bin/php" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -52,23 +47,23 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/src/components/common/img&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components/common/img",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/jean/Documents/GitHub/next-minmax/node_modules/prettier",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/common/img" />
@@ -78,18 +73,18 @@
       <recent name="$PROJECT_DIR$/src/app/(public)/[locale]" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app" />
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/src/components/social" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
-      <recent name="$PROJECT_DIR$/src/components/nav" />
-      <recent name="$PROJECT_DIR$/src/components/nav/variants" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.23726.107" />
-        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.23726.107" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.23339.16" />
+        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.23339.16" />
       </set>
     </attachedChunks>
   </component>
@@ -128,6 +123,7 @@
       <workItem from="1732694665169" duration="23708000" />
       <workItem from="1733902643397" duration="21000" />
       <workItem from="1733902686079" duration="5556000" />
+      <workItem from="1734092419879" duration="6486000" />
     </task>
     <servers />
   </component>
