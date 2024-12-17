@@ -5,6 +5,7 @@ import NavToggle from '@/components/navToggle/NavToggle';
 import styles from './DefaultHeader.module.css';
 
 export default function BlogHeader() {
+
   return (
     <header className={`${styles.header} container-px`}>
       <LogoIndex className={styles.headerLogo} height={51} width={234} />

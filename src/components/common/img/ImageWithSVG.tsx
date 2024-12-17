@@ -23,11 +23,12 @@ export default function ImageWithSVG({
     const SvgComponent = src;
     return (
       <SvgComponent
-        role="img"
         aria-label={alt}
         className={className}
-        width={width}
         height={height}
+        role="img"
+        width={width}
+
       />
     );
   }
@@ -37,23 +38,24 @@ export default function ImageWithSVG({
       // 如果是 SVG 文件，使用 img 標籤
       return (
         <img
-          src={src}
           alt={alt}
           className={className}
-          width={width}
           height={height}
+          src={src}
+          width={width}
         />
       );
     } else {
       // 對於其他類型的圖片，使用 Next.js 的 Image 組件
       return (
         <Image
-          src={src}
           alt={alt}
           className={className}
-          width={width}
           height={height}
+          loading="lazy"
           priority={priority}
+          src={src}
+          width={width}
         />
       );
     }

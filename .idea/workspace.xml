@@ -5,11 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/app/manifest.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/favicon/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/common/logo-mobile.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/common/logo-mobile.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/common/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/common/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/common/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/common/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/static/images/common/logo2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/common/logo2.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/favicon-16x16.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/favicon/favicon-16x16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/favicon-32x32.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/favicon/favicon-32x32.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/favicon-96x96.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/favicon/favicon-96x96.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/icon-192.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/favicon/logo-192.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/icon-512.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/favicon/logo-512.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/icon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/favicon/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/minmax.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/minmax.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/img/ImageWithSVG.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/BlogHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/BlogHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +48,12 @@
     &quot;assignee&quot;: &quot;a602988&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/a602988/next-minmax.git",
-    "accountId": "664971d2-a866-4b26-841f-b3d320325559"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
+    &quot;accountId&quot;: &quot;664971d2-a866-4b26-841f-b3d320325559&quot;
   }
-}]]></component>
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/Cellar/php/8.2.8/bin/php" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -52,32 +72,32 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components/common/img",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/jean/Documents/GitHub/next-minmax/node_modules/prettier",
+    "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/src/components/common/img" />
       <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/components/navToggle" />
       <recent name="$PROJECT_DIR$/src/components" />
-      <recent name="$PROJECT_DIR$/src/app/(public)/[locale]" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images/favicon" />
       <recent name="$PROJECT_DIR$/src/app" />
+      <recent name="$PROJECT_DIR$/src/app/(favicon)" />
       <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$/src/components/social" />
-      <recent name="$PROJECT_DIR$/src/assets" />
-      <recent name="$PROJECT_DIR$/src/assets/images" />
+      <recent name="$PROJECT_DIR$/public/images" />
     </key>
   </component>
   <component name="SharedIndexes">
