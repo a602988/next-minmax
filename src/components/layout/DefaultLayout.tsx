@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import DefaultHeader from '@/components/header/DefaultHeader';
+// import DefaultHeader from '@/components/header/DefaultHeader';
 import styles from './DefaultLayout.module.css';
 
 
@@ -12,7 +12,7 @@ export default function DefaultLayout({
 }: Props) {
   return (
     <div className={styles.defaultLayout}>
-        <DefaultHeader />
+
         <p className="text-white">LayoutDefault</p>
         {children}
     </div>

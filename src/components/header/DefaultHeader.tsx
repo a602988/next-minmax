@@ -1,14 +1,11 @@
-import React, { Suspense } from 'react';
 import LogoImages from "@/assets/images/logo-mobile.svg";
-// import LiveSupportWidget from '@/components/headerWiddgets/LiveSupportWidget';
+import LiveSupportWidget from '@/components/headerWiddgets/LiveSupportWidget';
 import LogoIndex from "@/components/logo/LogoIndex";
 import MainNav from "@/components/nav/variants/MainNav";
 import NavToggle from '@/components/navToggle/NavToggle';
 import SocialLinks from '@/components/social/SocialLinks';
 import styles from './DefaultHeader.module.css';
-
-
-const LiveSupportWidget = React.lazy(() => import('@/components/headerWiddgets/LiveSupportWidget'));
+import React, { Suspense } from 'react';
 
 export default function DefaultHeader() {
     return (
@@ -16,9 +13,7 @@ export default function DefaultHeader() {
         <LogoIndex />
         <MainNav />
         <div className="max-xl:ms-auto">
-          <Suspense>
-            <LiveSupportWidget />
-          </Suspense>
+          <LiveSupportWidget />
         </div>
         <NavToggle className={styles.headerNavToggle} />
         <div className={styles.headerFooter}>
