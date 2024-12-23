@@ -1,13 +1,12 @@
-import FacebookLink from '@/components/social/variants/FacebookLink';
-import LineLink from '@/components/social/variants/LineLink';
+import SocialLink from '@/components/social/SocialLink';
 import style from './LiveSupportWidget.module.css';
 
 export default function LiveSupportWidget() {
 
   return (
     <div className={style.LiveSupportWidget}>
-      <FacebookLink className={style.facebook}/>
-      <LineLink className={style.line}/>
+      <SocialLink type="facebook" className={style.facebook}/>
+      <SocialLink type="line" className={style.line}/>
     </div>
   )
 }

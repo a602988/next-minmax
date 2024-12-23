@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import LogoImages from '@/assets/images/logo-mobile.svg';
-import PhoneLinkMobile from '@/components/social/variants/PhoneLinkMobile';
-import SocialLinks from '@/components/social/variants/SocialLinks';
+import ContactLinkMobile from '@/components/social/variants/ContactLinkMobile';
+import SocialLinks from '@/components/social/SocialLinks';
 import { getWebData } from '@/services/getWebData';
 import styles from './DefaultHeaderFooter.module.css';
 
@@ -32,7 +32,7 @@ function DefaultHeaderFooter({webData}: DefaultHeaderProps) {
               <dl className="m-0">
                 <dt className="sr-only">{t('tel')}</dt>
                 <dd className="m-0 leading-5">
-                  <PhoneLinkMobile className="text-xs" />
+                  <ContactLinkMobile className="text-xs" />
                 </dd>
               </dl>
             </address>

@@ -1,34 +1,43 @@
-import Link from 'next/link'
-import { ReactNode } from 'react'
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaLine, FaYoutube} from 'react-icons/fa';
+import { IconType } from 'react-icons';
 import { getWebData } from '@/services/getWebData';
 
-interface PROPS {
-  children: ReactNode
-  className?: string
-  classNameLabel?: string
-  dataKey: string
-  title: string
-  target?: '_blank' | '_self'
+interface Props {
+  className?: string;
+  type: 'facebook' | 'instagram' | 'linkedin' | 'twitter' | 'line' | 'youtube';
+  icon?: IconType;
 }
 
-export default async function SocialLink({
-  children,
-  className,
-  classNameLabel = 'sr-only',
-  dataKey,
-  target = '_blank',
-  title,
-}: PROPS) {
-  let href: string | undefined;
+const socialIcons: Record<string, IconType> = {
+  facebook: FaFacebookF,
+  instagram: FaInstagram,
+  linkedin: FaLinkedinIn,
+  twitter: FaTwitter,
+  line: FaLine,
+  youtube: FaYoutube
+};
 
-  try {
-    const webData = await getWebData();
-    const value = webData[dataKey];
-    href = value !== null ? value : undefined;
-  } catch (error) {
-    console.error(`Failed to fetch data for ${dataKey}:`, error);
-    return null; // 或者返回一個錯誤狀態的組件
-  }
+const socialDataKeys: Record<string, string> = {
+  facebook: 'social_facebook',
+  instagram: 'social_instagram',
+  linkedin: 'social_linkedin',
+  twitter: 'social_twitter',
+  line: 'social_line',
+  youtube: 'social_youtube'
+};
+
+export default async function SocialLink({ className = '', type, icon: CustomIcon }: Props) {
+  const t = useTranslations('socialLink');
+  
+  const DefaultIcon = socialIcons[type];
+  const IconComponent = CustomIcon || DefaultIcon;
+  const dataKey = socialDataKeys[type];
+  const title = type.charAt(0).toUpperCase() + type.slice(1);
+
+  const webData = await getWebData();
+  const href = webData[dataKey];
 
   if (!href) {
     return null; // 如果沒有對應的連結，不渲染任何內容
@@ -36,14 +45,15 @@ export default async function SocialLink({
 
   return (
     <Link
-      className={`social-link ${className || ''}`}
+      className={`social-link px-1 social-${type} ${className}`}
       href={href}
-      rel={target === '_blank' ? 'noopener noreferrer' : undefined}
-      target={target}
+      target="_blank"
+      rel="noopener noreferrer"
       title={title}
+      aria-label={`${t('ariaLabel')}${title}`}
     >
-      {children}
-      <span className={`${classNameLabel}`.trim()}>{title}</span>
+      <IconComponent />
+      <span className="sr-only">{title}</span>
     </Link>
-  )
+  );
 }

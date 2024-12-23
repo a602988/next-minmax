@@ -5,6 +5,15 @@ const baseConfig = await getPresets('typescript', 'react', 'tailwind');
 export default [
   ...baseConfig,
   {
+    languageOptions: {
+      globals: {
+        process: true,
+      },
+    },
+    env: {
+      node: true,
+      commonjs: true,
+    },
     settings: {
       'import/resolver': {
         typescript: {},

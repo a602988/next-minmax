@@ -1,22 +1,23 @@
 import { useTranslations } from 'next-intl';
 import { ReactNode } from 'react';
-import PhoneLink from '@/components/social/PhoneLink';
+import ContactLink from '@/components/social/ContactLink';
 
 interface PROPS {
   className?: string
   children?: ReactNode
 }
 
-export default function PhoneLinkMobile({ children, className = '' }: PROPS) {
-  const t = useTranslations('socialPhoneLink');
+export default function ContactLinkMobile({ children, className = '' }: PROPS) {
+  const t = useTranslations('contactLinkMobile');
   return (
-    <PhoneLink
+    <ContactLink
       ariaLabel={t('ariaLabel')}
       className={`call-phone ${className}`.trim()}
       dataKey='system_mobile'
       title={t('title')}
+      type="phone"
     >
       {children}
-    </PhoneLink>
+    </ContactLink>
   );
 }

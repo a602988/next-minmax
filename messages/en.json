@@ -47,9 +47,16 @@
     "closeNav": "close navigation menu",
     "openNav": "open navigation menu"
   },
-  "socialPhoneLink": {
+  "contactLinkMobile": {
     "ariaLabel": "Call Us on phone",
     "title": "phone number"
+  },
+  "contactLinkMail": {
+    "ariaLabel": "Send us an email",
+    "title": "email"
+  },
+  "socialLink": {
+    "ariaLabel": "link "
   },
   "header": {
     "callUs": "CALL US",

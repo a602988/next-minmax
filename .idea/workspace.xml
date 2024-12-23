@@ -5,33 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader-.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/PhoneLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/variants/PhoneLinkMobile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/variants/SocialLinks.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/social/ContactLink.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/social/variants/ContactLinkMail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/messages/zh-TW.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/headerWiddgets/LiveSupportWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/headerWiddgets/LiveSupportWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/navToggle/NavToggle.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/navToggle/NavToggle.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/FacebookLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/variants/FacebookLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/InstagramLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/variants/InstagramLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/LineLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/variants/LineLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/PhoneLink.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/social/SocialLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/SocialLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/variants/SocialLinks.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/YoutubeLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/variants/YoutubeLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/variants/FacebookLink.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/variants/InstagramLink.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/variants/LineLink.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/variants/PhoneLinkMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/variants/ContactLinkMobile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/variants/SocialLinks.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/variants/SocialLinks.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/social/variants/YoutubeLink.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +47,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
-    &quot;accountId&quot;: &quot;9f6eecd6-a281-490f-8010-6a13656f8514&quot;
+    &quot;accountId&quot;: &quot;664971d2-a866-4b26-841f-b3d320325559&quot;
   }
 }</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/Cellar/php/8.2.8/bin/php" />
@@ -72,25 +66,27 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Node.js.next.config.mjs.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components/header",
+    "last_opened_file_path": "/Users/jean/Documents/GitHub/next-minmax/src/components/social/variants",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
+    "prettierjs.PrettierConfiguration.Package": "/Users/jean/Documents/GitHub/next-minmax/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/header" />
-      <recent name="$PROJECT_DIR$/src/components/social" />
       <recent name="$PROJECT_DIR$/src/components/social/variants" />
+      <recent name="$PROJECT_DIR$/src/components/social" />
+      <recent name="$PROJECT_DIR$/src/components/header" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/src/components/common/img" />
     </key>
@@ -105,8 +101,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.23726.107" />
-        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.23726.107" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PS-243.22562.233" />
+        <option value="bundled-php-predefined-a98d8de5180a-7980c7aaca61-com.jetbrains.php.sharedIndexes-PS-243.22562.233" />
       </set>
     </attachedChunks>
   </component>
@@ -149,6 +145,8 @@
       <workItem from="1734505714141" duration="1446000" />
       <workItem from="1734924053487" duration="11266000" />
       <workItem from="1734937572346" duration="4743000" />
+      <workItem from="1734952541023" duration="287000" />
+      <workItem from="1734952832818" duration="5844000" />
     </task>
     <servers />
   </component>
@@ -172,6 +170,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx</url>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

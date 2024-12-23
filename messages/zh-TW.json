@@ -47,9 +47,16 @@
     "closeNav": "關閉導航選單",
     "openNav": "開啟導航選單"
   },
-  "socialPhoneLink": {
+  "contactLinkMobile": {
     "ariaLabel": "撥打手機給我們",
     "title": "手機號碼"
+  },
+  "contactLinkMail": {
+    "ariaLabel": "寫信給我們",
+    "title": "email"
+  },
+  "socialLink": {
+    "ariaLabel": "連到我們的"
   },
   "header": {
     "callUs": "CALL US",
