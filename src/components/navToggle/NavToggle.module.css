@@ -25,13 +25,10 @@
 
 /* 打開後形狀(x) */
 :global(body.nav-open) {
-    .navToggle{
-        @apply bg-primary justify-center;
-    }
     .iconBox {
         @apply relative;
         .iconBar {
-            @apply absolute w-full;
+            @apply absolute w-full bg-primary;
             &:nth-child(1) {
                 @apply rotate-45 top-[8px];
             }

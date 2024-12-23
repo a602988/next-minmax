@@ -1,37 +1,14 @@
 .header{
     @apply flex justify-between items-center container mx-auto gap-5;
     @apply max-w-3xl h-[50px] xl:h-[180px];
+    /*@apply transition-all ease-out duration-500;*/
 
     .headerNavToggle{
         @apply  xl:hidden;
+        :global(body.nav-open) &{
+            /*@apply absolute top-0 end-0;*/
+        }
     }
-    :global(body.nav-open) &{
-        @apply max-xl:!pe-0;
-    }
-}
-.headerFooter{
-    @apply xl:sr-only max-xl:fixed bottom-0 left-0 right-0  z-40 flex items-center justify-center;
-    @apply h-[100px] gap-6 p-6 text-white/50;
-}
-.headerFooterLogo{
-    @apply w-[45px] h-[50px];
-    :global path{
-        @apply fill-white/50;
-    }
-}
-.vr{
-    --m-vr-opacity:0.2;
-}
 
-.siteTitle{
-    @apply flex flex-col me-auto;
-}
-.boxTitle{
-    @apply text-xs  mb-1;
-}
 
-.socialBox{
-    :global .social-link-label{
-        @apply sr-only;
-    }
 }

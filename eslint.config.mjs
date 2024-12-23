@@ -15,6 +15,7 @@ export default [
       }
     },
     rules: {
+      'tailwindcss/classnames-order': 'off',// 關閉css字母排序的警告
       'import/no-unresolved': [
         'error',
         {

@@ -46,5 +46,15 @@
   "NavToggle": {
     "closeNav": "關閉導航選單",
     "openNav": "開啟導航選單"
+  },
+  "socialPhoneLink": {
+    "ariaLabel": "撥打手機給我們",
+    "title": "手機號碼"
+  },
+  "header": {
+    "callUs": "CALL US",
+    "findUs": "FIND US",
+    "tel": "電話：",
+    "company": "MINMAX DIGITAL AGENCY"
   }
 }

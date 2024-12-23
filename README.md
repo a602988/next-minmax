@@ -59,3 +59,39 @@ https://lucid.app/lucidchart/c180264e-1318-4ee5-80dc-4e0bfab293fc/edit?invitatio
 https://www.maman-corp.com/
 https://www.utsubo.com/
 https://www.thoughtlab.com/
+
+
+## 跑分紀錄
+
+移除layout 桌機：83 手機：78
+移除layout.css 桌機：95 手機：78
+移除header 桌機：94 手機：54
+清空Layout.css 內容
+
+## 減少javaScript執行時間 1 2 3
+
+## 排除禁止轉譯的資源 1 2 3
+
+## 網頁以靜止還原返照快取 1 2 3 
+
+## 減少無用的javaScript  2 
+
+## 最大的內容繪製至元素 2 
+
+## 壓縮javascript 2 
+
+
+
+
+## 將主要執行序工作降到最低 
+
+### 跑分叩分紀錄
+
+#### css
+
+- min-h-screen : 有時會影響，要多跑幾次才會正常
+- 
+
+
+
+

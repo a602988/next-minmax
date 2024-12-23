@@ -46,6 +46,15 @@
   "NavToggle": {
     "closeNav": "close navigation menu",
     "openNav": "open navigation menu"
+  },
+  "socialPhoneLink": {
+    "ariaLabel": "Call Us on phone",
+    "title": "phone number"
+  },
+  "header": {
+    "callUs": "CALL US",
+    "findUs": "FIND US",
+    "tel": "PHONE：",
+    "company": "MINMAX DIGITAL AGENCY"
   }
-
 }

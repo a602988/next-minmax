@@ -1,0 +1,17 @@
+
+.headerFooter{
+    @apply xl:sr-only max-xl:fixed bottom-0 left-0 right-0  z-40 flex items-center justify-center;
+    @apply h-[70px] sm:h-[100px] gap-3 sm:gap-6 p-3 sm:p-6 text-white/50;
+}
+.headerFooterLogo{
+    @apply w-[25px] sm:w-[45px];
+    :global path{
+        @apply fill-white/50;
+    }
+}
+.vr{
+    --m-vr-opacity:0.2;
+}
+
+
+
