@@ -3,7 +3,7 @@ import LiveSupportWidget from '@/components/headerWiddgets/LiveSupportWidget';
 import LogoIndex from "@/components/logo/LogoIndex";
 import MainNav from "@/components/nav/variants/MainNav";
 import NavToggle from '@/components/navToggle/NavToggle';
-import SocialLinks from '@/components/social/variants/SocialLinks';
+import SocialLinks from '@/components/social/SocialLinks';
 import styles from './DefaultHeader.module.css';
 // import React, { Suspense } from 'react';
 

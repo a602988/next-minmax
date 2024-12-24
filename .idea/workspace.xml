@@ -5,27 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/components/social/ContactLink.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/SocialLinks.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/social/variants/ContactLinkMail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages/zh-TW.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/zh-TW.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/postcss.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/headerWiddgets/LiveSupportWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/headerWiddgets/LiveSupportWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/PhoneLink.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/SocialLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/SocialLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/variants/FacebookLink.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/variants/InstagramLink.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/variants/LineLink.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/variants/PhoneLinkMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/variants/ContactLinkMobile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/variants/SocialLinks.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/variants/SocialLinks.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/variants/YoutubeLink.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader-.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader-.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +60,7 @@
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/jean/Documents/GitHub/next-minmax/node_modules/prettier",
     "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -173,7 +155,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

@@ -1,6 +1,8 @@
 
 
 
+git remote add minmax https://git.24241872.work/jean/next-minmax.git
+
 # 使用的套件
 
 https://next-intl-docs.vercel.app/
