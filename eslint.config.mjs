@@ -7,12 +7,15 @@ export default [
   {
     languageOptions: {
       globals: {
-        process: true,
+        process: 'readonly',
+      },
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
-    env: {
-      node: true,
-      commonjs: true,
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
     },
     settings: {
       'import/resolver': {
@@ -24,7 +27,7 @@ export default [
       }
     },
     rules: {
-      'tailwindcss/classnames-order': 'off',// 關閉css字母排序的警告
+      'tailwindcss/classnames-order': 'off', // 關閉css字母排序的警告
       'import/no-unresolved': [
         'error',
         {
