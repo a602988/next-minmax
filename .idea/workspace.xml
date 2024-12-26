@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/logo/LogoClient.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex--.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex--.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex-.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex-.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo/variants/LogoIndexCustom.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/variants/LogoIndexDefault.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logo/variants/LogoIndexCustom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/variants/LogoDefault.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +54,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/jean/Documents/GitHub/next-minmax",
+    "last_opened_file_path": "/Users/jean/Documents/GitHub/next-minmax/src/components/logo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -73,8 +68,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/components/logo" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/file" />
       <recent name="$PROJECT_DIR$/src/components/common/img" />
       <recent name="$PROJECT_DIR$/src/components/social/variants" />

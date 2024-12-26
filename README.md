@@ -80,6 +80,8 @@ https://www.thoughtlab.com/
 
 ## 最大的內容繪製至元素 2 
 
+解決：增加padding
+
 ## 壓縮javascript 2 
 
 

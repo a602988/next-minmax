@@ -10,7 +10,7 @@ function DefaultHeader() {
 
   return (
     <header className={`${styles.header} container-px`}>
-      <LogoIndex className="w-[234px] h-[50px]"/>
+      <LogoIndex className="w-[234px] h-[50px] p-1"/>
       <NavToggle className={styles.headerNavToggle} />
       <DefaultHeaderFooter />
     </header>
