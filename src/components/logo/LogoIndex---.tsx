@@ -1,11 +1,7 @@
-'use client';
-
-import Image from 'next/image';
+import Image from 'next/image'
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { use } from 'react';
-import LogoIndexCustom from '@/components/logo/variants/LogoIndexCustom';
 import { getWebData } from '@/services/getWebData';
 import styles from './LogoIndex.module.css';
 
@@ -14,27 +10,17 @@ interface Props {
   link?: boolean;
 }
 
-// Server Component
-function LogoIndex({ className = '', link = true }: Props) {
-  const webDataPromise = getWebData();
-  return <LogoClient className={className} link={link} webDataPromise={webDataPromise} />;
-}
-
-// Client Component
-
-
-function LogoClient({ className = '', link = true, webDataPromise }: Props & { webDataPromise: Promise<any> }) {
-  const webData = use(webDataPromise);
-  const params = useParams();
-  const t = useTranslations('common');
-
+export default async function LogoIndex({
+  className = '',
+  link = true,
+}: Props) {
+  const webData = await getWebData();
   const logoData = JSON.parse(webData.system_logo);
-  const logoSrc = logoData[0]?.path || '';
+  const logoSrc = logoData[0]?.path || '/images/common/logo.svg';
   const siteTitle = webData.site_title || 'logo';
 
-  if (!logoSrc) {
-    return <LogoIndexCustom />;
-  }
+  const params = useParams();
+  const t = useTranslations('common');
 
   const ariaLabel = t('returnTo') + t('home');
   const titleText = t('returnTo') + ` ${siteTitle} ` + t('home');
@@ -71,10 +57,10 @@ function LogoClient({ className = '', link = true, webDataPromise }: Props & { w
   }
 
   return (
-    <div className={`w-[234px] h-[50px] ${styles.logo} ${className}`}>
+    <div
+      className={`w-[234px] h-[50px] ${styles.logo} ${className}`}
+    >
       {logoContent}
     </div>
   );
 }
-
-export default LogoIndex;

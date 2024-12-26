@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import LogoImages from '@/assets/images/logo-mobile.svg';
-import ContactLinkMobile from '@/components/social/variants/ContactLinkMobile';
 import SocialLinks from '@/components/social/SocialLinks';
+import ContactLinkMobile from '@/components/social/variants/ContactLinkMobile';
 import { getWebData } from '@/services/getWebData';
 import styles from './DefaultHeaderFooter.module.css';
 
