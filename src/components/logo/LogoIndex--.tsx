@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
-import LogoIndexCustom from '@/components/logo/variants/LogoIndexCustom';
+import LogoDefault from '@/components/logo/variants/LogoDefault';
 import { useLogoData } from '@/hooks/useLogoData';
 import styles from './LogoIndex.module.css';
 import myPic from '../../../public/images/common/logo.png';
@@ -32,7 +32,7 @@ export default function LogoIndex({
 
   // 若logo圖片來源為空或加載失敗，使用自定義預設 logo
   if (logoSrc === '' || imageError) {
-    return <LogoIndexCustom />;
+    return <LogoDefault />;
   }
 
   // title 與 aria-label 多語系文字
