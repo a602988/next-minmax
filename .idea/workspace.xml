@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
+      <change afterPath="$PROJECT_DIR$/src/components/logo/variants/LogoIndex.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/loading/loadingBlock.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loading/loadingBlock.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/logo/LogoClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoClient.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex---.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex--.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex-.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoIndex.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/context/NavContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/NavContext.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/project-base-seeder.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,11 +81,11 @@
       <recent name="$PROJECT_DIR$/src/components/social/variants" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/logo/variants" />
       <recent name="$PROJECT_DIR$/src/hooks/no" />
       <recent name="$PROJECT_DIR$/src/hooks" />
       <recent name="$PROJECT_DIR$/src/components/social/variants" />
       <recent name="$PROJECT_DIR$/public/images/favicon" />
-      <recent name="$PROJECT_DIR$/src/app" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -133,7 +140,7 @@
       <workItem from="1735021368474" duration="1010000" />
       <workItem from="1735172950491" duration="14973000" />
       <workItem from="1735197661152" duration="6765000" />
-      <workItem from="1735279583940" duration="2376000" />
+      <workItem from="1735279583940" duration="6502000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
@@ -187,10 +194,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx</url>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/logo/LogoIndex---.tsx</url>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

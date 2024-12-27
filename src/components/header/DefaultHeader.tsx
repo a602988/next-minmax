@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import LogoIndex from "@/components/logo/LogoIndex";
+import LogoIndex from "@/components/logo/variants/LogoIndex";
 import NavToggle from '@/components/navToggle/NavToggle';
 import styles from './DefaultHeader.module.css';
 

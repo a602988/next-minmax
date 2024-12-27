@@ -3,7 +3,7 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 interface NavContextType {
-  toggleNav: () => void;
+  toggleNav(): void;
   isNavOpen: boolean;
 }
 
@@ -12,9 +12,9 @@ const NavContext = createContext<NavContextType | undefined>(undefined);
 export function NavProvider({ children }: { children: ReactNode }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const toggleNav = () => {
+  function toggleNav() {
     setIsNavOpen(prev => !prev);
-  };
+  }
 
   return (
     <NavContext.Provider value={{ isNavOpen, toggleNav }}>
