@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import React, { useState } from 'react';
 import LogoDefault from '@/components/logo/variants/LogoDefault';
 import styles from './LogoIndex.module.css';
 
@@ -22,9 +23,10 @@ function LogoClient({ className = '', data, link = true }: Props) {
 
   // 從 data 中解構出 logoSrc 和 site_title
   const { logoSrc, site_title } = data;
+  const [imageError, setImageError] = useState(false);
 
   // 如果沒有 logoSrc，則返回默認 Logo
-  if (!logoSrc) {
+  if (!logoSrc || imageError) {
     return <LogoDefault />;
   }
 
@@ -41,7 +43,7 @@ function LogoClient({ className = '', data, link = true }: Props) {
       <Image
         alt="logo"
         fill
-        onError={() => <LogoDefault />}  // 如果圖片加載失敗，顯示默認 Logo
+        onError={() => setImageError(true)}  // 如果圖片加載失敗，顯示默認 Logo
         priority  // 優先加載此圖片
         sizes="(max-width: 768px) 20w, 25w"
         src={logoSrc}
