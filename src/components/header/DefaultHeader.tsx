@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import LogoIndex from "@/components/logo/variants/LogoIndex";
+import MainNav from '@/components/nav/variants/MainNav';
 import NavToggle from '@/components/navToggle/NavToggle';
 import styles from './DefaultHeader.module.css';
 
@@ -11,6 +12,7 @@ function DefaultHeader() {
   return (
     <header className={`${styles.header} container-px`}>
       <LogoIndex className="w-[234px] h-[50px] p-1"/>
+      <MainNav />
       <NavToggle className={styles.headerNavToggle} />
       <DefaultHeaderFooter />
     </header>

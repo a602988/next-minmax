@@ -1,6 +1,6 @@
 import LogoImages from "@/assets/images/logo-mobile.svg";
 import LiveSupportWidget from '@/components/headerWiddgets/LiveSupportWidget';
-import LogoIndex from "@/components/logo/LogoIndex";
+import LogoIndex from "@/components/logo/variants/LogoIndex";
 import MainNav from "@/components/nav/variants/MainNav";
 import NavToggle from '@/components/navToggle/NavToggle';
 import SocialLinks from '@/components/social/SocialLinks';
