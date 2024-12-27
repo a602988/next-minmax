@@ -12,7 +12,7 @@ interface NavItemProps {
     title: string;
     url: string;
     target?: string;
-    options?: Option[] | string;
+    options?: Array<Option>;
   };
   className?: string;
   children?: React.ReactNode;
@@ -26,23 +26,8 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
 
   // 處理 options
   const [optionClass, restOptions] = React.useMemo(() => {
-    if (!item.options) return ['', {}];
-    
-    if (typeof item.options === 'string') {
-      try {
-        const parsedOptions = JSON.parse(item.options) as Option[];
-        const classOption = parsedOptions.find(opt => opt.key === 'class');
-        const otherOptions = parsedOptions.reduce((acc, opt) => {
-          if (opt.key !== 'class') acc[opt.key] = opt.value;
-          return acc;
-        }, {} as Record<string, string>);
-        return [classOption?.value || '', otherOptions];
-      } catch {
-        console.error('Invalid options string');
-        return ['', {}];
-      }
-    }
-    
+    if (!item.options || !Array.isArray(item.options)) return ['', {}];
+
     const classOption = item.options.find(opt => opt.key === 'class');
     const otherOptions = item.options.reduce((acc, opt) => {
       if (opt.key !== 'class') acc[opt.key] = opt.value;
