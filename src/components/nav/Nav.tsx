@@ -2,11 +2,9 @@
  * Nav 組件
  *
  * 這個組件負責渲染主導航菜單。它的主要功能包括：
- * - 處理多層次的子菜單結構
- * - 為導航元素設置適當的 ARIA 屬性以提高可訪問性
- *
- * @param {Props} props - 組件的屬性
- * @returns {JSX.Element} 渲染的導航菜單
+ * - 多層：處理多層次的子菜單結構
+ * - seo：為導航元素設置適當的 ARIA 屬性以提高可訪問性
+ * - 樣式：可設定樣式帶入
  */
 
 import React from 'react';
@@ -40,7 +38,7 @@ function Nav({
             options,
             target
           }}
-        />
+        >
         {children && children.length > 0 && (
           <ul
             aria-label={`${title} submenu`}
@@ -50,6 +48,7 @@ function Nav({
             {children.map((child) => renderMenuItem(child, depth + 1))}
           </ul>
         )}
+        </NavItem>
       </React.Fragment>
     );
   }

@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="1">
+    <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="Nav ok">
+      <change afterPath="$PROJECT_DIR$/src/components/nav/NavAd.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/nav/variants/MainNavAd.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c9ed7c08-6014-4d2a-b205-57ac5374a6bf.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c9ed7c08-6014-4d2a-b205-57ac5374a6bf.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/Nav.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/nav/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/NavItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +35,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
-    &quot;accountId&quot;: &quot;664971d2-a866-4b26-841f-b3d320325559&quot;
+    &quot;accountId&quot;: &quot;9f6eecd6-a281-490f-8010-6a13656f8514&quot;
   }
 }</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/usr/local/Cellar/php/8.2.8/bin/php" />
@@ -45,32 +51,32 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Node.js.next.config.mjs.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/src/components&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Node.js.next.config.mjs.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components/nav/variants",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/nav/variants" />
+      <recent name="$PROJECT_DIR$/src/components/nav" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/components/logo" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/public/file" />
-      <recent name="$PROJECT_DIR$/src/components/common/img" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/logo/variants" />
@@ -83,8 +89,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PS-243.22562.233" />
-        <option value="bundled-php-predefined-a98d8de5180a-7980c7aaca61-com.jetbrains.php.sharedIndexes-PS-243.22562.233" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-PS-242.23726.107" />
+        <option value="bundled-php-predefined-a98d8de5180a-90914f2295cb-com.jetbrains.php.sharedIndexes-PS-242.23726.107" />
       </set>
     </attachedChunks>
   </component>
@@ -135,6 +141,8 @@
       <workItem from="1735279583940" duration="8422000" />
       <workItem from="1735305266892" duration="39000" />
       <workItem from="1735305320538" duration="1479000" />
+      <workItem from="1735533347815" duration="7189000" />
+      <workItem from="1735542680262" duration="4068000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
@@ -160,7 +168,39 @@
       <option name="project" value="LOCAL" />
       <updated>1735021860920</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="navitem初步完成">
+      <option name="closed" value="true" />
+      <created>1735539658239</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1735539658239</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Nav ok">
+      <option name="closed" value="true" />
+      <created>1735541373804</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1735541373804</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Nav ok">
+      <option name="closed" value="true" />
+      <created>1735543923060</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1735543923060</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Nav ok">
+      <option name="closed" value="true" />
+      <created>1735544077417</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1735544077417</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +220,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="需補寫圖片檔名路徑有問題時的判斷" />
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="navitem初步完成" />
+    <MESSAGE value="Nav ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nav ok" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

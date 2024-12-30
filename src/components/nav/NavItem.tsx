@@ -1,3 +1,14 @@
+/**
+ * NavItem Component
+ *
+ * - 該頁判斷：判斷是否目前網址為該頁，不需要有link，且增加`aria-current`
+ * - data 屬性擴充：資料來源可能會有屬性的設定，例如data-color 或者其他應用的屬性
+ * - 樣式：可設定樣式帶入
+ * - 子元件：可放入子元件
+ *
+ */
+
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react';
@@ -53,12 +64,6 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
   // 組合所有的 className
   const combinedClassName = `listItem ${className || ''} ${optionClass}`.trim();
 
-  const linkContent = (
-    <>
-      {item.title}
-      {children}
-    </>
-  );
 
   return (
     <li className={combinedClassName} {...optionAttributes}>
@@ -68,16 +73,17 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
           href={item.url}
           target={item.target || '_self'}
         >
-          {linkContent}
+          {item.title}
         </Link>
       ) : (
         <div
           aria-current={isActive ? 'page' : undefined}
           className="link"
         >
-          {linkContent}
+          {item.title}
         </div>
       )}
+      {children}
     </li>
   );
 }
