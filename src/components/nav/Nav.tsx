@@ -1,8 +1,17 @@
+/**
+ * Nav 組件
+ *
+ * 這個組件負責渲染主導航菜單。它的主要功能包括：
+ * - 處理多層次的子菜單結構
+ * - 為導航元素設置適當的 ARIA 屬性以提高可訪問性
+ *
+ * @param {Props} props - 組件的屬性
+ * @returns {JSX.Element} 渲染的導航菜單
+ */
+
 import React from 'react';
-import { Option, SystemMenuType } from '@/types/systemMenuType';
+import { SystemMenuType } from '@/types/systemMenuType';
 import NavItem from './NavItem';
-
-
 
 interface Props {
     ariaLabel?: string;
@@ -19,25 +28,8 @@ function Nav({
     id,
     items
 }: Props) {
-  function parseOptions(optionsString: string): Array<Option> | undefined {
-    if (!optionsString || optionsString === '[]') return undefined;
-
-    try {
-      const parsed = JSON.parse(optionsString);
-      if (Array.isArray(parsed) && parsed.every(opt => typeof opt === 'object' && 'key' in opt && 'value' in opt)) {
-        return parsed;
-      }
-    } catch (error) {
-      console.error(`Error parsing options:`, error, 'Options string:', optionsString);
-    }
-
-    return undefined;
-  }
-
   function renderMenuItem(item: SystemMenuType, depth: number) {
-    const { children, code, options, target, title, url } = item;
-
-    const parsedOptions = typeof options === 'string' ? parseOptions(options) : options;
+    const {children, code, options, target, title, url} = item;
 
     return (
       <React.Fragment key={code}>
@@ -45,12 +37,16 @@ function Nav({
           item={{
             title,
             url: url || '',
-            options: parsedOptions,
-            target,
+            options,
+            target
           }}
         />
         {children && children.length > 0 && (
-          <ul className={`sub-${depth + 1}`}>
+          <ul
+            aria-label={`${title} submenu`}
+            className={`sub-${depth + 1}`}
+            role="menu"
+          >
             {children.map((child) => renderMenuItem(child, depth + 1))}
           </ul>
         )}
@@ -59,8 +55,8 @@ function Nav({
   }
 
   return (
-    <nav aria-label={ariaLabel} className={classNameWp}>
-      <ul className={className} id={id}>
+    <nav aria-label={ariaLabel} className={classNameWp} role="navigation">
+      <ul className={className} id={id} role="menubar">
         {items.map((item) => renderMenuItem(item, 0))}
       </ul>
     </nav>

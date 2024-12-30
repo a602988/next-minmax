@@ -12,7 +12,7 @@ interface NavItemProps {
     title: string;
     url: string;
     target?: string;
-    options?: Option[] | null;
+    options?: Array<Option> | string | null;
   };
   className?: string;
   children?: React.ReactNode;
@@ -31,9 +31,9 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
 
     if (item.options) {
       try {
-        const parsedOptions: Array<Option> = typeof item.options === 'string'
-          ? JSON.parse(item.options)
-          : item.options;
+        const parsedOptions: Array<Option> = Array.isArray(item.options)
+          ? item.options
+          : JSON.parse(item.options);
 
         parsedOptions.forEach(option => {
           if (option.key === 'class') {
