@@ -3,7 +3,7 @@ export interface SystemMenuType {
   title: string;
   description?: string | null;
   url?: string | null;
-  target?: string | null;
+  target?: string;
   children?: Array<SystemMenuType>;
   options?: string | Array<Option> | null;
 }
