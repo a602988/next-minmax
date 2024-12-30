@@ -43,7 +43,7 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
           }
         });
       } catch (error) {
-        console.error('解析選項時出錯:', error);
+        console.error('navItem option:', error);
       }
     }
 
