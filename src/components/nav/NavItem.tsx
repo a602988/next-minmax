@@ -12,7 +12,7 @@ interface NavItemProps {
     title: string;
     url: string;
     target?: string;
-    options?: Array<Option>;
+    options?: string | Array<Option>;
   };
   className?: string;
   children?: React.ReactNode;
@@ -22,30 +22,37 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
   const pathname = usePathname();
 
   // 判斷當前菜單項是否為活動狀態（當前頁面）
-  const isActive = pathname === item.url;
+  const isActive = item.url && pathname === item.url;
 
-  // 處理 options
-  const [optionClass, restOptions] = React.useMemo(() => {
-    if (!item.options || !Array.isArray(item.options)) return ['', {}];
+  // 解析和處理菜單項的額外選項
+  const { optionAttributes, optionClass } = React.useMemo(() => {
+    let resultClass = '';
+    const resultAttributes: Record<string, string> = {};
 
-    const classOption = item.options.find(opt => opt.key === 'class');
-    const otherOptions = item.options.reduce((acc, opt) => {
-      if (opt.key !== 'class') acc[opt.key] = opt.value;
-      return acc;
-    }, {} as Record<string, string>);
-    return [classOption?.value || '', otherOptions];
+    if (item.options) {
+      try {
+        const parsedOptions: Array<Option> = typeof item.options === 'string' 
+          ? JSON.parse(item.options) 
+          : item.options;
+
+        parsedOptions.forEach(option => {
+          if (option.key === 'class') {
+            resultClass = option.value;
+          } else {
+            resultAttributes[option.key] = option.value;
+          }
+        });
+      } catch (error) {
+        console.error('解析選項時出錯:', error);
+      }
+    }
+
+    return { optionAttributes: resultAttributes, optionClass: resultClass };
   }, [item.options]);
 
   // 組合所有的 className
   const combinedClassName = `listItem ${className || ''} ${optionClass}`.trim();
 
-  // 創建共同的屬性對象
-  const commonProps = {
-    className: combinedClassName,
-    ...restOptions,
-  };
-
-  // 創建鏈接內容
   const linkContent = (
     <>
       {item.title}
@@ -54,22 +61,22 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
   );
 
   return (
-    <li {...commonProps}>
-      {isActive ? (
-        <div
-          aria-current="page"
-          className="link"
-        >
-          {linkContent}
-        </div>
-      ) : (
+    <li className={combinedClassName} {...optionAttributes}>
+      {item.url && !isActive ? (
         <Link
           className="link"
-          href={item.url || '#'}
+          href={item.url}
           target={item.target || '_self'}
         >
           {linkContent}
         </Link>
+      ) : (
+        <div
+          aria-current={isActive ? 'page' : undefined}
+          className="link"
+        >
+          {linkContent}
+        </div>
       )}
     </li>
   );
