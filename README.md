@@ -100,7 +100,8 @@ https://git.24241872.work/jean/next-minmax
 
 # 待處理問題
 
-
+- windows 的捲軸測試
+- 
 
 
 

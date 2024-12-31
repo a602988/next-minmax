@@ -19,27 +19,32 @@ function Footer({webData}: DefaultHeaderProps) {
 
   return (
       <div className={styles.footer}>
-        <LogoImages className={styles.footerLogo} />
-        <span className={`${styles.vr} vr`} />
-        <div className="me-auto flex flex-col text-xs sm:text-sm">
-          <span className="pt-1">{webData.site_title}</span>
-          <span className="inline-block py-1">{t('company')}</span>
+        <div className="fixed inset-0">
+          <LogoImages className="w-100 h-auto" />
         </div>
-        <div className="flex items-start gap-3 sm:gap-6">
-          <div>
-            <h3 className="text-xs font-normal	sm:mb-1">{t('callUs')}</h3>
-            <address>
-              <dl className="m-0">
-                <dt className="sr-only">{t('tel')}</dt>
-                <dd className="m-0 leading-5">
-                  <ContactLinkMobile className="text-xs" />
-                </dd>
-              </dl>
-            </address>
+        <div className={styles.footerInner}>
+          <LogoImages className={styles.footerLogo} />
+          <span className={`${styles.vr} vr`} />
+          <div className="me-auto flex flex-col text-xs sm:text-sm">
+            <span className="pt-1">{webData.site_title}</span>
+            <span className="inline-block py-1">{t('company')}</span>
           </div>
-          <div className="hidden xs:block">
-            <h3 className="text-xs font-normal	sm:mb-1">{t('findUs')}</h3>
-            <SocialLinks className="py-1 flex" />
+          <div className="flex items-start gap-3 sm:gap-6">
+            <div>
+              <h3 className="text-xs font-normal	sm:mb-1">{t('callUs')}</h3>
+              <address>
+                <dl className="m-0">
+                  <dt className="sr-only">{t('tel')}</dt>
+                  <dd className="m-0 leading-5">
+                    <ContactLinkMobile className="text-xs" />
+                  </dd>
+                </dl>
+              </address>
+            </div>
+            <div className="hidden xs:block">
+              <h3 className="text-xs font-normal	sm:mb-1">{t('findUs')}</h3>
+              <SocialLinks className="py-1 flex" />
+            </div>
           </div>
         </div>
       </div>

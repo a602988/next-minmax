@@ -5,21 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="Nav ok">
-      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/Document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Document.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/Nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/NavAd.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNav.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNavAd.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/variants/MainNavAd.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +138,7 @@
       <workItem from="1735305266892" duration="39000" />
       <workItem from="1735305320538" duration="1479000" />
       <workItem from="1735533347815" duration="7189000" />
-      <workItem from="1735542680262" duration="13759000" />
+      <workItem from="1735542680262" duration="14860000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />

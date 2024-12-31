@@ -37,7 +37,7 @@
 /* 手機版 */
 .mainNavWp{
     @media not all and (min-width: 1280px) {
-        @apply fixed top-[50px] left-0 right-0 bottom-[100px] bg-[var(--m-body)] z-50 ;
+        @apply fixed top-[50px] left-0 right-0 bottom-[100px]  z-50 ;
         @apply border-t border-b border-white/5;
     }
     @media not all and (min-width: 640px) {
