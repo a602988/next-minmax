@@ -3,7 +3,7 @@ import LogoImages from '@/assets/images/logo-mobile.svg';
 import SocialLinks from '@/components/social/SocialLinks';
 import ContactLinkMobile from '@/components/social/variants/ContactLinkMobile';
 import { getWebData } from '@/services/getWebData';
-import styles from './DefaultHeaderFooter.module.css';
+import styles from './Footer.module.css';
 
 type WebData = {
   site_title: string;
@@ -14,12 +14,12 @@ type DefaultHeaderProps = {
   webData: WebData;
 };
 
-function DefaultHeaderFooter({webData}: DefaultHeaderProps) {
+function Footer({webData}: DefaultHeaderProps) {
   const t = useTranslations('header');
 
   return (
-      <div className={styles.headerFooter}>
-        <LogoImages className={styles.headerFooterLogo} />
+      <div className={styles.footer}>
+        <LogoImages className={styles.footerLogo} />
         <span className={`${styles.vr} vr`} />
         <div className="me-auto flex flex-col text-xs sm:text-sm">
           <span className="pt-1">{webData.site_title}</span>
@@ -48,5 +48,5 @@ function DefaultHeaderFooter({webData}: DefaultHeaderProps) {
 
 export default async function DefaultHeaderWrapper() {
   const webData = await getWebData();
-  return <DefaultHeaderFooter webData={webData} />;
+  return <Footer webData={webData} />;
 }

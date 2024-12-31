@@ -11,21 +11,34 @@ import React from 'react';
 import { SystemMenuType } from '@/types/systemMenuType';
 import NavItem from './NavItem';
 
+// 定義 AdComponentProps 類型
+interface AdComponentProps {
+  depth: number;
+  item: SystemMenuType;
+}
+
 interface Props {
-    ariaLabel?: string;
-    className?: string;
-    classNameWp?: string;
-    id?: string;
-    items: Array<SystemMenuType>;
+  ariaLabel?: string;
+  className?: string;
+  classNameWp?: string;
+  id?: string;
+  items: Array<SystemMenuType>;
+  AdComponent?: React.ComponentType<AdComponentProps>;
+  enableAd?: boolean; // 是否啟用廣告
+  maxDepth?: number; // 新增：控制選單顯示的最大層數
 }
 
 function Nav({
-    ariaLabel = "Main Navigation",
-    className = "flex",
-    classNameWp = "",
-    id,
-    items
-}: Props) {
+               AdComponent,
+               ariaLabel = "Main Navigation",
+               className = "flex",
+               classNameWp = "",
+               enableAd = true, // 設置設值為 true，表示啟用廣告
+               id,
+               items,
+               maxDepth = Infinity // 設置預設值為 Infinity，表示默認顯示所有層級
+             }: Props) {
+
   function renderMenuItem(item: SystemMenuType, depth: number) {
     const {children, code, options, target, title, url} = item;
 
@@ -39,20 +52,24 @@ function Nav({
             target
           }}
         >
-        {children && children.length > 0 && (
-          <ul
-            aria-label={`${title} submenu`}
-            className={`sub-${depth + 1}`}
-            role="menu"
-          >
-            {children.map((child) => renderMenuItem(child, depth + 1))}
-          </ul>
-        )}
+          {children && children.length > 0 && depth < maxDepth && (
+            <div className={`submenu-wp-${depth + 1}`}>
+              <ul
+                aria-label={`${title} submenu`}
+                className={`submenu-${depth + 1}`}
+                role="menu"
+              >
+                {children.map((child) => renderMenuItem(child, depth + 1))}
+              </ul>
+              {enableAd && AdComponent && (
+                <AdComponent depth={depth + 1} item={item} />
+              )}
+            </div>
+          )}
         </NavItem>
       </React.Fragment>
     );
   }
-
   return (
     <nav aria-label={ariaLabel} className={classNameWp} role="navigation">
       <ul className={className} id={id} role="menubar">

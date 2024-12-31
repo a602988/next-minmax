@@ -1,10 +1,6 @@
 /* 桌機版 */
 .mainNav{
-    @apply flex gap-3 uppercase justify-center;
-    :global(.listItem){
-
-
-    }
+    @apply flex gap-3 uppercase justify-center overflow-y-auto;
     :global(.link){
         @apply text-[var(--m-navMain-text)] px-0.5 inline-block;
         @apply relative;
@@ -43,9 +39,10 @@
     @media not all and (min-width: 1280px) {
         @apply fixed top-[50px] left-0 right-0 bottom-[100px] bg-[var(--m-body)] z-50 ;
         @apply border-t border-b border-white/5;
-
     }
-
+    @media not all and (min-width: 640px) {
+        @apply bottom-[70px];
+    }
 }
 .mainNav{
     @apply max-xl:flex-col max-md:gap-6 max-xl:gap-12 max-xl:justify-center max-xl:h-full max-xl:px-[10%];

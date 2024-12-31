@@ -10,7 +10,7 @@ type Props = {
 
 export default function Document({ bodyClassName = '', children, locale }: Props) {
   return (
-    <html lang={locale}>
+    <html lang={locale} className="scroll-smooth">
       <ClientDocument bodyClassName={bodyClassName}>
         {children}
       </ClientDocument>

@@ -1,24 +1,22 @@
 import dynamic from 'next/dynamic'
+import MainNav from '@/app/(public)/[locale]/MainNav';
 import LogoIndex from "@/components/logo/variants/LogoIndex";
-import MainNavAd from '@/components/nav/variants/MainNavAd';
 import NavToggle from '@/components/navToggle/NavToggle';
-import styles from './DefaultHeader.module.css';
+import styles from './Header.module.css';
 
+const Footer = dynamic(() => import('../Footer'))
 
-const DefaultHeaderFooter = dynamic(() => import('./DefaultHeaderFooter'))
-
-function DefaultHeader() {
-
+function Header() {
   return (
     <header className={`${styles.header} container-px`}>
       <LogoIndex className="w-[234px] h-[50px] p-1"/>
-      <MainNavAd />
+      <MainNav />
       <NavToggle className={styles.headerNavToggle} />
-      <DefaultHeaderFooter />
+      <Footer />
     </header>
   );
 }
 
 export default async function DefaultHeaderWrapper() {
-  return <DefaultHeader />;
+  return <Header />;
 }

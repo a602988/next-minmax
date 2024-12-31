@@ -6,7 +6,6 @@
     .headerNavToggle{
         @apply  xl:hidden;
         :global(body.nav-open) &{
-            /*@apply absolute top-0 end-0;*/
         }
     }
 }

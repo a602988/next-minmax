@@ -5,14 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="Nav ok">
-      <change afterPath="$PROJECT_DIR$/src/components/nav/NavAd.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/nav/variants/MainNavAd.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c9ed7c08-6014-4d2a-b205-57ac5374a6bf.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c9ed7c08-6014-4d2a-b205-57ac5374a6bf.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeaderFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/Document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/Document.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/nav/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/Nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/NavItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/NavItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav/NavAd.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNav.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nav/variants/MainNavAd.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/variants/MainNavAd.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/page-seeder-import.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,11 +85,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/(public)/[locale]" />
+      <recent name="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)" />
       <recent name="$PROJECT_DIR$/src/components/logo/variants" />
       <recent name="$PROJECT_DIR$/src/hooks/no" />
       <recent name="$PROJECT_DIR$/src/hooks" />
-      <recent name="$PROJECT_DIR$/src/components/social/variants" />
-      <recent name="$PROJECT_DIR$/public/images/favicon" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -142,7 +148,7 @@
       <workItem from="1735305266892" duration="39000" />
       <workItem from="1735305320538" duration="1479000" />
       <workItem from="1735533347815" duration="7189000" />
-      <workItem from="1735542680262" duration="4068000" />
+      <workItem from="1735542680262" duration="13759000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
@@ -223,15 +229,5 @@
     <MESSAGE value="navitem初步完成" />
     <MESSAGE value="Nav ok" />
     <option name="LAST_COMMIT_MESSAGE" value="Nav ok" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
