@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="Nav ok">
+      <change afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/AnimatedLogo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useIsMobile.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/HeaderFooter.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/HeaderFooter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/MainNav.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/MainNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/MainNav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader-.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader-.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logo/LogoClient.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logo/LogoClient.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,32 +62,32 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components/nav/variants",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components/logo/variants",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/prettier",
-    "settings.editor.selected.configurable": "advanced.settings",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/logo/variants" />
       <recent name="$PROJECT_DIR$/src/components/nav/variants" />
       <recent name="$PROJECT_DIR$/src/components/nav" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/components/logo" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/app/(public)/[locale]/(header)" />
       <recent name="$PROJECT_DIR$/src/app/(public)/[locale]" />
+      <recent name="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/(header)" />
       <recent name="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)" />
       <recent name="$PROJECT_DIR$/src/components/logo/variants" />
-      <recent name="$PROJECT_DIR$/src/hooks/no" />
-      <recent name="$PROJECT_DIR$/src/hooks" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -139,6 +147,8 @@
       <workItem from="1735305320538" duration="1479000" />
       <workItem from="1735533347815" duration="7189000" />
       <workItem from="1735542680262" duration="14860000" />
+      <workItem from="1735795271023" duration="40000" />
+      <workItem from="1735795350734" duration="9253000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />

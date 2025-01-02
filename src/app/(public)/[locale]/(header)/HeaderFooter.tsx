@@ -3,7 +3,9 @@ import LogoImages from '@/assets/images/logo-mobile.svg';
 import SocialLinks from '@/components/social/SocialLinks';
 import ContactLinkMobile from '@/components/social/variants/ContactLinkMobile';
 import { getWebData } from '@/services/getWebData';
-import styles from './Footer.module.css';
+import AnimatedLogo from './AnimatedLogo';
+import styles from './HeaderFooter.module.css';
+
 
 type WebData = {
   site_title: string;
@@ -14,13 +16,13 @@ type DefaultHeaderProps = {
   webData: WebData;
 };
 
-function Footer({webData}: DefaultHeaderProps) {
+function HeaderFooter({webData}: DefaultHeaderProps) {
   const t = useTranslations('header');
 
   return (
-      <div className={styles.footer}>
+      <div className={styles.headerFooter}>
         <div className="fixed inset-0">
-          <LogoImages className="w-100 h-auto" />
+          <AnimatedLogo />
         </div>
         <div className={styles.footerInner}>
           <LogoImages className={styles.footerLogo} />
@@ -41,17 +43,18 @@ function Footer({webData}: DefaultHeaderProps) {
                 </dl>
               </address>
             </div>
-            <div className="hidden xs:block">
-              <h3 className="text-xs font-normal	sm:mb-1">{t('findUs')}</h3>
-              <SocialLinks className="py-1 flex" />
-            </div>
+              <div>
+                <h3 className="text-xs font-normal	sm:mb-1">{t('findUs')}</h3>
+                <SocialLinks className="py-1 flex" />
+              </div>
           </div>
         </div>
       </div>
   );
 }
 
+// DefaultHeaderWrapper 保持不變
 export default async function DefaultHeaderWrapper() {
   const webData = await getWebData();
-  return <Footer webData={webData} />;
+  return <HeaderFooter webData={webData} />;
 }

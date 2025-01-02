@@ -1,4 +1,4 @@
-.footer{
+.headerFooter{
     @apply fixed inset-0 bg-[var(--m-body)];
 }
 .footerInner{
@@ -16,3 +16,9 @@
 }
 
 
+.bgLogo{
+    @apply opacity-[0.02];
+    :global path{
+        @apply fill-white;
+    }
+}

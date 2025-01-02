@@ -28,6 +28,7 @@ export default [
     },
     rules: {
       'tailwindcss/classnames-order': 'off', // 關閉css字母排序的警告
+      'react/jsx-sort-props': 'off', // 關閉屬性字母排序的警告
       'import/no-unresolved': [
         'error',
         {

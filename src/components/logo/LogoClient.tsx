@@ -21,6 +21,7 @@ import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import LogoDefault from '@/components/logo/variants/LogoDefault';
 
+
 // 定義 Props 介面
 interface Props {
   className?: string;  // 可選的 CSS 類名
