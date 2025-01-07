@@ -1,5 +1,5 @@
 .headerFooter{
-    @apply fixed inset-0 bg-[var(--m-body)];
+    @apply fixed inset-0 bg-[var(--m-body)] z-10;
 }
 .footerInner{
     @apply xl:sr-only max-xl:fixed bottom-0 left-0 right-0  z-40 flex items-center justify-center;

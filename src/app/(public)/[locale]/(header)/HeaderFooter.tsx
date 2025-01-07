@@ -22,7 +22,7 @@ function HeaderFooter({webData}: DefaultHeaderProps) {
   return (
       <div className={styles.headerFooter}>
         <div className="fixed inset-0">
-          <AnimatedLogo />
+          <AnimatedLogo className="scale-150" />
         </div>
         <div className={styles.footerInner}>
           <LogoImages className={styles.footerLogo} />

@@ -1,6 +1,6 @@
 /* 桌機版 */
 .mainNav{
-    @apply flex gap-3 uppercase justify-center overflow-y-auto;
+    @apply flex gap-3 uppercase justify-center overflow-y-auto z-50 relative;
     :global(.link){
         @apply text-[var(--m-navMain-text)] px-0.5 inline-block;
         @apply relative;
