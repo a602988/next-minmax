@@ -6,16 +6,12 @@ import styles from './MainNav.module.css';
 
 const CODE = 'web-header';
 
-interface MainNavProps {
-  locale: string;
+async function getMenuData() {
+  return await getSystemMenu();
 }
 
-async function getMenuData(locale: string) {
-  return await getSystemMenu(locale);
-}
-
-async function MainNav({ locale }: MainNavProps) {
-  const menuData = await getMenuData(locale);
+async function MainNav() {
+  const menuData = await getMenuData();
   const mainMenu = menuData.find((item: SystemMenuType) => item.code === CODE);
 
   if (!mainMenu?.children?.length) return null;

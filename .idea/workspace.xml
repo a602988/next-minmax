@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="Nav ok">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/MainNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/MainNav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/nav/Nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nav/Nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/system-menus.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/system-menus.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/getSystemMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/getSystemMenu.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -152,7 +149,7 @@
       <workItem from="1736126801698" duration="3765000" />
       <workItem from="1736215649937" duration="8567000" />
       <workItem from="1736238651986" duration="59000" />
-      <workItem from="1736239037244" duration="3013000" />
+      <workItem from="1736239037244" duration="3444000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
