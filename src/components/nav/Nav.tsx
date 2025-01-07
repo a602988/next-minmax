@@ -2,11 +2,14 @@
  * Nav 組件
  *
  * 這個組件負責渲染主導航菜單。它的主要功能包括：
+ * - ariaLabel：帶入選單的title 若沒值則預設 "Main Navigation"
  * - 多層：處理多層次的子菜單結構
  * - seo：為導航元素設置適當的 ARIA 屬性以提高可訪問性
  * - 樣式：可設定樣式帶入
+ * - 廣告區塊：是否啟用廣告區塊、不同層不同廣告區塊
+ * - 顯示層數：最多顯示到第幾層
  */
-
+'use client';
 import React from 'react';
 import { SystemMenuType } from '@/types/systemMenuType';
 import NavItem from './NavItem';
@@ -36,7 +39,7 @@ function Nav({
                enableAd = true, // 設置設值為 true，表示啟用廣告
                id,
                items,
-               maxDepth = Infinity // 設置預設值為 Infinity，表示默認顯示所有層級
+               maxDepth = Infinity, // 設置預設值為 Infinity，表示默認顯示所有層級
              }: Props) {
 
   function renderMenuItem(item: SystemMenuType, depth: number) {
@@ -71,8 +74,8 @@ function Nav({
     );
   }
   return (
-    <nav aria-label={ariaLabel} className={classNameWp} role="navigation">
-      <ul className={className} id={id} role="menubar">
+    <nav aria-label={ariaLabel} className={classNameWp}>
+      <ul className={className} id={id}>
         {items.map((item) => renderMenuItem(item, 0))}
       </ul>
     </nav>

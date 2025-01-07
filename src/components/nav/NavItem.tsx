@@ -5,7 +5,8 @@
  * - data 屬性擴充：資料來源可能會有屬性的設定，例如data-color 或者其他應用的屬性
  * - 樣式：可設定樣式帶入
  * - 子元件：可放入子元件
- *
+ * - aria-label：若description為空值，則改為顯示title
+ * - target：若為_self則不設定
  */
 
 
@@ -21,6 +22,7 @@ interface Option {
 interface NavItemProps {
   item: {
     title: string;
+    description?: string;
     url: string;
     target?: string;
     options?: Array<Option> | string | null;
@@ -69,19 +71,20 @@ function NavItem({ children, className, item }: NavItemProps): React.ReactElemen
     <li className={combinedClassName} {...optionAttributes}>
       {item.url && !isActive ? (
         <Link
+          aria-label={item.description || item.title}
           className="link"
           href={item.url}
-          target={item.target || '_self'}
+          {...(item.target && item.target !== '_self' ? { target: item.target } : {})}
         >
           {item.title}
         </Link>
       ) : (
-        <div
+        <span
           aria-current={isActive ? 'page' : undefined}
           className="link"
         >
           {item.title}
-        </div>
+        </span>
       )}
       {children}
     </li>
