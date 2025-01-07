@@ -4,13 +4,13 @@
  * 這個組件負責渲染主導航菜單。它的主要功能包括：
  * - ariaLabel：帶入選單的title 若沒值則預設 "Main Navigation"
  * - 多層：處理多層次的子菜單結構
- * - seo：為導航元素設置適當的 ARIA 屬性以提高可訪問性
  * - 樣式：可設定樣式帶入
  * - 廣告區塊：是否啟用廣告區塊、不同層不同廣告區塊
  * - 顯示層數：最多顯示到第幾層
  */
+
 'use client';
-import React from 'react';
+import React,{ Fragment } from 'react';
 import { SystemMenuType } from '@/types/systemMenuType';
 import NavItem from './NavItem';
 
@@ -46,7 +46,7 @@ function Nav({
     const {children, code, options, target, title, url} = item;
 
     return (
-      <React.Fragment key={code}>
+      <Fragment key={code}>
         <NavItem
           item={{
             title,
@@ -70,7 +70,7 @@ function Nav({
             </div>
           )}
         </NavItem>
-      </React.Fragment>
+      </Fragment>
     );
   }
   return (

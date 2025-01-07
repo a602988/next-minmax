@@ -10,7 +10,7 @@ function Header() {
   return (
     <header className={`${styles.header} container-px`}>
       <LogoIndex className="w-[234px] h-[50px] p-1 z-20"/>
-      <MainNav dataSource="api"/>
+      <MainNav/>
       <NavToggle className={styles.headerNavToggle} />
 
     </header>

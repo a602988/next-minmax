@@ -7,16 +7,15 @@ import styles from './MainNav.module.css';
 const CODE = 'web-header';
 
 interface MainNavProps {
-  dataSource?: 'api' | 'json';
-  lang: string;
+  locale: string;
 }
 
-async function getMenuData(lang: string, dataSource: 'api' | 'json') {
-  return await getSystemMenu(lang, dataSource);
+async function getMenuData(locale: string) {
+  return await getSystemMenu(locale);
 }
 
-async function MainNav({ dataSource = 'api', lang }: MainNavProps) {
-  const menuData = await getMenuData(lang, dataSource);
+async function MainNav({ locale }: MainNavProps) {
+  const menuData = await getMenuData(locale);
   const mainMenu = menuData.find((item: SystemMenuType) => item.code === CODE);
 
   if (!mainMenu?.children?.length) return null;
