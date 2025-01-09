@@ -3,5 +3,5 @@
    @apply min-h-screen;
 }
 body:has(.defaultLayout){
-    @apply bg-[var(--m-body)];
+   @apply bg-[var(--m-body)];
 }

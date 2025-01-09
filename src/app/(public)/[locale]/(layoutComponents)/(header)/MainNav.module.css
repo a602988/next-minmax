@@ -1,0 +1,88 @@
+/* 桌機版 */
+.mainNav{
+    @apply flex gap-3 uppercase justify-center overflow-y-auto  relative;
+    :global(.link){
+        @apply  px-0.5 inline-block text-[var(--m-navMain-text)];
+        @apply relative;
+        &[aria-current=page],&.current{
+            @apply text-[var(--m-navMain-text-active)];
+            &::after{
+                @apply content-[''] absolute left-1/2 top-1/2 w-0 h-0.5 bg-primary/50;
+                animation: navMainLine .5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+        }
+    }
+    :global(a.link){
+        @apply transition-colors duration-700 ease-out ;
+        &:hover,&:focus{
+            @apply text-primary;
+        }
+        span{
+            @apply relative z-10;
+        }
+    }
+}
+@keyframes navMainLine {
+    from {
+        width: 0;
+        left: 50%;
+    }
+    to {
+        width: 100%;
+        left: 0;
+    }
+}
+
+
+/* 手機版 */
+.mainNav{
+    @apply max-xl:flex-col max-md:gap-6 max-xl:gap-12 max-xl:justify-center max-xl:h-full max-xl:px-[10%];
+    :global(.listItem){
+        @apply max-xl:relative max-xl:overflow-hidden;
+
+    }
+    :global(.link){
+        @apply inline-block max-md:text-2xl max-xl:text-6xl;
+        /*&[aria-current=page],&.current {*/
+        /*    @apply max-xl:opacity-40;*/
+        /*}*/
+    }
+}
+/* 手機版動畫 */
+@media not all and (min-width: 1280px) {
+    :global(body:not(.nav-open)) {
+        .mainNav :global(.listItem span), .mainNav :global(.listItem a) {
+            clip-path: inset(0 0 0 0);
+            animation: clipTextClose 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+        }
+    }
+
+    :global(body.nav-open) {
+        .mainNav :global(.listItem span), .mainNav :global(.listItem a) {
+            clip-path: inset(0 100% 0 0);
+            animation: clipTextOpen 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) 0.4s forwards;
+        }
+    }
+}
+@keyframes clipTextOpen {
+    from {
+        clip-path: inset(0 100% 0 0);
+        /*color: var(--m-primary)*/
+
+    }
+    to {
+        clip-path: inset(0 0 0 0);
+        /*color: var(--m-navMain-text)*/
+    }
+}
+
+@keyframes clipTextClose {
+    from {
+        clip-path: inset(0 0 0 0);
+        /*color: var(--m-navMain-text)*/
+    }
+    to {
+        clip-path: inset(0 100% 0 0);
+        /*color: var(--m-primary)*/
+    }
+}

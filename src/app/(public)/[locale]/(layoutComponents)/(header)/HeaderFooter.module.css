@@ -1,0 +1,65 @@
+.headerFooter{
+    @apply xl:hidden flex items-center justify-center;
+    @apply h-[70px] sm:h-[100px] gap-3 sm:gap-6 p-3 sm:p-6 text-white/50;
+}
+
+.footerLogo{
+    @apply w-[25px] sm:w-[45px];
+    :global path{
+        @apply fill-white/50;
+    }
+}
+.vr{
+    @apply bg-white/10;
+}
+
+
+.bgLogo{
+    @apply opacity-[0.02];
+    :global path{
+        @apply fill-white;
+    }
+}
+@keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+:global(body.nav-open){
+    .headerFooter > * {
+        @apply opacity-0 translate-x-[-100%];
+        animation-delay: 0.6s; /* 基本延遲 0.6 秒 */
+    }
+    .headerFooter > *:nth-child(1),
+    .headerFooter > *:nth-child(2),
+    .headerFooter > *:nth-child(3) {
+        animation: slideLeft 1s ease-out forwards;
+    }
+    .headerFooter > *:nth-child(4),
+    .headerFooter > *:nth-child(5) {
+        animation: slideRight 0.7s ease-out forwards;
+    }
+
+    .headerFooter > *:nth-child(1) { animation-delay: 0.6s; }
+    .headerFooter > *:nth-child(2) { animation-delay: 0.8s; }
+    .headerFooter > *:nth-child(3) { animation-delay: 1s; }
+    .headerFooter > *:nth-child(4) { animation-delay: 0.8s; }
+    .headerFooter > *:nth-child(5) { animation-delay: 0.6s; }
+}
+
+

@@ -1,3 +1,8 @@
+/**
+ * 選單 資料
+ * - json 選擇使用
+ * - API_ENDPOINTS 撈取資料表設定
+ */
 import { API_ENDPOINTS } from '@/config/apiConfig';
 import systemMenusJson from '@/data/system-menus.json';
 import { SystemMenuType } from '@/types/systemMenuType';

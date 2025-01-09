@@ -37,11 +37,8 @@ function AnimatedLogo({ className = '' }: AnimatedLogoProps): JSX.Element {
   const containerVariants = {
     hidden: {opacity: 0},
     visible: {
-      opacity: 0.02,
-      transition: {
-        delay: 0.5, // 整體動畫延遲 0.5 秒
-        when: 'beforeChildren' // 確保父元素動畫在子元素之前完成
-      }
+      opacity: 0.03,
+
     }
   };
 
@@ -52,17 +49,17 @@ function AnimatedLogo({ className = '' }: AnimatedLogoProps): JSX.Element {
     visible1: {
       opacity: 1,
       y: 0,
-      transition: {duration: 1, ease: 'easeInOut'}
+      transition: {duration: 1, ease: 'easeInOut', delay: 0.1}
     },
     visible2: {
       opacity: 1,
       x: 0,
-      transition: {duration: 1, ease: 'easeInOut', delay: 0.1}
+      transition: {duration: 1, ease: 'easeInOut', delay: 0.2}
     },
     visible3: {
       opacity: 1,
       x: 0,
-      transition: {duration: 1, ease: 'easeInOut', delay: 0.05}
+      transition: {duration: 1, ease: 'easeInOut', delay: 0.4}
     }
   };
 

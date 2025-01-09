@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import DefaultHeader from '@/app/(public)/[locale]/(defaultLayout)/Header';
+import DefaultHeader from '@/app/(public)/[locale]/(layoutComponents)/(header)/Header';
 import styles from './DefaultLayout.module.css';
 
 
