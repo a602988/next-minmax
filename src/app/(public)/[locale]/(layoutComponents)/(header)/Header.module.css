@@ -1,5 +1,5 @@
 .header{
-    @apply flex justify-between items-center container mx-auto gap-5;
+    @apply flex justify-between items-center container mx-auto gap-3 xl:gap-5;
     @apply max-w-3xl h-[50px] xl:h-[180px];
     /*@apply transition-all ease-out duration-500;*/
 

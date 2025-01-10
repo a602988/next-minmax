@@ -2,15 +2,23 @@
     @apply flex rounded-full overflow-hidden;
     :global(.social-link) {
         @apply flex items-center;
+        
     }
+    :global(.social-link svg) {
+        @apply text-xs lg:text-base transition-all duration-700;
+    }  
+    :global(.social-link:hover svg) {
+        @apply scale-110;
+    }    
     :global(.social-link-label) {
         @apply !ms-1 lg:!ms-1.5 sr-only md:not-sr-only;
     }
-    :global(svg) {
-        @apply text-base;
+  
+    :global(.social-line svg) {
+        @apply text-sm;
     }
     & > *{
-        @apply px-2 xl:px-4 py-2 xl:py-2 text-xs lg:text-sm;
+        @apply px-2 xl:px-4 py-1 xl:py-2
     }
     .facebook{
         @apply bg-white text-secondary;
