@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db040d24-55e0-4375-878c-ec10767edf91" name="更改" comment="Nav ok">
-      <change afterPath="$PROJECT_DIR$/src/components/social/ClientSocialLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)/(header)/Header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(defaultLayout)/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)/(header)/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/AnimatedLogo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)/(header)/AnimatedLogo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/HeaderFooter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)/(header)/HeaderFooter.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/HeaderFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)/(header)/HeaderFooter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/MainNav.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)/(header)/MainNav.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(public)/[locale]/(header)/MainNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)/(header)/MainNav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/DefaultHeader-.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/DefaultHeader-.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/DefaultLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/social/SocialLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/social/SocialLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/apiConfig.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/apiConfig.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/getSystemMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/getSystemMenu.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/components/logo/variants",
+    "last_opened_file_path": "/Users/jean/Documents/GitHub/next-minmax/src/components/layout",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -79,11 +66,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/layout" />
       <recent name="$PROJECT_DIR$/src/components/logo/variants" />
       <recent name="$PROJECT_DIR$/src/components/nav/variants" />
       <recent name="$PROJECT_DIR$/src/components/nav" />
       <recent name="$PROJECT_DIR$/src/components" />
-      <recent name="$PROJECT_DIR$/src/components/logo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/app/(public)/[locale]/(layoutComponents)" />

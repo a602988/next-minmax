@@ -8,13 +8,13 @@ type Props = {
 };
 
 export default function DefaultLayout({
-  children,
-}: Props) {
+                                        children,
+                                      }: Props) {
   return (
     <div className={styles.defaultLayout}>
-        <DefaultHeader />
-        <p className="text-white">LayoutDefault</p>
-        {children}
+      <DefaultHeader />
+      <p className="text-white">LayoutDefault</p>
+      {children}
     </div>
   );
 }
