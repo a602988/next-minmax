@@ -104,5 +104,10 @@ https://git.24241872.work/jean/next-minmax
 - 
 
 
+我的頁面是透過api回傳告知用什麼layout，如果沒有回傳就用預設的
+那我該怎麼寫這樣的頁面
+
+
+
 
 

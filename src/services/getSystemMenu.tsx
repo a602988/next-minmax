@@ -4,7 +4,7 @@
  * - API_ENDPOINTS 撈取資料表設定
  */
 import { API_ENDPOINTS } from '@/config/apiConfig';
-import systemMenusJson from '@/data/system-menus.json';
+import dataJson from '@/data/system-menus.json';
 import { SystemMenuType } from '@/types/systemMenuType';
 import { getApi } from './getApi';
 
@@ -16,7 +16,7 @@ export async function getSystemMenu(
 
   if (source === 'json') {
     // 從 JSON 文件中讀取數據
-    return systemMenusJson as Array<SystemMenuType>;
+    return dataJson as Array<SystemMenuType>;
   } else {
     // 從 API 獲取數據
     return getApi<Array<SystemMenuType>>(API_ENDPOINTS.MENUS);
