@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import { getLangDir } from 'rtl-detect';
 
 export default async function LocaleLayout({
   children,
@@ -18,12 +19,14 @@ export default async function LocaleLayout({
 
   // 設置請求的語言環境
   setRequestLocale(locale);
+
+  const direction = getLangDir(locale);
   
   // 獲取當前語言的所有消息
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} dir={direction}>
       <body>
         <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
