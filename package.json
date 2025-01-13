@@ -1,42 +1,33 @@
 {
-  "name": "example-app-router-mixed-routing",
+  "name": "my-app",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "lint": "eslint src && tsc && prettier src --check",
-    "test": "playwright test",
+    "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@react-icons/all-files": "^4.1.0",
-    "framer-motion": "^11.15.0",
-    "next": "^14.2.4",
-    "next-intl": "^3.25.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.3.0",
-    "sqlite3": "^5.1.7"
+    "next": "15.1.4",
+    "next-intl": "^3.26.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.48.1",
-    "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20.14.5",
-    "@types/react": "^18.3.3",
-    "autoprefixer": "^10.4.20",
-    "cssnano": "^7.0.6",
-    "eslint": "^9.11.1",
-    "eslint-config-molindo": "^8.0.0",
-    "postcss": "^8.4.49",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-import": "^15.1.0",
-    "postcss-loader": "^7.3.3",
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.4",
+    "postcss": "latest",
+    "postcss-flexbugs-fixes": "latest",
+    "postcss-import": "latest",
+    "postcss-loader": "latest",
     "postcss-nesting": "latest",
-    "postcss-preset-env": "^9.6.0",
-    "prettier": "^3.3.3",
-    "tailwindcss": "^3.4.15",
-    "terser-webpack-plugin": "^5.3.9",
-    "typescript": "^5.5.3"
-  },
-  "prettier": "eslint-config-molindo/.prettierrc.json"
+    "postcss-preset-env": "latest",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
 }

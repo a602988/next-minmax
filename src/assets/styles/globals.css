@@ -2,10 +2,8 @@
 @import "custom-components.css";
 @import "custom-utilities.css";
 @import "minmax.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-
 
