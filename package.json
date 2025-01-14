@@ -13,7 +13,8 @@
     "next-intl": "^3.26.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "rtl-detect": "^1.1.2"
+    "rtl-detect": "^1.1.2",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
