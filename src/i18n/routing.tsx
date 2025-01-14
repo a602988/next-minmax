@@ -2,11 +2,14 @@ import {defineRouting} from 'next-intl/routing';
 import {createNavigation} from 'next-intl/navigation';
  
 export const routing = defineRouting({
-  // A list of all locales that are supported
-  locales: ['en', 'zh-tw'],
+  // 支援的語系
+  locales: ['en', 'zh-tw','jp'],
  
-  // Used when no locale matches
-  defaultLocale: 'zh-tw'
+  // 預設的語系
+  defaultLocale: 'zh-tw',
+
+  // 預設語系不加前綴
+   localePrefix: 'as-needed'
 });
  
 // Lightweight wrappers around Next.js' navigation APIs
