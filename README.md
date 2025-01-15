@@ -6,4 +6,4 @@
 
     `npm install server-only`
 
-    
+    next-i18next
