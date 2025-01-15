@@ -1,0 +1,38 @@
+{
+    "code": "0000",
+    "message": "成功。",
+    "data": [
+        {
+            "id": "zh-TW",
+            "title": "中文(繁體)",
+            "native": "TW",
+            "icon": "flag-icon-tw",
+            "default": true,
+            "current": false
+        },
+        {
+            "id": "zh-CN",
+            "title": "中文（簡體）",
+            "native": "CN",
+            "icon": "flag-icon-cn",
+            "default": false,
+            "current": false
+        },
+        {
+            "id": "en",
+            "title": "English",
+            "native": "EN",
+            "icon": "flag-icon-us",
+            "default": false,
+            "current": false
+        },
+        {
+            "id": "ja",
+            "title": "日文",
+            "native": "JA",
+            "icon": "flag-icon-ja",
+            "default": false,
+            "current": false
+        }
+    ]
+}

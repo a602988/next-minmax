@@ -1,12 +1,14 @@
 'use client'
 import React from 'react'
+import { Link } from '@/i18n/routing'
+import { usePathname } from 'next/navigation'
 
-// Define the type for our language data
 interface Language {
   id: string;
   title: string;
   native: string;
   icon?: string;
+  showIcon: boolean;
   default: boolean;
 }
 
@@ -15,6 +17,10 @@ interface DataProps {
 }
 
 export default function LanguageSwitcherListApi({ languages }: DataProps) {
+  // 處理路徑，移除當前語言前綴（如果存在）
+  const pathname = usePathname();
+  const pathnameWithoutLocale = pathname.replace(/^\/[^\/]+/, '') || '/'
+
   return (
     <ul>
       {languages.map((language) => (
@@ -22,8 +28,15 @@ export default function LanguageSwitcherListApi({ languages }: DataProps) {
             key={language.id}
             className={`list-item ${language.default ? 'current' : ''}`}
         >
-          {language.icon && <span className={language.icon}></span>}
-          {language.title}
+          <Link
+              href={language.default ? '/' : pathnameWithoutLocale}
+              locale={language.id}
+          >
+            {language.showIcon && language.icon && (
+                <span className="languageIcon">{language.icon}</span>
+            )}
+            {language.title}
+          </Link>
         </li>
       ))}
     </ul>

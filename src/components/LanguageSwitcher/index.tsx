@@ -1,3 +1,14 @@
+/**
+ * @description 語言切換器組件
+ *
+ * 這個組件允許用戶在不同的語言之間切換。
+ * 它使用 next-intl 和 next/navigation 來處理國際化和路由。
+ *
+ * @author [Jean Lin]
+ * @created [2025-01-15]
+ * @last-modified [2025-01-15]
+ */
+
 'use client';
 
 import { usePathname } from 'next/navigation';

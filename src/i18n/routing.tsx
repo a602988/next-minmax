@@ -3,10 +3,10 @@ import {createNavigation} from 'next-intl/navigation';
  
 export const routing = defineRouting({
   // 支援的語系
-  locales: ['en', 'zh-tw','jp'],
+  locales: ['en', 'zh-TW','ja','zh-CN'],
  
   // 預設的語系
-  defaultLocale: 'zh-tw',
+  defaultLocale: 'zh-TW',
 
   // 預設語系不加前綴
    localePrefix: 'as-needed'
