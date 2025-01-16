@@ -18,39 +18,38 @@
 
 
 import React from 'react';
-import { Link } from '@/i18n/routing';
+import {Link} from '@/i18n/routing';
 
-interface LanguageLinkProps {
-  href: string;
-  locale: string;
-  isDefault: boolean;
-  isCurrent: boolean;
-  showIcon?: boolean;
-  icon?: string;
-  title: string;
+interface Props {
+    href: string;
+    locale: string;
+    isDefault: boolean;
+    isCurrent: boolean;
+    showIcon?: boolean;
+    icon?: string;
+    title: string;
 }
 
-const LanguageLink: React.FC<LanguageLinkProps> = ({
-  href,
-  locale,
-  isDefault,
-  isCurrent,
-  showIcon = false,
-  icon,
-  title
-}) => {
-  return (
-    <Link
-      href={isDefault ? '/' : href}
-      locale={locale}
-      className={`${isCurrent ? 'current' : ''}`}
-    >
-      {showIcon && icon && (
-        <span className={`${icon}`}></span>
-      )}
-      <span>{title}</span>
-    </Link>
-  );
-};
-
-export default LanguageLink;
+export default function LanguageLinks(
+    {
+         href,
+         locale,
+         isDefault,
+         isCurrent,
+         showIcon = false,
+         icon,
+         title
+    }: Props) {
+    return (
+        <Link
+            href={isDefault ? '/' : href}
+            locale={locale}
+            className={`${isCurrent ? 'current' : ''}`}
+        >
+            {showIcon && icon && (
+                <span className={`${icon}`}></span>
+            )}
+            <span>{title}</span>
+        </Link>
+    );
+}

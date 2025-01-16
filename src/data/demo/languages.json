@@ -8,7 +8,6 @@
             "native": "TW",
             "icon": "flag-icon-tw",
             "default": true,
-            "current": false
         },
         {
             "id": "zh-CN",
@@ -16,7 +15,6 @@
             "native": "CN",
             "icon": "flag-icon-cn",
             "default": false,
-            "current": false
         },
         {
             "id": "en",
@@ -24,7 +22,6 @@
             "native": "EN",
             "icon": "flag-icon-us",
             "default": false,
-            "current": false
         },
         {
             "id": "ja",
@@ -32,7 +29,6 @@
             "native": "JA",
             "icon": "flag-icon-ja",
             "default": false,
-            "current": false
         }
     ]
 }
