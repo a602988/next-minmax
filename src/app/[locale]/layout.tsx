@@ -1,10 +1,10 @@
-import {setRequestLocale} from 'next-intl/server';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
-import { getLangDir } from 'rtl-detect';
-import { ReactNode } from 'react';
+import { setRequestLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
+import { getLangDir } from "rtl-detect";
+import { ReactNode } from "react";
 
 export default async function LocaleLayout({
   children,
@@ -13,7 +13,7 @@ export default async function LocaleLayout({
   children: ReactNode;
   params: { locale: string };
 }) {
-  const { locale } = params;
+  const { locale } = await params;
 
   // 確保傳入的 `locale` 是有效的
   if (!routing.locales.includes(locale as any)) notFound();
