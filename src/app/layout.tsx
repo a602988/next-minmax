@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
+import type { Metadata } from "next";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,9 +23,5 @@ export default function RootLayoutDf({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  return (
-    <>
-        {children}
-    </>
-  );
+  return <>{children}</>;
 }

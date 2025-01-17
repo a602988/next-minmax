@@ -1,13 +1,13 @@
 {
-    "uri": "news/post/123",
-    "route": "news/post/{id}",
-    "meta_title": "Head Title - Site Name 123",
+    "uri": "/",
+    "route": "/",
+    "meta_title": "Head Title - index",
     "meta_description": "Head Meta Description",
     "meta_keywords": "Head Meta Keywords",
     "meta_image": {
         "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
     },
-    "wrap": "blog",
+    "wrap": "default",
     "breadcrumbs": [
         {
             "title": "Home",

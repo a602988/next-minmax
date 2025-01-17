@@ -4,11 +4,13 @@ import BlogLayout from "./BlogLayout";
 import ShopLayout from "./ShopLayout";
 // Import other layouts as needed
 
+
 interface LayoutProps {
   children: React.ReactNode;
   layoutData: {
     type: string;
   };
+  params: Promise<{ locale: string }>;
 }
 
 const layoutMap: { [key: string]: React.ComponentType<any> } = {
@@ -18,12 +20,19 @@ const layoutMap: { [key: string]: React.ComponentType<any> } = {
   // Add more layouts here
 };
 
-const DynamicLayout: React.FC<LayoutProps> = ({ children, layoutData }) => {
+const DynamicLayout: React.FC<LayoutProps> = async ({
+  children,
+  layoutData,
+  params,
+}) => {
+  const { locale } = await params;
   const Layout = layoutMap[layoutData.type] || DefaultLayout;
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Layout layoutData={layoutData}>{children}</Layout>
+      <Layout layoutData={layoutData} locale={locale}>
+        {children}
+      </Layout>
     </Suspense>
   );
 };
