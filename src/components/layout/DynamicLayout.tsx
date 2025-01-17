@@ -1,30 +1,30 @@
-import React from "react";
-import Head from "next/head";
+import React, { Suspense } from "react";
+import DefaultLayout from "./DefaultLayout";
+import BlogLayout from "./BlogLayout";
+import ShopLayout from "./ShopLayout";
+// Import other layouts as needed
 
-interface DynamicLayoutProps {
-  layout: {
-    type: string;
-    seo: {
-      title: string;
-      description: string;
-    };
-    // 其他布局相關的屬性
-  };
+interface LayoutProps {
   children: React.ReactNode;
+  layoutData: {
+    type: string;
+  };
 }
 
-const DynamicLayout: React.FC<DynamicLayoutProps> = ({ layout, children }) => {
+const layoutMap: { [key: string]: React.ComponentType<any> } = {
+  default: DefaultLayout,
+  blog: BlogLayout,
+  shop: ShopLayout,
+  // Add more layouts here
+};
+
+const DynamicLayout: React.FC<LayoutProps> = ({ children, layoutData }) => {
+  const Layout = layoutMap[layoutData.type] || DefaultLayout;
+
   return (
-    <>
-      <Head>
-        <title>{layout.seo.title}</title>
-        <meta name="description" content={layout.seo.description} />
-        {/* 添加其他必要的SEO元標籤 */}
-      </Head>
-      <header>{/* 根據布局數據渲染頁頭 */}</header>
-      <main>{children}</main>
-      <footer>{/* 根據布局數據渲染頁腳 */}</footer>
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Layout layoutData={layoutData}>{children}</Layout>
+    </Suspense>
   );
 };
 

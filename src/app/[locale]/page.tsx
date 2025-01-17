@@ -1,14 +1,18 @@
-import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/routing";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useTranslations } from "next-intl";
+import DynamicLayout from "@/components/layout/DynamicLayout";
 
-export default async function HomePage() {
-  const t = await getTranslations("HomePage");
+export default async function Home() {
+  const mockLayouts = {
+    type: "blog",
+    seo: {
+      title: "Default Page",
+      description: "This is the default layout",
+    },
+  };
+
   return (
-    <div>
-      <h1>locale page {t("title")}</h1>
-      <Link href="/about">{t("about")}</Link>
-      <LanguageSwitcher />
-    </div>
+    <DynamicLayout layoutData={mockLayouts}>
+      <h1>home</h1>
+    </DynamicLayout>
   );
 }
