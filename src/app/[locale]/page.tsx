@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import DynamicLayout from "@/components/layout/DynamicLayout";
 import type { Metadata } from "next";
+import { PageType } from "@/types/pageType";
 
 // 定義 PageData 接口
 interface PageData {

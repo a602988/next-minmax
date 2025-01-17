@@ -1,195 +1,201 @@
 {
-    "uri": "/",
-    "route": "/",
-    "meta_title": "Head Title - index",
-    "meta_description": "Head Meta Description",
-    "meta_keywords": "Head Meta Keywords",
-    "meta_image": {
-        "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-    },
-    "wrap": "default",
-    "breadcrumbs": [
+    "code": "0000",
+    "message": "成功。",
+    "data": [
         {
-            "title": "Home",
-            "url": "https://example.com"
-        },
-        {
-            "title": "News",
-            "url": "https://example.com/news"
-        }
-    ],
-    "modules": [
-        {
-            "component": "news-header",
-            "api": "https://example.com/api/news-detail/123",
-            "data": {
-                "title": "News Title",
-                "pics": [],
-                "cover": {
-                    "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-                },
-                "categories": [
-                    {
-                        "title": "Parent Category",
-                        "url": "https://example.com/news/company",
-                        "cover": {
-                            "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-                        }
-                    },
-                    {
-                        "title": "News Category",
-                        "url": "https://example.com/news/reward",
-                        "cover": {
-                            "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "component": "news-detail",
-            "api": "https://example.com/api/news-detail/123",
-            "data": {
-                "title": "News Title",
-                "pics": [],
-                "cover": {
-                    "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-                },
-                "editor": "\u003Cp\u003ENews Content\u003C/p\u003E",
-                "categories": [
-                    {
-                        "title": "Parent Category",
-                        "url": "https://example.com/news/company",
-                        "cover": {
-                            "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-                        }
-                    },
-                    {
-                        "title": "News Category",
-                        "url": "https://example.com/news/reward",
-                        "cover": {
-                            "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-                        }
-                    }
-                ],
-                "tags": [
-                    {
-                        "title": "Minmax",
-                        "url": "https://example.com/search?tag=minmax"
-                    },
-                    {
-                        "title": "Reward",
-                        "url": "https://example.com/search?tag=reward"
-                    }
-                ],
-                "prev_post": {
-                    "title": "Prev Post Title",
-                    "url": "https://example.com/news/post/456",
-                    "cover": {
-                        "path": "https://example.com/files/thumbnail/sample2_1920xauto.webp"
-                    }
-                },
-                "next_post": {
-                    "title": "Next Post Title",
-                    "url": "https://example.com/news/post/789",
-                    "cover": {
-                        "path": "https://example.com/files/thumbnail/sample3_1920xauto.webp"
-                    }
-                }
-            }
-        },
-        {
-            "component": "news-navigation",
-            "api": "https://example.com/api/news-detail/123",
-            "data": {
-                "prev_post": {
-                    "title": "Prev Post Title",
-                    "url": "https://example.com/news/post/456",
-                    "cover": {
-                        "path": "https://example.com/files/thumbnail/sample2_1920xauto.webp"
-                    }
-                },
-                "next_post": {
-                    "title": "Next Post Title",
-                    "url": "https://example.com/news/post/789",
-                    "cover": {
-                        "path": "https://example.com/files/thumbnail/sample3_1920xauto.webp"
-                    }
-                }
-            }
-        },
-        {
-            "component": "news-related-posts",
-            "api": "https://example.com/api/news-related/123",
-            "data": {
-                "related_posts": [
-                    {
-                        "title": "Related Post 1 Title",
-                        "url": "https://example.com/news/post/111",
-                        "cover": {
-                            "path": "https://example.com/files/thumbnail/sample9_1920xauto.webp"
-                        }
-                    },
-                    {
-                        "title": "Related Post 2 Title",
-                        "url": "https://example.com/news/post/222",
-                        "cover": {
-                            "path": "https://example.com/files/thumbnail/sample9_1920xauto.webp"
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "component": "news-list",
-            "api": "https://example.com/api/news-list/123",
-            "data": [
+            "uri": "/",
+            "route": "/",
+            "meta_title": "index",
+            "meta_description": "Head Meta Description",
+            "meta_keywords": "Head Meta Keywords",
+            "meta_image": {
+                "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+            },
+            "wrap": "blog",
+            "breadcrumbs": [
                 {
-                    "title": "News Title",
-                    "posted_at": "2025-05-01",
-                    "cover": {
-                        "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
-                    },
-                    "categor": [
-                        {
-                            "title": "Parent Category",
-                            "url": "https://example.com/news/company",
+                    "title": "Home",
+                    "url": "https://example.com"
+                },
+                {
+                    "title": "News",
+                    "url": "https://example.com/news"
+                }
+            ],
+            "modules": [
+                {
+                    "component": "news-header",
+                    "api": "https://example.com/api/news-detail/123",
+                    "data": {
+                        "title": "News Title",
+                        "pics": [],
+                        "cover": {
+                            "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                        },
+                        "categories": [
+                            {
+                                "title": "Parent Category",
+                                "url": "https://example.com/news/company",
+                                "cover": {
+                                    "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                }
+                            },
+                            {
+                                "title": "News Category",
+                                "url": "https://example.com/news/reward",
+                                "cover": {
+                                    "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "component": "news-detail",
+                    "api": "https://example.com/api/news-detail/123",
+                    "data": {
+                        "title": "News Title",
+                        "pics": [],
+                        "cover": {
+                            "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                        },
+                        "editor": "\u003Cp\u003ENews Content\u003C/p\u003E",
+                        "categories": [
+                            {
+                                "title": "Parent Category",
+                                "url": "https://example.com/news/company",
+                                "cover": {
+                                    "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                }
+                            },
+                            {
+                                "title": "News Category",
+                                "url": "https://example.com/news/reward",
+                                "cover": {
+                                    "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                }
+                            }
+                        ],
+                        "tags": [
+                            {
+                                "title": "Minmax",
+                                "url": "https://example.com/search?tag=minmax"
+                            },
+                            {
+                                "title": "Reward",
+                                "url": "https://example.com/search?tag=reward"
+                            }
+                        ],
+                        "prev_post": {
+                            "title": "Prev Post Title",
+                            "url": "https://example.com/news/post/456",
                             "cover": {
-                                "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                "path": "https://example.com/files/thumbnail/sample2_1920xauto.webp"
                             }
                         },
-                        {
-                            "title": "News Category",
-                            "url": "https://example.com/news/reward",
+                        "next_post": {
+                            "title": "Next Post Title",
+                            "url": "https://example.com/news/post/789",
                             "cover": {
-                                "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                "path": "https://example.com/files/thumbnail/sample3_1920xauto.webp"
                             }
                         }
-                    ],
-                    "categories": [
-                        {
-                            "title": "Parent Category",
-                            "url": "https://example.com/news/company",
+                    }
+                },
+                {
+                    "component": "news-navigation",
+                    "api": "https://example.com/api/news-detail/123",
+                    "data": {
+                        "prev_post": {
+                            "title": "Prev Post Title",
+                            "url": "https://example.com/news/post/456",
                             "cover": {
-                                "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                "path": "https://example.com/files/thumbnail/sample2_1920xauto.webp"
                             }
                         },
-                        {
-                            "title": "News Category",
-                            "url": "https://example.com/news/reward",
+                        "next_post": {
+                            "title": "Next Post Title",
+                            "url": "https://example.com/news/post/789",
                             "cover": {
-                                "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                "path": "https://example.com/files/thumbnail/sample3_1920xauto.webp"
                             }
                         }
-                    ],
-                    "tags": [
+                    }
+                },
+                {
+                    "component": "news-related-posts",
+                    "api": "https://example.com/api/news-related/123",
+                    "data": {
+                        "related_posts": [
+                            {
+                                "title": "Related Post 1 Title",
+                                "url": "https://example.com/news/post/111",
+                                "cover": {
+                                    "path": "https://example.com/files/thumbnail/sample9_1920xauto.webp"
+                                }
+                            },
+                            {
+                                "title": "Related Post 2 Title",
+                                "url": "https://example.com/news/post/222",
+                                "cover": {
+                                    "path": "https://example.com/files/thumbnail/sample9_1920xauto.webp"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "component": "news-list",
+                    "api": "https://example.com/api/news-list/123",
+                    "data": [
                         {
-                            "title": "Minmax",
-                            "url": "https://example.com/search?tag=minmax"
-                        },
-                        {
-                            "title": "Reward",
-                            "url": "https://example.com/search?tag=reward"
+                            "title": "News Title",
+                            "posted_at": "2025-05-01",
+                            "cover": {
+                                "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                            },
+                            "categor": [
+                                {
+                                    "title": "Parent Category",
+                                    "url": "https://example.com/news/company",
+                                    "cover": {
+                                        "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                    }
+                                },
+                                {
+                                    "title": "News Category",
+                                    "url": "https://example.com/news/reward",
+                                    "cover": {
+                                        "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                    }
+                                }
+                            ],
+                            "categories": [
+                                {
+                                    "title": "Parent Category",
+                                    "url": "https://example.com/news/company",
+                                    "cover": {
+                                        "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                    }
+                                },
+                                {
+                                    "title": "News Category",
+                                    "url": "https://example.com/news/reward",
+                                    "cover": {
+                                        "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+                                    }
+                                }
+                            ],
+                            "tags": [
+                                {
+                                    "title": "Minmax",
+                                    "url": "https://example.com/search?tag=minmax"
+                                },
+                                {
+                                    "title": "Reward",
+                                    "url": "https://example.com/search?tag=reward"
+                                }
+                            ]
                         }
                     ]
                 }
