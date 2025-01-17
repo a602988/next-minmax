@@ -4,8 +4,7 @@ const config = {
     'postcss-import': {},
     tailwindcss: {},
     autoprefixer: {},
-  },
-  'postcss-preset-env': {
+    'postcss-preset-env': {
       autoprefixer: {
         flexbox: 'no-2009',
       },
@@ -14,6 +13,7 @@ const config = {
         'custom-properties': false,
       },
     },
+  },
 };
 
 export default config;

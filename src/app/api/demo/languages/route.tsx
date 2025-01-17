@@ -1,60 +1,32 @@
-import {NextRequest, NextResponse} from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import languagesData from '@/data/demo/languages.json';
+import { LanguagesType } from '@/types/languages';
 
-interface Language {
-    id: string;
-    title: string;
-    native: string;
-    icon: string;
-    default: boolean;
-    current: boolean;
-}
 
-interface LanguageResponse {
+interface dataResponse {
     code: string;
     message: string;
-    data: Language[];
+    data: LanguagesType[];
 }
 
 export async function GET(req: NextRequest) {
     const language = req.nextUrl.searchParams.get('language');
-    // 定義支持的語言列表
-    const languageResponse: LanguageResponse = {
+
+    if(!Array.isArray(languagesData.data) || languagesData.data.length === 0) {
+        return NextResponse.json(
+            {
+                code: "5000",
+                message: "error languages.json"
+            },
+            { status: 500 }
+        );
+    }
+
+    // 使用引入的 JSON 數據
+    const languageResponse: dataResponse = {
         code: "0000",
-        message: "成功。",
-        data: [
-            {
-                id: "zh-TW",
-                title: "中文(繁體)",
-                native: "TW",
-                icon: "flag-icon-tw",
-                default: true,
-                current: language === 'zh-TW'
-            },
-            {
-                id: "zh-CN",
-                title: "中文（簡體）",
-                native: "CN",
-                icon: "flag-icon-cn",
-                default: false,
-                current: language === 'zh-CN'
-            },
-            {
-                id: "en",
-                title: "English",
-                native: "EN",
-                icon: "flag-icon-us",
-                default: false,
-                current: language === 'en'
-            },
-            {
-                id: "ja",
-                title: "日文",
-                native: "JA",
-                icon: "flag-icon-ja",
-                default: false,
-                current: language === 'ja'
-            }
-        ]
+        message: "success。",
+        data: languagesData.data as LanguagesType[]
     };
 
     return NextResponse.json(languageResponse);

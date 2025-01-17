@@ -4,7 +4,6 @@
  * 屬性：
  * - href: 點擊鏈接時要導航到的 URL
  * - locale: 語言的區域代碼（例如 'en'、'zh-TW'）
- * - isDefault: 布爾值，表示這是否為默認語言
  * - isCurrent: 布爾值，表示這是否為當前活動語言
  * - showIcon: 可選。是否在語言名稱旁顯示圖標
  * - icon: 可選。要顯示的圖標的 CSS 類
@@ -23,7 +22,6 @@ import {Link} from '@/i18n/routing';
 interface Props {
     href: string;
     locale: string;
-    isDefault: boolean;
     isCurrent: boolean;
     showIcon?: boolean;
     icon?: string;
@@ -34,17 +32,18 @@ export default function LanguageLinks(
     {
          href,
          locale,
-         isDefault,
          isCurrent,
          showIcon = false,
          icon,
-         title
+         title,
+        ...rest
     }: Props) {
     return (
         <Link
-            href={isDefault ? '/' : href}
+            href={href}
             locale={locale}
             className={`${isCurrent ? 'current' : ''}`}
+            {...rest}
         >
             {showIcon && icon && (
                 <span className={`${icon}`}></span>

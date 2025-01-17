@@ -4,15 +4,16 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { getLangDir } from 'rtl-detect';
+import { ReactNode } from 'react';
 
 export default async function LocaleLayout({
   children,
   params,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   params: { locale: string };
 }) {
-  const { locale } = await params;
+  const { locale } = params;
 
   // 確保傳入的 `locale` 是有效的
   if (!routing.locales.includes(locale as any)) notFound();
@@ -21,7 +22,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   const direction = getLangDir(locale);
-  
+
   // 獲取當前語言的所有消息
   const messages = await getMessages();
 
