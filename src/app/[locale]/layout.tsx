@@ -11,12 +11,14 @@ export default async function LocaleLayout({
   params,
 }: {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 
   // 確保傳入的 `locale` 是有效的
-  if (!routing.locales.includes(locale as any)) notFound();
+  if (!routing.locales.includes(locale as any)) {
+    notFound();
+  }
 
   // 設置請求的語言環境
   setRequestLocale(locale);
