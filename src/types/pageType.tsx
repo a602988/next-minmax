@@ -1,4 +1,4 @@
-export interface ApiResponse {
+export interface ApiResponseType {
   code: string;
   message: string;
   data?: Array<PageType>;

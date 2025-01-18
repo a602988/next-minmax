@@ -1,12 +1,15 @@
-const createNextIntlPlugin = require('next-intl/plugin');
- 
+import createNextIntlPlugin from 'next-intl/plugin';
+import { NextConfig } from 'next';
+
 const withNextIntl = createNextIntlPlugin();
- 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    experimental: { 
-        taint: true,//防止敏感資料洩露給客戶端(實驗性功能)
-      },
+
+const nextConfig: NextConfig = {
+    experimental: {
+        taint: true, // 防止敏感資料洩露給客戶端(實驗性功能)
+    },
+    env: {
+        NEXT_SERVER_API_URL: process.env.NEXT_SERVER_API_URL,
+    },
 };
- 
-module.exports = withNextIntl(nextConfig);
+
+export default withNextIntl(nextConfig);
