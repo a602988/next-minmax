@@ -4,13 +4,16 @@ import BlogLayout from "./BlogLayout";
 import ShopLayout from "./ShopLayout";
 // Import other layouts as needed
 
-
 interface LayoutProps {
-  children: React.ReactNode;
   layoutData: {
     type: string;
+    seo: {
+      title: string;
+      description: string;
+    };
   };
-  params: Promise<{ locale: string }>;
+  params: { locale: string }; // 修改這裡，移除 Promise
+  children: React.ReactNode;
 }
 
 const layoutMap: { [key: string]: React.ComponentType<any> } = {

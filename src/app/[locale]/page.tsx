@@ -2,54 +2,30 @@ import { useTranslations } from "next-intl";
 import DynamicLayout from "@/components/layout/DynamicLayout";
 import type { Metadata } from "next";
 import { PageType } from "@/types/pageType";
+import { notFound } from "next/navigation";
+import { getPageData } from "@/services/pageService";
 
-// 定義 PageData 接口
-interface PageData {
-  meta_title?: string;
-  meta_description?: string;
-  title?: string;
-  content?: string;
-  description?: string;
-}
-
-async function getPageData(path: string): Promise<PageData> {
+async function getPageDataOrNotFound(path: string): Promise<PageType> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/page?path=${encodeURIComponent(
-        path
-      )}`,
-      { cache: "no-store" }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    const pageData = await getPageData(path);
+    if (!pageData) {
+      notFound();
     }
-    return await response.json();
+    return pageData;
   } catch (error) {
-    console.error("Failed to fetch page data:", error);
-    return {
-      content: "<p>Default content. Unable to fetch page data.</p>",
-    };
+    console.error("Error fetching page data:", error);
+    notFound();
   }
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const { locale } = params;
   const path = `/${locale}`;
-
-  let pageData: PageData;
-  try {
-    pageData = await getPageData(path);
-  } catch (error) {
-    console.error("Error fetching page data for metadata:", error);
-    pageData = {
-      meta_title: "Error",
-      meta_description: "An error occurred while loading the page.",
-    };
-  }
+  const pageData = await getPageDataOrNotFound(path);
 
   return {
     title: pageData.meta_title || "Default Page Title",
@@ -57,25 +33,13 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
+export default async function Page({ params }: { params: { locale: string } }) {
+  const { locale } = params;
   const path = `/${locale}`;
-  console.log(path);
+  const pageData = await getPageDataOrNotFound(path);
 
-  let pageData: PageData;
-  try {
-    pageData = await getPageData(path);
-  } catch (error) {
-    console.error("Error fetching page data:", error);
-    pageData = {
-      content: "<p>Error loading page content.</p>",
-      title: "Error",
-      description: "An error occurred while loading the page.",
-    };
+  if (!pageData) {
+    notFound();
   }
 
   const layoutData = {
@@ -88,7 +52,7 @@ export default async function Page({
 
   return (
     <DynamicLayout layoutData={layoutData} params={params}>
-      <h1>{pageData.title || "Home"}</h1>
+      <h1>{pageData.meta_title || "Home"}</h1>
     </DynamicLayout>
   );
 }
