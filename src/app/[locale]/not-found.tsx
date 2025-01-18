@@ -1,10 +1,4 @@
-export default function NotFound() {
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404 4040</h1>
-        <p className="text-xl">Page Not Found </p>
-      </div>
-    </div>
-  );
+
+export default function NotFoundPage() {
+    return <h1>locale NotFoundPage</h1>;
 }
