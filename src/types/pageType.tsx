@@ -1,3 +1,9 @@
+export interface ApiResponse {
+  code: string;
+  message: string;
+  data?: Array<PageType>;
+}
+
 export interface PageType {
   uri: string;
   route: string;
@@ -8,11 +14,8 @@ export interface PageType {
     path: string;
   };
   wrap?: string;
-  breadcrumbs?: Breadcrumb[];
-  modules?: Module[];
-}
-interface MetaImage {
-  path: string;
+  breadcrumbs?: Array<Breadcrumb>;
+  modules?: Array<Module>;
 }
 
 interface Breadcrumb {
@@ -21,14 +24,6 @@ interface Breadcrumb {
 }
 
 
-
-interface Category {
-  title: string;
-  url: string;
-  cover: {
-    path: string;
-  };
-}
 
 interface Tag {
   title: string;
@@ -49,7 +44,7 @@ interface Module {
   data: ModuleData;
 }
 
-type ModuleData = 
+type ModuleData =
   | NewsHeader
   | NewsDetail
   | NewsNavigation
@@ -62,29 +57,29 @@ type ModuleData =
     cover: {
       path: string;
     };
-    categories?: Post[];
+    categories?: Array<Post>;
   }
-  
+
   interface NewsDetail{
     title: string;
     pics?: [];
     cover: {
       path: string;
     };
-    categories?: Post[];
+    categories?: Array<Post>;
     editor?: string;
-    tags?: Tag[];
+    tags?: Array<Tag>;
   }
-  
+
   interface NewsNavigation{
-    prev_post?: Post[];
-    next_post?: Post[];
+    prev_post?: Array<Post>;
+    next_post?: Array<Post>;
   }
-  
+
   interface NewsRelatedPosts{
-    related_posts?: Post[];
+    related_posts?:Array<Post>;
   }
-  
+
   interface NewsList{
-    data?: NewsDetail[];
+    data?: Array<NewsDetail>;
   }

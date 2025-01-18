@@ -35,6 +35,7 @@ export default [
           ignore: ['^next-intl/'],
         },
       ],
+      'import/order': 'off', // 關閉import順序的警告
     },
   },
 ];

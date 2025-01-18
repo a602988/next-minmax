@@ -24,3 +24,5 @@ http://localhost:3000/api/demo/page?path=news/post/123
 則檔案為news-post-123-en.json
 若為/，或/news/post/123 這種預設語系的路徑
 就不帶入後面檔案名稱，則為ews-post-123.json 或index.json
+
+可以phpstorm關閉載入順序的警告嗎
