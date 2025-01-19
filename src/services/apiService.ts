@@ -1,10 +1,9 @@
 import { RequestInit } from 'next/dist/server/web/spec-extension/request';
 
 interface ApiResponse<T> {
-    data?: T | Array<T>;
-    code?: string;
-    message?: string;
-    [key: string]: unknown;
+    data: T;
+    code: string;
+    message: string;
 }
 
 interface ErrorHandlingOptions {
@@ -12,7 +11,7 @@ interface ErrorHandlingOptions {
 }
 
 export interface FetchApiOptions extends Omit<RequestInit, 'next'>, ErrorHandlingOptions {
-    revalidate?: number;
+    revalidate?: number | false;
     tags?: Array<string>;
     timeout?: number;
 }
@@ -40,37 +39,28 @@ async function fetchApi<T>(endpoint: string, options: FetchApiOptions = {}): Pro
     try {
         const response = await fetch(`${apiUrl}${endpoint}`, {
             ...fetchOptions,
-            next: { revalidate, tags },
+            next: revalidate !== false ? { revalidate, tags } : undefined,
             signal: controller.signal,
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorBody = await response.text();
+            throw new Error(`HTTP error! status: ${response.status}, body: ${errorBody}`);
         }
 
         const result: ApiResponse<T> = await response.json();
 
-        if ('code' in result && result.code !== "0000") {
+        if (result.code !== "0000") {
             throw new Error(`API error: ${result.message}`);
         }
 
-        if (result.data === undefined) {
-            throw new Error('API response does not contain data');
-        }
-
-        if (Array.isArray(result.data)) {
-            if (result.data.length === 0) {
-                throw new Error('API returned an empty array');
-            }
-            console.log('data[]');
-            return result.data[0];
-        }
-        console.log('data');
         return result.data;
     } catch (error) {
         if (error instanceof Error) {
+            console.error(`API call failed for endpoint ${endpoint}:`, error);
             onError(error);
         } else {
+            console.error(`Unknown error occurred for endpoint ${endpoint}:`, error);
             onError(new Error('An unknown error occurred'));
         }
         throw error;

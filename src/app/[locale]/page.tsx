@@ -6,7 +6,7 @@ import { getPageData } from "@/services/pageService";
 
 async function getPageDataOrNotFound(path: string): Promise<PageType> {
     const pageData = await getPageData(path);
-    if (Object.keys(pageData).length === 0) {
+    if (!pageData) {
         notFound();
     }
     return pageData;
