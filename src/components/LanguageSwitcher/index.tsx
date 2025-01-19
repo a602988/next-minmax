@@ -1,63 +1,56 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { useLocale } from 'next-intl';
-import { routing } from '@/i18n/routing';
-import { getLanguagesData } from '@/services/languageService';
-import { LanguagesType } from '@/types/languages';
 import LanguageLink from './LanguageLink';
 
 interface Props {
     className?: string;
+    currentLocale: string;
 }
 
-function LanguageSwitcher({ className = 'flex gap-1' }: Props) {
-    const pathname = usePathname();
-    const locale = useLocale();
-    const [languages, setLanguages] = useState<Array<LanguagesType>>([]);
-    const [isLoading, setIsLoading] = useState(true);
+interface Language {
+    id: string;
+    title: string;
+}
 
-    useEffect(() => {
-        async function fetchLanguages() {
-            try {
-                const data = await getLanguagesData();
-                if (Array.isArray(data) && data.length > 0) {
-                    setLanguages(data);
-                }
-            } catch (error) {
-                console.error('Failed to fetch languages:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        }
+interface ApiResponse {
+    data: Array<Language>;
+    // 可以添加其他可能的字段，如 status, message 等
+}
 
-        fetchLanguages();
-    }, []);
+async function getLanguages(): Promise<Array<Language>> {
+    const response = await fetch('http://localhost:3000/api/demo/languages', { cache: 'no-store' });
+    if (!response.ok) {
+        throw new Error('Failed to fetch languages');
+    }
+    const data: ApiResponse = await response.json();
+    if (!Array.isArray(data.data)) {
+        throw new Error('Invalid data format received from API');
+    }
+    return data.data;
+}
 
-    if (isLoading) {
-        return <div>Loading...</div>; // 或者返回一個加載指示器
+export default async function LanguageSwitcher({ className = 'flex gap-1', currentLocale }: Props) {
+    let languages: Array<Language> = [];
+    try {
+        languages = await getLanguages();
+    } catch (error) {
+        console.error('Error fetching languages:', error);
+        // 可以在這裡添加錯誤處理邏輯，比如顯示錯誤消息
     }
 
     if (languages.length === 0) {
-        return null; // 如果沒有語言數據，不渲染任何內容
+        return null;
     }
-
-    const pathnameWithoutLocale = pathname.replace(new RegExp(`^/(${routing.locales.join('|')})`), '') || '/';
 
     return (
         <div className={className}>
-            {languages.map((lang) => (
+            {languages.map((lang: Language) => (
                 <LanguageLink
                     key={lang.id}
-                    href={pathnameWithoutLocale}
+                    href="/"
                     locale={lang.id}
-                    isCurrent={lang.id === locale}
+                    isCurrent={lang.id === currentLocale}
                     title={lang.title}
                 />
             ))}
         </div>
     );
 }
-
-export default LanguageSwitcher;

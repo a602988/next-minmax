@@ -62,9 +62,10 @@ async function fetchApi<T>(endpoint: string, options: FetchApiOptions = {}): Pro
             if (result.data.length === 0) {
                 throw new Error('API returned an empty array');
             }
+            console.log('data[]');
             return result.data[0];
         }
-
+        console.log('data');
         return result.data;
     } catch (error) {
         if (error instanceof Error) {
