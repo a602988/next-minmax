@@ -1,4 +1,5 @@
 
+設置CSP標頭
 
 ## 套件
 
@@ -9,25 +10,39 @@
 #### sqlite3
 
 
-因為目前沒有api，所以會先製作很多的page.json來顯示資料
-json命名會依據網址來載入可以嗎
-例如/news/post/123
-就會載入news-post-123.json
-該怎麼寫
+
 
 
 http://localhost:3000/api/demo/page?path=news/post/123
 
 
 
-需要判斷語系，如果頁面網址有語系，那麼檔案結尾要加上該語系id，例如 /en/news/post/123
-則檔案為news-post-123-en.json
-若為/，或/news/post/123 這種預設語系的路徑
-就不帶入後面檔案名稱，則為ews-post-123.json 或index.json
 
-可以phpstorm關閉載入順序的警告嗎
-
+進入頁面前，會套過getPageData 傳入頁面網址給api
+api會回傳下列很多資料，其中wrap代表實際要載入的頁面
+情境可能會是/about 但載入的卻是wrap指定的頁面
+那麼這樣的方式該怎麼做
 
 
+"uri": "news/post/123",
+"route": "news/post/{id}",
+"meta_title": "Head Title - Site Name 123",
+"meta_description": "Head Meta Description",
+"meta_keywords": "Head Meta Keywords",
+"meta_image": {
+"path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
+},
+"wrap": "blog",
+"breadcrumbs": [
+{
+"title": "Home",
+"url": "https://example.com"
+},
+{
+"title": "News",
+"url": "https://example.com/news"
+}
+],
+"modules": [
+{
 
-設置CSP標頭

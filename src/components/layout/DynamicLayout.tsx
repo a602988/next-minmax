@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import DefaultLayout from "./DefaultLayout";
+import Layout from "./DefaultLayout";
 import BlogLayout from "./BlogLayout";
 import ShopLayout from "./ShopLayout";
 
@@ -10,14 +10,14 @@ interface LayoutProps {
 }
 
 const layoutMap: { [key: string]: React.ComponentType<any> } = {
-  default: DefaultLayout,
+  default: Layout,
   blog: BlogLayout,
   shop: ShopLayout,
 };
 
 function DynamicLayout({ children, layoutData, params }: LayoutProps){
   const { locale } = params;
-  const Layout = layoutMap[layoutData] ?? DefaultLayout;
+  const Layout = layoutMap[layoutData] ?? Layout;
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

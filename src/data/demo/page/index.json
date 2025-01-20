@@ -11,7 +11,7 @@
             "meta_image": {
                 "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
             },
-            "wrap": "blog",
+            "wrap": "index",
             "breadcrumbs": [
                 {
                     "title": "Home",

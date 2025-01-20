@@ -1,40 +1,36 @@
-import DynamicLayout from "@/components/layout/DynamicLayout";
-import type { Metadata } from "next";
+import React, { Suspense } from 'react';
 import { PageType } from "@/types/pageType";
-import { notFound } from "next/navigation";
 import { getPageData } from "@/services/pageService";
+import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 
-async function getPageDataOrNotFound(path: string): Promise<PageType> {
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | Array<string> | undefined }>;
+}
+
+interface PageComponentProps {
+  pageData: PageType;
+}
+
+async function DynamicPage({ searchParams }: PageProps): Promise<React.ReactElement> {
+    const resolvedSearchParams = await searchParams;
+    const path = (resolvedSearchParams.path as string) || '/';
     const pageData = await getPageData(path);
+
     if (!pageData) {
-        notFound();
+        return <div>Error: Page not found</div>;
     }
-    return pageData;
-}
-export async function generateMetadata({
-    params,
-}: {
-    params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-    const { locale } = await params;
-    const path = `/${locale}`;
-    const pageData = await getPageDataOrNotFound(path);
 
-    return {
-        title: pageData.meta_title || "Default Page Title",
-        description: pageData.meta_description || "Default page description",
-    };
-}
-export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
-    const { locale } = await params;
-    const path = `/${locale}`;
-    const pageData = await getPageDataOrNotFound(path);
-
-    const layoutType = pageData.wrap || 'default'; // Provide a default value
+    // Dynamically import the component based on the 'wrap' property
+    const PageComponent = dynamic<PageComponentProps>(
+        () => import(`@/app/[locale]/${pageData.wrap}/page`).then(mod => mod.default)
+    );
 
     return (
-        <DynamicLayout layoutData={layoutType} params={{ locale }}>
-            <h1>{pageData.meta_title || "Home"}</h1>
-        </DynamicLayout>
+        <Suspense fallback={<p>Loading...</p>}>
+            <PageComponent pageData={pageData} />
+        </Suspense>
     );
 }
+
+export default DynamicPage as NextPage<PageProps>;
