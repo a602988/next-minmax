@@ -5,20 +5,24 @@ import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 
 interface PageProps {
-  searchParams: Promise<{ [key: string]: string | Array<string> | undefined }>;
+  params: Promise<{ locale: string }>;
 }
 
 interface PageComponentProps {
   pageData: PageType;
 }
 
-async function DynamicPage({ searchParams }: PageProps): Promise<React.ReactElement> {
-    // 解析搜索參數
-    const resolvedSearchParams = await searchParams;
-    // 獲取路徑，如果未提供則默認為 '/'
-    const path = (resolvedSearchParams.path as string) || '/';
+async function DynamicPage({ params }: PageProps): Promise<React.ReactElement> {
+    // 等待 params 解析
+    const resolvedParams = await params;
+
+    // 使用 resolvedParams.locale 來構建路徑
+    const path = `/${resolvedParams.locale}`;
+
     // 使用路徑獲取頁面數據
     const pageData = await getPageData(path);
+
+
 
     // 如果沒有找到頁面數據，返回錯誤信息
     if (!pageData) {

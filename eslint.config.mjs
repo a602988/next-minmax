@@ -5,6 +5,10 @@ const baseConfig = await getPresets('typescript', 'react', 'tailwind');
 export default [
   ...baseConfig,
   {
+    extends: [
+      "next",
+      "next/core-web-vitals"
+    ],
     languageOptions: {
       globals: {
         process: 'readonly',
