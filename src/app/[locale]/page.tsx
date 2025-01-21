@@ -30,7 +30,7 @@ const DynamicPage: NextPage<PageProps> = async ({ params }) => {
 
     // 根據 'wrap' 屬性動態導入組件
     const PageComponent = dynamic<PageComponentProps>(
-        () => import(`@/components/page/${pageData.wrap}/page`).then(mod => mod.default)
+        () => import(`@/components/pageWrap/${pageData.wrap}/page`).then(mod => mod.default)
     );
 
     // 返回動態加載的組件，並使用 Suspense 進行加載狀態處理
