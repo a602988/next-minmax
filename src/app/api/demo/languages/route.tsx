@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import languagesData from '@/data/demo/languages.json';
 import { LanguagesType } from '@/types/languages';
 
@@ -9,8 +9,7 @@ interface dataResponse {
     data: LanguagesType[];
 }
 
-export async function GET(req: NextRequest) {
-    const language = req.nextUrl.searchParams.get('language');
+export async function GET() {
 
     if(!Array.isArray(languagesData.data) || languagesData.data.length === 0) {
         return NextResponse.json(

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getLocalData } from '@/utils/localDataFallback';
 
-async function fetchFromExternalAPI(path: string) {
+async function fetchFromExternalAPI() {
   // 實際的 API 調用邏輯
   throw new Error('API unavailable');
 }
@@ -14,10 +14,11 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const apiData = await fetchFromExternalAPI(requestPath);
+    const apiData = await fetchFromExternalAPI();
     return NextResponse.json(apiData);
   } catch (apiError) {
-    console.log('API call failed, falling back to local JSON');
+    console.error('API call failed:', apiError instanceof Error ? apiError.message : 'Unknown error');
+    console.log('Falling back to local JSON');
     return getLocalData(requestPath, 'page');
   }
 }

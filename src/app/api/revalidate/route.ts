@@ -42,12 +42,16 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        // 嘗試重新驗證指定的 tag
         revalidateTag(tag);
-        // 如果成功，返回成功消息，包括重新驗證的 tag 和當前時間戳
         return NextResponse.json({ revalidated: true, tag, now: Date.now() });
     } catch (error) {
-        // 如果重新驗證過程中發生錯誤，返回 500 服務器錯誤
-        return NextResponse.json({ message: 'Error revalidating' }, { status: 500 });
+        console.error('Revalidation error:', error instanceof Error ? error.message : 'Unknown error');
+        return NextResponse.json(
+            {
+                message: 'Error revalidating',
+                error: error instanceof Error ? error.message : 'Unknown error'
+            },
+            { status: 500 }
+        );
     }
 }

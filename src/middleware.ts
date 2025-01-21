@@ -5,8 +5,7 @@ import { routing } from './i18n/routing';
 const handleI18nRouting = createMiddleware(routing);
 
 export default function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  
+
   return handleI18nRouting(request);
 }
 
