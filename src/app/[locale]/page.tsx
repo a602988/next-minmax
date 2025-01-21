@@ -3,6 +3,7 @@ import { PageType } from "@/types/pageType";
 import { getPageData } from "@/services/pageService";
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
+import { routing } from "@/i18n/routing";
 
 interface PageProps {
     params: Promise<{ locale: string }>;
@@ -16,8 +17,8 @@ const DynamicPage: NextPage<PageProps> = async ({ params }) => {
     // 等待 params 解析
     const resolvedParams = await params;
 
-    // 使用 resolvedParams.locale 來構建路徑
-    const path = `/${resolvedParams.locale}`;
+    // 構建路徑，考慮預設語系的情況
+    const path = resolvedParams.locale === routing.defaultLocale ? '/' : `/${resolvedParams.locale}`;
 
     // 使用路徑獲取頁面數據
     const pageData = await getPageData(path);
@@ -29,7 +30,7 @@ const DynamicPage: NextPage<PageProps> = async ({ params }) => {
 
     // 根據 'wrap' 屬性動態導入組件
     const PageComponent = dynamic<PageComponentProps>(
-        () => import(`@/app/[locale]/${pageData.wrap}/page`).then(mod => mod.default)
+        () => import(`@/components/page/${pageData.wrap}/page`).then(mod => mod.default)
     );
 
     // 返回動態加載的組件，並使用 Suspense 進行加載狀態處理

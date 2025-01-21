@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
-import Layout from "./DefaultLayout";
+import DefaultLayout from "./DefaultLayout";
 import BlogLayout from "./BlogLayout";
-import ShopLayout from "./ShopLayout";
 
 interface LayoutProps {
   layoutData: string;
@@ -9,21 +8,19 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const layoutMap: { [key: string]: React.ComponentType<any> } = {
-  default: Layout,
+const layoutMap: { [key: string]: React.ComponentType<LayoutProps> } = {
+  default: DefaultLayout,
   blog: BlogLayout,
-  shop: ShopLayout,
 };
 
-function DynamicLayout({ children, layoutData, params }: LayoutProps){
-  const { locale } = params;
-  const Layout = layoutMap[layoutData] ?? Layout;
+function DynamicLayout({ children, layoutData, params }: LayoutProps) {
+  const SelectedLayout = layoutMap[layoutData] || DefaultLayout;
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Layout locale={locale}>
+      <SelectedLayout layoutData={layoutData} params={params}>
         {children}
-      </Layout>
+      </SelectedLayout>
     </Suspense>
   );
 }
