@@ -1,11 +1,7 @@
 import React from 'react';
 import { PageType } from "@/types/pageType";
 
-// type HomePageProps = {
-//     pageData: PageType;
-// };
-
-const HomePage: React.FC<{pageData: PageType}> = ({ pageData }: { pageData: PageType }) => {
+const HomePage = ({ pageData }: { pageData: PageType }) => {
     return (
         <div className="HomePage">
             <h1>{pageData.meta_title}</h1>

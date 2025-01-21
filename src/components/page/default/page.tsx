@@ -1,10 +1,7 @@
-import {PageType} from "@/types/pageType";
+import React from 'react';
+import { PageType } from "@/types/pageType";
 
-type HomePageProps = {
-    pageData: PageType;
-};
-
-const DefaultPage = async ({ pageData }: HomePageProps) => {
+const DefaultPage = ({ pageData }: { pageData: PageType }) => {
     return (
         <div className="defaultPage">
             <h1>{pageData.meta_title}</h1>

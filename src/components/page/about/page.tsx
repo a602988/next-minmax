@@ -1,14 +1,13 @@
-import { Link } from "@/i18n/routing";
+import React from 'react';
+import { PageType } from "@/types/pageType";
 
-export default function AboutPage() {
-  return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">About</h1>
-      <nav className="flex space-x-4 mb-4">
-        <Link href="/public" className="text-blue-500 hover:underline">
-          Home
-        </Link>
-      </nav>
-    </main>
-  );
-}
+const AboutPage = ({ pageData }: { pageData: PageType }) => {
+    return (
+        <div className="defaultPage">
+            <h1>{pageData.meta_title}</h1>
+            <p>{pageData.meta_description}</p>
+        </div>
+    );
+};
+
+export default AboutPage;
