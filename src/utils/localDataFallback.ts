@@ -55,7 +55,7 @@ export async function getLocalData(requestPath: string, dataType: string): Promi
   }
 
   // 構建完整的文件路徑
-  const filePath = path.join(process.cwd(), 'src', 'data', 'demo', dataType, fileName);
+  const filePath = path.join(process.cwd(), 'src', 'data', 'project', dataType, fileName);
 
   console.log(`嘗試讀取文件: ${filePath}`);
 
@@ -73,7 +73,7 @@ export async function getLocalData(requestPath: string, dataType: string): Promi
     // 如果是非默認語言且讀取失敗，嘗試讀取默認語言的文件
     if (locale && locale !== routing.defaultLocale) {
       const defaultFileName = fileName.replace(`-${locale}.json`, '.json');
-      const defaultFilePath = path.join(process.cwd(), 'src', 'data', 'demo', dataType, defaultFileName);
+      const defaultFilePath = path.join(process.cwd(), 'src', 'data', 'project', dataType, defaultFileName);
 
       console.log(`嘗試讀取默認文件: ${defaultFilePath}`);
 
