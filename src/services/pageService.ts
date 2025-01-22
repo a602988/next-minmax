@@ -24,7 +24,6 @@ export async function getPageData(
 ): Promise<PageType | null> {
   // 設置默認的 API 請求選項
   const defaultOptions: Partial<FetchApiOptions> = {
-    revalidate: 3600, // 默認重新驗證時間為 1 小時
     tags: ['page'], // 添加 'page' 標籤用於緩存管理
     timeout: 5000, // 設置請求超時時間為 5 秒
   };

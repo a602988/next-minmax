@@ -1,0 +1,32 @@
+{
+    "code": "0000",
+    "message": "成功。",
+    "data": {
+        "id": "web",
+        "site_title": "雲端數位科技有限公司",
+        "system_language": "zh-TW",
+        "system_email": "service@minmax.biz",
+        "system_mobile": null,
+        "system_url": "https://minmax.tw",
+        "system_logo": "[{\"path\":\"static/images/common/logo.svg\"}]",
+        "company_name": "雲端數位科技有限公司",
+        "company_nickname": "MINMAX",
+        "company_vat": "24241872",
+        "contact_phone": "04-3609-8898",
+        "contact_fax": "04-2435-0745",
+        "contact_email": "service@minmax.biz",
+        "contact_address": "406 臺中市北屯區崇德路二段46號10樓",
+        "contact_map": "https://goo.gl/maps/s7aP6R9RuaR2",
+        "social_facebook": "https://www.facebook.com/minmaxeric",
+        "social_instagram": null,
+        "social_youtube": null,
+        "social_line": "https://line.me/ti/p/koe_umrp1t",
+        "meta_description": "網站簡短敘述",
+        "meta_keywords": "網站,關鍵字",
+        "custom_head": null,
+        "custom_body": null,
+        "custom_foot": null,
+        "cookie_consent": "\u003Cp\u003E我們尊重您的隱私權和偏好。請按照如下所述選擇並接受您的偏好。您可以點擊不同的類別標題以了解有關每個選項的更多資訊。封鎖某些類型的 Cookies 可能會影響您對我們網站的體驗以及我們可能提供的服務。如需了解更多詳情，請點選我們的\u003Ca href=\"/privacy\" target=\"_blank\"\u003E隱私權政策\u003C/a\u003E。\u003C/p\u003E",
+        "offline_text": "網站正在維護中，很快就會回來，請稍候一下。"
+    }
+}

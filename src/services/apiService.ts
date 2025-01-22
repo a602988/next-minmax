@@ -7,7 +7,7 @@
  * 4. 自動處理 API 響應格式，包括錯誤碼檢查。
  * 5. 集成了 Next.js 的緩存機制。
  * 6. 提供了請求超時功能以防止長時間掛起。
- *
+ * 7. 默認緩存時間設置為 1 小時，可以根據需求調整。
  * 使用示例：
  * const data = await fetchApi<UserData>('/api/user', { timeout: 3000 });
  */
@@ -31,6 +31,7 @@ export interface FetchApiOptions extends Omit<RequestInit, 'next'>, ErrorHandlin
     revalidate?: number | false;  // 重新驗證時間（秒）或禁用重新驗證
     tags?: Array<string>;         // 緩存標籤
     timeout?: number;             // 請求超時時間（毫秒）
+    language?: string;            // 語言參數
 }
 
 // 默認錯誤處理函數
@@ -49,11 +50,18 @@ async function fetchApi<T>(endpoint: string, options: FetchApiOptions = {}): Pro
     // 解構並設置默認選項
     const {
         onError = defaultErrorHandler,
-        revalidate = 3600,
+        revalidate = 3600, // 默認重新驗證時間為 1 小時
         tags = ['api-data'],
         timeout = 5000,
+        language,
         ...fetchOptions
     } = options;
+
+    // 構建完整的 URL，包括語言參數（如果提供）
+    const fullUrl = new URL(`${apiUrl}${endpoint}`);
+    if (language) {
+        fullUrl.searchParams.append('language', language);
+    }
 
     // 設置請求超時
     const controller = new AbortController();
@@ -61,7 +69,7 @@ async function fetchApi<T>(endpoint: string, options: FetchApiOptions = {}): Pro
 
     try {
         // 發送 API 請求
-        const response = await fetch(`${apiUrl}${endpoint}`, {
+        const response = await fetch(fullUrl.toString(), {
             ...fetchOptions,
             next: revalidate !== false ? { revalidate, tags } : undefined,
             signal: controller.signal,

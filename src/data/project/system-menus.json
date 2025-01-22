@@ -1,5 +1,7 @@
-[
-    {
+{
+    "code": "0000",
+    "message": "成功。",
+    "data": {
         "parent": null,
         "code": "web-header",
         "title": "json主選單",
@@ -119,4 +121,4 @@
             }
         ]
     }
-]
+}
