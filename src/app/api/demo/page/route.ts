@@ -1,6 +1,6 @@
 /**
  * 頁面數據獲取 API 路由
- * 
+ *
  * 重點說明：
  * 1. 此 API 路由用於獲取頁面數據，支持從外部 API 獲取或使用本地數據作為後備。
  * 2. 使用 URL 參數 'path' 來指定請求的頁面路徑。
@@ -39,12 +39,12 @@ export async function GET(req: NextRequest) {
     // 記錄 API 調用失敗的錯誤
     console.error('API call failed:', apiError instanceof Error ? apiError.message : 'Unknown error');
     console.log('Falling back to local JSON');
-    
+
     // 如果配置為使用本地數據，則從本地獲取
     if(useLocalData){
-      return getLocalData(requestPath, 'page');
+      return getLocalData(requestPath, 'page','demo');
     }
-    
+
     // 如果不使用本地數據，可以在這裡添加其他錯誤處理邏輯
     // 例如：返回一個通用的錯誤響應
     return NextResponse.json({ error: 'Unable to fetch data' }, { status: 500 });

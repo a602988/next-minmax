@@ -14,8 +14,26 @@
  *
  * 注意事項：
  * - 確保 src/data/demo 目錄下有相應的 JSON 文件。
- * - 文件名格式：[路徑]-[語言].json 或 [路徑].json。 example: products-list-en.json(url: /en/products/list)。
+ * - 文件名格式：[路徑]-[語言].json 或 [路徑].json。 example: /products/list-en.json。(url: en/products/list)
  * - 錯誤處理包括權限不足（403）、服務器錯誤（500）和資源不存在（404）。
+ *
+ * 使用範例：
+ * 1. 獲取默認語言的首頁數據：
+ *    const response = await getLocalData('/', 'page');
+ *
+ * 2. 獲取英文版的產品列表數據：
+ *    const response = await getLocalData('/en/products/list', 'page');
+ *
+ * 3. 從自定義文件夾獲取數據：
+ *    const response = await getLocalData('/about', 'page', 'custom-folder');
+ *
+ * 4. 處理響應：
+ *    if (response.status === 200) {
+ *      const data = await response.json();
+ *      // 使用數據
+ *    } else {
+ *      console.error('Failed to fetch data:', response.statusText);
+ *    }
  */
 
 
@@ -28,9 +46,15 @@ import { routing } from '@/i18n/routing';
  * 獲取本地數據的函數
  * @param requestPath 請求路徑
  * @param dataType 數據類型
+ * @param folderName 數據文件所在的文件夾名稱，默認為 'demo'
  * @returns Promise<NextResponse> 包含數據或錯誤信息的 NextResponse
  */
-export async function getLocalData(requestPath: string, dataType: string): Promise<NextResponse> {
+
+export async function getLocalData(
+    requestPath: string,
+    dataType: string,
+    folderName: string = 'demo'
+): Promise<NextResponse> {
   let fileName;
   let locale = '';
 
@@ -55,7 +79,7 @@ export async function getLocalData(requestPath: string, dataType: string): Promi
   }
 
   // 構建完整的文件路徑
-  const filePath = path.join(process.cwd(), 'src', 'data', 'project', dataType, fileName);
+  const filePath = path.join(process.cwd(), 'src', 'data', folderName, dataType, fileName);
 
   console.log(`嘗試讀取文件: ${filePath}`);
 
@@ -73,7 +97,7 @@ export async function getLocalData(requestPath: string, dataType: string): Promi
     // 如果是非默認語言且讀取失敗，嘗試讀取默認語言的文件
     if (locale && locale !== routing.defaultLocale) {
       const defaultFileName = fileName.replace(`-${locale}.json`, '.json');
-      const defaultFilePath = path.join(process.cwd(), 'src', 'data', 'project', dataType, defaultFileName);
+      const defaultFilePath = path.join(process.cwd(), 'src', 'data', folderName, dataType, defaultFileName);
 
       console.log(`嘗試讀取默認文件: ${defaultFilePath}`);
 
