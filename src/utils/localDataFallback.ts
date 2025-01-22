@@ -53,7 +53,7 @@ import { routing } from '@/i18n/routing';
 export async function getLocalData(
     requestPath: string,
     dataType: string,
-    folderName: string = 'demo'
+    folderName: string = 'project'
 ): Promise<NextResponse> {
   let fileName;
   let locale = '';

@@ -1,14 +1,23 @@
 /**
- * 獲取頁面數據
- * @param path - 頁面路徑
- * @param options - 可選的 API 請求選項
- * @returns 返回頁面數據或 null（如果獲取失敗）
+ * pageService.ts
+ *
+ * 重點說明：
+ * 1. 此服務用於獲取頁面數據，支持自定義 API 請求選項。
+ * 2. 使用 fetchApi 函數從 API 獲取語言數據。
+ * 3. 支持自定義獲取選項，如重新驗證時間和緩存標籤。
+ * 4. 錯誤處理：當獲取失敗時，會記錄錯誤並返回 null。
+ * 5. 默認緩存時間設置為 1 小時，可以根據需求調整。
  */
 
 import { PageType } from "@/types/pageType";
 import { FetchApiOptions, fetchApi } from "./apiService";
 
-
+/**
+ * 獲取頁面數據
+ * @param path - 頁面路徑
+ * @param options - 可選的 API 請求選項
+ * @returns 返回頁面數據或 null（如果獲取失敗）
+ */
 export async function getPageData(
     path: string,
     options: Partial<FetchApiOptions> = {}
@@ -45,7 +54,7 @@ export async function getPageData(
   } catch (error) {
     // 捕獲並記錄錯誤
     // 注意：fetchApi 已經處理了基本的錯誤日誌，這裡添加額外的錯誤信息
-    console.error('獲取頁面數據時發生錯誤:', error);
+    console.error('獲取頁面數據失敗:', error);
     // 返回 null 表示獲取失敗
     return null;
   }
