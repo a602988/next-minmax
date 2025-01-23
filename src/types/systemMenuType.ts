@@ -6,6 +6,7 @@ export interface SystemMenuType {
   target?: string;
   children?: Array<SystemMenuType>;
   options?: string | Array<Option> | null;
+  sort: number;
 }
 
 export interface Option {

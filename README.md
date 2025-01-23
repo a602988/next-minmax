@@ -56,3 +56,4 @@ api會回傳下列很多資料，其中wrap代表實際要載入的頁面
 
 將目前的git分支，覆蓋掉version2-DynamicPage，指令該怎麼下
 
+sqlite3 src/data/project-base-seeder.sqlite3

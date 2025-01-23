@@ -36,7 +36,7 @@ function getMenuTree(root: string | null, allMenus: Array<ExtendedSystemMenuType
 }
 
 // 建立數據庫連接
-const connection = newConnection('page-seeder-import.sqlite3');
+const connection = newConnection('demo-base-seeder.sqlite3');
 
 /**
  * GET 請求處理函數
@@ -46,11 +46,11 @@ const connection = newConnection('page-seeder-import.sqlite3');
 export async function GET(req: NextRequest): Promise<Response> {
   const language = req.nextUrl.searchParams.get('language');
 
-  let tableName = 'menus';  // 默認表名
+  let tableName = 'system_menu';  // 默認表名
   let query = '';
 
   if (language) {
-    const specificTableName = `menus_${language}`;
+    const specificTableName = `system_menu_${language}`;
 
     // 檢查特定語言的表是否存在
     const tableExistsQuery = `

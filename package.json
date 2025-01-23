@@ -12,6 +12,7 @@
   "dependencies": {
     "better-sqlite3": "^11.8.1",
     "eslint-config-molindo": "^8.0.0",
+    "lru-cache": "^11.0.2",
     "next": "15.1.4",
     "next-intl": "^3.26.3",
     "react": "^19.0.0",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/better-sqlite3": "^7.6.12",
+    "@types/lru-cache": "^7.10.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
