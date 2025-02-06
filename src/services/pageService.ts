@@ -53,7 +53,7 @@ export async function getPageData(
   } catch (error) {
     // 捕獲並記錄錯誤
     // 注意：fetchApi 已經處理了基本的錯誤日誌，這裡添加額外的錯誤信息
-    console.error('獲取頁面數據失敗:', error);
+    console.error('獲取 選單 數據失敗:', error);
     // 返回 null 表示獲取失敗
     return null;
   }

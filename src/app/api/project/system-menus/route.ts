@@ -1,27 +1,17 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { SystemMenuType } from '@/types/systemMenuType';
-import { getFromCache, setInCache } from '@/services/cacheService';
 import { query } from '@/services/databaseService';
-import { createSuccessResponse, createErrorResponse } from '@/services/apiResponseService';
+
+const databaseFile = 'project-base-seeder.sqlite3';
 
 export async function GET(req: NextRequest) {
-  const startTime = Date.now();
   const language = req.nextUrl.searchParams.get('language');
   const fallbackToDefault = req.nextUrl.searchParams.get('fallbackToDefault') !== 'false';
   const defaultTableName = 'system_menu';
-  const databaseFile = 'project-base-seeder.sqlite3';
 
   const tableName = language ? `${defaultTableName}_${language}` : defaultTableName;
-  const cacheKey = `menus_${tableName}`;
 
   try {
-    // 檢查緩存
-    const cachedMenus = getFromCache<SystemMenuType[]>(cacheKey);
-    if (cachedMenus) {
-      console.log(`從緩存中獲取菜單數據 ${tableName}`);
-      return createSuccessResponse(cachedMenus, startTime);
-    }
-
     // 檢查表是否存在並獲取菜單數據
     const sqlQuery = `
       SELECT * FROM ${tableName}
@@ -30,25 +20,49 @@ export async function GET(req: NextRequest) {
     const menus = await query<SystemMenuType>(databaseFile, sqlQuery);
 
     if (menus.length > 0) {
-      setInCache(cacheKey, menus);
-      return createSuccessResponse(menus, startTime);
+      const menuTree = getMenuTree(null, menus);
+      return NextResponse.json({ menus: menuTree }, { status: 200 });
     }
 
-    // 如果沒有找到數據或表不存在
+    // 如果沒有找到數據或表不存在，且允許回退到默認
     if (fallbackToDefault && tableName !== defaultTableName) {
       console.log(`Table '${tableName}' 不存在或為空，嘗試使用默認表 '${defaultTableName}'`);
-      const newUrl = new URL(req.url);
-      newUrl.searchParams.delete('language');
-      // 遞歸調用 GET 函數，但使用修改後的 URL
-      return GET(new NextRequest(newUrl, req));
+      const defaultQuery = `SELECT * FROM ${defaultTableName}`;
+      const defaultMenus = await query<SystemMenuType>(databaseFile, defaultQuery);
+      if (defaultMenus.length > 0) {
+        const menuTree = getMenuTree(null, defaultMenus);
+        return NextResponse.json({ menus: menuTree }, { status: 200 });
+      }
     }
 
-    console.log(`表中未找到選單 ${tableName}`);
-    return createErrorResponse(`表 '${tableName}' 不存在或為空${!fallbackToDefault ? '，且預設表已停用' : ''}`, 404, startTime);
+    console.log(`未找到選單數據 ${tableName}`);
+    return NextResponse.json({ error: `表 '${tableName}' 不存在或為空${!fallbackToDefault ? '，且預設表已停用' : ''}` }, { status: 404 });
 
   } catch (err: unknown) {
     console.error(`取得選單時出錯: ${err}`);
     const errorMessage = err instanceof Error ? err.message : String(err);
-    return createErrorResponse('內部伺服器錯誤', 500, startTime, errorMessage);
+    return NextResponse.json({ error: '內部伺服器錯誤', details: errorMessage }, { status: 500 });
+  }
+}
+
+interface ExtendedSystemMenuType extends SystemMenuType {
+  parent_id: string | null;
+  children?: ExtendedSystemMenuType[];
+}
+
+function getMenuTree(root: string | null, allMenus: Array<ExtendedSystemMenuType>): Array<ExtendedSystemMenuType> {
+  if (allMenus.length === 0) return [];
+
+  try {
+    return allMenus
+      .filter(menu => menu.parent_id === root)
+      .map(menu => ({
+        ...menu,
+        target: menu.url && !String(menu.url).startsWith("http") ? '_self' : '_blank',
+        children: getMenuTree(menu.code, allMenus)
+      }));
+  } catch (error) {
+    console.error('Error in getMenuTree:', error);
+    return [];
   }
 }
