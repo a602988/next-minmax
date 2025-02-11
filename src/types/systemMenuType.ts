@@ -1,4 +1,5 @@
 export interface SystemMenuType {
+  id: string;
   code: string;
   title: string;
   description?: string | null;

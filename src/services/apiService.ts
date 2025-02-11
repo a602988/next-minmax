@@ -164,6 +164,7 @@ export async function fetchApi<T>(endpoint: string, options: FetchApiOptions = {
             throw new Error(`API error: ${result.message}`);
         }
 
+
         // 將結果存入內存緩存
         if (useCache) {
             setToCache(cacheKey, result.data);
