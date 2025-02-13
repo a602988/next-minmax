@@ -16,7 +16,7 @@ const responseCache: Map<string, CacheEntry> = new Map();
 const DEFAULT_CACHE_TTL = 60000;
 
 /**
- * 將 HeadersInit 轉換為純物件
+ * 將 HeadersInit 轉換為純物件形式
  * @param headers RequestInit.headers 可能的型別
  * @returns 純物件形式的 headers
  */
@@ -38,7 +38,17 @@ function normalizeHeaders(headers: HeadersInit): Record<string, string> {
 }
 
 /**
- * 高級 API 請求函式，整合 TTL 快取與 HTTP 條件請求
+ * 高級 API 請求函式，整合 TTL 快取與 HTTP 條件請求（利用 ETag / Last-Modified）
+ *
+ * 流程說明：
+ * 1. 檢查是否已有快取資料，並確認是否在 TTL 有效期內，若是則直接回傳。
+ * 2. 若存在快取但 TTL 過期，則在請求 header 中加入條件請求的標頭：
+ *    - If-None-Match（如果有 etag）
+ *    - If-Modified-Since（如果有 lastModified）
+ * 3. 發送請求後：
+ *    - 若 API 回傳 304 Not Modified，則更新快取的 timestamp 並回傳快取資料。
+ *    - 否則，解析回傳資料並根據回應 header 更新快取（包含 etag 與 lastModified）。
+ *
  * @param url API URL
  * @param options fetch 選項
  * @returns 解析後的 JSON 資料
@@ -47,16 +57,18 @@ export async function cachedApiFetch(
     url: string,
     options: RequestInit = {}
 ): Promise<any> {
-    // 先檢查是否有有效的快取資料
+    // 先檢查是否已有快取資料
     const cached = responseCache.get(url);
     if (cached && Date.now() - cached.timestamp < DEFAULT_CACHE_TTL) {
+        // TTL 尚未過期，直接回傳快取資料
         return cached.data;
     }
 
-    // 若存在過期的快取，加入條件請求標頭
+    // 若有快取但 TTL 過期，則在 header 中加入條件請求資訊
     const headers: Record<string, string> = options.headers
         ? normalizeHeaders(options.headers)
         : {};
+
     if (cached) {
         if (cached.etag) {
             headers['If-None-Match'] = cached.etag;
@@ -67,17 +79,18 @@ export async function cachedApiFetch(
     }
     options.headers = headers;
 
-    // 使用基礎請求模組進行網路請求
+    // 使用基本 API 請求模組發送網路請求
     const response = await basicApiFetch(url, options);
+
     if (response.status === 304 && cached) {
-        // 304 表示資源未變動，更新快取的 timestamp 後回傳舊資料
+        // API 回傳 304 表示資源未更新，僅更新快取 timestamp
         cached.timestamp = Date.now();
         return cached.data;
     } else {
+        // API 回傳新的資料，解析 JSON 並更新快取
         const data = await response.json();
         const etag = response.headers.get('ETag');
         const lastModified = response.headers.get('Last-Modified');
-        // 更新快取
         responseCache.set(url, {
             data,
             etag,
