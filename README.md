@@ -1,4 +1,4 @@
-
+git說明：原本的next-minmax儲存
 
 
 git remote add minmax https://git.24241872.work/jean/next-minmax.git
