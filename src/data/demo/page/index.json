@@ -1,7 +1,7 @@
 {
     "code": "0000",
     "message": "成功。",
-    "data": [
+    "data":
         {
             "uri": "/",
             "route": "/",
@@ -11,7 +11,7 @@
             "meta_image": {
                 "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
             },
-            "wrap": "home",
+            "wrap": "index",
             "breadcrumbs": [
                 {
                     "title": "Home",
@@ -206,5 +206,4 @@
                 }
             ]
         }
-    ]
 }

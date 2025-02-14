@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { SystemMenuType } from '@/types/systemMenuType';
-import { query } from '@/services/databaseService';
+import { query } from '@/utils/databaseService';
 
 const databaseFile = 'project-base-seeder.sqlite3';
 

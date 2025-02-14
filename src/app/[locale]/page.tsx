@@ -13,10 +13,10 @@
 
 import React, { Suspense } from 'react';
 import { PageType } from "@/types/pageType";
-import { getPageData } from "@/services/pageService";
+import { getPageData } from "@/services/page";
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
-import { routing } from "@/i18n/routing";
+// import { routing } from "@/i18n/routing";
 import { notFound } from 'next/navigation';
 
 interface PageProps {
@@ -27,15 +27,16 @@ interface PageComponentProps {
     pageData: PageType;
 }
 
-const DynamicPage: NextPage<PageProps> = async ({ params }) => {
+const DynamicPage: NextPage<PageProps> = async () => {
     try {
-        const resolvedParams = await params;
+        // const resolvedParams = await params;
         // 根據當前語言設置路徑
-        const path = resolvedParams.locale === routing.defaultLocale ? '/' : `/${resolvedParams.locale}`;
+        // const path = resolvedParams.locale === routing.defaultLocale ? '/' : `/${resolvedParams.locale}`;
 
         // 獲取頁面數據
-        const pageData = await getPageData(path);
+        const pageData = await getPageData();
 
+        // console.log(pageData);
         // 如果沒有找到頁面數據，返回404
         if (!pageData) {
             notFound();
@@ -44,7 +45,7 @@ const DynamicPage: NextPage<PageProps> = async ({ params }) => {
         // 動態導入頁面組件
         const PageComponent = dynamic<PageComponentProps>(
             // 根據pageData.wrap動態導入對應的頁面組件
-            () => import(`@/components/pageWrap/${pageData.wrap}/page`).then(mod => mod.default),
+            () => import(`@/components/page/${pageData.wrap}/page`).then(mod => mod.default),
             {
                 // 設置加載中的顯示內容
                 loading: () => <p>Loading component...</p>,

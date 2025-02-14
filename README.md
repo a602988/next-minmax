@@ -11,6 +11,15 @@
 
 設置CSP標頭
 
+## 資料夾說明
+
+- src
+  - lib : 「核心業務邏輯」或「跟外部系統的整合」
+  - utils : 通用輔助工具
+    - databaseService.ts : SQLite 數據庫連
+    - localDataFallback.ts  : 獲取本地JS數據
+
+
 ## 套件
 
 ### server-only
