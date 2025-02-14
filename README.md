@@ -67,3 +67,16 @@ api會回傳下列很多資料，其中wrap代表實際要載入的頁面
 將目前的git分支，覆蓋掉version2-DynamicPage，指令該怎麼下
 
 sqlite3 src/data/project-base-seeder.sqlite3
+
+
+
+寫一隻基底api撈取程式
+符合以下條件：
+- api 前綴網址為 process.env.NEXT_SERVER_API_URL
+- 同一個資料請求不會被重複發送
+- 依據api屬性可選擇是否在伺服器端快取
+- 讓撈取api的header若有header 加上 If-Modified-Since，則依據回傳的header會有Last-Modified時間戳，若符合則會回傳304，資料就取伺服器快取，若不符合則將資料快取在伺服器，並取伺服器的快取資料。如果沒有傳遞 If-Modified-Since，則直接取回api回傳的資料。
+- 
+
+讓我們一步一步重新來
+先幫我寫一隻公用的api撈取
