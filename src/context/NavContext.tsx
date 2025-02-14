@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+import React, { ReactNode, createContext, useContext, useState, useEffect } from 'react';
 
 interface NavContextType {
   toggleNav(): void;
@@ -11,13 +11,20 @@ const NavContext = createContext<NavContextType | undefined>(undefined);
 
 export function NavProvider({ children }: { children: ReactNode }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   function toggleNav() {
     setIsNavOpen(prev => !prev);
   }
 
+  const value = isClient ? { isNavOpen, toggleNav } : { isNavOpen: false, toggleNav: () => {} };
+
   return (
-    <NavContext.Provider value={{ isNavOpen, toggleNav }}>
+    <NavContext.Provider value={value}>
       {children}
     </NavContext.Provider>
   );

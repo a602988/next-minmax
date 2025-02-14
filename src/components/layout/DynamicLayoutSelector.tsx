@@ -1,21 +1,17 @@
-import React from 'react';
+'use client';
+
+import React, { ReactNode } from 'react';
 import DefaultLayout from '@/components/layout/DefaultLayout';
 import BlogLayout from '@/components/layout/BlogLayout';
+import { useLayout } from './DynamicLayout';
 
-// 導入其他可能的布局組件
+export default function DynamicLayoutSelector({ children }: { children: ReactNode }) {
+  const { layoutType } = useLayout();
 
-interface DynamicLayoutProps {
-  layoutType: string;
-  children: React.ReactNode;
-}
-
-const DynamicLayout: React.FC<DynamicLayoutProps> = ({ layoutType, children }) => {
   switch (layoutType) {
     case 'web-blog':
       return <BlogLayout>{children}</BlogLayout>;
     default:
       return <DefaultLayout>{children}</DefaultLayout>;
   }
-};
-
-export default DynamicLayout;
+}

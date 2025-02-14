@@ -111,3 +111,15 @@ https://git.24241872.work/jean/next-minmax
 
 
 
+https://minmax-web3.jeffy.test/api/page/detail?uri=/news/detail/8870&language=zh-tw?q=柯文哲金流&filters=eyJyZ
+
+/news/datiel/8870/?q=柯文哲金流&filters=eyJyZ
+
+
+重新描述一次需求
+首先 使用者輸入網址後 例如：/news/datiel/8870/?q=柯文哲金流&filters=eyJyZ
+我們需要先將頁面資訊丟給api : /api/page/detail?uri=/news/detail/8870&language=zh-tw?q=柯文哲金流&filters=eyJyZa
+
+api會還傳資料如範例src/data/page.json
+在依據回傳的api 中的wrap值，
+判斷使用的layoutType

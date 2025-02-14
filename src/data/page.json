@@ -7,7 +7,7 @@
     "meta_image": {
         "path": "https://example.com/files/thumbnail/sample_1920xauto.webp"
     },
-    "wrap": "wrap_key",
+    "wrap": "web-blog",
     "breadcrumbs": [
         {
             "title": "Home",

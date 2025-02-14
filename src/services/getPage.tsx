@@ -1,20 +1,26 @@
-import { API_ENDPOINTS } from '@/config/apiConfig';
-import dataJson from '@/data/page.json';
 import { PageType } from '@/types/pageType';
 import { getApi } from './getApi';
+import { API_ENDPOINTS } from '@/config/apiConfig';
+import dataJson from '@/data/page.json';
 
 export async function getPage(
-  dataSource?: 'json' | 'api'
+  locale: string,
+  slug: string,
+  searchParams: URLSearchParams,
+  dataSource: 'json' | 'api' = 'api'
 ): Promise<PageType[]> {
-  // 如果沒有提供 dataSource，則從環境變量或配置中獲取
-  const source = dataSource || process.env.NEXT_PUBLIC_DATA_SOURCE || 'api';
-
-  if (source === 'json') {
-    // 從 JSON 文件中讀取數據
-    return dataJson as Array<PageType>;
-  } else {
-    // 從 API 獲取數據
-    const response = await getApi<PageType>(API_ENDPOINTS.PAGE);
-    return response.data;
+  try {
+    if (dataSource === 'json') {
+      // 確保返回一個數組
+      return Array.isArray(dataJson) ? dataJson as PageType[] : [dataJson as PageType];
+    } else {
+      // 從 API 獲取數據
+      const url = `${API_ENDPOINTS.PAGE}/${locale}/${slug}?${searchParams.toString()}`;
+      const apiData = await getApi<PageType[]>(url);
+      return apiData;
+    }
+  } catch (error) {
+    console.error('Error fetching page data:', error);
+    return []; // 在出錯時返回空數組
   }
 }
