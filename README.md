@@ -11,13 +11,16 @@
 
 設置CSP標頭
 
-## 資料夾說明
+## 資料結構檔案說明
 
 - src
   - lib : 「核心業務邏輯」或「跟外部系統的整合」
+    - apiFetch.ts : 共用的 API 請求函數
+    - 
   - utils : 通用輔助工具
     - databaseService.ts : SQLite 數據庫連
-    - localDataFallback.ts  : 獲取本地JS數據
+    - localDataFallback.ts : 獲取本地JS數據
+    - pathUtils.ts : 網址路徑處理
 
 
 ## 套件

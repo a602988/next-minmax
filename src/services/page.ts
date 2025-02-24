@@ -1,41 +1,33 @@
+// lib/getPageData.ts
 import { PageType } from "@/types/pageType";
-import nodeFetch, { RequestInit as NodeFetchRequestInit } from 'node-fetch';
-import https from 'https';
+import { apiFetch } from "@/lib/apiClient";
 
-// 定義一個通用的 Fetch 類型
-type UniversalFetch = typeof fetch | typeof nodeFetch;
+/**
+ * 取得頁面資料
+ * @param project - 專案名稱
+ * @param language - 語言代碼（例如 zh-TW）
+ * @param uri - 頁面 URI（例如 '/'）
+ * @param params - 額外的參數，預設為空字串
+ * @returns 回傳 API 回傳的 data 內容，型別為 PageType 或 null
+ */
+export async function getPageData(
+    project: string,
+    language: string,
+    uri: string,
+    params: string = ""
+): Promise<PageType | null> {
+    const baseUrl = process.env.NEXT_SERVER_API_URL;
+    if (!baseUrl) {
+        throw new Error("NEXT_SERVER_API_URL is not defined");
+    }
 
-// 創建一個通用的 fetch 函數
-const universalFetch: UniversalFetch = process.env.NODE_ENV === 'development' ? nodeFetch : global.fetch;
-
-// 只在開發模式下創建 httpsAgent
-const httpsAgent = process.env.NODE_ENV === 'development' ? new https.Agent({
-    rejectUnauthorized: false
-}) : undefined;
-
-// 定義一個通用的 RequestInit 類型
-type UniversalRequestInit = RequestInit & NodeFetchRequestInit;
-
-export async function getPageData(): Promise<PageType | null> {
-    const url = `${process.env.NEXT_SERVER_API_URL}/ssr/page/detail?project=minmax2025&language=zh-TW&uri=/&params=`;
-
-    const fetchOptions: UniversalRequestInit = process.env.NODE_ENV === 'development'
-        ? { agent: httpsAgent as any }
-        : {};
+    const url = `${baseUrl}/ssr/page/detail?project=${encodeURIComponent(project)}&language=${encodeURIComponent(language)}&uri=${encodeURIComponent(uri)}&params=${encodeURIComponent(params)}`;
 
     try {
-        const response = await universalFetch(url, fetchOptions);
-
-
-        // api路徑有問題回傳錯誤
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        // 轉為json格式
-        const data = await response.json();
-        console.log(data);
-        return data.data;
+        // 假設 API 回傳的 JSON 格式為 { data: PageType }
+        const result = await apiFetch<{ data: PageType }>(url);
+        // console.log(result);
+        return result.data;
     } catch (error) {
         console.error('Error fetching page data:', error);
         throw error;

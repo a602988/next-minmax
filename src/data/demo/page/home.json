@@ -1,0 +1,95 @@
+{
+    "code": "0000",
+    "message": "Success.",
+    "data": {
+        "uri": "/",
+        "route": "/",
+        "meta_title": "雲端數位科技有限公司",
+        "meta_description": "網站簡短敘述",
+        "meta_keywords": "網站,關鍵字",
+        "meta_image": "https://minmax.tw/static/images/common/logo.svg",
+        "wrap": "web-home",
+        "breadcrumbs": [
+            {
+                "title": "Home",
+                "url": "https://minmax.tw"
+            }
+        ],
+        "modules": [
+            {
+                "component": "home-wide-slider",
+                "area": null,
+                "api": null,
+                "attributes": {
+                    "category": "block-home-wide-slider",
+                    "speed": 3000
+                },
+                "data": [
+                    {
+                        "id": "block-home-wide-slider-1",
+                        "category_id": "block-home-wide-slider",
+                        "title": "首頁寬幅輪播1",
+                        "editor": "\u003Ch3\u003ESlide 1\u003C/h3\u003E",
+                        "pic": [
+                            {
+                                "path": "files/img/index-slider-1.webp",
+                                "title": null,
+                                "media": null,
+                                "autoplay": false,
+                                "device": "all",
+                                "cover": false,
+                                "spot_x": null,
+                                "spot_y": null,
+                                "url": "https://minmax.tw/files/img/index-slider-1.webp"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "block-home-wide-slider-2",
+                        "category_id": "block-home-wide-slider",
+                        "title": "首頁寬幅輪播2",
+                        "editor": "\u003Ch3\u003ESlide 2\u003C/h3\u003E",
+                        "pic": [
+                            {
+                                "path": "files/img/index-slider-2.webp",
+                                "title": null,
+                                "media": null,
+                                "autoplay": false,
+                                "device": "all",
+                                "cover": false,
+                                "spot_x": null,
+                                "spot_y": null,
+                                "url": "https://minmax.tw/files/img/index-slider-2.webp"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "component": "home-block-about",
+                "area": null,
+                "api": null,
+                "attributes": {
+                    "category": "block-home-about"
+                },
+                "data": {
+                    "id": "block-home-about-1",
+                    "category_id": "block-home-about",
+                    "title": "首頁關於區塊",
+                    "editor": "\u003Ch3\u003E首頁關於區塊\u003C/h3\u003E"
+                }
+            },
+            {
+                "component": "home-post-slider",
+                "area": null,
+                "api": null,
+                "attributes": {
+                    "category": null,
+                    "page": "web-news-detail",
+                    "limit": null
+                },
+                "data": []
+            }
+        ]
+    }
+}

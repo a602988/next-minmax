@@ -10,6 +10,13 @@ const nextConfig: NextConfig = {
     env: {
         NEXT_SERVER_API_URL: process.env.NEXT_SERVER_API_URL,
     },
+    serverRuntimeConfig: {
+        projectName: process.env.PROJECT_NAME || 'minmax2025',
+        // 在這裡添加其他服務器端配置項
+    },
+    publicRuntimeConfig: {
+        // 在這裡添加可以在客戶端使用的配置項
+    },
 };
 
 export default withNextIntl(nextConfig);
