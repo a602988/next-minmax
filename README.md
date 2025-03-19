@@ -7,9 +7,9 @@ project-root/
 │   ├── app/              # App Router 路由和頁面
 │   ├── components/       # 共用元件
 │   │   ├── ui/           # 基礎 UI 元件（按鈕、輸入框、卡片等）
-│   │   ├── layout/       # 布局相關元件（頁頭、頁尾、側邊欄等）
+│   │   ├── layout/       # 布局相關元件（頁頭、頁尾、側邊欄等）：LanguageSwitcher、ThemeSwitcher、TopBar、Header．．
 │   │   ├── forms/        # 表單相關元件
-│   │   ├── common/       # 通用元件
+│   │   ├── common/       # 通用元件：通常是較小的、功能單一的組件，不屬於布局元件。例如：Toast、Image、BackToTop、ProgressBar、ScrollLock等
 │   │   └── [feature]/    # 按功能分類的元件
 │   ├── lib/              # 核心業務邏輯和外部系統整合（如數據庫），常見文件如 db.ts、auth.ts 等
 │   ├── utils/            # 通用工具函數，格式化、驗證、計算等輔助函數，不包含業務邏輯的純函數
@@ -24,3 +24,10 @@ project-root/
 ├── postcss.config.mjs    # PostCSS 配置
 ├── tsconfig.json         # TypeScript 配置
 └── package.json          # 項目依賴和腳本
+
+
+## lighthouse 跑分
+
+初始 語系 dev 83 start 99
+
+
