@@ -15,8 +15,9 @@ import { Link } from '@/i18n/routing'; // 使用 next-intl 的 Link 組件
 import { routing } from '@/i18n/routing';
 import styles from './LanguageSwitcher.module.css';
 import defaultLanguages from '@/data/json/defaultLanguages.json';
-import API_ENDPOINTS from '@/config/apiConfig';
-
+import API_ENDPOINTS from '@/services/api/clients/minmax/apiConfig';
+import { apiClientMinmax } from '@/services/api/clients/minmax/apiClient';
+import { isApiError } from '@/services/api/core/ApiError';
 // 定義 API 返回的語言選項類型
 interface LanguageOption {
   id: string;        // 語言代碼，如 'zh-TW'
@@ -36,7 +37,7 @@ interface LanguageApiResponse {
 /**
  * 自定義 Hook：負責從 API 或備用資料中抓取語言選項
  */
-function useLanguageOptions(apiUrl: string, locale: string) {
+function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale: string) {
   const [languageOptions, setLanguageOptions] = useState<LanguageOption[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -45,11 +46,18 @@ function useLanguageOptions(apiUrl: string, locale: string) {
     const fetchLanguages = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-          throw new Error(`API 請求失敗: ${response.status}`);
-        }
-        const result: LanguageApiResponse = await response.json();
+
+        // 構建完整的 API 請求 URL
+
+        // 使用 minmaxApiClient 來獲取語言選項，啟用緩存和中止控制器
+        const result: LanguageApiResponse = await apiClientMinmax<LanguageApiResponse>(apiUrlKey, {
+          params: { language: locale },
+          useCache: true, // 啟用緩存
+          cacheTTL: 300, // 緩存時間（秒）
+          useAbortController: true, // 開啟
+          signal: controller.signal, // 傳入 signal
+        });
+
         if (result.code === '0000') {
           // 更新當前語言標記
           const updatedLanguages = result.data.map(lang => ({
@@ -62,7 +70,13 @@ function useLanguageOptions(apiUrl: string, locale: string) {
         }
       } catch (err) {
         console.error('獲取語言選項失敗:', err);
-        setError(err instanceof Error ? err.message : '獲取語言選項失敗');
+        if (isApiError(err)) {
+          setError(`API 錯誤 ${err.status}：${err.message}`);
+        } else if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('獲取語言選項失敗');
+        }
         // 當 API 失敗時，回退到預設資料
         setLanguageOptions(
             defaultLanguages.map(lang => ({
@@ -76,7 +90,13 @@ function useLanguageOptions(apiUrl: string, locale: string) {
     };
 
     fetchLanguages();
-  }, [apiUrl, locale]);
+
+    // 清理函數，在組件卸載時取消請求
+    return () => {
+      controller.abort(); // ✅ 組件 unmount 時取消請求
+    };
+
+  }, [apiUrlKey, locale]);
 
   return { languageOptions, isLoading, error };
 }
@@ -85,12 +105,12 @@ export default function LanguageSwitcher({
                                            variant = 'dropdown',
                                            showFlags = true,
                                            className = '',
-                                           apiUrl = API_ENDPOINTS.LANGUAGES,
+                                             apiUrl = 'LANGUAGES',
                                          }: {
   variant?: 'dropdown' | 'buttons';
   showFlags?: boolean;
   className?: string;
-  apiUrl?: string;
+  apiUrl?: keyof typeof API_ENDPOINTS;  // Update the type to match the expected keys
 }) {
   const locale = useLocale();
   const pathname = usePathname();

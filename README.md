@@ -17,13 +17,24 @@ project-root/
 │   ├── types/            # TypeScript 類型定義，接口、類型別名、枚舉等，可按功能或模塊分類
 │   ├── styles/           # 全局樣式
 │   ├── contexts/         # React Context 相關文件，狀態管理相關代碼，例如 ThemeContext、AuthContext 等
-│   └── services/         # API 服務和數據獲取，例如 userService.ts、productService.ts 等
+│   ├── services/         # API 服務和數據獲取，例如 userService.ts、productService.ts 等
+│   │   ├── core/         # 通用邏輯，跨平台的底層工具，任何 client 都可以用
+│   │   ├── clients/      # 封裝對應
+│   │   │   └── minmax/   # minmax 專屬邏輯
+│   │   ├── interceptors/ # 攔截器，所有 client 可選擇是否使用它們
+│   │   ├── interceptors/ # auth 認證流程，集中處理登入、refresh、登出
 ├── public/               # 靜態資源文件，圖片、字體、favicon 等，這些文件可以通過 URL 直接訪問
 ├── next.config.mjs       # Next.js 配置文件
 ├── tailwind.config.ts    # Tailwind CSS 配置
 ├── postcss.config.mjs    # PostCSS 配置
 ├── tsconfig.json         # TypeScript 配置
 └── package.json          # 項目依賴和腳本
+
+
+# 目錄細節說明
+
+## service
+
 
 
 ## lighthouse 跑分
