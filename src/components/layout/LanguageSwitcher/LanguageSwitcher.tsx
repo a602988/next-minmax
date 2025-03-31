@@ -1,3 +1,14 @@
+/**
+ * @component LanguageSwitcher
+ * 語言切換組件，支持下拉和按鈕兩種顯示變體。
+ *
+ * 1. 支持語言選項的動態加載和本地化。
+ * 2. 提供鍵盤導航和無障礙支持。
+ * 3. 支持顯示國旗圖標。
+ * 4. 提供加載和錯誤狀態的反饋。
+ * 5. 提供下拉式介面與清單介面。
+ */
+
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -43,6 +54,7 @@ function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale: strin
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController(); // 初始化 AbortController
     const fetchLanguages = async () => {
       try {
         setIsLoading(true);
@@ -322,7 +334,7 @@ export default function LanguageSwitcher({
 
   // 按鈕變體
   return (
-      <div className={`${styles.buttonsContainer} ${className}`} role="group" aria-label="語言選擇">
+      <div className={`${styles.buttonsContainer}  ${className}`} role="group" aria-label="語言選擇">
         {languageOptions.map(option => (
             <Link
                 key={option.id}
@@ -339,7 +351,7 @@ export default function LanguageSwitcher({
                 title={`切換至${option.title}`}
             >
               {renderFlag(option.icon)}
-              <span>{option.native}</span>
+              <span>{option.title}</span>
             </Link>
         ))}
       </div>

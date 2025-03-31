@@ -1,3 +1,10 @@
+
+
+import { withTimeout } from '../core/withTimeout';
+import { applyRequestInterceptors } from '../interceptors/requestInterceptor';
+import { applyResponseInterceptors } from '../interceptors/responseInterceptor';
+import { getCached, setCached } from '../core/cache';
+
 /**
  * @interface FetchOptions
  * 定義 HTTP 請求的選項。
@@ -12,13 +19,6 @@
  * @property {boolean} [useInterceptors] - 是否使用攔截器。
  * @property {boolean} [useAbortController] - 是否使用中止控制器。
  */
-
-import { withTimeout } from '../core/withTimeout';
-import { applyRequestInterceptors } from '../interceptors/requestInterceptor';
-import { applyResponseInterceptors } from '../interceptors/responseInterceptor';
-import { getCached, setCached } from '../core/cache';
-
-
 export interface FetchOptions extends RequestInit {
   params?: Record<string, string>;
   retries?: number;
@@ -33,7 +33,13 @@ export interface FetchOptions extends RequestInit {
 
 /**
  * @function httpClient
- * 通用的 HTTP 客戶端，用於發送 HTTP 請求，支持緩存、重試、攔截器和超時控制。
+ * 通用的 HTTP 客戶端，用於發送 HTTP 請求，支持以下機制：
+ *
+ * 1. 緩存機制：通過 `useCache` 和 `cacheKey` 來決定是否使用緩存，並通過 `cacheTTL` 設置緩存的存活時間。
+ * 2. 重試機制：通過 `retries` 參數設置重試次數，實現自動重試失敗的請求。
+ * 3. 超時控制：通過 `timeout` 參數設置請求的超時時間，並使用 `AbortController` 來中止超時的請求。
+ * 4. 攔截器支持：通過 `useInterceptors` 參數決定是否應用請求和響應攔截器。
+ * 5. 中止控制：通過 `useAbortController` 參數決定是否使用 `AbortController` 來中止請求。
  *
  * @template T - 預期的響應類型。
  * @param {string} url - 請求的 URL。

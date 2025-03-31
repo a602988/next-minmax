@@ -1,5 +1,5 @@
 import {useTranslations} from 'next-intl';
-import LanguageSwitcher from '@/components/layout/LanguageSwitcher'
+import LanguageSwitcher from '@/components/layout/LanguageSwitcher/LanguageSwitcher'
 
 export default function HomeLocale() {
     const t = useTranslations('HomePage');
@@ -8,7 +8,7 @@ export default function HomeLocale() {
     return (
     <div>
       <h1>{t('title')}</h1>
-        <div className="flex gap-4">
+        <div className="flex gap-2">
             <LanguageSwitcher />
         </div>
     </div>
