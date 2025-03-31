@@ -1,0 +1,5 @@
+/* 錯誤狀態樣式 */
+.error {
+    color: #ef4444;
+    font-size: 0.875rem;
+}
