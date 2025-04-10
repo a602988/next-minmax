@@ -20,14 +20,14 @@ import API_ENDPOINTS from '@/services/api/clients/minmax/apiConfig';
 import { LanguageSwitcherDropdown, LanguageSwitcherButtons } from './variants';
 import LoadingState from '@/components/feedback/LoadingState';
 import ErrorState from '@/components/feedback/ErrorState';
-import { useLanguageOptions } from '@/hooks/useLanguageOptions';
+import { LanguageOption, useLanguageOptions } from '@/hooks/useLanguageOptions';
 
 export interface LanguageOption {
-  id: string;        // 語言代碼，如 'zh-TW'
-  title: string;     // 顯示名稱，如 '中文(繁體)'
-  native: string;    // 本地名稱縮寫，如 'TW'
-  default: boolean;  // 是否為預設語言
-  current: boolean;  // 是否為當前語言
+  id: string;
+  title: string;
+  native: string;
+  default: boolean;
+  current: boolean;
 }
 
 export interface LanguageSwitcherProps {

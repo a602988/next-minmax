@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
 import API_ENDPOINTS from '@/services/api/clients/minmax/apiConfig';
 import { apiClientMinmax } from '@/services/api/clients/minmax/apiClient';
-import { isApiError } from '@/services/api/core/ApiError';
-import defaultLanguages from '@/data/json/defaultLanguages.json';
-import { LanguageOption } from '@/components/layout/LanguageSwitcher/LanguageSwitcher';
+import { isApiError, ApiError } from '@/services/api/core/ApiError';
+import { loadFallbackData, isFallbackEnabled } from '@/services/fallback/fallbackDataJsonLoader';
+
+export interface LanguageOption {
+  id: string;
+  title: string;
+  native: string;
+  default: boolean;
+  current: boolean;
+}
 
 interface LanguageApiResponse {
   code: string;
@@ -11,9 +18,6 @@ interface LanguageApiResponse {
   data: LanguageOption[];
 }
 
-/**
- * 自定義 Hook：負責從 API 或備用資料中抓取語言選項
- */
 export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale: string) {
   const [languageOptions, setLanguageOptions] = useState<LanguageOption[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +29,7 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
       try {
         setIsLoading(true);
 
-        const result: LanguageApiResponse = await apiClientMinmax<LanguageApiResponse>(apiUrlKey, {
+        const result = await apiClientMinmax<LanguageApiResponse>(apiUrlKey, {
           params: { language: locale },
           useCache: true,
           cacheTTL: 300,
@@ -34,7 +38,7 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
         });
 
         if (result.code === '0000') {
-          const updatedLanguages = result.data.map(lang => ({
+          const updatedLanguages: LanguageOption[] = result.data.map(lang => ({
             ...lang,
             current: lang.id === locale,
           }));
@@ -42,22 +46,37 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
         } else {
           throw new Error(`API 返回錯誤: ${result.message}`);
         }
-      } catch (err) {
+      } catch (err: unknown) {
         console.error('獲取語言選項失敗:', err);
         if (isApiError(err)) {
-          setError(`API 錯誤 ${err.status}：${err.message}`);
+          setError(`API 錯誤 ${(err as ApiError).status}：${(err as ApiError).message}`);
         } else if (err instanceof Error) {
           setError(err.message);
         } else {
           setError('獲取語言選項失敗');
         }
-        // 當 API 失敗時，回退到預設資料
-        setLanguageOptions(
-          defaultLanguages.map(lang => ({
-            ...lang,
-            current: lang.id === locale,
-          }))
-        );
+        
+        if (isFallbackEnabled()) {
+          try {
+            const fileName = locale === 'default' ? 'defaultLanguages' : `defaultLanguages_${locale}`;
+            const fallbackData = await loadFallbackData<LanguageOption[]>(fileName);
+
+            if (fallbackData && fallbackData.length > 0) {
+              const updatedFallbackData: LanguageOption[] = fallbackData.map(lang => ({
+                ...lang,
+                current: lang.id === locale,
+              }));
+              setLanguageOptions(updatedFallbackData);
+            } else {
+              setLanguageOptions([]);
+            }
+          } catch (fallbackError) {
+            console.error(`加載回退數據失敗:`, fallbackError);
+            setLanguageOptions([]);
+          }
+        } else {
+          setLanguageOptions([]);
+        }
       } finally {
         setIsLoading(false);
       }
