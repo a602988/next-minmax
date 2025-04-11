@@ -1,4 +1,4 @@
-import { getRefreshToken } from '../api/interceptors/tokenProvider';
+import { getRefreshToken } from '@/services/shared/interceptors/tokenProvider';
 
 export async function refreshAuthToken(): Promise<void> {
     const refreshToken = getRefreshToken('cookie');

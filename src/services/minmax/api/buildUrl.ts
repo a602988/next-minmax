@@ -1,4 +1,4 @@
-import API_ENDPOINTS from '@/services/api/clients/minmax/apiConfig';
+import API_ENDPOINTS from '@/services/minmax/api/apiConfig';
 const isDevelopment = process.env.NODE_ENV === 'development'; // 判斷當前環境是否為開發環境
 const projectName = process.env.NEXT_PUBLIC_PROJECT_NAME || 'minmax2025'; // 項目名稱
 const ApiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://v5.jeffy.test/api/ssr'; // API 基本 URL

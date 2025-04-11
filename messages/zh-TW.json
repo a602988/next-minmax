@@ -2,5 +2,14 @@
     "HomePage": {
       "title": "您好!",
       "about": "瀏覽 關於我們 頁面"
+    },
+    "components": {
+        "LanguageSwitcher": {
+            "loading": "載入語言選項...",
+            "error": "載入語言選項錯誤",
+            "switch": "切換至...",
+            "select": "選擇語言",
+            "aria-label": "語言選項"
+        }
     }
-  }
+}

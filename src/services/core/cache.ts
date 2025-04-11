@@ -13,7 +13,7 @@ interface CacheItem<T> {
 }
 
 // 緩存存儲，鍵為字符串，值為 CacheItem。
-const cacheStore = new Map<string, CacheItem<any>>();
+const cacheStore = new Map<string, CacheItem<unknown>>();
 
 /**
  * @function getCached
@@ -26,7 +26,7 @@ export function getCached<T>(key: string): T | undefined {
         cacheStore.delete(key); // 刪除過期項
         return undefined;
     }
-    return entry.data;
+    return entry.data as T;
 }
 
 /**

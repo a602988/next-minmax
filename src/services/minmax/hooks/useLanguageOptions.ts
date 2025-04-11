@@ -1,22 +1,13 @@
 import { useState, useEffect } from 'react';
-import API_ENDPOINTS from '@/services/api/clients/minmax/apiConfig';
-import { apiClientMinmax } from '@/services/api/clients/minmax/apiClient';
-import { isApiError, ApiError } from '@/services/api/core/ApiError';
+import API_ENDPOINTS from '@/services/minmax/api/apiConfig';
+import { apiClientMinmax } from '@/services/minmax/api/apiClient';
 import { loadFallbackData, isFallbackEnabled } from '@/services/fallback/fallbackDataJsonLoader';
+import { LanguageOption } from '@/services/minmax/types/language';
+import { ApiResponse } from '@/services/minmax/types/api';
+import { handleApiError, createApiError } from '@/services/core/ApiError';
 
-export interface LanguageOption {
-  id: string;
-  title: string;
-  native: string;
-  default: boolean;
-  current: boolean;
-}
 
-interface LanguageApiResponse {
-  code: string;
-  message: string;
-  data: LanguageOption[];
-}
+
 
 export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale: string) {
   const [languageOptions, setLanguageOptions] = useState<LanguageOption[]>([]);
@@ -29,7 +20,7 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
       try {
         setIsLoading(true);
 
-        const result = await apiClientMinmax<LanguageApiResponse>(apiUrlKey, {
+        const result = await apiClientMinmax<ApiResponse<LanguageOption[]>>(apiUrlKey, {
           params: { language: locale },
           useCache: true,
           cacheTTL: 300,
@@ -44,18 +35,13 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
           }));
           setLanguageOptions(updatedLanguages);
         } else {
-          throw new Error(`API 返回錯誤: ${result.message}`);
+          throw createApiError(400, result.message, result.code);
         }
       } catch (err: unknown) {
-        console.error('獲取語言選項失敗:', err);
-        if (isApiError(err)) {
-          setError(`API 錯誤 ${(err as ApiError).status}：${(err as ApiError).message}`);
-        } else if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('獲取語言選項失敗');
-        }
-        
+        const errorMessage = handleApiError(err);
+        console.error('API 獲取選項失敗:', errorMessage);
+        setError(errorMessage);
+
         if (isFallbackEnabled()) {
           try {
             const fileName = locale === 'default' ? 'defaultLanguages' : `defaultLanguages_${locale}`;

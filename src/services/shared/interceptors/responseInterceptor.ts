@@ -11,8 +11,8 @@
  * @returns {Promise<T>} - 返回解析後的響應數據。
  */
 
-import { refreshAuthToken } from '../../auth/authService';
-import { createApiError } from '../core/ApiError';
+import { refreshAuthToken } from '@/services/shared/auth/authService';
+import { createApiError } from '@/services/core/ApiError';
 
 let refreshing = false;
 let refreshPromise: Promise<void> | null = null;

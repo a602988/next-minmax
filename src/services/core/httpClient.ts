@@ -1,9 +1,9 @@
 
 
-import { withTimeout } from '../core/withTimeout';
-import { applyRequestInterceptors } from '../interceptors/requestInterceptor';
-import { applyResponseInterceptors } from '../interceptors/responseInterceptor';
-import { getCached, setCached } from '../core/cache';
+import { withTimeout } from './withTimeout';
+import { applyRequestInterceptors } from '@/services/shared/interceptors/requestInterceptor';
+import { applyResponseInterceptors } from '@/services/shared/interceptors/responseInterceptor';
+import { getCached, setCached } from './cache';
 
 /**
  * @interface FetchOptions

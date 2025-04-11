@@ -8,7 +8,7 @@ interface LoadingStateProps {
 
 export default function LoadingState({
   className = '',
-  message = '載入語言選項...'
+  message = '載入中...'
 }: LoadingStateProps) {
   return (
     <div className={`${styles.loading} ${className}`} role="status">

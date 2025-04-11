@@ -8,7 +8,7 @@ interface ErrorStateProps {
 
 export default function ErrorState({
   className = '',
-  message = '無法載入語言選項'
+  message = '無法載'
 }: ErrorStateProps) {
   return (
     <div className={`${styles.error} ${className}`} role="alert">

@@ -17,13 +17,39 @@ project-root/
 │   ├── types/            # TypeScript 類型定義，接口、類型別名、枚舉等，可按功能或模塊分類
 │   ├── styles/           # 全局樣式
 │   ├── contexts/         # React Context 相關文件，狀態管理相關代碼，例如 ThemeContext、AuthContext 等
-│   ├── services/         # API 服務和數據獲取，例如 userService.ts、productService.ts 等
-│   │   ├── core/         # 通用邏輯，跨平台的底層工具，任何 client 都可以用
-│   │   ├── clients/      # 封裝對應
-│   │   │   └── minmax/   # minmax 專屬邏輯
-│   │   ├── interceptors/ # 攔截器，所有 client 可選擇是否使用它們
-│   │   ├── interceptors/ # auth 認證流程，集中處理登入、refresh、登出
+│   ├── models/           # 複雜的 API 響應模型
+│   ├── services/
+│   │   ├── core/         # 通用邏輯，跨平台的底層工具
+│   │   │   ├── httpClient.ts
+│   │   │   └── ApiError.ts
+│   │   ├── shared/       # 多個服務共享的邏輯
+│   │   │   ├── interceptors/ # 通用攔截器
+│   │   │   └── auth/     # 認證相關邏輯
+│   │   ├── minmax/       # minmax 專屬服務
+│   │   │   ├── api/      # API 相關邏輯
+│   │   │   │   ├── client.ts
+│   │   │   │   ├── endpoints.ts
+│   │   │   │   └── buildUrl.ts
+│   │   │   ├── hooks/    # 相關的自定義 hooks
+│   │   │   │   └── useLanguageOptions.ts
+│   │   │   └── types.ts  # minmax 專用類型定義
+│   │   └── index.ts      # 導出所有服務
 ├── public/               # 靜態資源文件，圖片、字體、favicon 等，這些文件可以通過 URL 直接訪問
+├── __tests__/         # 單元測試和集成測試
+│   ├── components/
+│   ├── hooks/
+│   └── services/
+├── docs/              # 項目文檔
+│   ├── api/           # API 文檔
+│   ├── architecture/  # 架構說明
+│   └── guides/        # 開發指南
+├── scripts/           # 開發和部署腳本
+│   ├── build.js
+│   └── deploy.js
+├── assets/
+│   ├── images/
+│   ├── fonts/
+│   └── icons/
 ├── next.config.mjs       # Next.js 配置文件
 ├── tailwind.config.ts    # Tailwind CSS 配置
 ├── postcss.config.mjs    # PostCSS 配置

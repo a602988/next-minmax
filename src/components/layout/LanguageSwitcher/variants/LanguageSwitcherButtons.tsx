@@ -1,9 +1,9 @@
 'use client';
 
-import React from 'react'; // 添加 React 導入
+import React from 'react';
 import { Link } from '@/i18n/routing';
-import styles from './LanguageSwitcherDropdown.module.css';
-import { LanguageOption } from '../LanguageSwitcher';
+import styles from './LanguageSwitcherButtons.module.css';
+import { LanguageOption } from '@/services/minmax/types/language';
 
 interface LanguageSwitcherButtonsProps {
   languageOptions: LanguageOption[];
@@ -11,6 +11,10 @@ interface LanguageSwitcherButtonsProps {
   isPending: boolean;
   handleLanguageChange: (newLocale: string) => void;
   className?: string;
+  translations: {
+    select: string;
+    switch: string;
+  };
 }
 
 export default function LanguageSwitcherButtons({
@@ -19,9 +23,10 @@ export default function LanguageSwitcherButtons({
   isPending,
   handleLanguageChange,
   className = '',
+  translations,
 }: LanguageSwitcherButtonsProps) {
   return (
-    <div className={`${styles.buttonsContainer} ${className}`} role="group" aria-label="語言選擇">
+    <div className={`${styles.buttonsContainer} ${className}`} role="group" aria-label={translations.select}>
       {languageOptions.map(option => (
         <Link
           key={option.id}
@@ -35,7 +40,7 @@ export default function LanguageSwitcherButtons({
           aria-disabled={option.current ? 'true' : 'false'}
           lang={option.id}
           hrefLang={option.id}
-          title={`切換至${option.title}`}
+          title={`${translations.switch} ${option.title}`}
         >
           <span>{option.title}</span>
         </Link>

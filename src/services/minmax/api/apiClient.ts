@@ -8,9 +8,9 @@
  * @returns {Promise<T>} - 返回一個 Promise，解析為請求的響應。
  */
 
-import API_ENDPOINTS from '@/services/api/clients/minmax/apiConfig';
+import API_ENDPOINTS from '@/services/minmax/api/apiConfig';
 import { buildMinmaxUrl } from './buildUrl';
-import { httpClient, FetchOptions } from '@/services/api/core/httpClient';
+import { httpClient, FetchOptions } from '@/services/core/httpClient';
 
 
 export async function apiClientMinmax<T>(

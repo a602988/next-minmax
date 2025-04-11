@@ -3,7 +3,8 @@
 import React, { useState, useRef, useEffect, KeyboardEvent, useCallback } from 'react';
 import { Link } from '@/i18n/routing';
 import styles from './LanguageSwitcherDropdown.module.css';
-import { LanguageOption } from '../LanguageSwitcher';
+import { LanguageOption } from '@/services/minmax/types/language';
+
 
 interface LanguageSwitcherDropdownProps {
   languageOptions: LanguageOption[];
@@ -12,24 +13,29 @@ interface LanguageSwitcherDropdownProps {
   isPending: boolean;
   handleLanguageChange: (newLocale: string) => void;
   className?: string;
+  translations: {
+    select: string;
+    'aria-label': string;
+    switch: string;
+  };
 }
 
 export default function LanguageSwitcherDropdown({
-  languageOptions,
-  currentLanguage,
-  pathnameWithoutLocale,
-  isPending,
-  handleLanguageChange,
-  className = '',
-}: LanguageSwitcherDropdownProps) {
+   languageOptions,
+   currentLanguage,
+   pathnameWithoutLocale,
+   isPending,
+   handleLanguageChange,
+   className = '',
+   translations,
+ }: LanguageSwitcherDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const optionRefs = useRef<(HTMLLIElement | null)[]>([]);
-
   // 處理鍵盤導航
   const handleKeyDown = useCallback(
-    (e: KeyboardEvent<HTMLButtonElement | HTMLDivElement | HTMLUListElement>) => {
+      (e: KeyboardEvent<HTMLButtonElement | HTMLDivElement | HTMLUListElement>) => {
       if (!isOpen && (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ')) {
         setIsOpen(true);
         e.preventDefault();
@@ -98,69 +104,69 @@ export default function LanguageSwitcherDropdown({
   }, [isOpen, handleClickOutside]);
 
   return (
-    <div className={`${styles.container} ${className}`} ref={dropdownRef}>
-      <button
-        type="button"
-        className={`${styles.dropdownButton} ${isPending ? styles.pending : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
-        onKeyDown={handleKeyDown}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        disabled={isPending}
-        aria-label="選擇語言"
-      >
+      <div className={`${styles.container} ${className}`} ref={dropdownRef}>
+        <button
+            type="button"
+            className={`${styles.dropdownButton} ${isPending ? styles.pending : ''}`}
+            onClick={() => setIsOpen(!isOpen)}
+            onKeyDown={handleKeyDown}
+            aria-haspopup="listbox"
+            aria-expanded={isOpen}
+            disabled={isPending}
+            aria-label={translations.select}
+        >
         <span className="flex items-center">
           <span>{currentLanguage.title}</span>
         </span>
-      </button>
+        </button>
 
-      {isOpen && (
-        <ul
-          className={styles.dropdown}
-          role="listbox"
-          aria-label="語言選項"
-          aria-activedescendant={
-            activeIndex >= 0 ? `language-option-${languageOptions[activeIndex].id}` : undefined
-          }
-          tabIndex={-1}
-          onKeyDown={handleKeyDown}
-        >
-          {languageOptions.map((option, index) => (
-            <li
-              key={option.id}
-              id={`language-option-${option.id}`}
-              className={`${styles.dropdownItem} ${
-                option.current ? styles.dropdownItemActive : ''
-              } ${activeIndex === index ? styles.dropdownItemFocused : ''}`}
-              role="option"
-              aria-selected={option.current}
-              tabIndex={-1}
-              ref={el => {
-                optionRefs.current[index] = el;
-              }}
+        {isOpen && (
+            <ul
+                className={styles.dropdown}
+                role="listbox"
+                aria-label={translations['aria-label']}
+                aria-activedescendant={
+                  activeIndex >= 0 ? `language-option-${languageOptions[activeIndex].id}` : undefined
+                }
+                tabIndex={-1}
+                onKeyDown={handleKeyDown}
             >
-              <Link
-                href={pathnameWithoutLocale}
-                locale={option.id}
-                onClick={() => {
-                  handleLanguageChange(option.id);
-                  setIsOpen(false);
-                }}
-                className="block w-full h-full"
-                lang={option.id}
-                hrefLang={option.id}
-                title={`切換至${option.title}`}
-              >
-                <div className="flex items-center">
+              {languageOptions.map((option, index) => (
+                  <li
+                      key={option.id}
+                      id={`language-option-${option.id}`}
+                      className={`${styles.dropdownItem} ${
+                          option.current ? styles.dropdownItemActive : ''
+                      } ${activeIndex === index ? styles.dropdownItemFocused : ''}`}
+                      role="option"
+                      aria-selected={option.current}
+                      tabIndex={-1}
+                      ref={el => {
+                        optionRefs.current[index] = el;
+                      }}
+                  >
+                    <Link
+                        href={pathnameWithoutLocale}
+                        locale={option.id}
+                        onClick={() => {
+                          handleLanguageChange(option.id);
+                          setIsOpen(false);
+                        }}
+                        className="block w-full h-full"
+                        lang={option.id}
+                        hrefLang={option.id}
+                        title={`${translations.switch} ${option.title}`}
+                    >
+                      <div className="flex items-center">
                   <span className={option.current ? styles.itemTextActive : styles.itemText}>
                     {option.title}
                   </span>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+                      </div>
+                    </Link>
+                  </li>
+              ))}
+            </ul>
+        )}
+      </div>
   );
 }
