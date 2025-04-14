@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from 'react';
 import API_ENDPOINTS from '@/services/minmax/api/apiConfig';
 import { apiClientMinmax } from '@/services/minmax/api/apiClient';
