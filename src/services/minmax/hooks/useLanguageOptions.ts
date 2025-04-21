@@ -1,27 +1,27 @@
-"use client"
-import { useState, useEffect } from 'react';
-import API_ENDPOINTS from '@/services/minmax/api/apiConfig';
 import { apiClientMinmax } from '@/services/minmax/api/apiClient';
 import { loadFallbackData, isFallbackEnabled } from '@/services/fallback/fallbackDataJsonLoader';
+import { useState, useEffect } from 'react';
 import { LanguageOption } from '@/services/minmax/types/language';
 import { ApiResponse } from '@/services/minmax/types/api';
 import { handleApiError, createApiError } from '@/services/core/ApiError';
 
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 second
 
-
-
-export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale: string) {
+export function useLanguageOptions(locale: string) {
   const [languageOptions, setLanguageOptions] = useState<LanguageOption[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
+    let retryCount = 0;
+
     const fetchLanguages = async () => {
       try {
         setIsLoading(true);
 
-        const result = await apiClientMinmax<ApiResponse<LanguageOption[]>>(apiUrlKey, {
+        const result = await apiClientMinmax<ApiResponse<LanguageOption[]>>('LANGUAGES', {
           params: { language: locale },
           useCache: true,
           cacheTTL: 300,
@@ -35,12 +35,21 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
             current: lang.id === locale,
           }));
           setLanguageOptions(updatedLanguages);
+          setError(null);
         } else {
           throw createApiError(400, result.message, result.code);
         }
       } catch (err: unknown) {
         const errorMessage = handleApiError(err);
         console.error('API 獲取選項失敗:', errorMessage);
+
+        if (retryCount < MAX_RETRIES) {
+          retryCount++;
+          console.log(`重試 (${retryCount}/${MAX_RETRIES})...`);
+          setTimeout(fetchLanguages, RETRY_DELAY);
+          return;
+        }
+
         setError(errorMessage);
 
         if (isFallbackEnabled()) {
@@ -54,6 +63,7 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
                 current: lang.id === locale,
               }));
               setLanguageOptions(updatedFallbackData);
+              setError(null);
             } else {
               setLanguageOptions([]);
             }
@@ -69,12 +79,12 @@ export function useLanguageOptions(apiUrlKey: keyof typeof API_ENDPOINTS, locale
       }
     };
 
-    fetchLanguages();
+    void fetchLanguages();
 
     return () => {
       controller.abort();
     };
-  }, [apiUrlKey, locale]);
+  }, [locale]);
 
   return { languageOptions, isLoading, error };
 }
