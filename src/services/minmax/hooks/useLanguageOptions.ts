@@ -1,5 +1,5 @@
 import { apiClientMinmax } from '@/services/minmax/api/apiClient';
-import { loadFallbackData, isFallbackEnabled } from '@/services/fallback/fallbackDataJsonLoader';
+import { loadFallbackData } from '@/services/fallback/fallbackDataJsonLoader';
 import { useState, useEffect } from 'react';
 import { LanguageOption } from '@/services/minmax/types/language';
 import { ApiResponse } from '@/services/minmax/types/api';
@@ -60,28 +60,24 @@ export function useLanguageOptions(locale: string) {
 
         setError(errorMessage);
 
-        // 如果啟用了回退機制，嘗試加載回退數據
-        if (isFallbackEnabled()) {
-          try {
-            const fileName = locale === 'default' ? 'defaultLanguages' : `defaultLanguages_${locale}`;
-            const fallbackData = await loadFallbackData<LanguageOption[]>(fileName);
+        // 嘗試加載回退數據
+        try {
+          const fileName = locale === 'default' ? 'defaultLanguages' : `defaultLanguages_${locale}`;
+          const fallbackData = await loadFallbackData<LanguageOption[]>(fileName);
 
-            if (fallbackData && fallbackData.length > 0) {
-              // 更新回退數據，標記當前語言
-              const updatedFallbackData: LanguageOption[] = fallbackData.map(lang => ({
-                ...lang,
-                current: lang.id === locale,
-              }));
-              setLanguageOptions(updatedFallbackData);
-              setError(null);
-            } else {
-              setLanguageOptions([]);
-            }
-          } catch (fallbackError) {
-            console.error(`加載回退數據失敗:`, fallbackError);
+          if (fallbackData && fallbackData.length > 0) {
+            // 更新回退數據，標記當前語言
+            const updatedFallbackData: LanguageOption[] = fallbackData.map(lang => ({
+              ...lang,
+              current: lang.id === locale,
+            }));
+            setLanguageOptions(updatedFallbackData);
+            setError(null);
+          } else {
             setLanguageOptions([]);
           }
-        } else {
+        } catch (fallbackError) {
+          console.error(`加載回退數據失敗:`, fallbackError);
           setLanguageOptions([]);
         }
       } finally {
