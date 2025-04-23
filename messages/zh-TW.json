@@ -10,6 +10,11 @@
             "switch": "切換至...",
             "select": "選擇語言",
             "aria-label": "語言選項"
+        },
+        "Logo": {
+            "ariaLabel": "{siteName} homepage",
+            "title": "Return to {siteName} homepage",
+            "imageAlt": "{siteName} logo"
         }
     }
 }

@@ -1,5 +1,6 @@
 import {useTranslations} from 'next-intl';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher/LanguageSwitcher'
+import HeaderFactory from '@/components/layout/Header/HeaderFactory';
 
 export default function HomeLocale() {
     const t = useTranslations('HomePage');
@@ -7,6 +8,12 @@ export default function HomeLocale() {
 
     return (
     <div>
+        <HeaderFactory
+            type="simple"
+            showLogo={true}
+            showLanguageSwitcher={false}
+            customClass="py-4 px-6"
+        />
       <h1>{t('title')}</h1>
         <div className="flex gap-2">
             <LanguageSwitcher />
