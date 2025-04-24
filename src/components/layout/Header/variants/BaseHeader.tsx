@@ -1,16 +1,17 @@
-import { CommonHeaderProps } from '../HeaderTypes';
+import React from 'react';
 import Logo from '@/components/ui/Logo';
+import { CommonHeaderProps } from '../HeaderTypes';
 
 
-export default function SimpleHeader({
-  showLogo,
-  customClass,
+
+export default function BaseHeader({
+  customClass = '',
   locale,
   siteName
 }: CommonHeaderProps) {
   return (
     <header className={`flex items-center justify-between ${customClass}`}>
-      {showLogo && <Logo siteName={siteName} locale={locale} />}
+      <Logo siteName={siteName} locale={locale} />
     </header>
   );
 }

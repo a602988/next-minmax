@@ -5,11 +5,13 @@ import LanguageSwitcher from '@/components/layout/LanguageSwitcher/LanguageSwitc
 export default function FullHeader({
   showLogo,
   showLanguageSwitcher,
-  customClass
+  customClass,
+  locale,
+  siteName
 }: CommonHeaderProps) {
   return (
     <header className={`flex items-center justify-between ${customClass}`}>
-      {showLogo && <Logo siteName="Your Site Name" />}
+      {showLogo && <Logo siteName={siteName} locale={locale} />}
       <div className="flex items-center">
         {showLanguageSwitcher && <LanguageSwitcher />}
       </div>
