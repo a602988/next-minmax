@@ -34,8 +34,8 @@ export default function Logo({
   }
 
   const siteName = webData.company_nickname || webData.company_name;
-  const imagePath = webData.system_logo && webData.system_logo.length > 0
-    ? webData.system_logo[0]
+  const imagePath = webData.system_logo && webData.system_logo.length > 0 && webData.system_logo[0].url
+    ? webData.system_logo[0].url
     : '/images/logo.webp'; // 使用默認 logo 如果 API 沒有提供
 
   const logoContent = (
