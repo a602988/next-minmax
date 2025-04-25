@@ -1,17 +1,9 @@
+import { ImageData } from './image';
+
 export interface WebData {
   site_title: string;
   system_url: string;
-  system_logo: {
-    path: string;
-    title: string | null;
-    media: string | null;
-    autoplay: boolean;
-    device: string;
-    cover: boolean;
-    spot_x: number | null;
-    spot_y: number | null;
-    url: string;
-  }[];
+  system_logo: ImageData[];
   company_name: string;
   company_nickname: string;
   company_vat: string;
