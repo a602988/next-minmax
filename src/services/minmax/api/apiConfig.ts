@@ -2,7 +2,7 @@
 export const API_ENDPOINTS = {
     // 系統相關
     LANGUAGES: `languages`,
-
+    WEB_DATA: `web-data`,
     // 可以添加更多 API 端點
     // 用戶相關
     USER: {

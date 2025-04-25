@@ -1,41 +1,76 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { usePathnameWithoutLocale } from '@/hooks/usePathnameWithoutLocale';
+import { useWebData } from '@/services/minmax/hooks/useWebData';
+import { useLocale } from 'next-intl';
+import React from "react";
 
 interface LogoProps {
   className?: string;
-  siteName: string;
-  imagePath?: string;
   width?: number;
   height?: number;
-  locale: string;
+  isLink?: boolean;
 }
 
 export default function Logo({
   className = 'logo',
-  siteName,
-  imagePath = '/images/logo.webp',
   width = 150,
   height = 50,
-  locale
+  isLink = true
 }: LogoProps) {
-  const t = useTranslations('Logo');
+  const locale = useLocale();
+  const t = useTranslations('components.Logo');
+  const pathnameWithoutLocale = usePathnameWithoutLocale();
+  const { webData, isLoading, error } = useWebData(locale);
 
-  return (
-    <Link 
-      href={`/${locale}`} 
-      className={`inline-block ${className}`} 
-      aria-label={t('ariaLabel', { siteName })}
-      title={t('title', { siteName })}
-    >
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error || !webData) {
+    console.error('Error loading web data:', error);
+    return <div>Error loading logo</div>;
+  }
+
+  const siteName = webData.company_nickname || webData.company_name;
+  const imagePath = webData.system_logo && webData.system_logo.length > 0
+    ? webData.system_logo[0]
+    : '/images/logo.webp'; // 使用默認 logo 如果 API 沒有提供
+
+  const logoContent = (
+    <>
       <Image
         src={imagePath}
-        alt={t('imageAlt', { siteName })}
+        alt={t('imageAlt', { siteName }) ?? siteName}
         width={width}
         height={height}
-        priority  // 優先加載
+        priority
       />
       <span className="sr-only">{siteName}</span>
-    </Link>
+    </>
+  );
+
+  if (isLink) {
+    return (
+      <Link
+        href={webData.system_url || `/${pathnameWithoutLocale}`}
+        className={`inline-block ${className}`}
+        aria-label={t('ariaLabel', { siteName }) ?? siteName}
+        title={t('title', { siteName }) ?? siteName}
+      >
+        {logoContent}
+      </Link>
+    );
+  }
+
+  return (
+    <div
+      className={`inline-block ${className}`}
+      aria-label={t('ariaLabel', { siteName }) ?? siteName}
+      title={t('title', { siteName }) ?? siteName}
+    >
+      {logoContent}
+    </div>
   );
 }

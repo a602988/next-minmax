@@ -12,8 +12,8 @@
             "aria-label": "語言選項"
         },
         "Logo": {
-            "ariaLabel": "{siteName} homepage",
-            "title": "Return to {siteName} homepage",
+            "ariaLabel": "{siteName} 網站",
+            "title": "返回 {siteName} 首頁",
             "imageAlt": "{siteName} logo"
         }
     }

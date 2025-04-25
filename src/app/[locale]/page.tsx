@@ -1,14 +1,14 @@
-import {useTranslations} from 'next-intl';
+import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher/LanguageSwitcher'
+import Header from '@/components/layout/Header/Header'
 
 export default function HomeLocale() {
     const t = useTranslations('HomePage');
-    // 處理路徑，移除當前語言前綴（如果存在）
 
     return (
     <div>
-
-      <h1>{t('title')}</h1>
+        <Header  />
+        <h1>{t('title')}</h1>
         <div className="flex gap-2">
             <LanguageSwitcher />
         </div>

@@ -1,6 +1,20 @@
 {
     "HomePage": {
-      "title": "Hello world!",
-      "about": "Go to the about page"
+        "title": "Hello!",
+        "about": "Visit the About Us page"
+    },
+    "components": {
+        "LanguageSwitcher": {
+            "loading": "Loading language options...",
+            "error": "Error loading language options",
+            "switch": "Switch to...",
+            "select": "Select language",
+            "aria-label": "Language options"
+        },
+        "Logo": {
+            "ariaLabel": "{siteName} homepage",
+            "title": "Return to {siteName} homepage",
+            "imageAlt": "{siteName} logo"
+        }
     }
-  }
+}

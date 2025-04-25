@@ -1,17 +1,19 @@
-import React from 'react';
+import LanguageSwitcher from '../../LanguageSwitcher/LanguageSwitcher';
 import Logo from '@/components/ui/Logo';
-import { CommonHeaderProps } from '../HeaderTypes';
 
+interface SimpleHeaderProps {
+  className?: string;
 
+}
 
 export default function BaseHeader({
-  customClass = '',
-  locale,
-  siteName
-}: CommonHeaderProps) {
+   className,
+}: SimpleHeaderProps) {
   return (
-    <header className={`flex items-center justify-between ${customClass}`}>
-      <Logo siteName={siteName} locale={locale} />
+    <header className={`${className} flex justify-between items-center p-4`}>
+      <h1>base</h1>
+      <Logo />
+      <LanguageSwitcher variant="dropdown" />
     </header>
   );
 }
