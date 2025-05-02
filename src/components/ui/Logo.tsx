@@ -5,6 +5,8 @@ import { usePathnameWithoutLocale } from '@/hooks/usePathnameWithoutLocale';
 import { useWebData } from '@/services/minmax/hooks/useWebData';
 import { useLocale } from 'next-intl';
 import React from "react";
+import { MImage } from '@/components/ui/MImage';
+
 
 interface LogoProps {
   className?: string;
@@ -40,7 +42,7 @@ export default function Logo({
 
   const logoContent = (
     <>
-      <Image
+      <MImage
         src={imagePath}
         alt={t('imageAlt', { siteName }) ?? siteName}
         width={width}
