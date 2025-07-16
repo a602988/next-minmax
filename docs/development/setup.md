@@ -22,6 +22,26 @@ Would you like to customize the import alias (`@/*` by default)?  Yes
 
 What import alias would you like configured? @/*``
 
+## 建立目錄檔案
+
+# 建立目錄結構
+mkdir -p docs/{development,architecture,deployment}
+
+### 建立所有檔案
+
+
+## 套件
+
+多國語系 next-intl
+
+`npm install next-intl`
+
+https://next-intl.dev/
+
+
+
+
+
 ## node
 
 查看版本 `node -v` 
