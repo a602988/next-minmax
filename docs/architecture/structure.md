@@ -261,9 +261,10 @@ tests/
 ```
 docs/
 ├── architecture/                       # 架構文件
-├── api/                               # API 文件
-├── deployment/                        # 部署指南
-└── contributing.md                    # 貢獻指南
+│   ├──structure.md                     # 目錄
+├── deployment/                         # 部署指南
+│   ├──setup.md                         # 安裝說明
+└── CHANGELOG.md                        # 版本說明
 ```
 
 
