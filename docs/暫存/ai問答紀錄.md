@@ -1,9 +1,14 @@
 # 首頁 語系切換
 
-根據這份規劃的目錄結構，我要開始一步一步製作了
+請依據這份文件，配合規劃好的structure.md這個結構，幫我一步一步開始
 首先先從最基本的首頁開始，首頁僅需要一個組件，為語系切換。
 請先幫我建置以下的文件
 
+## 網站運作
+
+1. 進入網站
+2. 傳遞完整網址給api包含網址的語系，例如http://test/en 如果沒有語系api會取得後端系統預設語系
+3. 取得api回傳的網頁資料
 
 ## 資料來源
 
@@ -62,3 +67,48 @@ api結構：
 ]
 }
 ```
+
+##
+
+依據國家判斷網站進入的語系，這是否有相關第三方的套件或者api?
+網站有哪些語系可對應是從api回傳，包含預設的語系
+但流程應該是怎麼做好
+
+首次訪問：
+1. 用戶訪問: https://yoursite.com/about
+2. Middleware 檢查: 沒有 preferred-locale cookie
+3. 自動檢測語系: zh-TW
+4. 重定向: https://yoursite.com/zh-TW/about
+5. 設定 cookie: preferred-locale=zh-TW
+
+用戶切換語系：
+1. 用戶點擊語系切換器選擇 "English"
+2. 更新 cookie: preferred-locale=en
+3. 導航到: https://yoursite.com/en/about
+4. Middleware 更新 cookie 記錄
+
+後續訪問：
+1. 用戶訪問: https://yoursite.com/contact
+2. Middleware 檢查: preferred-locale=en (從 cookie)
+3. 重定向: https://yoursite.com/en/contact
+4. 不再進行自動檢測，使用用戶偏好
+
+
+5. 優勢說明
+   使用 API 預設語系的優勢：
+   ✅ 動態配置，可隨時調整
+   ✅ 與後端系統保持一致
+   ✅ 支援多專案不同預設語系
+   ✅ 可根據業務需求調整
+   保留靜態配置的優勢：
+   ✅ API 故障時的可靠後備
+   ✅ 開發環境的穩定性
+   ✅ 減少首次載入時間
+   ✅ 離線開發支援
+
+建議的檢測順序：
+1.用戶已選擇的語系 (Cookie)
+2.瀏覽器語言偏好 (Accept-Language)
+3.地理位置推測
+4.API 回傳的預設語系
+5.靜態配置的後備語系

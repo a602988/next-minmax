@@ -26,7 +26,7 @@ What import alias would you like configured? @/*``
 
 # 建立目錄結構
 mkdir -p docs/{development,architecture,deployment}
-
+mkdir -p types/{api.ts}
 ### 建立所有檔案
 
 

@@ -388,8 +388,15 @@ src/i18n/
 
 ```
 src/types/
-├── index.ts                            # 統一匯出
+├── index.ts                            # 統一導出 API 服務 v
+├── base.ts                             # 基礎 API 服務類 v
+├── minmax.ts                           # 雲端連線 API v
 ├── api.ts                              # API 相關類型
+├── language.ts                         # 語言相關 v
+├── web-data.ts                         # 網站資訊
+├── menu.ts                             # 選單相關
+├── page.ts                             # 頁面相關
+└── index.ts                            # 統一導出
 ├── auth.ts                             # 認證相關類型
 ├── common.ts                           # 通用類型
 ├── database.ts                         # 資料庫類型
