@@ -1,0 +1,12 @@
+{
+  "common": {
+    "languageSwitch": "Language Switch",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact Us"
+  }
+}
