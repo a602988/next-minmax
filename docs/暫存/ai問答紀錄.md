@@ -123,7 +123,13 @@ api結構：
 
 
 網頁流程
-1. api取得語系資料，裡面會包含語系清單與預設語系
-2. 第一次進入則將語系資料存進cookie 或者 session 建議看是多久清除一次重新取得
+1. 語系資料獲取 API
+   api(https://v5.jeffy.test/api/ssr/languages?project=minmax2025&language=zh-TW) 取得語系資料，裡面包含語系清單與預設語系。
+2. 獲取用戶地理位置
+3. 執行條件式語系引導邏輯:獲取用戶 IP 和其對應國家代碼後，如果用戶 IP 匹配到強制導引國家，應該立即執行重定向，而無需考慮 Cookie 偏好或頁面路徑語系。只有在沒有強制導引的情況下，才考慮 Cookie 偏好和建議導引。
+3. 將使用語系資料採用伺服器端渲染 (SSR) / Server Components + Cookie 管理
+   1. 伺服器端檢查 Cookie： 在 SSR 的 getServerSideProps 或 Server Components 中，伺服器可以檢查請求頭中的 Cookie。 
+   2. 若無 Cookie 或版本過舊： 如果沒有語系 Cookie，或伺服器判斷 Cookie 中的語系版本過舊（例如，伺服器端維護一個當前最新語系版本號），則直接從 API 獲取最新的語系資料。 
+   3. 設置新的 Cookie： 將新的語系資料（可能包含新的版本號）設置到響應的 Set-Cookie 頭中，這樣客戶端就會接收到最新的 Cookie。
 3. 比對網頁語系路徑 /en/about 或者/about ，當第一個/後面的字串，比對到api的語系資料，則放到api路徑 https://v5.jeffy.test/api/ssr/page/detail?project=minmax2025&language=zh-TW&uri=/news/demo-cate&params= 的languageh 的參數中，若無比對到，則採預設語系，並將網址第一個/後面的全部放入uri中
 4. api回傳的資料若有該頁面則顯示頁面內容，若無頁面資料，api會回傳無資料則顯示404
