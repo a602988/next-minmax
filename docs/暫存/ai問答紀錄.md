@@ -133,3 +133,11 @@ api結構：
    3. 設置新的 Cookie： 將新的語系資料（可能包含新的版本號）設置到響應的 Set-Cookie 頭中，這樣客戶端就會接收到最新的 Cookie。
 3. 比對網頁語系路徑 /en/about 或者/about ，當第一個/後面的字串，比對到api的語系資料，則放到api路徑 https://v5.jeffy.test/api/ssr/page/detail?project=minmax2025&language=zh-TW&uri=/news/demo-cate&params= 的languageh 的參數中，若無比對到，則採預設語系，並將網址第一個/後面的全部放入uri中
 4. api回傳的資料若有該頁面則顯示頁面內容，若無頁面資料，api會回傳無資料則顯示404
+
+
+意境說明：
+
+使用者第一次來到網站http://xxx.com，若網站有依據國家位置有不同的子網域網站，且有設定轉向，則直接轉向。
+若有多語系，網址可能是沒有帶到語系的結構
+那個則以語系判斷優先順序帶入直接導引語系，例如http://xxx.com(預設為zh-tw)，但使用者為en，那麼則直接導引到http://xxx.com/en
+但若使用者切換語系，那麼則以每次切換的語系，為偏好語系，在後續進入無帶入網址的語系時，都直接導引到該語系
