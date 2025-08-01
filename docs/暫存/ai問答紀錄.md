@@ -120,3 +120,10 @@ api結構：
 若無法取得api回傳的預設語系
 則使用 靜態配置的後備預設語系
 
+
+
+網頁流程
+1. api取得語系資料，裡面會包含語系清單與預設語系
+2. 第一次進入則將語系資料存進cookie 或者 session 建議看是多久清除一次重新取得
+3. 比對網頁語系路徑 /en/about 或者/about ，當第一個/後面的字串，比對到api的語系資料，則放到api路徑 https://v5.jeffy.test/api/ssr/page/detail?project=minmax2025&language=zh-TW&uri=/news/demo-cate&params= 的languageh 的參數中，若無比對到，則採預設語系，並將網址第一個/後面的全部放入uri中
+4. api回傳的資料若有該頁面則顯示頁面內容，若無頁面資料，api會回傳無資料則顯示404
