@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
+import {NextIntlClientProvider, hasLocale} from 'next-intl';
+import {notFound} from 'next/navigation';
+import {routing} from '@/i18n/routing';
 import { Geist, Geist_Mono } from "next/font/google";
-import { routing } from "@/i18n/routing";
-import { notFound } from "next/navigation";
-import "../globals.css";
+import type { Metadata } from 'next'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,31 +14,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+// 頁面 meta 設置，以設置面標題、描述等等。
+export const metadata: Metadata = {
+  title: '...',
+  description: '...',
 }
 
+
 export default async function LocaleLayout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: Promise<{ locale: string }>;
+     children,
+     params
+   }: {
+  children: React.ReactNode;
+  params: Promise<{locale: string}>;
 }) {
-  const { locale } = await params;
-  
+
   // 驗證 locale 是否有效
-  if (!routing.locales.includes(locale as any)) {
+  const {locale} = await params;
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
   return (
-    <html lang={locale}>
+      <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+      <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
-    </html>
+      </html>
   );
 }
