@@ -10,6 +10,8 @@
 
 - 效能最佳化： 利用 CDN 與 Cookie 快取，減少 API 請求
 
+- 一次性處理原則： 對於特定資訊（如地理位置偵測、語系資料獲取），在一個會話週期或指定時間窗內僅處理一次，避免資源浪費。
+
 ### 架構特色
 
 - 語系 / 站點分離： 國家用子網域，語言獨立切換，支援多語系
@@ -18,11 +20,11 @@
 - 框架整合： 使用 next-intl，支援 SSR + 前端語系切換
 - 超時設定： API 請求統一設定 3-5 秒超時，內容 API 可延長至 5-10 秒
 - 日誌記錄： 記錄所有失敗情況但不暴露給使用者
-- 快取策略： 失敗時優先使用快取資料，最後才使用靜態預設值
-- 
+- 智慧快取： 實施分層快取策略，涵蓋應用配置、Session 級別和長期（24小時/30天）快取，提升資料復用率和效能。
+
 ### 決策邏輯
 
-1. 國家重定向（如 /tw, /us）
+1. 國家站點重定向： 優先根據偵測到的國家進行站點跳轉。
 
 2. 語系優先順： 使用者偏好 > 瀏覽器語系 > 地理推薦 > 預設
 
@@ -55,7 +57,18 @@
 
 - 同步處理： 確保語系資料在 SSR 和 CSR 中保持一致
 
+### 效能最佳化策略
 
+#### 分層快取架構
+- **應用配置層：** 功能開關、國家對應表、預設語系等靜態配置，應用啟動時載入一次
+- **Session級快取：** 地理位置偵測結果，同一session內重複使用
+- **24小時快取：** 語系清單資料，透過Cookie版本控制自動更新
+- **30天快取：** 使用者語系偏好，長期記住使用者選擇
+
+#### 一次性處理原則
+- **國家偵測：** 每個session只執行一次地理定位API
+- **語系資料：** 24小時內不重複呼叫語系API
+- **配置資訊：** 應用啟動時載入，運行期間不重複處理
 
 
 ## 步驟說明
@@ -77,6 +90,7 @@
       * 若 CDN 地理資訊不可用，自動切換到備用 IP 地理定位服務
       * 若所有地理定位服務都失敗或超時（建議設定 3-5 秒超時），則 DetectedCountry 設為 null
       * 當 DetectedCountry 為 null 時，跳過地理重定向邏輯，但語系功能仍可正常運作
+    * Session級快取：DetectedCountry 結果在同一個 session 內快取，避免重複執行地理定位API
     * 查詢映射表，找到 DetectedCountry 對應的目標子網域 TargetSubdomain（例如 "tw"）。
     * 從當前請求的網址中，解析出當前的子網域 CurrentSubdomain（例如 "us"）。
   * 重定向決策
@@ -135,6 +149,9 @@
     * **安全性設定：**
       * httpOnly: false（前端需要讀取）
       * secure: true（HTTPS 環境）
+* **一次性處理策略：**
+  * **24小時快取：** availableLanguages 透過 languageData Cookie 快取，24小時內不重複呼叫語系API
+  * **版本控制：** 透過版本號自動判斷是否需要更新快取，避免不必要的API請求
 * 步驟：
   1. **讀取現有Cookie：**
      * 讀取 languageData Cookie(語系資料快取)
@@ -203,6 +220,19 @@
 
 ### 8. 前端 UI 建議與資訊傳遞
 * **目的 ：** 在伺服器完成渲染後，前端介面根據後端傳遞的元數據，向使用者顯示友善的切換建議。
+* **一次性處理策略：**
+  * **應用配置層 (啟動時載入一次)：**
+    - `geoRedirectEnabled/multiLanguageEnabled` - 功能開關狀態
+    - `countryMapping` - 國家與子網域對應表
+    - `defaultLanguage` - 預設語系配置
+    - `apiTimeout` - API 超時設定
+  * **Session級快取：**
+    - `detectedCountry` - 偵測到的國家代碼，同一session內重複使用
+  * **24小時快取：**
+    - `availableLanguages` - 可用語系清單，從Cookie快取讀取
+  * **動態更新的資訊：**
+    - `finalLanguage` - 當使用者切換語系時更新
+    - `userPreferredLanguage` Cookie - 當使用者主動切換語系時更新
 * **next-intl 整合：**
   * **語系切換實作：** 使用 next-intl 的 `useRouter` 和 `usePathname` 進行語系切換
   * **翻譯內容載入：** 透過 `useTranslations` Hook 載入當前語系的翻譯內容
@@ -231,6 +261,22 @@
       * 當使用者主動切換語系時，前端需要：
         1. 設定 userPreferredLanguage Cookie(使用者偏好語系)
         2. 導引到新語系的對應頁面URL（如 /zh-tw/current-path）
+
+* **前端效能最佳化：**
+  ```typescript
+  // 頁面級別的快取，避免重複處理
+  const pageCache = {
+    configFlags: null,       // 配置開關快取 (應用啟動時載入)
+    geoInfo: null,           // 地理資訊快取 (Session級)
+    languageData: null,      // 語系資料快取 (24小時級)
+  };
+  
+  // 避免重複處理的檢查機制
+  if (!pageCache.configFlags) {
+    // 只在首次載入時獲取配置
+    pageCache.configFlags = getAppConfig();
+  }
+  ```
 
 
 ## 情境說明
@@ -323,6 +369,7 @@ my-business-website/
 │   │   ├── routing.ts                      # 路由配置 (官方要求)
 │   │   └── request.ts                      # next-intl 請求配置 (官方要求)
 │   ├── types/                              # 全域類型定義
+│   │   ├── api                             # API 基本通用
 │   │   ├── api/                            # API 相關類型
 │   │   │   ├── language.types.ts           # 語系 API 的類型定義
 │   │   │   └── page.types.ts               # 頁面 API 的類型定義
