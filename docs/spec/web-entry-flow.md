@@ -1,4 +1,4 @@
-# 網頁進入流程說明
+# 網頁進入流程
 
 ## 重點說明
 
@@ -13,14 +13,13 @@
 ### 架構特色
 
 - 語系 / 站點分離： 國家用子網域，語言獨立切換，支援多語系
-
 - 優雅降級： 功能異常時自動退回預設行為
-
 - 偏好記憶： 使用者切換語言後會記住，下次自動套用
-
 - 框架整合： 使用 next-intl，支援 SSR + 前端語系切換
-
-
+- 超時設定： API 請求統一設定 3-5 秒超時，內容 API 可延長至 5-10 秒
+- 日誌記錄： 記錄所有失敗情況但不暴露給使用者
+- 快取策略： 失敗時優先使用快取資料，最後才使用靜態預設值
+- 
 ### 決策邏輯
 
 1. 國家重定向（如 /tw, /us）
@@ -34,6 +33,17 @@
 - 版本控制： 語系資料含版本號，若變動則自動清除快取重抓
 
 - 安全性： 僅限 HTTPS 傳送，設 secure + sameSite: 'lax' 防跨站攻擊
+  - **安全性設定：**
+  
+  ```javascript
+  {
+    httpOnly: false,        // 前端需要讀取
+    secure: true,          // 僅 HTTPS 傳送
+    sameSite: 'lax',       // 防跨站攻擊
+    path: '/',             // 全站可用
+    domain: '.example.com' // 支援子網域共享（如需要）
+  }
+  ```
 
 ### 技術實作：next-intl 整合
 
@@ -44,6 +54,9 @@
 - URL 策略： 使用 localePrefix: 'as-needed'，預設語言 URL 無前綴
 
 - 同步處理： 確保語系資料在 SSR 和 CSR 中保持一致
+
+
+
 
 ## 步驟說明
 
@@ -257,7 +270,7 @@ Amélie 是一位在台灣工作的法國人，她的筆電瀏覽器一直都設
 
 ## 實作
 
-### 目錄結構
+### 應用的目錄結構
 
 ```
 my-business-website/
@@ -267,20 +280,52 @@ my-business-website/
 │   └── ...
 ├── src/
 │   ├── app/
-│   │   └── layout.tsx                   # 網站版型配置，注入語系與國家資訊元數據
+│   │   ├── [locale]/
+│   │   │   ├── layout.tsx                   # 網站版型配置，注入語系與國家資訊元數據
+│   │   │   └── page.tsx                     # 網站頁面配置，注入語系與國家資訊元數據
+│   │   ├── not-found.tsx                    # 自訂 404 頁面
+│   │   ├── layout.tsx                       # 根網站版型配置
+│   │   └── api/                             # 後端 API 路由
+│   │      └── ssr/                           # Mock API（開發測試用）
+│   │         ├── _data/                      # Mock API 的靜態資料
+│   │         │   ├── languages.data.ts       # 語系列表的 Mock 資料
+│   │         │   └── pages.data.ts           # 頁面內容的 Mock 資料
+│   │         ├── languages/
+│   │         │   └── route.ts                # 語系資料獲取的 Mock API
+│   │         └── page/
+│   │             └── home/
+│   │                 └── route.ts            # 內容 API 的 Mock 路由
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Header.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── LanguageSwitcher.tsx
+│   │   ├── layout/
+│   │   │   └── MainLayout.tsx
+│   ├── lib/
+│   │   ├── apiClient.ts                    # 全局 API 客戶端配置
+│   │   ├── cookie.ts                       # 提供最基礎、最通用的 get, set, remove 函式，並在內部統一處理好安全設定。
+│   │   └── utils.ts                        # 通用工具函數
 │   ├── features/
-│   │   ├── geoRedirect/
-│   │   │   ├── geoService.ts            # 地理位置偵測工具 (IP 判斷等)
-│   │   │   └── geoRedirectHandler.ts    # 國家子網域重定向邏輯
-│   │   ├── i18n/
-│   │   │   ├── languageApi.ts           # 取得語系清單 API 實作
-│   │   │   ├── cookieManager.ts         # Cookie 管理工具（語系快取、偏好設定）
-│   │   │   └── languageRedirect.ts      # 語系導引與重定向邏輯
-│   │   └── contentApi/
-│   │       └── pageDetail.ts            # 內容 API 請求與錯誤處理
+│   │   ├── i18n/                           # 語系功能模組
+│   │   │   ├── services/                   # 語系相關的服務
+│   │   │   │   └── languageService.ts      # 語系服務，處理語系 API 請求
+│   │   │   ├── utils.ts                    # 語系相關的工具函數（包含 createTranslator 和 cookieManager 的功能）
+│   │   │   ├── cookies.ts                  # Cookie 管理
+│   │   │   └── types.ts                    # 語系相關的類型定義
+│   │   └── content/                        # 內容功能模組
+│   │       ├── services/                   # 內容相關的服務
+│   │       │   └── pageService.ts          # 頁面服務，處理頁面 API 請求
+│   │       ├── utils.ts                    # 內容相關的工具函數
+│   │       └── types.ts                    # 內容相關的類型定義
 │   ├── i18n/
-│   │   └── nextIntlConfig.ts            # next-intl 多語系框架配置與同步
-│   ├── env.mjs                          # 環境變數類型定義（包含重導開關等）
-│   └── middleware.ts                    # Next.js 中間件，負責地理重導與語系導引邏輯
-
+│   │   ├── nextIntlConfig.ts               # next-intl 多語系框架配置與同步
+│   │   ├── routing.ts                      # 路由配置 (官方要求)
+│   │   └── request.ts                      # next-intl 請求配置 (官方要求)
+│   ├── types/                              # 全域類型定義
+│   │   ├── api/                            # API 相關類型
+│   │   │   ├── language.types.ts           # 語系 API 的類型定義
+│   │   │   └── page.types.ts               # 頁面 API 的類型定義
+│   ├── env.mjs                             # 環境變數類型定義（包含重導開關等）
+│   └── middleware.ts                       # Next.js 中間件，負責地理重導與語系導引邏輯（包含 languageRedirect 的功能）
 ```
