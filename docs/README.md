@@ -10,6 +10,10 @@ API 回應的數據將包含頁面元數據 (SEO)、版型配置 (layout) 以及
 
 通用頁面渲染器會根據 layout 資訊選擇對應的版型組件，並動態地將 blocks 陣列映射到對應的前端組件庫，最終組合並渲染出完整的頁面。
 
+
+
+
+
 ## 專案根目錄結構
 
 ```
@@ -506,6 +510,8 @@ docs/
 │   │   ├── rate-limiting.md        # 速率限制策略
 │   │   ├── caching.md              # 快取策略
 │   │   └── security.md             # 安全性最佳實踐
+│   ├── spec/                       # 設計規格說明
+│   │   └── web-entry-flow.md       # 網頁進入流程說明
 │   └── integration/                # 整合指南
 │       ├── setup-guide.md          # 環境設定
 │       ├── testing.md              # API測試
@@ -514,7 +520,18 @@ docs/
 │   ├──structure.md                     # 目錄
 ├── deployment/                         # 部署指南
 │   ├──setup.md                         # 安裝說明
+├── README.md                           # 架構說明
 └── CHANGELOG.md                        # 版本說明
 ```
 
+## 已建置文件
 
+- docs
+    - spec/
+        - [web-entry-flow.md](./spec/web-entry-flow.md]) 網頁進入流程說明
+    - api/
+        - [README.md](./api/) API 總覽和索引
+    - deployment/
+        - [setup.md ](./deployment/setup.md) 安裝說明
+    - [CHANGELOG.md](CHANGELOG.md) 版本說明
+    - [README.md](README.md) 架構說明

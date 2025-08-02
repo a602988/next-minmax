@@ -74,13 +74,13 @@
     * 查詢映射表，找到 DetectedCountry 對應的目標子網域 TargetSubdomain（例如 "tw"）。
     * 從當前請求的網址中，解析出當前的子網域 CurrentSubdomain（例如 "us"）。
   * 重定向決策
-    * 如果 forceRedirect(重定向) 為 true 且 CurrentSubdomain(使用者的國家代碼) 與 TargetSubdomain(子網域) 不符，伺服器將執行 302 臨時重定向，將使用者導向到正確的子網域，並保持原有的路徑和查詢參數。例如，從 https://us.example.com/path 重定向到 https://tw.example.com/path。
+    * 如果 forceRedirect(重定向) 為 true 且 CurrentSubdomain(當前的子網域) 與 TargetSubdomain(目標子網域) 不符，伺服器將執行 302 臨時重定向，將使用者導向到正確的子網域，並保持原有的路徑和查詢參數。例如，從 https://us.example.com/path 重定向到 https://tw.example.com/path。
     * 在其他所有情況下（forceRedirect(重定向) 為 false，或使用者已在正確的子網域），不執行任何重定向。DetectedCountry(國家代碼) 資訊將被傳遞到後續步驟使用。
 
 ### 2. 語系資料獲取 API
 * **目的：** 此 API 的功能是提供網站所有可用的語系清單，以及一個基於使用者情境的推薦預設語系~~。它是一個能力提供者，在需要時被呼叫。
 * **執行條件：** 僅在「多語系網站」模式下 (enableMultiLanguage 為 true) 才可能被呼叫。
-* API： /api/ssr/languages?project=minmax2025&language
+* API： /api/ssr/languages?project=minmax2025&language=[語系]
   * project: 專案代碼 (例如 "minmax2025")
   * language: 語系資料
 * **API 超時與錯誤處理：**
