@@ -3,55 +3,49 @@
 ## 重點說明
 
 ### 核心設計理念
-- **使用者體驗優先**：系統會自動偵測使用者的地理位置和語言偏好，提供最適合的網站版本，減少手動選擇的負擔
-- **彈性配置**：透過功能開關 (enableGeoRedirect, forceRedirect, enableMultiLanguage) 可靈活控制各項功能的啟用狀態
-- **效能優化**：採用 Cookie 快取機制避免重複 API 呼叫，並優先使用 CDN 邊緣運算提供的地理資訊
+
+- 使用者體驗優先：自動偵測使用者的地理位置和語言，減少選擇操作。
+
+- 彈性配置：可設定功能開關 (例如 enableGeoRedirect 是否啟用地理位置判斷) 來控制網站行為。
+
+- 效能優化：使用 CDN 邊緣運算和 Cookie 快取，減少不必要的 API 呼叫。
 
 ### 架構特色
-- **多站點 vs 多語系分離**：國家站點 (子網域) 與語系 (URL 前綴) 是獨立的兩個維度，一個國家站點可支援多種語系
-- **優雅降級**：當某項功能關閉或資料不可用時，系統會自動退回到預設行為，確保網站正常運作
-- **使用者偏好記憶**：系統會記住使用者的主動選擇，並在後續訪問中優先採用
+
+- 多站點 vs 多語系分離：國家站點和語系分開，靈活支援多語系。
+
+- 優雅降級：若功能或資料不可用，退回預設行為。
+
+- 使用者偏好記憶：記錄使用者選擇，並在後續訪問中自動應用。
+
+- **國際化框架整合：** 使用 next-intl 作為多語系框架，動態配置可用語系清單，支援伺服器端渲染 (SSR) 和客戶端語系切換。
+
 
 ### 決策優先順序
-1. **地理重定向**：DetectedCountry → 國家站點映射 → 子網域重定向
-2. **語系選擇**：使用者偏好 Cookie > 瀏覽器語言 > 地理推薦 > 系統預設
-3. **錯誤處理**：API 失敗或無資料時回傳 404，確保使用者體驗一致性
 
-### 前端整合要點
-- 後端需將關鍵元數據 (detectedCountry, finalLanguage 等) 注入前端環境
-- 前端根據元數據智慧顯示國家/語系切換建議
-- 使用者主動切換時更新相應的 Cookie 設定
+- 地理重定向：優先根據國家進行子網域重定向。
 
-### 重要技術說明：localePrefix 設定影響
+- 語系選擇：使用者偏好 > 瀏覽器語言 > 地理推薦 > 系統預設。
 
-由於採用 `localePrefix: 'as-needed'` 設定：
-- **預設語系 (如 zh-TW)：** URL 不包含語系前綴
-  - 範例：`http://xxx.com/about` (使用預設語系 zh-TW)
-- **非預設語系 (如 en, ja)：** URL 包含語系前綴
-  - 範例：`http://xxx.com/en/about`, `http://xxx.com/ja/about`
+### Cookie 設定
 
-### 錯誤處理補充說明
-- **API 超時處理**：設定合理的 timeout（建議 3-5 秒），超時後使用預設值
-- **部分功能降級**：當地理 API 失敗時，仍可正常處理語系功能
-- **快取失效策略**：當 API 版本更新時，如何清理舊的 Cookie 快取
+- 過期時間： 語系資料快取 24 小時，使用者偏好語系 30 天。
 
-### 效能優化策略
-- **邊緣運算優先**：優先使用 CDN 提供的地理資訊，減少額外 API 呼叫
-- **快取策略**：語系資料 Cookie 建議設定 24 小時過期
+- 版本控制： 語系資料包含版本號，若版本變動則清除快取並重新取得資料。
 
+- 安全性設定： 支持 HTTPS，設定為 secure（使用 HTTPS 傳送）和 sameSite（防止跨站請求偽造（CSRF）攻擊）。
 
-### Cookie 設定規範
-- **過期時間**：
-  - languageData Cookie: 24 小時（配合 API 快取策略）
-  - userPreferredLanguage Cookie: 30 天（長期記住使用者偏好）
-- **安全性設定**：
-  - httpOnly: false（前端需要讀取）
-  - secure: true（HTTPS 環境）
-  - sameSite: 'lax'（跨子網域相容性）
-- **跨子網域設定**：
-  - domain: '.example.com'（確保 tw.example.com 和 jp.example.com 都能讀取）
+### 技術架構
 
+- **國際化框架：** 採用 next-intl 作為多語系解決方案
+  - 支援 SSR 和 CSR 的語系切換
+  - 動態語系配置，可根據 API 回應調整支援語系
+  - 採用 `localePrefix: 'as-needed'` 策略，預設語系 URL 無前綴
+  - 整合 Cookie 快取機制，減少重複 API 呼叫
 
+- **語系資料流：** API → Cookie → next-intl 配置 → 前端渲染
+  - 確保語系資料在伺服器端和客戶端的一致性
+  - 支援語系清單的版本控制和快取失效機制
 
 ## 步驟說明
 ###  1. 國家站點判斷與重定向
@@ -92,6 +86,22 @@
   * defaultLanguage: API 推薦的預設語系
   * version: 語系列表的版本號，用於快取控制
 
+### 2-1. next-intl 語系配置同步
+* **目的：** 將從 API 獲取的語系清單同步到 next-intl 框架配置中，確保路由和國際化功能正常運作。
+* **執行條件：** 僅在「多語系網站」模式下 (enableMultiLanguage 為 true) 執行。
+* **處理邏輯：**
+  * **中間件 (Middleware) 配置：**
+    * 從 languageData Cookie 讀取可用語系清單
+    * 動態更新 next-intl 的 locales 配置
+    * 設定 defaultLocale 為 API 回傳的預設語系
+    * 維持 `localePrefix: 'as-needed'` 設定（預設語系不顯示前綴）
+  * **i18n 配置同步：**
+    * 驗證當前請求的 locale 是否在可用語系清單中
+    * 若語系不支援，觸發 404 錯誤
+    * 載入對應語系的翻譯檔案
+  * **錯誤處理：**
+    * 若 Cookie 中無語系資料或解析失敗，使用靜態預設語系清單
+    * 確保 next-intl 始終有有效的語系配置可用
 
 ### 3. Cookie 檢查與語系設定
 * **目的 ：** 管理語系相關的 Cookie，並在必要時觸發 API 呼叫以獲取最新的語系資料，實現高效能快取。
@@ -115,20 +125,20 @@
       * secure: true（HTTPS 環境）
 * 步驟：
   1. **讀取現有Cookie：**
-     * 讀取 languageData Cookie(語系資料快取)
-     * 讀取 userPreferredLanguage Cookie(使用者偏好語系)
+    * 讀取 languageData Cookie(語系資料快取)
+    * 讀取 userPreferredLanguage Cookie(使用者偏好語系)
 
   2. **語系資料快取檢查：**
-     * 檢查 languageData Cookie(語系資料快取) 是否存在
-     * 檢查其內部儲存的 version 是否與當前系統設定的語系版本相符
+    * 檢查 languageData Cookie(語系資料快取) 是否存在
+    * 檢查其內部儲存的 version 是否與當前系統設定的語系版本相符
 
   3. **API呼叫決策：**
-     * 如果 languageData Cookie(語系資料快取) 不存在或版本已過期，則執行步驟 2 中定義的「語系資料獲取 API」呼叫
-     * 將從 API 獲取到的最新語系資料（包含新的版本號）寫入 languageData Cookie(語系資料快取)
-     * **快取失效與清理策略：**
-       * 當檢測到 API 版本號更新時，自動清理舊版本的 languageData Cookie
-       * 若 Cookie 中的版本號格式不正確或無法解析，視為過期並重新獲取
-       * 在系統升級或配置變更時，可透過更新版本號強制所有用戶重新獲取語系資料
+    * 如果 languageData Cookie(語系資料快取) 不存在或版本已過期，則執行步驟 2 中定義的「語系資料獲取 API」呼叫
+    * 將從 API 獲取到的最新語系資料（包含新的版本號）寫入 languageData Cookie(語系資料快取)
+    * **快取失效與清理策略：**
+      * 當檢測到 API 版本號更新時，自動清理舊版本的 languageData Cookie
+      * 若 Cookie 中的版本號格式不正確或無法解析，視為過期並重新獲取
+      * 在系統升級或配置變更時，可透過更新版本號強制所有用戶重新獲取語系資料
   4. **偏好語系準備：**
   * userPreferredLanguage Cookie(使用者偏好語系) 將在後續步驟中用於語系導引決策
   * 此Cookie僅在前端使用者主動切換語系時才會被設定或更新
@@ -140,14 +150,14 @@
   * 當前URL路徑無匹配語系前綴 (例如訪問 http://xxx.com 而非 http://xxx.com/en)
 * **導引邏輯：**
   1. 確定目標語系 (優先順序)：
-    1. 使用者偏好語系 Cookie (userPreferredLanguage)
-    2. 瀏覽器語言偏好 (Accept-Language header)
-    3. 地理位置推薦語系 (基於步驟 1 的 DetectedCountry)
-    4. cookie中的預設語系
-    5. 若以上皆無，則使用一個全域的預設語系。
+  1. 使用者偏好語系 Cookie (userPreferredLanguage)
+  2. 瀏覽器語言偏好 (Accept-Language header)
+  3. 地理位置推薦語系 (基於步驟 1 的 DetectedCountry)
+  4. cookie中的預設語系
+  5. 若以上皆無，則使用一個全域的預設語系。
   2. 執行302重定向到帶語系前綴的URL
-    * **如果目標語系是預設語系：** 由於 `localePrefix: 'as-needed'` 設定，預設語系不需要前綴，因此保持原 URL 不變 (例如：http://xxx.com)
-    * **如果目標語系非預設語系：** 執行302重定向到帶語系前綴的URL (例如：http://xxx.com → http://xxx.com/en)
+  * **如果目標語系是預設語系：** 由於 `localePrefix: 'as-needed'` 設定，預設語系不需要前綴，因此保持原 URL 不變 (例如：http://xxx.com)
+  * **如果目標語系非預設語系：** 執行302重定向到帶語系前綴的URL (例如：http://xxx.com → http://xxx.com/en)
 
 
 ### 5. 最終語系確定與路徑處理
@@ -169,24 +179,32 @@
 * **目的 ：** 使用前序步驟準備好的參數，獲取頁面所需的主要內容。
 * **處理邏輯 ：**
   1. 組裝 API 請求:
-    * language = FinalLanguage (來自步驟 4)
-    * uri = CleanURI (來自步驟 4)
+  * language = FinalLanguage (來自步驟 4)
+  * uri = CleanURI (來自步驟 4)
   2. 呼叫內容 API: GET /api/ssr/page/detail?project=...&language=[語系]&uri=[路徑]
-    * **API 超時設定：** 建議設定 5-10 秒超時時間
-    * **重試機制：** 失敗時可進行 1-2 次重試，間隔 1 秒
+  * **API 超時設定：** 建議設定 5-10 秒超時時間
+  * **重試機制：** 失敗時可進行 1-2 次重試，間隔 1 秒
   3. 回傳處理:
-    * 若 API 成功回傳資料 → 進入渲染流程。
-    * 若 API 回傳無資料或發生錯誤 → 伺服器應回傳 { notFound: true }，觸發前端框架顯示 404 頁面。
-    * **錯誤日誌記錄：** 記錄 API 失敗的詳細資訊，包含請求參數、錯誤類型和響應時間
+  * 若 API 成功回傳資料 → 進入渲染流程。
+  * 若 API 回傳無資料或發生錯誤 → 伺服器應回傳 { notFound: true }，觸發前端框架顯示 404 頁面。
+  * **錯誤日誌記錄：** 記錄 API 失敗的詳細資訊，包含請求參數、錯誤類型和響應時間
 
 ### 7. 前端 UI 建議與資訊傳遞
 * **目的 ：** 在伺服器完成渲染後，前端介面根據後端傳遞的元數據，向使用者顯示友善的切換建議。
+* **next-intl 整合：**
+  * **語系切換實作：** 使用 next-intl 的 `useRouter` 和 `usePathname` 進行語系切換
+  * **翻譯內容載入：** 透過 `useTranslations` Hook 載入當前語系的翻譯內容
+  * **語系清單顯示：** 從 languageData Cookie 讀取可用語系，動態生成語系選擇器
+  * **URL 結構維護：** 確保語系切換時保持當前頁面路徑和查詢參數
+
 * **後端需傳遞的元數據**
   伺服器在渲染頁面時，必須將以下資訊注入到前端 JavaScript 環境中：
   * detectedCountry: 偵測到的使用者國家代碼 (來自步驟 1)。
   * currentCountrySubdomain: 當前子網域 (來自步驟 1)。
   * finalLanguage: 當前頁面最終渲染的語系 (來自步驟 4)。
   * preferredLanguage: 使用者的偏好語系，主要來自 Accept-Language Header。
+  * **availableLanguages: 可用語系清單 (來自步驟 2，供前端語系選擇器使用)**
+
 * **前端顯示邏輯**
   * 國家切換建議:
     * 邏輯: 比較 detectedCountry(使用者國家代碼) 對應的子網域與 currentCountrySubdomain。如果不一致，則根據網站類型顯示相應提示：
