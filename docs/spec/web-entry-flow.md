@@ -20,14 +20,14 @@
 ### 1. 國際化資料處理
 
 * 全域設定參數
-  * 國際化功能總開關：`internationalization.enabled: true | false `
+  * 國際化功能總開關：`internationalization.enabled: true | false (預設)`
       說明：整份國際化功能的最高權限開關。 
       * false (預設): 完全停用所有後續的國家站點判斷、語系偵測及快取等邏輯。 
       * true: 啟用整套國際化邏輯。
   
   * 快取策略： `i18n.cache.strategy`: `"memory" | "none"`
       說明：當國際化功能啟用時，用以決定設定資料的獲取與快取方式。核心原則為「API 優先，檔案備援」。
-      * `"memory"`記憶體快取動態資料
+      * `"memory"`(預設) 記憶體快取動態資料
         * 適用場景：中低流量的單一伺服器生產環境，或不希望引入 Redis 的情境。
         * 運作方式：
             * 快取機制：伺服器在記憶體中快取設定資料，並設定一個生命週期 (TTL)，例如 10 分鐘。
@@ -52,7 +52,7 @@
           - 適用場景：Vercel、Netlify、Cloudflare Pages 等平台
           - 優點：零延遲、高可靠性
           - 缺點：僅限特定平台使用
-      * `"api-only"`: 僅使用外部 API 服務
+      * `"api-only"`:(預設) 僅使用外部 API 服務
           - 適用場景：私人 VPS、Akamai Cloud Computing 等
           - 服務：geoPlugin API
           - 超時設定：500-800ms
@@ -61,9 +61,9 @@
           - 邏輯：先檢查 CDN 標頭，失敗時呼叫 API
 
   * 國家偵測模式：`geoRedirectMode: "off" | "suggest" | "force"`
-      * `"off"`: 停用國家判斷與導引。
-      * `"suggest"`(預設): 偵測後僅透過 HTTP 標頭傳遞建議，不自動跳轉。
-      * `"force"`: 偵測後自動重導向至對應子站。
+      * `"off"`: (預設)停用國家判斷與導引。(內容與資訊型網站、B2B (企業對企業) 網站)
+      * `"suggest"`: 偵測後僅透過 HTTP 標頭傳遞建議，不自動跳轉(大型電商、跨國電商網站)。
+      * `"force"`: 偵測後自動重導向至對應子站()。
 
 ### 2. SSR初始化與資料處理
 執行條件：`internationalization:true`(國際化功能總開關:開)
