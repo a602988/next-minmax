@@ -92,9 +92,6 @@
   * 權限控制：需要後台管理員登入驗證
   * 支援操作：
     * 清除全部快取：`POST /api/admin/cache/clear`
-    * 清除指定快取：`POST /api/admin/cache/clear/[type]`
-        * `country-language-mapping` - 國家語系對照表
-        * `site-language-config` - 網站語系清單 
   * 安全考量：        
     * 使用 JWT 或 Session 驗證管理員身份
     * 記錄清除操作日誌（操作者、時間、類型）
@@ -102,7 +99,7 @@
     * 清除後自動重新載入快取資料
 
 ### 3. 國家站點與語系決策
-
+初期做到範圍：僅啟用國家偵測（`geoRedirectMode: "suggest"`）與對應 國家語系對照表
 * **目的：**
   根據使用者 IP 判斷其國家位置，依據配置決定是否： 
   1. 將使用者自動導引至對應的國家子站（例如 tw.example.com）。 
@@ -110,12 +107,13 @@
   3. 依據國家對應所適合語系
 * **核心資訊：**
   * Cookie 名稱：
-    * `user_preferred_site`：使用者手動選擇的站點（180 天有效）
-      - 內容：子站域名，如 `"tw"`, `"us"`, `"jp"`
-      - 來源：使用者主動切換站點時設定
-    * `user_preferred_language`：使用者偏好語系（180 天有效）
+    * `NEXT_LOCALE`：使用者偏好語系（next-intl 標準，180 天有效）
       - 內容：語系代碼，如 `"zh-TW"`, `"en-US"`, `"ja-JP"`
       - 來源：使用者主動切換語系時設定
+      - 管理：由 next-intl 自動處理
+    * `user_preferred_site`：使用者手動選擇的站點（180 天有效）
+        - 內容：子站域名，如 `"tw"`, `"us"`, `"jp"`
+        - 來源：使用者主動切換站點時設定
     * `detected_country`：系統自動偵測的國家（1 天有效）
       - 內容：國家代碼，如 `"TW"`, `"US"`, `"JP"`
       - 來源：IP 地理位置偵測結果
@@ -128,7 +126,7 @@
   * **決策優先級**：
     1. **使用者選擇優先**：
         - `user_preferred_site` 存在 → 使用該站點
-        - `user_preferred_language` 存在 → 使用該語系
+        - `NEXT_LOCALE` 存在 → 使用該語系
     2. **系統建議次之**：
         - 無使用者偏好時，使用 `suggested_site` 和 `suggested_language`
     3. **預設值兜底**：
@@ -141,44 +139,75 @@
   1. 機器人排除：
     * 依據 User-Agent 匹配已知的爬蟲列表，對於重要爬蟲（如 Googlebot）可輔以 rDNS (反向 DNS 查詢) 驗證其真實性。
     * 若為爬蟲，略過所有導引，保留 SEO 抓取完整性。
-  2. 檢查使用者是否已手動選擇：
-     * 若 Cookie 存在 `user_preferred_site`，表示使用者已有選擇，略過導引流程。
-     * 若 Cookie 存在 `user_preferred_language` ，表示使用者已有選擇，略過導引流程。
-     * 建議在使用者主動切換站點時更新此 Cookie（效期建議 180 天）。
-  3. 導引模式執行條件
-     * geoRedirectMode === `"off"`：不執行導引。
-     * geoRedirectMode === `"suggest"` | `"force"`：繼續進行國家偵測。
-  4. 執行國家偵測： 
+  2. cookie檢測：
+     * 若 Cookie 存在 `user_preferred_site`，表示使用者已手動選擇站點，直接重定向至該子站，流程結束。
+     * 若 Cookie 存在 `NEXT_LOCALE`，表示使用者已手動選擇語系，略過語系決策流程。
+  3. 國家偵測： 
      * 根據 `geo.detection.strategy` 設定執行對應策略
      * 通用降級處理：
-       - 當所有偵測方式失敗時，DetectedCountry 設為 null
+       - 當所有偵測方式失敗時，detected_country 設為 null
        - 進入降級模式，自動切換為 default site
        - 記偵測狀態：`x-geo-status: failed-timeout` 或 `x-geo-status: no-geo-data`
-  5. 查詢對應站點與語系：
-      * 根據偵測到的國家代碼查詢「國家對應子站映射」得出建議站點
-      * 根據偵測到的國家代碼查詢「國家語系對照表」得出建議語系
-      * 設定相關 Cookie：`detected_country`、`suggested_site`、`suggested_language`
-  6. 根據模式處理：
-    * `force`: 強制導引
-      1. 查詢對應子網域，執行 HTTP 307 臨時重定向。
-      2. 設定短期 Cookie（如 detected_country，效期建議 1 天）避免重複偵測。
-    * `suggest`: 僅提供建議 
-      1. 透過 HTTP 標頭（如 `geo-suggested-site: tw`,`geo-suggested-reason: ip_geo`）傳遞建議資訊。 
-      2. 無實際跳轉，頁面照原網址呈現。
-      3. 可輔以 Accept-Language 判斷語系偏好供前端提示。
-* **延伸考量：**
-  * 資料記錄與行為分析（建議實作以提升維運觀測性）
-    為利於除錯與持續優化，可在後端記錄以下資訊，並整合至統計平台或 A/B 測試系統：
-    - 使用者來源 IP 與 User-Agent
-    - 國家偵測方式（如 CDN 標頭或 MaxMind）
-    - 偵測結果與採用之導引模式（off/suggest/force）
-    - 是否實際跳轉、使用者是否接受建議站點
-    - 最終呈現語系與站點決策結果
-  * SEO 考慮建議 
-    - 強制導引（force）應謹慎使用，建議僅限於合規需求或特定業務場景。
-    - 建議使用 `HTTP 307 Temporary Redirect`，以避免搜尋引擎將原始 URL 判定為永久移除。
-    - 使用 `hreflang` 標籤：在每個頁面的 `<head>` 中，使用 `<link rel="alternate" hreflang="..." href="...">` 標籤來列出該頁面所有的國家/語言替代版本。
-    - 使用「自我參照」的 Canonical 標籤 (Self-Referencing Canonical)
-    - 使用 `suggest` 模式不會影響 SEO，可保留原始 URL，有利於部署國際化 SEO 策略。
+     
+  4. 模式處理：
+    * `force`強制導引: 根據偵測到的國家代碼查詢「國家對應子站映射」得出建議站點，執行 HTTP 307 臨時重定向。
+    * `suggest`: 根據偵測到的國家代碼查詢「國家語系對照表」得出建議語系。
+      * 無法取得國家對應語系時，將依據next-intl判斷適當語系
+  5.  頁面資料獲取與快取策略：
+    * **資料來源**：外部頁面內容 API
+    * **傳遞參數**：
+        - 語系代碼（從前述步驟確定的最終語系）
+        - 頁面路徑（當前請求的頁面路徑）
+          * **有語系前綴的情況：** 移除語系前綴部分，得到乾淨路徑 (例如：/en/about → /about)
+          * **無語系前綴的情況：** 保持原始路徑不變 (例如：/about → /about)
+        - 使用者 Cookie 資訊：
+            * 會員等級 (`member_level`)
+            * 登入狀態 (`auth_token` 或 `session_id`)
+            * 其他業務相關 Cookie
+    * **快取策略配置**：
+      - **快取功能開關**：`cache.enabled: true | false`
+          * 完全停用快取功能，適用於開發環境或簡單網站
+      - **CDN 快取開關**：`cache.cdn.enabled: true | false`
+          * 針對無 CDN 環境的網站，可停用 CDN 相關快取邏輯
+      - **會員功能開關**：`features.membership.enabled: true | false`
+          * 無會員系統的網站，停用所有會員相關的個人化快取
+      - **快取層級配置**：根據網站功能動態調整
+          * **基礎網站**（無會員、無 CDN）：
+              - 僅使用瀏覽器快取：短期快取（5-10 分鐘）
+              - 伺服器快取：統一中期快取（30 分鐘）
+          * **有 CDN 無會員**：
+              - 瀏覽器快取：短期快取（5-10 分鐘）
+              - CDN 快取：長期快取（1-2 小時）
+              - 伺服器快取：中期快取（30 分鐘）
+          * **有會員無 CDN**：
+              - 瀏覽器快取：短期快取（5-10 分鐘）
+              - 伺服器快取：依內容類型分層
+                  * 公共內容：長期快取（1-2 小時）
+                  * 會員內容：短期快取（5-10 分鐘）
+          * **完整功能**（有會員、有 CDN）：
+              - 使用前述完整的分層快取策略
 
-初期做到範圍：僅啟用國家偵測（`geoRedirectMode: "suggest"`）與對應 國家語系對照表
+    * **內容區塊類型自動偵測**：
+      - **靜態內容偵測**：
+          * 檢查內容是否包含會員相關變數
+          * 無會員變數 → 歸類為靜態內容
+      - **動態內容偵測**：
+          * 檢查 API 回應中的快取提示標頭
+          * 例如：`X-Cache-Type: static|dynamic|realtime`
+      - **預設策略**：
+          * 當無法確定內容類型時，使用保守的短期快取（5 分鐘）
+
+    * **快取決策流程**：
+      1. **檢查功能開關**：
+          - `cache.enabled: false` → 完全不快取
+          - `features.membership.enabled: false` → 忽略會員相關邏輯
+      2. **分析內容特性**：
+          - 檢查 API 回應的快取提示
+          - 分析內容是否包含個人化元素
+      3. **選擇快取策略**：
+          - 根據網站配置和內容特性選擇適當的快取時間
+      4. **設定快取標頭**：
+          - 自動設定適當的 Cache-Control 標頭
+            這樣的設計讓您可以：
+
+

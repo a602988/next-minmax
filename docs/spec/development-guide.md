@@ -17,3 +17,18 @@
     1. **前期開發：** 完全使用 Mock API，專注於前端邏輯與 UI 開發
     2. **中期整合：** 後端 API 就緒後，優先替換核心 API（如語系 API）
     3. **後期完善：** 逐步替換所有 API，保留 Mock 作為測試與開發輔助
+
+
+## SEO 策略
+
+### 國際化網站避免重複內容並正確標示語系版本。
+
+hreflang 標籤：告訴搜尋引擎哪些頁面是同一個內容的不同語系版本，在每個頁面的 <head> 中設定 hreflang 標籤。
+
+範例：
+
+```html
+<link rel="alternate" hreflang="en" href="https://example.com/en/about" />
+<link rel="alternate" hreflang="zh" href="https://example.com/zh/about" />
+<link rel="alternate" hreflang="x-default" href="https://example.com/en/about" />
+```
