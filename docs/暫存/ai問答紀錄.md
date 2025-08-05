@@ -166,3 +166,13 @@ api結構：
 前期用 Next.js API Routes mock，配合環境變數切換。
 隨著後端 API 就緒，逐步替換成正式呼叫。
 請幫我補上mock需要的檔案在 目錄結構 中
+
+
+現在的少了
+* API 快取：`api-${project}-${language}-${uri}-${groupHash}`
+* 頁面快取：`page-${language}-${uri}-${groupHash}`
+
+* 要補在哪裡
+另外api回饋的資料是頁面全部資料
+那怎麼做到分層快取
+我的設計文件需要改嗎
