@@ -176,3 +176,59 @@ api結構：
 另外api回饋的資料是頁面全部資料
 那怎麼做到分層快取
 我的設計文件需要改嗎
+
+依據開發設計文件中的
+4-頁面資料獲取與快取策略
+
+api回傳的是整個頁面的資料
+例如 
+```json
+{
+  "code": "0000",
+  "message": "Success.",
+  "data": {
+    "uri": "/news/demo-cate",
+    "route": "/news/{id?}",
+    "meta_title": "新聞列表 | 雲端數位科技有限公司",
+    "meta_description": "網站簡短敘述",
+    "meta_keywords": "網站,關鍵字,新聞列表",
+    "meta_image": "https://minmax.tw/static/images/common/logo.svg",
+    "wrap": "web-news-list",
+    "breadcrumbs": [
+      {
+        "title": "Home",
+        "url": "https://minmax.tw"
+      },
+      {
+        "title": "最新消息",
+        "url": "https://minmax.tw/news"
+      }
+    ],
+    "modules": [
+      {
+        "component": "news-post-list",
+        "area": null,
+        "api": null,
+        "attributes": {
+          "category": null,
+          "page": "web-news-detail"
+        },
+        "data": null
+      }
+    ]
+  }
+}
+```
+除了api整頁面的快取資料
+頁面要分層快取
+目前這樣規劃是否有問題
+還是有更好的做法
+
+
+- 應用程式部署：有些客戶可能會區分資料庫與檔案不同主機(少數)，有些客戶則單一主機(多數)，有些會採用cdn(少數)
+- 所以是否 快取儲存體（Cache Store）的選擇 可以依據不同網站來做設定
+- 快取粒度（Granularity）的權衡 關於這個，目前的api回傳的是整個頁面的資料中，modules 會帶api網址，所以是指在分別取得資料快取嗎
+
+以上三點是我針對您的建議詢問的問題
+分別該怎麼更改設計文件ㄋ
+
