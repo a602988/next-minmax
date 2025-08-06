@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 5, "column": 0}, "map": {"version":3,"sources":["file:///Users/chianlin/Documents/GitHub/next-minmax/src/app/layout.tsx"],"sourcesContent":["import {ReactNode} from 'react';\nimport \"./globals.css\";\n\n\ntype Props = {\n  children: ReactNode;\n};\n\n// 由於我們在根目錄有 `not-found.tsx` 頁面，因此需要一個 layout 檔案，\n// 即使它只是將 children 傳遞下去。\nexport default function RootLayout({children}: Props) {\n  return children;\n}\n"],"names":[],"mappings":";;;;AAUe,SAAS,WAAW,EAAC,QAAQ,EAAQ;IAClD,OAAO;AACT","debugId":null}}]
+}
