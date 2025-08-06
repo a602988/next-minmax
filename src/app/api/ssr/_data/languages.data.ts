@@ -1,0 +1,34 @@
+export const languagesData = {
+  code: "0000",
+  message: "成功",
+  data: [
+      {
+          "id": "zh-TW",
+          "title": "中文(繁體)",
+          "native": "TW",
+          "icon": "flag-icon-tw",
+          "default": true
+      },
+      {
+          "id": "zh-CN",
+          "title": "中文（簡體）",
+          "native": "CN",
+          "icon": "flag-icon-cn",
+          "default": false
+      },
+      {
+          "id": "en",
+          "title": "English",
+          "native": "EN",
+          "icon": "flag-icon-us",
+          "default": false
+      },
+      {
+          "id": "ja",
+          "title": "日文",
+          "native": "JA",
+          "icon": "flag-icon-ja",
+          "default": false
+      }
+  ]
+};
