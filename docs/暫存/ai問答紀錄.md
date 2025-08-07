@@ -232,3 +232,15 @@ api回傳的是整個頁面的資料
 以上三點是我針對您的建議詢問的問題
 分別該怎麼更改設計文件ㄋ
 
+
+* next-intl 整合與 SSR 渲染流程
+  * 語系決策：在每個 SSR 請求中，根據「國家站點與語系決策」流程，從已快取的「網站語系清單」與「國家語系對照表」中，結合使用者 Cookie 和地理位置偵測，決定出本次渲染的最終語系 (locale)。
+  * 翻譯檔案載入：根據決策出的最終語系，動態載入對應的翻譯檔案（例如 messages/zh-TW.json）。next-intl 會使用這個翻譯檔案來進行頁面渲染。
+  * 提供給 next-intl：將最終的語系和翻譯檔案傳遞給 next-intl，完成 SSR 渲染。
+
+src/lib/config/
+├── index.ts                    # 統一配置導出
+├── app.config.ts              # 應用程式核心配置  
+├── locale.config.ts           # 語系統一配置
+├── api.config.ts              # API 相關配置
+└── cache.config.ts            # 快取配置

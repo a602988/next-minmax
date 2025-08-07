@@ -100,17 +100,32 @@ hreflang 標籤：告訴搜尋引擎哪些頁面是同一個內容的不同語�
 
   * 地理位置偵測策略：`geo.detection.strategy`: `"cdn-only" | "api-only" | "cdn-fallback"`
     說明：根據主機部署環境選擇最適合的地理位置偵測方式。
-      * `"cdn-only"`: 僅使用 CDN 提供的地理標頭
-          - 適用場景：Vercel、Netlify、Cloudflare Pages 等平台
-          - 優點：零延遲、高可靠性
-          - 缺點：僅限特定平台使用
-      * `"api-only"`:(預設) 僅使用外部 API 服務
-          - 適用場景：私人 VPS、Akamai Cloud Computing 等
-          - 服務：geoPlugin API
-          - 超時設定：500-800ms
-      * `"cdn-fallback"`: CDN 標頭優先，API 備援
-          - 適用場景：有 CDN 但不確定穩定性的環境
-          - 邏輯：先檢查 CDN 標頭，失敗時呼叫 API
+      * `"cdn-only"`: 純 CDN Headers 檢測
+        * 適用場景：部署在 Cloudflare、Vercel、AWS CloudFront 等提供地理位置 headers 的 CDN
+        * 優點：零延遲、高可靠性
+        * 缺點：依賴 CDN 提供商，某些 CDN 可能不提供此功能
+        * 檢測來源： CDN 提供的 HTTP Headers
+      * `"api-only"`:(預設) 純外部 API 檢測
+        * 適用場景: 開發環境、自建伺服器、不支援地理位置 headers 的主機
+        * 優點: 不依賴 CDN，檢測精度較高
+        * 缺點: 有網路延遲，可能有 API 配額限制
+        * 檢測來源: 第三方 IP 地理位置 API 服務
+            * 服務：
+              * geoplugin.net： 
+                * 優點：使用起來非常簡單，無需註冊或 API 金鑰，直接呼叫 URL 即可。這對於快速測試非常方便。 
+                * 缺點：免費服務在可靠性、穩定性及流量限制上通常缺乏保障，不適合生產環境。
+              * ipapi.co： 
+                * 優點：同樣提供免費方案，而且相較於 geoplugin.net，其提供的資訊可能更為全面，例如除了國家、城市之外，還能提供 ISP 等資訊。 
+                * 缺點：免費方案通常會有較嚴格的請求次數限制（例如每小時 1000 次請求），可能需要註冊才能獲得 API 金鑰。
+              * ip-api.com：這是一個功能非常強大的服務，它提供多種格式的 API，包括 JSON。免費版本不需要 API 金鑰，但有每分鐘 45 次請求的限制。它的資料庫更新較快，準確性也相對高。 
+              * ipinfo.io：這個服務也提供免費方案，每個月有 5 萬次的免費請求額度。它的 API 回傳的資料非常詳細，包含國家、城市、地區、時區，甚至還有組織（Organization）資訊，對於需要更全面地理位置資料的開發者來說非常有用。 
+                  * freegeoip.app：這是另一個簡單、快速且免費的 IP 地理位置服務，同樣不需要 API 金鑰。它提供的資訊比較基本，但足以應付大多數開發階段的測試需求。
+            * 超時設定：500-800ms
+      * `"cdn-fallback"`:CDN 優先，API 備援
+        * 適用場景：生產環境推薦策略，確保最高可用性
+        * 優點: 結合兩者優勢，高可用性 
+        * 缺點: 配置較複雜 
+        * 檢測流程: CDN Headers → 外部 API → 預設語系
 
   * 國家偵測模式：`geoRedirectMode: "off" | "suggest" | "force"`
       * `"off"`: (預設)停用國家判斷與導引。(內容與資訊型網站、B2B (企業對企業) 網站)
@@ -136,7 +151,7 @@ hreflang 標籤：告訴搜尋引擎哪些頁面是同一個內容的不同語�
       * 頁面選單 (System-Menus)：全站通用的導航選單資料。
       * 網站資訊 (Web-Data)：網站標題、聯絡資訊等全域設定。
     * 處理流程： 
-      * 伺服器啟動階段： **伺服器啟動階段**：當伺服器啟動時，應用程式會檢查快取，若快取中無這些公用資料，則透過外部 API 一次性取得所有
+      * 伺服器啟動階段： 伺服器啟動階段：當伺服器啟動時，應用程式會檢查快取，若快取中無這些公用資料，則透過外部 API 一次性取得所有
       * 快取更新與失效： 
         * 若需緊急更新資料，可透過手動清除快取路徑 (/api/admin/cache/clear) 來觸發重新載入。 
         * 當國際化配置在 CMS 後台被修改時，應觸發事件驅動的快取失效機制，精準清除這些動態資料的快取，確保所有伺服器實例都能立即載入最新資料。
@@ -241,61 +256,37 @@ hreflang 標籤：告訴搜尋引擎哪些頁面是同一個內容的不同語�
 
 ```
 my-business-website/
-├── messages/                            # 國際化翻譯檔案 (JSON等)
-│   ├── zh-TW.json
-│   ├── en.json
-│   └── ...
-├── src/
-│   ├── app/
-│   │   ├── [locale]/
-│   │   │   ├── layout.tsx                   # 網站版型配置，注入語系與國家資訊元數據
-│   │   │   └── page.tsx                     # 網站頁面配置，注入語系與國家資訊元數據
-│   │   ├── not-found.tsx                    # 自訂 404 頁面
-│   │   ├── layout.tsx                       # 根網站版型配置
-│   │   └── api/                             # 後端 API 路由
-│   │      └── ssr/                           # Mock API（開發測試用）
-│   │         ├── _data/                      # Mock API 的靜態資料
-│   │         │   ├── languages.data.ts       # 語系列表的 Mock 資料
-│   │         │   └── pages.data.ts           # 頁面內容的 Mock 資料
-│   │         ├── languages/
-│   │         │   └── route.ts                # 語系資料獲取的 Mock API
-│   │         ├── locales/
-│   │         │   └── route.ts                # 國家語系對照表  Mock API
-│   │         └── page/
-│   │             └── home/
-│   │                 └── route.ts            # 內容 API 的 Mock 路由
-│   ├── components/
-│   │   ├── common/
-│   │   │   ├── Header.tsx
-│   │   │   ├── Footer.tsx
-│   │   │   ├── LanguageSwitcher.tsx
-│   │   ├── layout/
-│   │   │   └── MainLayout.tsx
-│   ├── lib/
-│   │   ├── apiClient.ts                    # 全局 API 客戶端配置
-│   │   ├── cookie.ts                       # 提供最基礎、最通用的 get, set, remove 函式，並在內部統一處理好安全設定。
-│   │   └── utils.ts                        # 通用工具函數
-│   ├── features/
-│   │   ├── i18n/                           # 語系功能模組
-│   │   │   ├── services/                   # 語系相關的服務
-│   │   │   │   └── languageService.ts      # 語系服務，處理語系 API 請求
-│   │   │   ├── utils.ts                    # 語系相關的工具函數（包含 createTranslator 和 cookieManager 的功能）
-│   │   │   ├── cookies.ts                  # Cookie 管理
-│   │   │   └── types.ts                    # 語系相關的類型定義
-│   │   └── content/                        # 內容功能模組
-│   │       ├── services/                   # 內容相關的服務
-│   │       │   └── pageService.ts          # 頁面服務，處理頁面 API 請求
-│   │       ├── utils.ts                    # 內容相關的工具函數
-│   │       └── types.ts                    # 內容相關的類型定義
-│   ├── i18n/
-│   │   ├── nextIntlConfig.ts               # next-intl 多語系框架配置與同步
-│   │   ├── routing.ts                      # 路由配置 (官方要求)
-│   │   └── request.ts                      # next-intl 請求配置 (官方要求)
-│   ├── types/                              # 全域類型定義
-│   │   ├── api                             # API 基本通用
-│   │   ├── api/                            # API 相關類型
-│   │   │   ├── language.types.ts           # 語系 API 的類型定義
-│   │   │   └── page.types.ts               # 頁面 API 的類型定義
-│   ├── env.mjs                             # 環境變數類型定義（包含重導開關等）
-│   └── middleware.ts                       # Next.js 中間件，負責地理重導與語系導引邏輯（包含 languageRedirect 的功能）
+├── .env.local                          # 本地環境變數
+├── .env.example                        # 環境變數範例
+├── .gitignore                          # Git 忽略檔案
+├── package.json                        # 專案依賴與腳本
+├── next.config.ts                      # Next.js 配置
+├── tsconfig.json                       # TypeScript 配置
+├── postcss.config.mjs                  # PostCSS 配置
+├── eslint.config.mjs                   # ESLint 配置
+├── README.md                           # 專案說明文件
+├── messages/                           # 國際化 (i18n) 翻譯檔案
+├── public/                             # 靜態資源 (圖片、字體等)
+├── docs/                               # 專案文件 (架構、API 文件等)
+├── src/                                # 原始碼主目錄
+│   ├── app/                            # (核心路由) Next.js 14 App Router
+│   ├── components/                     # (共享UI) 全域共享、無業務邏輯的基礎 UI 組件
+│   ├── features/                       # (核心業務) 各項業務功能模組
+│   ├── lib/                            # (核心工具庫) 全域共享、與業務無關的底層工具函式
+│   │   ├── config/                             # 統一配置導出 v
+│   │   │   ├── app.config.ts                   # 應用程式核心配置  v 
+│   │   │   ├── locale.config.ts                # 語系統一配置v
+│   │   │   ├── api.config.ts                   # API 相關配置v
+│   │   │   └── cache.config.ts                 # 快取配置v
+│   ├── hooks/                          # (共享Hooks) 全域共享的 Hooks
+│   ├── contexts/                       # (共享Context) 全域狀態管理 Context
+│   ├── providers/                      # 全域 Provider 集合
+│   ├── constants/                      # 全域常數
+│   ├── i18n/                           # 國際化配置與核心邏輯
+│   ├── styles/                         # 全域樣式與主題配置
+│   ├── assets/                         # 靜態資源
+│   ├── types/                          # 全域共享的 TypeScript 類型定義
+│   ├── middleware.ts                   # Next.js 中間件 (認證、國際化等)
+│   └── env.mjs                         # 環境變數驗證與類型定義 (使用 Zod)
+└── tests/   
 ```
