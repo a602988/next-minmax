@@ -1,5 +1,7 @@
+
 import { NextRequest } from 'next/server';
-import { APP_CONFIG, LOCALE_CONFIG, CACHE_CONFIG, type SupportedLocale } from '@/lib/config';
+import { APP_CONFIG, LOCALE_CONFIG, CACHE_CONFIG, type SupportedLocale } from  '@/config';
+import { env } from '@/env.mjs';
 
 /**
  * 標準參數接口
@@ -71,12 +73,11 @@ export function deepClone<T>(obj: T): T {
  * 檢查是否應該模擬錯誤
  */
 export function shouldSimulateError(): boolean {
-    // 從本地 API_CONFIG 獲取錯誤模擬設定
-    const { API_CONFIG: LOCAL_API_CONFIG } = require('./config');
-    if (!LOCAL_API_CONFIG.ERROR_SIMULATION.ENABLED) {
+    // 直接使用 env 中的錯誤模擬設定
+    if (!env.MOCK_ERROR_ENABLED) {
         return false;
     }
-    return Math.random() < LOCAL_API_CONFIG.ERROR_SIMULATION.RATE;
+    return Math.random() < env.MOCK_ERROR_RATE;
 }
 
 /**

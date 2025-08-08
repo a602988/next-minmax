@@ -4,7 +4,7 @@
  */
 
 // 導出環境變數配置
-export { env } from '../../env.mjs';
+export { env } from '../env.mjs';
 
 // 導出應用程式配置
 export * from './app.config';

@@ -32,13 +32,15 @@ mkdir -p types/{api.ts}
 
 ## 套件
 
-多國語系 next-intl
+### 多國語系 next-intl
 
 `npm install next-intl`
 
 https://next-intl.dev/
 
+### 提供型別安全的環境變數管理，`zod` 負責資料驗證和轉換。**
 
+`npm install @t3-oss/env-nextjs zod`
 
 
 

@@ -1,10 +1,9 @@
-
-import { LOCALE_CONFIG, type SupportedLocale } from '@/lib/config';
+import { LOCALE_CONFIG, type SupportedLocale } from '@/config';
 
 /**
- * Mock API 配置
+ * Mock API 專用配置
  */
-export const API_CONFIG = {
+export const MOCK_API_CONFIG = { // 改名避免衝突
     // 快取配置
     CACHE: {
         DEFAULT_TTL: 300, // 5分鐘
@@ -19,10 +18,7 @@ export const API_CONFIG = {
     }
 } as const;
 
-/**
- * Mock API 延遲配置 (毫秒)
- * 在開發階段，Mock API（假的 API）通常會立即返回數據，但真實的 API 會有網路延遲。為了讓開發環境更接近生產環境，需要人為添加延遲。
- */
+// 其他配置保持不變...
 export const MOCK_DELAYS = {
     LANGUAGES: 100,    // 語系清單
     LOCALES: 150,      // 國家語系對照
@@ -31,14 +27,6 @@ export const MOCK_DELAYS = {
     DETAIL: 300,       // 頁面詳細內容
 } as const;
 
-/**
- * 支援的語系列表 - 從統一的語系配置獲取
- * 確保與國際化配置保持一致
- */
 export const SUPPORTED_LANGUAGES = LOCALE_CONFIG.SUPPORTED_LOCALES;
 export type SupportedLanguage = SupportedLocale;
-
-/**
- * 語系驗證函數 - 重新導出以便在 API 中使用
- */
 export const { isValidLocale } = LOCALE_CONFIG;

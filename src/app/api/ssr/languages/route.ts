@@ -1,23 +1,20 @@
 import { NextResponse } from 'next/server';
 import { languagesData } from '../_data/languages.data';
 import { simulateApiDelay, createCacheHeaders, deepClone } from '../_utils/api-helpers';
-import { MOCK_DELAYS } from '../_utils/config';
-import { CACHE_CONFIG } from '@/lib/config';
+import { MOCK_DELAYS } from '../_utils/mock.config';
+import { CACHE_CONFIG } from '@/config';
 
 /**
- * 語系清單 API
+ * 語系清單 Mock API
  *
- * 用途：提供網站支援的語系清單
- * 回傳：純粹的語系清單資料，不包含當前狀態
- *
- * 注意：current 屬性應該在後續的資料處理流程中決定，
- *      而不是在這個基礎 API 中處理
+ * 🔄 開發階段使用，與正式 API 格式完全一致
+ * 🚀 透過環境變數 USE_MOCK_API 控制是否使用此端點
  */
 export async function GET() {
-    // 模擬 API 延遲
+    // 開發環境才模擬延遲
     await simulateApiDelay(MOCK_DELAYS.LANGUAGES);
 
-    // 回傳純粹的語系資料
+    // 回傳深拷貝的資料，避免原始資料被修改
     const data = deepClone(languagesData);
 
     return NextResponse.json(data, {

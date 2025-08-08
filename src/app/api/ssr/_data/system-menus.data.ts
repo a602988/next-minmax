@@ -1,4 +1,4 @@
-export const webData = {
+export const systemMenusData = {
     code: "0000",
     message: "成功",
     data: {

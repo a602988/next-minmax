@@ -1,6 +1,3 @@
-/* 統一導出 API 服務 */
-
-import { MinmaxApiService } from './minmax';
-
-// 創建單例實例
-export const minmaxApi = new MinmaxApiService();
+// 統一導出所有服務
+export * from './language.service';
+export * from './locales.service';

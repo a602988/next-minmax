@@ -351,10 +351,6 @@
 @layer components;
 
 @layer utilities {
-  .static {
-    position: static;
-  }
-
   .flex {
     display: flex;
   }

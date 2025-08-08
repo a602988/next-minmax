@@ -43,8 +43,8 @@ const server = {
     /** 預設語系 */
     DEFAULT_LANGUAGE: z.string().default("zh-TW"),
 
-    /** 國家子網域對應表 (JSON) */
-    COUNTRY_SUBDOMAIN_MAP: z.string().default('{"TW": "tw", "US": "us", "JP": "jp"}'),
+    /** 國家子網域對應表 (JSON) {"TW": "tw", "US": "us", "JP": "jp"} */
+    COUNTRY_SUBDOMAIN_MAP: z.string().default('{}'),
 
     // ==========================================
     // 🔄 快取系統配置
@@ -106,7 +106,7 @@ const server = {
     // ==========================================
 
     /** API 請求日誌記錄 */
-    API_LOGGING_ENABLED: z.string().transform((val) => val === "true").default("false"),
+    API_LOGGING_ENABLED: z.string().transform((val) => val === "true").default("true"),
 
     /** 效能監控開關 */
     PERFORMANCE_MONITORING_ENABLED: z.string().transform((val) => val === "true").default("false"),
@@ -125,22 +125,22 @@ const server = {
     // ==========================================
 
     /** 資料庫連線字串 */
-    DATABASE_URL: z.string().optional(),
+    //DATABASE_URL: z.string().optional(),
 
     /** Redis 連線字串 */
-    REDIS_URL: z.string().optional(),
+    //REDIS_URL: z.string().optional(),
 
     /** API 密鑰 */
-    API_SECRET_KEY: z.string().optional(),
+    //API_SECRET_KEY: z.string().optional(),
 
     /** JWT 簽名密鑰 */
-    JWT_SECRET: z.string().optional(),
+   // JWT_SECRET: z.string().optional(),
 
     /** 管理員 API 金鑰 */
-    ADMIN_API_KEY: z.string().optional(),
+    //ADMIN_API_KEY: z.string().optional(),
 
     /** 地理位置服務 API 金鑰 */
-    GEO_API_KEY: z.string().optional(),
+    //GEO_API_KEY: z.string().optional(),
 };
 
 /**
