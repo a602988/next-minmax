@@ -244,3 +244,8 @@ src/lib/config/
 ├── locale.config.ts           # 語系統一配置
 ├── api.config.ts              # API 相關配置
 └── cache.config.ts            # 快取配置
+
+請幫我改為.env 只存放敏感資訊（例如資料庫密碼、API 金鑰）。
+env.mjs 為程式碼所依賴的配置
+只需要在 .env 中覆寫那些「需要變更」的設定
+

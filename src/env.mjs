@@ -2,77 +2,235 @@ import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 /**
- * 環境變數配置 - 完全用程式碼管理預設值
- * 開發時使用預設值，production 時用環境變數覆蓋
+ * 環境變數配置 - 程式碼優先的配置管理
+ *
+ * 設計原則：
+ * 1. env.mjs 包含所有預設值和業務邏輯配置
+ * 2. .env 檔案只覆寫需要變更或敏感的設定
+ * 3. 開發時依賴預設值，生產時用環境變數覆蓋
  */
+
+/**
+ * 伺服器端環境變數配置
+ * 這些變數只在伺服器端使用，確保安全性，不會暴露給客戶端
+ */
+const server = {
+    // ==========================================
+    // 國際化與語系配置
+    // 控制多語系、地理位置偵測及語系重導功能
+    // ==========================================
+
+    /** 國際化功能總開關 */
+    INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** 多語系功能開關 */
+    MULTI_LANGUAGE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** ip 地理偵測功能開關 */
+    GEO_DETECTION_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 強制重導開關 */
+    FORCE_REDIRECT: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 專案核心配置
+    // 專案基本資訊與預設語系設定
+    // ==========================================
+
+    /** 專案代碼 */
+    PROJECT_CODE: z.string().default("minmax2025"),
+
+    /** 預設語系 */
+    DEFAULT_LANGUAGE: z.string().default("zh-TW"),
+
+    /** 國家子網域對應表 (JSON) */
+    COUNTRY_SUBDOMAIN_MAP: z.string().default('{"TW": "tw", "US": "us", "JP": "jp"}'),
+
+    // ==========================================
+    // 🔄 快取系統配置
+    // 控制整體快取策略和生存時間
+    // ==========================================
+
+    /** 快取系統總開關 */
+    CACHE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** CDN 快取協作開關 */
+    CACHE_CDN_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 國際化快取策略 */
+    I18N_CACHE_STRATEGY: z.enum(["memory", "redis", "none"]).default("memory"),
+
+    /** 快取預設生存時間 (秒) */
+    CACHE_DEFAULT_TTL: z.string().transform((val) => parseInt(val)).default("3600"),
+
+    // ==========================================
+    // API 與外部服務配置
+    // API 網址、超時設定及第三方服務配置
+    // ==========================================
+
+    /** 外部後端 API 基礎網址 */
+    EXTERNAL_API_BASE_URL: z.string().default("https://v5.jeffy.test"),
+
+    /** 一般 API 請求超時 (毫秒) */
+    API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("5000"),
+
+    /** 內容 API 請求超時 (毫秒) */
+    CONTENT_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("10000"),
+
+    /** 地理位置 API 超時 (毫秒) */
+    GEO_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("800"),
+
+    /** 地理位置服務提供商 */
+    GEO_API_PROVIDER: z.enum(["ipapi", "ipinfo", "geoplugin"]).default("geoplugin"),
+
+    // ==========================================
+    // 開發與測試配置
+    // Mock API、錯誤模擬及開發工具設定
+    // ==========================================
+
+    /** Mock API 開關 */
+    USE_MOCK_API: z.string().transform((val) => val === "true").default("true"),
+
+    /** Mock API 延遲模擬 (毫秒) */
+    MOCK_API_DELAY: z.string().transform((val) => parseInt(val)).default("100"),
+
+    /** 錯誤模擬開關 */
+    MOCK_ERROR_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 錯誤模擬機率 (0.0-1.0) */
+    MOCK_ERROR_RATE: z.string().transform((val) => parseFloat(val)).default("0.0"),
+
+    // ==========================================
+    // 監控與日誌配置
+    // API 日誌記錄及效能監控開關
+    // ==========================================
+
+    /** API 請求日誌記錄 */
+    API_LOGGING_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 效能監控開關 */
+    PERFORMANCE_MONITORING_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 功能開關
+    // 各項業務功能的開關控制
+    // ==========================================
+
+    /** 會員功能開關 */
+   MEMBERSHIP_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 🔐 敏感資訊
+    // 資料庫、API 金鑰等敏感資料，僅在 .env 中設定
+    // ==========================================
+
+    /** 資料庫連線字串 */
+    DATABASE_URL: z.string().optional(),
+
+    /** Redis 連線字串 */
+    REDIS_URL: z.string().optional(),
+
+    /** API 密鑰 */
+    API_SECRET_KEY: z.string().optional(),
+
+    /** JWT 簽名密鑰 */
+    JWT_SECRET: z.string().optional(),
+
+    /** 管理員 API 金鑰 */
+    ADMIN_API_KEY: z.string().optional(),
+
+    /** 地理位置服務 API 金鑰 */
+    GEO_API_KEY: z.string().optional(),
+};
+
+/**
+ * 客戶端環境變數配置
+ * 這些變數會暴露給瀏覽器，請避免包含敏感資訊
+ * 所有變數都必須以 NEXT_PUBLIC_ 前綴開始
+ */
+const client = {
+    // ==========================================
+    // 🏗️ 專案基本資訊
+    // 前端顯示用的專案資訊和基礎配置
+    // ==========================================
+
+    /** 專案顯示名稱 */
+    NEXT_PUBLIC_PROJECT_NAME: z.string().default("demo測試網站"),
+
+    /** 前端預設語系 */
+    NEXT_PUBLIC_DEFAULT_LOCALE: z.string().default("zh-TW"),
+
+    /** API 版本號 */
+    NEXT_PUBLIC_API_VERSION: z.string().default("1.0.0"),
+
+    // ==========================================
+    // 🌐 API 與服務配置
+    // 客戶端 API 呼叫相關設定
+    // ==========================================
+
+    /** 前端 API 基礎網址 */
+    NEXT_PUBLIC_API_BASE_URL: z.string().default("http://localhost:3000"),
+
+    // ==========================================
+    // 🌍 國際化功能開關
+    // 前端國際化相關的功能控制
+    // ==========================================
+
+    /** 前端多語系功能開關 */
+    NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    // ==========================================
+    // 🗺️ 地理位置偵測配置
+    // 使用者地理位置偵測與重導邏輯設定
+    // ==========================================
+
+    /** 地理位置偵測策略 */
+    NEXT_PUBLIC_GEO_DETECTION_STRATEGY: z.enum(["cdn-only", "api-only", "cdn-fallback"]).default("api-only"),
+
+    /** 地理重導模式 */
+    NEXT_PUBLIC_GEO_REDIRECT_MODE: z.enum(["off", "suggest", "force"]).default("suggest"),
+
+    /** CDN 國家標頭名稱 */
+    NEXT_PUBLIC_CDN_COUNTRY_HEADER: z.string().default("cf-ipcountry"),
+
+    // ==========================================
+    // ⚙️ 前端功能配置
+    // 前端特有的功能開關和配置
+    // ==========================================
+
+    /** 前端快取功能開關 */
+    NEXT_PUBLIC_CACHE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** 開發模式開關 */
+    NEXT_PUBLIC_DEV_MODE_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 🔧 外部服務配置
+    // 第三方服務的公開配置項目
+    // ==========================================
+
+    /** 錯誤追蹤服務 DSN */
+    NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
+};
+
+// 取得所有 schema 的鍵名
+const serverKeys = Object.keys(server);
+const clientKeys = Object.keys(client);
+
 export const env = createEnv({
-    server: {
-        // 功能開關 - 開發時的安全預設值
-        ENABLE_GEO_REDIRECT: z.string().transform((val) => val === "true").default("false"),
-        FORCE_REDIRECT: z.string().transform((val) => val === "true").default("false"),
-        ENABLE_MULTI_LANGUAGE: z.string().transform((val) => val === "true").default("true"),
-        INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("true"),
+    server,
+    client,
 
-        // API 配置 - 開發友好的預設值
-        API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("5000"),
-        CONTENT_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("10000"),
-        GEO_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("800"),
-
-        // 專案配置 - 統一的預設值
-        PROJECT_CODE: z.string().default("minmax2025"),
-        DEFAULT_LANGUAGE: z.string().default("zh-TW"),
-        COUNTRY_SUBDOMAIN_MAP: z.string().default('{"TW": "tw", "US": "us", "JP": "jp"}'),
-
-        // 快取配置 - 合理的預設值
-        I18N_CACHE_STRATEGY: z.enum(["memory", "redis", "none"]).default("memory"),
-        CACHE_DEFAULT_TTL: z.string().transform((val) => parseInt(val)).default("3600"),
-
-        // 功能開關 - 開發時的安全預設值
-        FEATURES_MEMBERSHIP_ENABLED: z.string().transform((val) => val === "true").default("false"),
-        USE_MOCK_API: z.string().transform((val) => val === "true").default("true"),
-        API_LOGGING_ENABLED: z.string().transform((val) => val === "true").default("false"),
-        PERFORMANCE_MONITORING: z.string().transform((val) => val === "true").default("false"),
-    },
-
-    client: {
-        // 前端環境變數 - 開發友好的預設值
-        NEXT_PUBLIC_PROJECT_CODE: z.string().default("minmax2025"),
-        NEXT_PUBLIC_PROJECT_NAME: z.string().default("minmax2025"),
-        NEXT_PUBLIC_DEFAULT_LOCALE: z.string().default("zh-TW"),
-        NEXT_PUBLIC_API_BASE_URL: z.string().default("http://localhost:3000"),
-        NEXT_PUBLIC_ENABLE_MULTI_LANGUAGE: z.string().transform((val) => val === "true").default("true"),
-        NEXT_PUBLIC_GEO_DETECTION_STRATEGY: z.enum(["cdn-only", "api-only", "cdn-fallback"]).default("api-only"),
-        NEXT_PUBLIC_GEO_REDIRECT_MODE: z.enum(["off", "suggest", "force"]).default("suggest"),
-        NEXT_PUBLIC_CDN_COUNTRY_HEADER: z.string().default("cf-ipcountry"),
-    },
-
+    /**
+     * 運行時環境變數映射
+     * 精確地從 process.env 映射我們定義的變數
+     */
     runtimeEnv: {
-        // 伺服器端環境變數映射 - 開發時這些都會是 undefined，使用預設值
-        ENABLE_GEO_REDIRECT: process.env.ENABLE_GEO_REDIRECT,
-        FORCE_REDIRECT: process.env.FORCE_REDIRECT,
-        ENABLE_MULTI_LANGUAGE: process.env.ENABLE_MULTI_LANGUAGE,
-        INTERNATIONALIZATION_ENABLED: process.env.INTERNATIONALIZATION_ENABLED,
-        API_TIMEOUT: process.env.API_TIMEOUT,
-        CONTENT_API_TIMEOUT: process.env.CONTENT_API_TIMEOUT,
-        GEO_API_TIMEOUT: process.env.GEO_API_TIMEOUT,
-        PROJECT_CODE: process.env.PROJECT_CODE,
-        DEFAULT_LANGUAGE: process.env.DEFAULT_LANGUAGE,
-        COUNTRY_SUBDOMAIN_MAP: process.env.COUNTRY_SUBDOMAIN_MAP,
-        I18N_CACHE_STRATEGY: process.env.I18N_CACHE_STRATEGY,
-        CACHE_DEFAULT_TTL: process.env.CACHE_DEFAULT_TTL,
-        FEATURES_MEMBERSHIP_ENABLED: process.env.FEATURES_MEMBERSHIP_ENABLED,
-        USE_MOCK_API: process.env.USE_MOCK_API,
-        API_LOGGING_ENABLED: process.env.API_LOGGING_ENABLED,
-        PERFORMANCE_MONITORING: process.env.PERFORMANCE_MONITORING,
-
-        // 客戶端環境變數映射 - 開發時這些都會是 undefined，使用預設值
-        NEXT_PUBLIC_PROJECT_CODE: process.env.NEXT_PUBLIC_PROJECT_CODE,
-        NEXT_PUBLIC_PROJECT_NAME: process.env.NEXT_PUBLIC_PROJECT_NAME,
-        NEXT_PUBLIC_DEFAULT_LOCALE: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
-        NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
-        NEXT_PUBLIC_ENABLE_MULTI_LANGUAGE: process.env.NEXT_PUBLIC_ENABLE_MULTI_LANGUAGE,
-        NEXT_PUBLIC_GEO_DETECTION_STRATEGY: process.env.NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        NEXT_PUBLIC_GEO_REDIRECT_MODE: process.env.NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        NEXT_PUBLIC_CDN_COUNTRY_HEADER: process.env.NEXT_PUBLIC_CDN_COUNTRY_HEADER,
+        ...Object.fromEntries(
+            serverKeys.map(key => [key, process.env[key]])
+        ),
+        ...Object.fromEntries(
+            clientKeys.map(key => [key, process.env[key]])
+        ),
     },
 });
