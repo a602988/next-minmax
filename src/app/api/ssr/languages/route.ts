@@ -21,3 +21,8 @@ export async function GET() {
         headers: createCacheHeaders(CACHE_CONFIG.TTL.LANGUAGES)
     });
 }
+
+// 如果需要其他 HTTP 方法，可以這樣定義：
+export async function POST() {
+    // POST 請求的處理邏輯
+}

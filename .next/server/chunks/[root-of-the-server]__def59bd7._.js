@@ -1,6 +1,6 @@
 module.exports = {
 
-"[project]/.next-internal/server/app/api/ssr/languages/route/actions.js [app-rsc] (server actions loader, ecmascript)": ((__turbopack_context__) => {
+"[project]/.next-internal/server/app/api/ssr/locales/route/actions.js [app-rsc] (server actions loader, ecmascript)": ((__turbopack_context__) => {
 
 var { m: module, e: exports } = __turbopack_context__;
 {
@@ -61,45 +61,24 @@ const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-asyn
 
 module.exports = mod;
 }}),
-"[project]/src/app/api/ssr/_data/languages.data.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/ssr/_data/locales.data.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s({
-    "languagesData": ()=>languagesData
+    "localesData": ()=>localesData
 });
-const languagesData = {
+const localesData = {
     code: "0000",
     message: "成功",
-    data: [
-        {
-            "id": "zh-TW",
-            "title": "中文(繁體)",
-            "native": "TW",
-            "icon": "flag-icon-tw",
-            "default": true
-        },
-        {
-            "id": "zh-CN",
-            "title": "中文（簡體）",
-            "native": "CN",
-            "icon": "flag-icon-cn",
-            "default": false
-        },
-        {
-            "id": "en",
-            "title": "English",
-            "native": "EN",
-            "icon": "flag-icon-us",
-            "default": false
-        },
-        {
-            "id": "ja",
-            "title": "日文",
-            "native": "JA",
-            "icon": "flag-icon-ja",
-            "default": false
-        }
-    ]
+    data: {
+        "TW": "zh-TW",
+        "CN": "zh-CN",
+        "HK": "zh-TW",
+        "US": "en",
+        "GB": "en",
+        "JP": "ja",
+        "KR": "ko"
+    }
 };
 }),
 "[project]/src/env.mjs [app-route] (ecmascript)": ((__turbopack_context__) => {
@@ -635,38 +614,41 @@ const MOCK_DELAYS = {
 const SUPPORTED_LANGUAGES = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].SUPPORTED_LOCALES;
 const { isValidLocale } = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"];
 }),
-"[project]/src/app/api/ssr/languages/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
+"[project]/src/app/api/ssr/locales/route.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s({
-    "GET": ()=>GET,
-    "POST": ()=>POST
+    "GET": ()=>GET
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_data$2f$languages$2e$data$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/ssr/_data/languages.data.ts [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_data$2f$locales$2e$data$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/ssr/_data/locales.data.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/ssr/_utils/api-helpers.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$mock$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/app/api/ssr/_utils/mock.config.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-route] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.config.ts [app-route] (ecmascript)");
 ;
 ;
 ;
 ;
 ;
-async function GET() {
+async function GET(request) {
+    // 提取標準參數 (使用統一的參數處理)
+    const { project, language } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["extractStandardParams"])(request);
     // 開發環境才模擬延遲
-    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["simulateApiDelay"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$mock$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["MOCK_DELAYS"].LANGUAGES);
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["simulateApiDelay"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$mock$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["MOCK_DELAYS"].LOCALES);
     // 回傳深拷貝的資料，避免原始資料被修改
-    const data = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deepClone"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_data$2f$languages$2e$data$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["languagesData"]);
+    const data = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["deepClone"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_data$2f$locales$2e$data$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["localesData"]);
+    if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
+        const countryCount = Object.keys(data.data || data).length;
+        console.log(`📍 地區語系資料回應 [${project}/${language}]:`, countryCount, '個國家對照');
+    }
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json(data, {
-        headers: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createCacheHeaders"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TTL.LANGUAGES)
+        headers: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$api$2f$ssr$2f$_utils$2f$api$2d$helpers$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["createCacheHeaders"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TTL.LOCALES)
     });
-}
-async function POST() {
-// POST 請求的處理邏輯
 }
 }),
 
 };
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__4bb31e51._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__def59bd7._.js.map

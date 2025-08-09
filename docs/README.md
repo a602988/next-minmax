@@ -107,6 +107,8 @@ my-business-website/
     ├── constants/                              # (共享常數) 全域使用的常數 (例如 Cookie 名稱、API 路徑、事件名稱)
     ├── i18n/                                   # (國際化配置) next-intl 的核心配置邏輯 (getRequestConfig)
     ├── styles/                                 # (全域樣式) 全域 CSS 樣式、主題變數、字體定義
+    │   ├── variables.css                       # │  ├─ CSS 變數定義 (顏色、字重、間距等)
+    │   └── base.css                            # │  └─ 基礎元素樣式 (標題、段落、連結等預設樣式)
     ├── assets/                                 # (建置資源) 需要經由建置流程處理的靜態資源 (例如 Next/Image 使用的圖片)
     ├── types/                                  # (共享類型) 全域共享的 TypeScript 類型定義
     │   ├── api.ts                              # ├─ 📦 API 回應的類型定義 (PageData, Block, SEO 等)

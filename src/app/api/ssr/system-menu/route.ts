@@ -1,41 +1,53 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { LOCALE_CONFIG } from '@/config';
 import { systemMenusData } from '../_data/system-menus.data';
+import { simulateApiDelay, createCacheHeaders, deepClone, extractStandardParams } from '../_utils/api-helpers';
+import { MOCK_DELAYS } from '../_utils/mock.config';
+import { API_CONFIG, CACHE_CONFIG } from '@/config';
 
 /**
- * 系統選單 API
+ * 系統選單 Mock API
  *
- * 用途：提供網站導航選單的階層結構資料
+ * 🔄 開發階段使用，與正式 API 格式完全一致
+ * 🚀 透過環境變數 USE_MOCK_API 控制是否使用此端點
+ *
+ * 用途：提供網站選單結構資料，包含多層級選單配置
  * 參數：
  *   - project: 專案代碼
  *   - language: 當前語系
  *
- * 回傳：系統選單資料，包含完整的階層結構與選單項目設定
+ * 回傳：系統選單資料，包含階層結構、連結、選項等完整配置
  */
 export async function GET(request: NextRequest) {
-    // 取得查詢參數，使用統一配置的預設值
-    const searchParams = request.nextUrl.searchParams;
-    const language = searchParams.get('language') || LOCALE_CONFIG.DEFAULT_LOCALE;
+    // 提取標準參數 (使用統一的參數處理)
+    const { project, language } = extractStandardParams(request);
 
-    // 驗證語系參數
-    if (!LOCALE_CONFIG.isValidLocale(language)) {
-        return NextResponse.json({
-            code: "4000",
-            message: `不支援的語系: ${language}`,
-            data: null
-        }, { status: 400 });
+    // 開發環境才模擬延遲
+    await simulateApiDelay(MOCK_DELAYS.MENUS);
+
+    // 回傳深拷貝的資料，避免原始資料被修改
+    const data = deepClone(systemMenusData);
+
+    if (API_CONFIG.LOGGING) {
+        const menuCount = data.data?.data?.length || 0;
+        const totalMenuItems = countMenuItems(data.data?.data || []);
+        console.log(`🧭 系統選單資料回應 [${project}/${language}]:`, `${menuCount} 個主選單，共 ${totalMenuItems} 個項目`);
     }
 
-    // 模擬 API 延遲 (開發測試用)
-    await new Promise(resolve => setTimeout(resolve, 200));
-
-    // 深拷貝資料以避免修改原始資料
-    const data = JSON.parse(JSON.stringify(systemMenusData));
-
-    // 設置 Cache-Control 標頭
     return NextResponse.json(data, {
-        headers: {
-            'Cache-Control': 'public, max-age=3600, s-maxage=3600'
-        }
+        headers: createCacheHeaders(CACHE_CONFIG.TTL.MENUS)
     });
+}
+
+/**
+ * 遞迴計算選單項目總數
+ */
+function countMenuItems(menus: any[]): number {
+    let count = 0;
+    for (const menu of menus) {
+        count += 1; // 當前項目
+        if (menu.children && Array.isArray(menu.children)) {
+            count += countMenuItems(menu.children); // 遞迴計算子項目
+        }
+    }
+    return count;
 }

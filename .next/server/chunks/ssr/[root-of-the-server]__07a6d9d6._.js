@@ -429,6 +429,84 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$conf
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.config.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <locals>");
 }),
+"[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "BaseApiService": ()=>BaseApiService
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
+;
+class BaseApiService {
+    serviceName;
+    constructor(serviceName){
+        this.serviceName = serviceName;
+    }
+    /**
+     * 通用的 API 請求方法
+     * @param endpoint 端點配置 { mock: string, external: string }
+     * @param options 額外的 fetch 選項
+     * @returns Promise<T>
+     */ async apiRequest(endpoint, options = {}) {
+        const url = this.buildApiUrl(endpoint);
+        try {
+            this.logApiCall(url);
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                // 只有正式 API 需要超時設定
+                ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK ? {} : {
+                    signal: AbortSignal.timeout(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].TIMEOUT.DEFAULT)
+                },
+                ...options
+            });
+            if (!response.ok) {
+                throw new Error(`${this.serviceName} API 請求失敗: ${response.status} ${response.statusText}`);
+            }
+            const apiResponse = await response.json();
+            // 處理 API 回應格式 { code, message, data }
+            const data = apiResponse.data || apiResponse; // 兼容不同的回應格式
+            this.logSuccess(data);
+            return data;
+        } catch (error) {
+            this.logError(error);
+            throw error;
+        }
+    }
+    /**
+     * 根據環境變數建構 API 網址
+     */ buildApiUrl(endpoint) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK) {
+            // Mock API - 使用內部 Next.js API Routes
+            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].BASE_URL}${endpoint.mock}`;
+        } else {
+            // 正式 API - 使用外部後端 API
+            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].EXTERNAL_BASE_URL}${endpoint.external}`;
+        }
+    }
+    /**
+     * 記錄 API 呼叫日誌
+     */ logApiCall(url) {
+        console.log(`🌐 ${this.serviceName} API 呼叫: ${url} (Mock: ${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK})`);
+    }
+    /**
+     * 記錄成功日誌 - 子類別可以覆寫自定義格式
+     */ logSuccess(data) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
+            console.log(`✅ ${this.serviceName}資料載入成功`);
+        }
+    }
+    /**
+     * 記錄錯誤日誌
+     */ logError(error) {
+        console.error(`❌ ${this.serviceName} API 呼叫失敗:`, error);
+    }
+}
+}),
 "[project]/src/services/language.service.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -437,52 +515,31 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)");
+;
 ;
 /**
- * 語系服務 - 抽象化 API 呼叫
+ * 支援語系服務 - 抽象化 API 呼叫
  * 根據環境變數自動切換 Mock 或正式 API
- */ class LanguageService {
-    /**
-     * 取得語系清單
-     * @returns Promise<Language[]>
-     */ async getLanguages() {
-        const url = this.buildApiUrl();
-        try {
-            console.log(`🌍 語系 API 呼叫: ${url} (Mock: ${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK})`);
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                // 只有正式 API 需要超時設定
-                ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK ? {} : {
-                    signal: AbortSignal.timeout(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].TIMEOUT.DEFAULT)
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`語系 API 請求失敗: ${response.status} ${response.statusText}`);
-            }
-            const apiResponse = await response.json();
-            // 處理 API 回應格式 { code, message, data }
-            const data = apiResponse.data || apiResponse; // 兼容不同的回應格式
-            if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
-                console.log('✅ 語系資料載入成功:', data.length, '個語系');
-            }
-            return data;
-        } catch (error) {
-            console.error('❌ 語系 API 呼叫失敗:', error);
-            throw error;
-        }
+ */ class LanguageService extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BaseApiService"] {
+    constructor(){
+        super('支援語系');
     }
     /**
-     * 根據環境變數建構 API 網址
-     */ buildApiUrl() {
-        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK) {
-            // Mock API - 使用內部 Next.js API Routes
-            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].BASE_URL}${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.LANGUAGE}`;
-        } else {
-            // 正式 API - 使用外部後端 API
-            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].EXTERNAL_BASE_URL}${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.LANGUAGE}`;
+     * 取得支援的語系清單
+     * @returns Promise<Language[]>
+     */ async getLanguages() {
+        const endpoint = {
+            mock: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.LANGUAGE,
+            external: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.LANGUAGE
+        };
+        return this.apiRequest(endpoint);
+    }
+    /**
+     * 覆寫成功日誌，顯示語系數量
+     */ logSuccess(data) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
+            console.log(`✅ ${this.serviceName}資料載入成功:`, data.length, '個語系');
         }
     }
 }
@@ -496,43 +553,25 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)");
+;
 ;
 /**
- * 地區語系服務 - 抽象化 API 呼叫
+ * 國家語系對應服務 - 抽象化 API 呼叫
  * 根據環境變數自動切換 Mock 或正式 API
- */ class LocalesService {
+ */ class LocalesService extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BaseApiService"] {
+    constructor(){
+        super('國家語系對應');
+    }
     /**
      * 取得國家語系對照表
      * @returns Promise<CountryLocaleMapping>
      */ async getLocales() {
-        const url = this.buildApiUrl();
-        try {
-            console.log(`🌏 地區語系 API 呼叫: ${url} (Mock: ${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK})`);
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                // 只有正式 API 需要超時設定
-                ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK ? {} : {
-                    signal: AbortSignal.timeout(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].TIMEOUT.DEFAULT)
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`地區語系 API 請求失敗: ${response.status} ${response.statusText}`);
-            }
-            const apiResponse = await response.json();
-            // 處理 API 回應格式 { code, message, data }
-            const data = apiResponse.data || apiResponse; // 兼容不同的回應格式
-            if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
-                const countryCount = Object.keys(data).length;
-                console.log('✅ 地區語系資料載入成功:', countryCount, '個國家對照');
-            }
-            return data;
-        } catch (error) {
-            console.error('❌ 地區語系 API 呼叫失敗:', error);
-            throw error;
-        }
+        const endpoint = {
+            mock: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.LOCALES,
+            external: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.LOCALES
+        };
+        return this.apiRequest(endpoint);
     }
     /**
      * 根據國家代碼取得對應語系
@@ -548,14 +587,11 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$conf
         }
     }
     /**
-     * 根據環境變數建構 API 網址
-     */ buildApiUrl() {
-        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK) {
-            // Mock API - 使用內部 Next.js API Routes
-            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].BASE_URL}${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.LOCALES}`;
-        } else {
-            // 正式 API - 使用外部後端 API
-            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].EXTERNAL_BASE_URL}${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.LOCALES}`;
+     * 覆寫成功日誌，顯示國家數量
+     */ logSuccess(data) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
+            const countryCount = Object.keys(data).length;
+            console.log(`✅ ${this.serviceName}資料載入成功:`, countryCount, '個國家對照');
         }
     }
 }
@@ -738,4 +774,4 @@ module.exports = mod;
 
 };
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__d40ada99._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__07a6d9d6._.js.map

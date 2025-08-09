@@ -28,6 +28,7 @@ export function extractStandardParams(request: NextRequest): StandardParams {
  * 模擬 API 延遲
  */
 export async function simulateApiDelay(delay: number): Promise<void> {
+    // 開發環境才模擬延遲
     if (process.env.NODE_ENV === 'development') {
         await new Promise(resolve => setTimeout(resolve, delay));
     }
