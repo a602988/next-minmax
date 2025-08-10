@@ -4,6 +4,10 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from 'next'
+import { I18nProvider } from '@/providers/I18nProvider';
+import { I18nIntegrationService } from '@/services/i18n-integration.service';
+import { LOCALE_CONFIG } from '@/config';
+import { Language } from '@/types';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +40,9 @@ export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));
 }
 
+
+
+
 export default async function LocaleLayout({
      children,
      params
@@ -46,11 +53,25 @@ export default async function LocaleLayout({
 
   // 驗證 locale 是否有效
   const {locale} = await params;
+
+  // 更嚴格的類型檢查
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
-  // 啟用靜態渲染
+
+    // 🔄 SSR 階段預載語系資料
+    let languages: Language[] = [];
+    try {
+        if (LOCALE_CONFIG.DETECTION.ENABLED) {
+            languages = await I18nIntegrationService.getLanguages();
+            console.log(`🌐 SSR 預載語系資料成功: ${languages.length} 個語系`);
+        }
+    } catch (error) {
+        console.error('❌ SSR 語系資料預載失敗:', error);
+    }
+
+    // 啟用靜態渲染
   setRequestLocale(locale);
 
   return (
@@ -58,7 +79,12 @@ export default async function LocaleLayout({
       <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <NextIntlClientProvider >{children}</NextIntlClientProvider>
+      <NextIntlClientProvider >
+          <I18nProvider languages={languages} currentLocale={locale}>
+          {children}
+          </I18nProvider>
+
+      </NextIntlClientProvider>
       </body>
       </html>
   );

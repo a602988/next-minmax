@@ -1,48 +1,148 @@
 import { env } from '@/env.mjs';
 
 /**
+ * 快取資料類型定義 - 統一管理所有快取相關設定
+ */
+const CACHE_DATA_TYPES = {
+    LANGUAGES: {
+        ttl: 7200,  // 2小時
+        tags: ['languages', 'static-data'] as string[],
+        description: '語言資料快取'
+    },
+    LOCALES: {
+        ttl: 7200,  // 2小時
+        tags: ['locales', 'static-data'] as string[],
+        description: '地區設定快取'
+    },
+    MENUS: {
+        ttl: 3600,  // 1小時
+        tags: ['menus', 'navigation'] as string[],
+        description: '選單資料快取'
+    },
+    WEB_DATA: {
+        ttl: 3600,  // 1小時
+        tags: ['web-data', 'static-data'] as string[],
+        description: '網站資料快取'
+    },
+    PAGES: {
+        ttl: 1800,  // 30分鐘
+        tags: ['pages', 'content'] as string[],
+        description: '頁面內容快取'
+    },
+    GEO_DATA: {
+        ttl: 1800,  // 30分鐘
+        tags: ['geo-data', 'location'] as string[],
+        description: '地理位置資料快取'
+    },
+    USER_DATA: {
+        ttl: 600,   // 10分鐘
+        tags: ['user-data', 'dynamic-data'] as string[],
+        description: '使用者資料快取'
+    },
+    API_RESPONSE: {
+        ttl: env.CACHE_DEFAULT_TTL,
+        tags: ['api-response'] as string[],
+        description: 'API 回應快取'
+    },
+};
+
+/**
  * 快取相關配置
  */
 export const CACHE_CONFIG = {
     // 基礎配置
-    ENABLED: env.CACHE_ENABLED, // 快取系統總開關
-    CDN_ENABLED: env.CACHE_CDN_ENABLED, // CDN 快取協作開關
-    DEFAULT_TTL: env.CACHE_DEFAULT_TTL, // 快取預設生存時間 (秒)
-    STRATEGY: env.I18N_CACHE_STRATEGY, // 國際化快取策略
+    ENABLED: env.CACHE_ENABLED,
+    CDN_ENABLED: env.CACHE_CDN_ENABLED,
+    DEFAULT_TTL: env.CACHE_DEFAULT_TTL,
+    STRATEGY: env.I18N_CACHE_STRATEGY,
 
-    // 各類型資料的 TTL 設定 (秒)
-    TTL: {
-        LANGUAGES: 7200, // 語言資料快取 - 2小時
-        LOCALES: 7200, // 地區設定快取 - 2小時
-        MENUS: 3600, // 選單資料快取 - 1小時
-        WEB_DATA: 3600, // 網站資料快取 - 1小時
-        PAGES: 1800, // 頁面內容快取 - 30分鐘
-        GEO_DATA: 1800, // 地理位置資料快取 - 30分鐘
-        API_RESPONSE: env.CACHE_DEFAULT_TTL, // API 回應快取 - 使用預設 TTL
-    },
-
-    // Redis 配置 (如果使用 Redis 策略)
+    // Redis 配置
     REDIS: {
-        URL: undefined, // Redis 連線字串 - 由 env 設定 (敏感資訊)
-        PREFIX: 'minmax:', // Redis 鍵值前綴
-        KEY_SEPARATOR: ':', // 鍵值分隔符號
+        URL: undefined,
+        PREFIX: 'minmax:',
+        KEY_SEPARATOR: ':',
     },
 
-    // 快取標籤 - 用於分組管理和批次清除
+    // 從 CACHE_DATA_TYPES 自動生成 TTL 和 TAGS
+    TTL: {
+        LANGUAGES: CACHE_DATA_TYPES.LANGUAGES.ttl,
+        LOCALES: CACHE_DATA_TYPES.LOCALES.ttl,
+        MENUS: CACHE_DATA_TYPES.MENUS.ttl,
+        WEB_DATA: CACHE_DATA_TYPES.WEB_DATA.ttl,
+        PAGES: CACHE_DATA_TYPES.PAGES.ttl,
+        GEO_DATA: CACHE_DATA_TYPES.GEO_DATA.ttl,
+        USER_DATA: CACHE_DATA_TYPES.USER_DATA.ttl,
+        API_RESPONSE: CACHE_DATA_TYPES.API_RESPONSE.ttl,
+    },
+
     TAGS: {
-        LANGUAGES: 'languages', // 語言資料標籤
-        LOCALES: 'locales', // 地區設定標籤
-        MENUS: 'menus', // 選單資料標籤
-        WEB_DATA: 'web-data', // 網站資料標籤
-        PAGES: 'pages', // 頁面內容標籤
-        GEO_DATA: 'geo-data', // 地理位置資料標籤
-        API_RESPONSE: 'api-response', // API 回應標籤
+        LANGUAGES: CACHE_DATA_TYPES.LANGUAGES.tags,
+        LOCALES: CACHE_DATA_TYPES.LOCALES.tags,
+        MENUS: CACHE_DATA_TYPES.MENUS.tags,
+        WEB_DATA: CACHE_DATA_TYPES.WEB_DATA.tags,
+        PAGES: CACHE_DATA_TYPES.PAGES.tags,
+        GEO_DATA: CACHE_DATA_TYPES.GEO_DATA.tags,
+        USER_DATA: CACHE_DATA_TYPES.USER_DATA.tags,
+        API_RESPONSE: CACHE_DATA_TYPES.API_RESPONSE.tags,
     },
 
-    // 快取鍵值生成函數：統一生成快取鍵值，確保整個專案使用一致的命名規則。
+    // 快取鍵值生成函數
     generateKey: (type: string, identifier: string, locale?: string): string => {
         const parts = [CACHE_CONFIG.REDIS.PREFIX, type, identifier];
         if (locale) parts.push(locale);
         return parts.join(CACHE_CONFIG.REDIS.KEY_SEPARATOR);
-    }
+    },
 } as const;
+
+// 輔助函數
+export type CacheDataType = keyof typeof CACHE_DATA_TYPES;
+
+/**
+ * 取得指定資料類型的完整配置
+ */
+export function getCacheConfig(type: CacheDataType) {
+    return CACHE_DATA_TYPES[type];
+}
+
+/**
+ * 取得指定資料類型的 TTL (毫秒)
+ */
+export function getCacheTTL(type: CacheDataType): number {
+    return CACHE_DATA_TYPES[type].ttl * 1000;
+}
+
+/**
+ * 取得指定資料類型的標籤
+ */
+export function getCacheTags(type: CacheDataType): string[] {
+    return CACHE_DATA_TYPES[type].tags;
+}
+
+/**
+ * 根據標籤找到相關的資料類型
+ */
+export function getDataTypesByTag(tag: string): CacheDataType[] {
+    return Object.entries(CACHE_DATA_TYPES)
+        .filter(([_, config]) => config.tags.includes(tag))
+        .map(([key]) => key as CacheDataType);
+}
+
+/**
+ * 取得所有可用的標籤
+ */
+export function getAllCacheTags(): string[] {
+    const allTags = Object.values(CACHE_DATA_TYPES).flatMap(config => config.tags);
+    return [...new Set(allTags)];
+}
+
+/**
+ * 取得快取配置摘要 (用於除錯)
+ */
+export function getCacheConfigSummary() {
+    return Object.entries(CACHE_DATA_TYPES).map(([type, config]) => ({
+        type,
+        ttl: `${config.ttl}s (${config.ttl / 60}min)`,
+        tags: config.tags.join(', '),
+        description: config.description
+    }));
+}

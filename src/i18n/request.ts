@@ -8,25 +8,49 @@
  * 4. 動態載入對應的語言資源檔案
  * 5. 將語言配置和翻譯資源提供給應用程式
  */
-
-import {getRequestConfig} from 'next-intl/server'; // Next.js 國際化請求配置工廠函數
-import {hasLocale} from 'next-intl'; // 語言識別碼驗證工具函數
-import {routing} from './routing'; // 路由配置模組，包含支援語言清單和預設語言
+import {getRequestConfig} from 'next-intl/server';
+import {hasLocale} from 'next-intl';
+import {routing} from './routing';
+import {I18nIntegrationService} from '@/services/i18n-integration.service';
+import {LOCALE_CONFIG} from '@/config';
 
 export default getRequestConfig(async ({requestLocale}) => {
-    // 取得請求中的語言識別碼 (對應 [locale] 動態路由段)
-    // 使用 await 處理可能的異步語言識別碼解析
     const requested = await requestLocale;
-    
-    // 語言識別碼驗證與回退策略
-    // 若請求的語言在支援清單中則使用該語言，否則回退至預設語言
-    const locale = hasLocale(routing.locales, requested)
-        ? requested
-        : routing.defaultLocale;
+    let locale = routing.defaultLocale;
 
-    // 回傳國際化配置物件
+    // 🔄 動態語系驗證流程
+    if (LOCALE_CONFIG.DETECTION.ENABLED) {
+        try {
+            // 取得動態語系清單
+            const supportedLocales = await I18nIntegrationService.getSupportedLocales();
+            const dynamicDefaultLocale = await I18nIntegrationService.getDefaultLocale();
+
+            // 使用動態語系清單驗證
+            if (requested && supportedLocales.includes(requested)) {
+                // 確保 requested 是有效的 locale
+                locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
+            } else {
+                // 確保 dynamicDefaultLocale 是有效的 locale
+                locale = hasLocale(routing.locales, dynamicDefaultLocale) ? dynamicDefaultLocale : routing.defaultLocale;
+            }
+
+            console.log(`🌍 動態語系決策: 請求=${requested} → 最終=${locale}`);
+        } catch (error) {
+            console.warn('⚠️ 動態語系載入失敗，使用靜態配置', error);
+            // 降級至靜態驗證
+            locale = hasLocale(routing.locales, requested)
+                ? requested
+                : routing.defaultLocale;
+        }
+    } else {
+        // 使用靜態驗證
+        locale = hasLocale(routing.locales, requested)
+            ? requested
+            : routing.defaultLocale;
+    }
+
     return {
-        locale, // 最終確定的語言識別碼
-        messages: (await import(`../../messages/${locale}.json`)).default // 動態載入語言資源檔案
+        locale,
+        messages: (await import(`../../messages/${locale}.json`)).default
     };
 });
