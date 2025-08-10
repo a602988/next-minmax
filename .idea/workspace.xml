@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/providers/I18nProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/i18n-integration.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/cache.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/cache.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/request.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +105,7 @@
       <updated>1754533604105</updated>
       <workItem from="1754533605176" duration="13866000" />
       <workItem from="1754551019541" duration="10324000" />
-      <workItem from="1754660980608" duration="21910000" />
+      <workItem from="1754660980608" duration="22017000" />
     </task>
     <servers />
   </component>
