@@ -113,7 +113,7 @@ export const CACHE_CONFIG = {
     },
 
     // 快取鍵值生成函數
-    generateKey: (type: string, identifier: string, locale?: string): string => {
+    generateKey: (type: CacheDataType, identifier: string, locale?: string): string => {
         const parts = [CACHE_CONFIG.REDIS.PREFIX, type, identifier];
         if (locale) parts.push(locale);
         return parts.join(CACHE_CONFIG.REDIS.KEY_SEPARATOR);

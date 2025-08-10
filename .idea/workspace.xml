@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/暫存/QA.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/暫存/QA.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/暫存/ai問答紀錄.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/暫存/ai問答紀錄.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/cache.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/cache.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,12 +24,12 @@
     &quot;assignee&quot;: &quot;a602988&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/a602988/next-minmax.git",
-    "accountId": "664971d2-a866-4b26-841f-b3d320325559"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
+    &quot;accountId&quot;: &quot;664971d2-a866-4b26-841f-b3d320325559&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -58,7 +60,7 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
     "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/jean/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/chianlin/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -106,6 +108,7 @@
       <workItem from="1754533605176" duration="13866000" />
       <workItem from="1754551019541" duration="10324000" />
       <workItem from="1754660980608" duration="22017000" />
+      <workItem from="1754799107028" duration="6895000" />
     </task>
     <servers />
   </component>
@@ -118,12 +121,10 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/app/api/ssr/locales/route.ts</url>
           <line>4</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/middleware.ts</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
