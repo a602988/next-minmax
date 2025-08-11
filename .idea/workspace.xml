@@ -5,22 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/spec/cache.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/[locale]/layout-.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/application/use-cases/getLanguagesForSSR.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/infrastructure/language.cache.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/infrastructure/language.repository.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/presentation/LanguageProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/presentation/components/LanguageSwitcher.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/presentation/hooks/useLanguages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/locales/application/locales.repository.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/locales/application/use-cases/resolveLocaleForSSR.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/locales/domain/locales.types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/locales/infrastructure/locales.cache.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/cache/factory.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/cache/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/cache/memory-adapter.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/cache/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/app-build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/app-build-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/build-manifest.json" afterDir="false" />
@@ -98,6 +82,7 @@
       <change beforePath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/trace" beforeDir="false" afterPath="$PROJECT_DIR$/.next/trace" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/暫存/ai問答紀錄.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/暫存/ai問答紀錄.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/[locale]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/page.tsx" afterDir="false" />
@@ -206,7 +191,7 @@
       <workItem from="1754551019541" duration="10324000" />
       <workItem from="1754660980608" duration="22017000" />
       <workItem from="1754799107028" duration="6895000" />
-      <workItem from="1754881077830" duration="12845000" />
+      <workItem from="1754881077830" duration="12866000" />
     </task>
     <servers />
   </component>
