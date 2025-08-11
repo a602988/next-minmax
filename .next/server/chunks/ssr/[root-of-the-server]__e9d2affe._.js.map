@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":["file:///Users/linchian/Documents/GitHub/next-minmax/src/features/language/presentation/hooks/useLanguages.ts"],"sourcesContent":["// src/features/language/presentation/hooks/useLanguages.ts\n'use client';\n\nimport type { Language } from '@/types';\nimport { useLanguageContext } from '../LanguageProvider';\n\nexport function useLanguages(): Language[] {\n    return useLanguageContext().languages;\n}"],"names":[],"mappings":"AAAA,2DAA2D;;;;AAI3D;AAHA;;AAKO,SAAS;IACZ,OAAO,CAAA,GAAA,gKAAA,CAAA,qBAAkB,AAAD,IAAI,SAAS;AACzC","debugId":null}}]
+}

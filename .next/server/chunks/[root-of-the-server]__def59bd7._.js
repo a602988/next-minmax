@@ -418,44 +418,142 @@ const API_CONFIG = {
 "[project]/src/config/cache.config.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
-__turbopack_context__.s({
-    "CACHE_CONFIG": ()=>CACHE_CONFIG
+/**
+ * 快取系統配置檔案
+ *
+ * **主要職責**：
+ * - 統一管理所有快取相關的配置設定
+ * - 定義各種資料類型的快取策略（TTL、標籤、描述）
+ * - 提供快取鍵值生成和標籤管理的輔助函數
+ *
+ * **配置內容**：
+ * - **基礎設定**：快取開關、CDN協作、預設TTL、快取策略
+ * - **Redis設定**：連線配置、鍵值前綴、分隔符號
+ * - **資料類型**：8種快取資料類型的完整配置（語言、選單、頁面等）
+ *
+ * **提供功能**：
+ * - 取得特定資料類型的快取配置、TTL、標籤
+ * - 根據標籤查找相關的資料類型
+ * - 生成統一格式的快取鍵值
+ * - 快取配置摘要（用於除錯和監控）
+ *
+ * **設計特點**：
+ * - 單一數據源：所有快取設定集中在 CACHE_DATA_TYPES
+ * - 自動同步：TTL 和 TAGS 從主配置自動生成，避免不一致
+ * - 類型安全：完整的 TypeScript 類型定義和推斷
+ * - 易於維護：新增快取類型只需在一個地方定義
+ */ __turbopack_context__.s({
+    "CACHE_CONFIG": ()=>CACHE_CONFIG,
+    "getAllCacheTags": ()=>getAllCacheTags,
+    "getCacheConfig": ()=>getCacheConfig,
+    "getCacheConfigSummary": ()=>getCacheConfigSummary,
+    "getCacheTTL": ()=>getCacheTTL,
+    "getCacheTags": ()=>getCacheTags,
+    "getDataTypesByTag": ()=>getDataTypesByTag
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-route] (ecmascript)");
 ;
+/**
+ * 快取資料類型定義 - 統一管理所有快取相關設定
+ */ const CACHE_DATA_TYPES = {
+    LANGUAGES: {
+        ttl: 7200,
+        tags: [
+            'languages',
+            'static-data'
+        ],
+        description: '語言資料快取'
+    },
+    LOCALES: {
+        ttl: 7200,
+        tags: [
+            'locales',
+            'static-data'
+        ],
+        description: '地區設定快取'
+    },
+    MENUS: {
+        ttl: 3600,
+        tags: [
+            'menus',
+            'navigation'
+        ],
+        description: '選單資料快取'
+    },
+    WEB_DATA: {
+        ttl: 3600,
+        tags: [
+            'web-data',
+            'static-data'
+        ],
+        description: '網站資料快取'
+    },
+    PAGES: {
+        ttl: 1800,
+        tags: [
+            'pages',
+            'content'
+        ],
+        description: '頁面內容快取'
+    },
+    GEO_DATA: {
+        ttl: 1800,
+        tags: [
+            'geo-data',
+            'location'
+        ],
+        description: '地理位置資料快取'
+    },
+    USER_DATA: {
+        ttl: 600,
+        tags: [
+            'user-data',
+            'dynamic-data'
+        ],
+        description: '使用者資料快取'
+    },
+    API_RESPONSE: {
+        ttl: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL,
+        tags: [
+            'api-response'
+        ],
+        description: 'API 回應快取'
+    }
+};
 const CACHE_CONFIG = {
     // 基礎配置
     ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].CACHE_ENABLED,
     CDN_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].CACHE_CDN_ENABLED,
     DEFAULT_TTL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL,
     STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
-    // 各類型資料的 TTL 設定 (秒)
-    TTL: {
-        LANGUAGES: 7200,
-        LOCALES: 7200,
-        MENUS: 3600,
-        WEB_DATA: 3600,
-        PAGES: 1800,
-        GEO_DATA: 1800,
-        API_RESPONSE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL
-    },
-    // Redis 配置 (如果使用 Redis 策略)
+    // Redis 配置
     REDIS: {
         URL: undefined,
         PREFIX: 'minmax:',
         KEY_SEPARATOR: ':'
     },
-    // 快取標籤 - 用於分組管理和批次清除
-    TAGS: {
-        LANGUAGES: 'languages',
-        LOCALES: 'locales',
-        MENUS: 'menus',
-        WEB_DATA: 'web-data',
-        PAGES: 'pages',
-        GEO_DATA: 'geo-data',
-        API_RESPONSE: 'api-response'
+    // 從 CACHE_DATA_TYPES 自動生成 TTL 和 TAGS
+    TTL: {
+        LANGUAGES: CACHE_DATA_TYPES.LANGUAGES.ttl,
+        LOCALES: CACHE_DATA_TYPES.LOCALES.ttl,
+        MENUS: CACHE_DATA_TYPES.MENUS.ttl,
+        WEB_DATA: CACHE_DATA_TYPES.WEB_DATA.ttl,
+        PAGES: CACHE_DATA_TYPES.PAGES.ttl,
+        GEO_DATA: CACHE_DATA_TYPES.GEO_DATA.ttl,
+        USER_DATA: CACHE_DATA_TYPES.USER_DATA.ttl,
+        API_RESPONSE: CACHE_DATA_TYPES.API_RESPONSE.ttl
     },
-    // 快取鍵值生成函數：統一生成快取鍵值，確保整個專案使用一致的命名規則。
+    TAGS: {
+        LANGUAGES: CACHE_DATA_TYPES.LANGUAGES.tags,
+        LOCALES: CACHE_DATA_TYPES.LOCALES.tags,
+        MENUS: CACHE_DATA_TYPES.MENUS.tags,
+        WEB_DATA: CACHE_DATA_TYPES.WEB_DATA.tags,
+        PAGES: CACHE_DATA_TYPES.PAGES.tags,
+        GEO_DATA: CACHE_DATA_TYPES.GEO_DATA.tags,
+        USER_DATA: CACHE_DATA_TYPES.USER_DATA.tags,
+        API_RESPONSE: CACHE_DATA_TYPES.API_RESPONSE.tags
+    },
+    // 快取鍵值生成函數
     generateKey: (type, identifier, locale)=>{
         const parts = [
             CACHE_CONFIG.REDIS.PREFIX,
@@ -466,6 +564,32 @@ const CACHE_CONFIG = {
         return parts.join(CACHE_CONFIG.REDIS.KEY_SEPARATOR);
     }
 };
+function getCacheConfig(type) {
+    return CACHE_DATA_TYPES[type];
+}
+function getCacheTTL(type) {
+    return CACHE_DATA_TYPES[type].ttl * 1000;
+}
+function getCacheTags(type) {
+    return CACHE_DATA_TYPES[type].tags;
+}
+function getDataTypesByTag(tag) {
+    return Object.entries(CACHE_DATA_TYPES).filter(([_, config])=>config.tags.includes(tag)).map(([key])=>key);
+}
+function getAllCacheTags() {
+    const allTags = Object.values(CACHE_DATA_TYPES).flatMap((config)=>config.tags);
+    return [
+        ...new Set(allTags)
+    ];
+}
+function getCacheConfigSummary() {
+    return Object.entries(CACHE_DATA_TYPES).map(([type, config])=>({
+            type,
+            ttl: `${config.ttl}s (${config.ttl / 60}min)`,
+            tags: config.tags.join(', '),
+            description: config.description
+        }));
+}
 }),
 "[project]/src/config/index.ts [app-route] (ecmascript) <locals>": ((__turbopack_context__) => {
 "use strict";
@@ -528,6 +652,7 @@ function extractStandardParams(request) {
     };
 }
 async function simulateApiDelay(delay) {
+    // 開發環境才模擬延遲
     if ("TURBOPACK compile-time truthy", 1) {
         await new Promise((resolve)=>setTimeout(resolve, delay));
     }
