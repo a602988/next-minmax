@@ -24,3 +24,7 @@ Service Worker：離線快取策略
 規劃出來
 
 依據先前規劃的，是否符合以上描述
+
+
+next.js 採用 「功能導向」或「領域驅動」`的目錄結構
+src/features/Language or Locales or 任何其他/下完整的目錄運用可能有什麼目錄

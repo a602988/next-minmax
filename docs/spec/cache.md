@@ -3,17 +3,6 @@
 ## 目錄規劃
 
 ```
-docs/
-└── i18n/
-    ├── language/
-    │   ├── README.md                 # Language 快取與整合說明（已完成）
-    │   ├── ssr-integration.md        # SSR 時序、注入與使用（已完成）
-    │   └── cache-flow.md             # Key/TTL/Tags 規範（已完成）
-    └── locales/
-        ├── README.md                 # Locales（國家→語系）快取與決策設計
-        ├── ssr-integration.md        # 與 next-intl 的決策串接流程與時序
-        └── cache-flow.md             # Key/TTL/Tags 規範與失效策略
-
 src/
 ├── i18n/
 │   ├── routing.ts                    # 靜態「超集合」語系/預設語系，作為保底
@@ -30,7 +19,7 @@ src/
 │   ├── language/
 │   │   ├── domain/
 │   │   │   └── language.types.ts     # 語系型別與工具（若已有可沿用）
-│   │   ├── infrastructure/
+│   │   ├── infrastructure/           
 │   │   │   └── language.cache.ts     # Key/TTL/Tags + adapter 包裝（已完成）
 │   │   ├── application/
 │   │   │   ├── language.repository.ts       # 快取→API→回填（已完成）
