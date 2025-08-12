@@ -23,7 +23,6 @@
     --text-sm: .875rem;
     --text-sm--line-height: calc(1.25 / .875);
     --font-weight-bold: 700;
-    --radius-sm: .25rem;
     --default-font-family: var(--font-geist-sans);
     --default-mono-font-family: var(--font-geist-mono);
   }
@@ -454,10 +453,6 @@
     border-radius: .25rem;
   }
 
-  .rounded-sm {
-    border-radius: var(--radius-sm);
-  }
-
   .bg-blue-500\/20 {
     background-color: rgba(48, 128, 255, .2);
   }
@@ -474,10 +469,6 @@
 
   .bg-gray-100 {
     background-color: var(--color-gray-100);
-  }
-
-  .object-cover {
-    object-fit: cover;
   }
 
   .px-1\.5 {

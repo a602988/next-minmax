@@ -92,7 +92,7 @@ my-business-website/
     │   ├── layout/                             # ├─ 🖼️ 版型組件 (頁首、頁尾、側邊欄、通用頁面容器)
     │   └── ui/                                 # └─ ⚙️ 基礎原子組件 (按鈕、輸入框、卡片、對話框等)
     ├── features/                               # 核心業務功能模組，每個子目錄代表一個獨立領域
-    │   ├── demo/                             # 示例業務功能模塊（可根據實際業務命名）
+    │   ├── demo/                               # 示例業務功能模塊（可根據實際業務命名）
     │   │   ├── actions/                          # 伺服器動作 (Server Actions)，包含需要處理的API請求或伺服器端邏輯
     │   │   ├── api/                              # 客戶端調用API的函數
     │   │   ├── components/                       # 存放UI元件，例如表單、按鈕等
@@ -143,7 +143,11 @@ my-business-website/
     ├── contexts/                               # (共享Context) 全域狀態管理 Context (例如 AuthContext, ThemeContext)
     ├── providers/                              # (共享Provider) 集中管理所有 Context Provider 的組件
     ├── constants/                              # (共享常數) 全域使用的常數 (例如 Cookie 名稱、API 路徑、事件名稱)
-    ├── i18n/                                   # (國際化配置) next-intl 的核心配置邏輯 (getRequestConfig)
+    ├── i18n/                                   # (國際化配置) next-intl 的核心配置邏輯
+    │   ├── routing.ts                          # 路由配置：定義支援的語系、預設語系和路徑前綴策略
+    │   ├── locale-cookie.ts                    # Cookie 管理：處理使用者語系偏好的 Cookie 讀寫邏輯
+    │   ├── navigation.ts                       # 導航組件：提供國際化的 Link、redirect、useRouter 等導航工具
+    │   └── request.ts                          # 請求配置：next-intl 的 getRequestConfig，處理 SSR 語系決策和訊息載入
     ├── styles/                                 # (全域樣式) 全域 CSS 樣式、主題變數、字體定義
     │   ├── variables.css                       # │  ├─ CSS 變數定義 (顏色、字重、間距等)
     │   └── base.css                            # │  └─ 基礎元素樣式 (標題、段落、連結等預設樣式)
@@ -152,7 +156,8 @@ my-business-website/
     │   ├── api.ts                              # ├─ 📦 API 回應的類型定義 (PageData, Block, SEO 等)
     │   ├── i18n.ts                             # ├─ 國際化相關的類型
     │   ├── index.ts                            # ├─ 類型的統一導出點
-    │   └── language.ts                         # └─ 語系與地區相關的類型
+    │   ├── locales.types.ts                    # ├─ 國家預設語系
+    │   └── language.types.ts                   # └─ 語系資料與系統預設語系
     ├── middleware.ts                           # (請求中介層) Next.js 中間件，處理國際化路由、認證、地理位置重導向等
     └── env.mjs                                 # (環境變數) 🔒 使用 Zod 進行環境變數驗證，提供類型安全的 `env` 物件
 ```

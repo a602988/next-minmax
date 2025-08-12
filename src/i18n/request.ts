@@ -17,12 +17,13 @@ export default getRequestConfig(async ({requestLocale}) => {
     } catch (e) {
         // 動態載入失敗時，使用 routing 的靜態預設作為兜底
         console.warn('⚠️ 載入動態 locales 失敗，使用靜態 routing 作為兜底', e);
-        supportedLocales = routing.locales;
+        supportedLocales = [...routing.locales]; // Create a mutable copy
         dynamicDefaultLocale = routing.defaultLocale;
     }
 
     // 2) 依優先序決定候選語系：URL → Cookie → 動態預設 → 靜態預設
-    const cookieLocale = cookies().get('NEXT_LOCALE')?.value;
+    const cookieStore = await cookies();
+    const cookieLocale = cookieStore.get('NEXT_LOCALE')?.value;
     const candidate =
         requested ||
         (LOCALE_CONFIG.DETECTION.ENABLED ? cookieLocale : undefined) ||

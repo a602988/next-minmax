@@ -29,7 +29,8 @@ export default async function HomePage() {
                         </Link>
                     ))}
                 </nav>
-                <LanguageSwitcher className="mb-6" />
+                <LanguageSwitcher className="mb-6" languages={languages} />
+
             </div>
             <div>
                 <h2>國家預設語系</h2>

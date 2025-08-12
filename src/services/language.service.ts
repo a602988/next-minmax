@@ -1,5 +1,5 @@
 import { API_CONFIG } from '@/config';
-import { Language } from '@/types';
+import type { Language } from '@/types';
 import { BaseApiService } from './base/api-service.base';
 
 /**
