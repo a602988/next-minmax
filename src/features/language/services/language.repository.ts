@@ -1,6 +1,6 @@
 // src/features/language/application/language.repository.ts
 import { languageService } from '@/services/language.service';
-import { getLanguagesCache, setLanguagesCache } from '../infrastructure/language.cache';
+import { getLanguagesCache, setLanguagesCache } from '@/features/language/lib/language.cache';
 import type { Language } from '@/types';
 
 export class LanguageRepository {

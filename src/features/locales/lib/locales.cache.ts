@@ -2,7 +2,7 @@
 // features/locales/infrastructure/locales.cache.ts
 import { getCacheAdapter } from '@/lib/cache';
 import { CACHE_CONFIG } from '@/config';
-import type { CountryLocaleMapping } from './locales.types';
+import type { CountryLocaleMapping } from '@/features/locales/types/locales.types';
 
 const adapter = getCacheAdapter();
 const KEY = CACHE_CONFIG.generateKey('LOCALES', 'country-map');

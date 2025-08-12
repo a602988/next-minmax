@@ -1,8 +1,8 @@
 // TypeScript
 // features/locales/application/locales.repository.ts
 import { localesService } from '@/services/locales.service';
-import { getLocalesCache, setLocalesCache } from '../infrastructure/locales.cache';
-import type { CountryLocaleMapping } from '../domain/locales.types';
+import { getLocalesCache, setLocalesCache } from '../lib/locales.cache';
+import type { CountryLocaleMapping } from '@/features/locales/types/locales.types';
 
 export class LocalesRepository {
     async getLocales(): Promise<CountryLocaleMapping> {

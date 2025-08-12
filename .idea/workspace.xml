@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/README2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/language/constants/language.constants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README2.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/spec/cache.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/cache.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[locale]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/language/application/use-cases/getLanguagesForSSR.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/lib/getLanguagesForSSR.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/language/infrastructure/language.cache.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/lib/language.cache.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/language/infrastructure/language.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/services/language.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/language/presentation/LanguageProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/components/LanguageProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/language/presentation/components/LanguageSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/components/LanguageSwitcher.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/language/presentation/hooks/useLanguages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/hooks/useLanguages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/locales/application/locales.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/locales/services/locales.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/locales/application/use-cases/resolveLocaleForSSR.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/locales/lib/resolveLocaleForSSR.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/locales/domain/locales.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/locales/types/locales.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/locales/infrastructure/locales.cache.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/locales/lib/locales.cache.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,10 +85,11 @@
       <recent name="$PROJECT_DIR$/src/services" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/lib/cache" />
-      <recent name="$PROJECT_DIR$/src/lib" />
-      <recent name="$PROJECT_DIR$/docs/spec" />
-      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/features/locales" />
+      <recent name="$PROJECT_DIR$/src/features/locales/lib" />
+      <recent name="$PROJECT_DIR$/src/features/language/lib" />
+      <recent name="$PROJECT_DIR$/src/features/language/services" />
+      <recent name="$PROJECT_DIR$/src/features/services" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
@@ -113,7 +127,7 @@
       <workItem from="1754799107028" duration="6895000" />
       <workItem from="1754881077830" duration="12866000" />
       <workItem from="1754906126988" duration="1998000" />
-      <workItem from="1754966782521" duration="1446000" />
+      <workItem from="1754966782521" duration="2714000" />
     </task>
     <servers />
   </component>

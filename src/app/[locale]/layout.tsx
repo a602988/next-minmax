@@ -4,8 +4,8 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from 'next'
-import { getLanguagesForSSR } from '@/features/language/application/use-cases/getLanguagesForSSR';
-import { LanguageProvider } from '@/features/language/presentation/LanguageProvider';
+import { getLanguagesForSSR } from '@/features/language/lib/getLanguagesForSSR';
+import { LanguageProvider } from '@/features/language/components/LanguageProvider';
 
 
 const geistSans = Geist({

@@ -1,8 +1,8 @@
 // TypeScript
 // features/locales/application/use-cases/resolveLocaleForSSR.ts
 import { cookies } from 'next/headers';
-import { localesRepository } from '../locales.repository';
-import { languageRepository } from '@/features/language/application/language.repository';
+import { localesRepository } from '@/features/locales/services/locales.repository';
+import { languageRepository } from '@/features/language/services/language.repository';
 
 type Input = {
     requestLocale?: string | null;   // 來自 URL
@@ -14,7 +14,8 @@ export async function resolveLocaleForSSR({ requestLocale, detectedCountry }: In
     const supported = languages.map(l => l.id);
     const dynamicDefault = languages.find(l => l.default)?.id ?? supported[0];
 
-    const cookieLocale = cookies().get('NEXT_LOCALE')?.value;
+    const cookieStore = await cookies();
+    const cookieLocale = cookieStore.get('NEXT_LOCALE')?.value;
 
     const candidate =
         (requestLocale && supported.includes(requestLocale) && requestLocale) ||

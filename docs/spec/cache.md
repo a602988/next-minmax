@@ -5,57 +5,65 @@
 ```
 src/
 ├── i18n/
-│   ├── routing.ts                    # 靜態「超集合」語系/預設語系，作為保底
-│   └── request.ts                    # SSR：動態決策最終 locale + 載入 messages（已調整方案）
+│   ├── routing.ts
+│   └── request.ts
 │
 ├── lib/
 │   └── cache/
-│       ├── types.ts                  # CacheAdapter 介面（已完成）
-│       ├── memory-adapter.ts         # 記憶體快取（已完成）
-│       ├── factory.ts                # 策略切換（已完成）
-│       └── index.ts                  # 封裝 export（已完成）
+│       ├── types.ts
+│       ├── memory-adapter.ts
+│       ├── factory.ts
+│       └── index.ts
 │
 ├── features/
 │   ├── language/
-│   │   ├── domain/
-│   │   │   └── language.types.ts     # 語系型別與工具（若已有可沿用）
-│   │   ├── infrastructure/           
-│   │   │   └── language.cache.ts     # Key/TTL/Tags + adapter 包裝（已完成）
-│   │   ├── application/
-│   │   │   ├── language.repository.ts       # 快取→API→回填（已完成）
-│   │   │   └── use-cases/
-│   │   │       └── getLanguagesForSSR.ts    # SSR 專用取數（已完成）
-│   │   └── presentation/
-│   │       ├── components/
-│   │       │   ├── LanguageSwitcher.tsx             # 內含導頁的 Client 下拉（已提供）
-│   │       │   └── LanguageSwitcherStandalone.tsx   # Server 傳 props 的 Client 下拉（已提供）
-│   │       └── sections/
-│   │           └── LanguagesSection.server.tsx      # SSR 取數→以 props 給下拉（已提供）
+│   │   ├── actions/                          #（可選）目前可留空，預留未來 Server Actions
+│   │   ├── api/
+│   │   │   └── language.client.ts            # 原：呼叫語系 API 的前端 client（若你已有全域 service，可在此做適配或重導）
+│   │   ├── components/
+│   │   │   ├── LanguageProvider.tsx          # 原 presentation/LanguageProvider（若原檔名如此）
+│   │   │   ├── LanguageSwitcher.tsx          # 原 presentation/components/LanguageSwitcher.tsx
+│   │   │   └── LanguageSwitcherStandalone.tsx# 原 presentation/components/LanguageSwitcherStandalone.tsx
+│   │   ├── constants/
+│   │   │   └── language.constants.ts         # 快取 KEY/TTL/TAGS 等常數集中地
+│   │   ├── hooks/
+│   │   │   └── useLanguages.ts               # 原 presentation/hooks/useLanguages.ts
+│   │   ├── lib/
+│   │   │   ├── language.cache.ts             # 原 infrastructure/language.cache.ts（快取封裝）
+│   │   │   └── getLanguagesForSSR.ts         # 原 application/use-cases/getLanguagesForSSR.ts
+│   │   ├── services/
+│   │   │   └── language.repository.ts        # 原 application/language.repository.ts（快取→API→回填）
+│   │   ├── types/
+│   │   │   └── language.types.ts             # 原 domain/language.types.ts
+│   │   ├── __tests__/                        # 測試維持原語意，檔名可沿用
+│   │   │   ├── language.cache.test.ts
+│   │   │   └── language.repository.test.ts
+│   │   └── index.ts                          # 對外匯出整合（barrel）
 │   │
 │   └── locales/
 │       ├── domain/
-│       │   └── locales.types.ts       # CountryLocaleMapping 等型別
+│       │   └── locales.types.ts
 │       ├── infrastructure/
-│       │   └── locales.cache.ts       # Key：LOCALES:list 或 country-map；TTL/Tags：CACHE_CONFIG.TTL.LOCALES
+│       │   └── locales.cache.ts
 │       ├── application/
-│       │   ├── locales.repository.ts  # getLocales()（快取→API→回填）；getLocaleByCountry(country)
+│       │   ├── locales.repository.ts
 │       │   └── use-cases/
-│       │       └── resolveLocaleForSSR.ts # SSR 語系決策用例（Cookie/URL/Geo → 最終 locale）
+│       │       └── resolveLocaleForSSR.ts
 │       └── integration/
-│           └── i18n-integration.service.ts  # 門面（可選）：對 request.ts 提供 getSupportedLocales/getDefaultLocale
+│           └── i18n-integration.service.ts
 │
 ├── services/
-│   ├── language.service.ts            # 已有：語系 API 呼叫
-│   └── locales.service.ts             # 已有：國家→語系對照，與 getLocaleByCountry
+│   ├── language.service.ts
+│   └── locales.service.ts
 │
 ├── app/
 │   └── [locale]/
-│       ├── layout.tsx                 # SSR：next-intl +（可選）預取下拉語系並渲染 UI
-│       └── page.tsx                   # 使用 LanguagesSection 或 LanguageSwitcher
+│       ├── layout.tsx
+│       └── page.tsx
 │
 └── tests/
-    ├── language.cache.test.ts         # 命中/未命中、TTL、API 降級
-    └── locales.cache.test.ts         
+    ├── language.cache.test.ts
+    └── locales.cache.test.ts
 ```
 
 ---

@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { languageService,localesService } from '@/services'; // ✅ 使用統一導出
-import LanguageSwitcher from '@/features/language/presentation/components/LanguageSwitcher';
+import LanguageSwitcher from '@/features/language/components/LanguageSwitcher';
 
 export default async function HomePage() {
     // 靜態渲染的翻譯資料
