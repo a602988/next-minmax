@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/features/language/types/language.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/README2.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/spec/cache.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/cache.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/暫存/ai問答紀錄.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/暫存/ai問答紀錄.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/chianlin/Documents/GitHub/next-minmax/src/features/language/types",
+    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/docs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -61,17 +59,17 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "junie.application.models",
     "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/chianlin/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs" />
       <recent name="$PROJECT_DIR$/src/features/language/types" />
       <recent name="$PROJECT_DIR$/src/features/locales" />
       <recent name="$PROJECT_DIR$/src/app/[locale]" />
       <recent name="$PROJECT_DIR$/src/services" />
-      <recent name="$PROJECT_DIR$/src/app/api/ssr" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/lib/cache" />
@@ -115,6 +113,7 @@
       <workItem from="1754799107028" duration="6895000" />
       <workItem from="1754881077830" duration="12866000" />
       <workItem from="1754906126988" duration="1998000" />
+      <workItem from="1754966782521" duration="1446000" />
     </task>
     <servers />
   </component>
