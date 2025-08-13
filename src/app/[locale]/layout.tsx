@@ -132,6 +132,9 @@ export default async function LocaleLayout({
 }) {
     const { locale } = await params;
 
+
+
+
     if (!hasLocale(routing.locales, locale)) {
         notFound();
     }
@@ -141,6 +144,8 @@ export default async function LocaleLayout({
     return (
         <html lang={locale}>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+
+
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
         </body>
         </html>

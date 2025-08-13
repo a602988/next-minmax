@@ -26,12 +26,12 @@
     │           ├── locales/                    #       ├─ 專門提供 `locales` 資料的 API 端點
     │           │   └── route.ts                #       │  └─ /api/ssr/locales 的路由處理器
     │           └── route.ts                    #       └─ 處理頁面內容的通用 Mock API 端點 (例如 /api/ssr/pages/[slug])  
-    ├── i18n/
+    ├── i18n/                                   # 應用層整合
     │   ├── routing.ts
     │   └── request.ts
     │
     ├── lib/
-    │   ├── cache/
+    │   ├── cache/                              # 基礎設施層
     │   │   ├── types.ts
     │   │   ├── memory-adapter.ts
     │   │   ├── factory.ts

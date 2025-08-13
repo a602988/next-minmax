@@ -5,35 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/features/language/components/LanguageSwitcherContainer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/hooks/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/language/hooks/useLanguageSwitcher.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/locale-utils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/seo-utils.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/layout/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/app-build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/app-build-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/build-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/fallback-build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/fallback-build-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/server/app/[locale]/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/app/[locale]/page.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/server/app/[locale]/page/app-build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/app/[locale]/page/app-build-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/server/app/[locale]/page_client-reference-manifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/app/[locale]/page_client-reference-manifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__2af95f33._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__2af95f33._.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__e4123d4e._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__e4123d4e._.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ec1c2fb1._.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ec1c2fb1._.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ec1c2fb1._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ec1c2fb1._.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/middleware-build-manifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/middleware-build-manifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/chunks/_a1e59275._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/_a1e59275._.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/chunks/src_app_[locale]_page_tsx_1d6daa98._.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/src_app_[locale]_page_tsx_1d6daa98._.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__1a35c82f._.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__1a35c82f._.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__1a35c82f._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__1a35c82f._.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__cdd1146a._.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__cdd1146a._.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__cdd1146a._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__cdd1146a._.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__e8a7818d._.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__e8a7818d._.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__e8a7818d._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__e8a7818d._.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ef490ac7._.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ef490ac7._.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ef490ac7._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/chunks/ssr/[root-of-the-server]__ef490ac7._.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/chunks/_5a216271._.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/_5a216271._.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/chunks/_5a216271._.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/_5a216271._.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/src_app_globals_b805903d.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/trace" beforeDir="false" afterPath="$PROJECT_DIR$/.next/trace" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/spec/cache.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/cache.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/[locale]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/features/language/components/LanguageSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/components/LanguageSwitcher.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/language/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/components/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/language/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/language/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/i18n-integration.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/i18n-integration.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/language.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/language.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/locales.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/locales.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +137,7 @@
       <workItem from="1754799107028" duration="6895000" />
       <workItem from="1754881077830" duration="12866000" />
       <workItem from="1754906126988" duration="1998000" />
-      <workItem from="1754966782521" duration="25594000" />
+      <workItem from="1754966782521" duration="34569000" />
     </task>
     <servers />
   </component>

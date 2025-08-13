@@ -33,158 +33,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$routing$2e$ts
 ;
 const { Link, redirect, usePathname, useRouter, getPathname } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$navigation$2f$react$2d$server$2f$createNavigation$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__createNavigation$3e$__["createNavigation"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$routing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["routing"]);
 }),
-"[project]/src/services/locales.service.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-__turbopack_context__.s({
-    "localesService": ()=>localesService
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)");
-;
-;
-/**
- * 國家語系對應服務 - 抽象化 API 呼叫
- * 根據環境變數自動切換 Mock 或正式 API
- */ class LocalesService extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BaseApiService"] {
-    constructor(){
-        super('國家語系對應');
-    }
-    /**
-     * 取得國家語系對照表
-     * @returns Promise<CountryLocaleMapping>
-     */ async getLocales() {
-        const endpoint = {
-            mock: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.LOCALES,
-            external: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.LOCALES
-        };
-        return this.apiRequest(endpoint);
-    }
-    /**
-     * 根據國家代碼取得對應語系
-     * @param countryCode 國家代碼 (如 "TW", "US")
-     * @returns Promise<string | null>
-     */ async getLocaleByCountry(countryCode) {
-        try {
-            const locales = await this.getLocales();
-            return locales[countryCode] || null;
-        } catch (error) {
-            console.error(`❌ 無法取得國家 ${countryCode} 對應的語系:`, error);
-            return null;
-        }
-    }
-    /**
-     * 覆寫成功日誌，顯示國家數量
-     */ logSuccess(data) {
-        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
-            const countryCount = Object.keys(data).length;
-            console.log(`✅ ${this.serviceName}資料載入成功:`, countryCount, '個國家對照');
-        }
-    }
-}
-const localesService = new LocalesService();
-}),
-"[project]/src/services/system-menu.service.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
-"use strict";
-
-__turbopack_context__.s({
-    "systemMenuService": ()=>systemMenuService
-});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)");
-;
-;
-/**
- * 系統選單服務 - 抽象化 API 呼叫
- * 根據環境變數自動切換 Mock 或正式 API
- */ class SystemMenuService extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BaseApiService"] {
-    constructor(){
-        super('系統選單');
-    }
-    /**
-     * 取得系統選單資料
-     * @returns Promise<SystemMenuItem[]>
-     */ async getSystemMenu() {
-        const endpoint = {
-            mock: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.SYSTEM_MENUS,
-            external: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.SYSTEM_MENUS
-        };
-        return this.apiRequest(endpoint);
-    }
-    /**
-     * 根據層級取得選單項目
-     * @param level 選單層級 (1 或 2)
-     * @returns Promise<SystemMenuItem[]>
-     */ async getMenuByLevel(level) {
-        try {
-            const allMenus = await this.getSystemMenu();
-            return allMenus.filter((menu)=>menu.level === level);
-        } catch (error) {
-            console.error(`❌ 無法取得第 ${level} 層選單:`, error);
-            return [];
-        }
-    }
-    /**
-     * 根據上層選單 ID 取得子選單
-     * @param parentId 上層選單 ID
-     * @returns Promise<SystemMenuItem[]>
-     */ async ㄓㄜ(parentId) {
-        try {
-            const allMenus = await this.getSystemMenu();
-            return allMenus.filter((menu)=>menu.parentId === parentId);
-        } catch (error) {
-            console.error(`❌ 無法取得上層選單 ${parentId} 的子選單:`, error);
-            return [];
-        }
-    }
-    /**
-     * 根據選單 ID 取得特定選單項目
-     * @param menuId 選單項目 ID
-     * @returns Promise<SystemMenuItem | null>
-     */ async getMenuItemById(menuId) {
-        try {
-            const allMenus = await this.getSystemMenu();
-            return allMenus.find((menu)=>menu.id === menuId) || null;
-        } catch (error) {
-            console.error(`❌ 無法找到選單項目 ${menuId}:`, error);
-            return null;
-        }
-    }
-    /**
-     * 覆寫成功日誌，顯示選單項目統計
-     */ logSuccess(data) {
-        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
-            const level1Count = data.filter((menu)=>menu.level === 1).length;
-            const level2Count = data.filter((menu)=>menu.level === 2).length;
-            console.log(`✅ ${this.serviceName}資料載入成功:`, `總計 ${data.length} 個選單項目 (第一層:${level1Count}, 第二層:${level2Count})`);
-        }
-    }
-}
-const systemMenuService = new SystemMenuService();
-}),
-"[project]/src/services/index.ts [app-rsc] (ecmascript) <locals>": ((__turbopack_context__) => {
-"use strict";
-
-// 統一導出所有服務
-__turbopack_context__.s({});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$language$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/language.service.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$locales$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/locales.service.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$system$2d$menu$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/system-menu.service.ts [app-rsc] (ecmascript)");
-;
-;
-;
-}),
-"[project]/src/services/index.ts [app-rsc] (ecmascript) <module evaluation>": ((__turbopack_context__) => {
-"use strict";
-
-__turbopack_context__.s({});
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$language$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/language.service.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$locales$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/locales.service.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$system$2d$menu$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/system-menu.service.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/services/index.ts [app-rsc] (ecmascript) <locals>");
-}),
 "[project]/src/lib/cache/types.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -561,12 +409,9 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$server$2f$react$2d$server$2f$getTranslations$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__getTranslations$3e$__ = __turbopack_context__.i("[project]/node_modules/next-intl/dist/esm/development/server/react-server/getTranslations.js [app-rsc] (ecmascript) <export default as getTranslations>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$navigation$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/i18n/navigation.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/services/index.ts [app-rsc] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$locales$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/locales.service.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$features$2f$language$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/features/language/index.ts [app-rsc] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$features$2f$language$2f$components$2f$LanguageSwitcherContainer$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__LanguageSwitcherContainer$3e$__ = __turbopack_context__.i("[project]/src/features/language/components/LanguageSwitcherContainer.tsx [app-rsc] (ecmascript) <export default as LanguageSwitcherContainer>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$i18n$2d$integration$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/i18n-integration.service.ts [app-rsc] (ecmascript)");
-;
 ;
 ;
 ;
@@ -576,7 +421,7 @@ async function HomePage() {
     // 靜態渲染的翻譯資料
     const t = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$server$2f$react$2d$server$2f$getTranslations$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__getTranslations$3e$__["getTranslations"])('navigation');
     const languages = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$i18n$2d$integration$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["I18nIntegrationService"].getLanguages();
-    const locales = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$locales$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["localesService"].getLocales();
+    const locales = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$i18n$2d$integration$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["I18nIntegrationService"].getCountryLocaleMap();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col gap-3",
         children: [
@@ -586,7 +431,7 @@ async function HomePage() {
                         children: "頁面"
                     }, void 0, false, {
                         fileName: "[project]/src/app/[locale]/page.tsx",
-                        lineNumber: 16,
+                        lineNumber: 15,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -597,7 +442,7 @@ async function HomePage() {
                                 children: t('home')
                             }, void 0, false, {
                                 fileName: "[project]/src/app/[locale]/page.tsx",
-                                lineNumber: 18,
+                                lineNumber: 17,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$navigation$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Link"], {
@@ -605,7 +450,7 @@ async function HomePage() {
                                 children: t('about')
                             }, void 0, false, {
                                 fileName: "[project]/src/app/[locale]/page.tsx",
-                                lineNumber: 19,
+                                lineNumber: 18,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$navigation$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Link"], {
@@ -613,19 +458,19 @@ async function HomePage() {
                                 children: t('contact')
                             }, void 0, false, {
                                 fileName: "[project]/src/app/[locale]/page.tsx",
-                                lineNumber: 20,
+                                lineNumber: 19,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/[locale]/page.tsx",
-                        lineNumber: 17,
+                        lineNumber: 16,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/[locale]/page.tsx",
-                lineNumber: 15,
+                lineNumber: 14,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -634,7 +479,7 @@ async function HomePage() {
                         children: "支援的語系清單"
                     }, void 0, false, {
                         fileName: "[project]/src/app/[locale]/page.tsx",
-                        lineNumber: 24,
+                        lineNumber: 23,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -645,12 +490,12 @@ async function HomePage() {
                                 children: lang.title
                             }, lang.id, false, {
                                 fileName: "[project]/src/app/[locale]/page.tsx",
-                                lineNumber: 27,
+                                lineNumber: 26,
                                 columnNumber: 25
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/[locale]/page.tsx",
-                        lineNumber: 25,
+                        lineNumber: 24,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$features$2f$language$2f$components$2f$LanguageSwitcherContainer$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__LanguageSwitcherContainer$3e$__["LanguageSwitcherContainer"], {
@@ -659,13 +504,13 @@ async function HomePage() {
                         languages: languages
                     }, void 0, false, {
                         fileName: "[project]/src/app/[locale]/page.tsx",
-                        lineNumber: 34,
+                        lineNumber: 33,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/[locale]/page.tsx",
-                lineNumber: 23,
+                lineNumber: 22,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -674,7 +519,7 @@ async function HomePage() {
                         children: "國家預設語系"
                     }, void 0, false, {
                         fileName: "[project]/src/app/[locale]/page.tsx",
-                        lineNumber: 41,
+                        lineNumber: 40,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -687,24 +532,24 @@ async function HomePage() {
                                 ]
                             }, countryCode, true, {
                                 fileName: "[project]/src/app/[locale]/page.tsx",
-                                lineNumber: 44,
+                                lineNumber: 43,
                                 columnNumber: 25
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/[locale]/page.tsx",
-                        lineNumber: 42,
+                        lineNumber: 41,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/[locale]/page.tsx",
-                lineNumber: 40,
+                lineNumber: 39,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/[locale]/page.tsx",
-        lineNumber: 14,
+        lineNumber: 13,
         columnNumber: 9
     }, this);
 }
@@ -724,4 +569,4 @@ module.exports = mod;
 
 };
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__1a35c82f._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__eb1621f1._.js.map

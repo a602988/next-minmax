@@ -107,10 +107,10 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$locale$2d$util
 ;
 ;
 function LanguageSwitcher(param) {
-    let { className, languages, currentLocale, pathname, searchParams, showLabels = true, variant = 'inline' } = param;
-    // 錯誤處理：若無語系列表，顯示錯誤訊息或不渲染
+    let { className, languages, currentLocale, pathname, searchParams, showLabels = true, showIcons = false, variant = 'inline', showDefaultBadge = false } = param;
+    // 基礎資料檢查：若語系列表為空
     if (!languages || languages.length === 0) {
-        // 開發環境下顯示警告訊息
+        // 開發環境下提示，協助定位資料注入問題
         if ("TURBOPACK compile-time truthy", 1) {
             return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: className,
@@ -119,53 +119,57 @@ function LanguageSwitcher(param) {
                     children: "⚠️ 無語系資料"
                 }, void 0, false, {
                     fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                    lineNumber: 62,
+                    lineNumber: 57,
                     columnNumber: 21
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                lineNumber: 61,
+                lineNumber: 56,
                 columnNumber: 17
             }, this);
         }
         //TURBOPACK unreachable
         ;
     }
-    // 找到當前語言的詳細資訊
+    // 取得目前語系對應的語言物件（用於顯示圖示或標籤）
     const currentLanguage = languages.find((lang)=>lang.id === currentLocale);
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
+    return(// nav 容器：指定 aria-label，協助讀屏器辨識此導覽區塊用途
+    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
         className: className,
         "aria-label": "Language switcher",
-        role: "navigation",
-        children: variant === 'dropdown' ? // 下拉選單版本（目前僅顯示當前語言按鈕）
+        children: variant === 'dropdown' ? // 下拉模式：目前僅示範按鈕，尚未加入彈出選單與鍵盤操作
         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "relative",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                 className: "inline-flex items-center gap-2 rounded px-3 py-1 text-sm bg-gray-100 text-gray-800 hover:bg-gray-200",
+                // 尚未開啟，下拉內容會對應 aria-expanded 與 aria-controls
                 "aria-expanded": "false",
-                "aria-haspopup": "true",
-                "aria-label": "Current language: ".concat((currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.native) || (currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.title), ". Click to change language"),
+                // 表示將會打開 menu 類型的彈出內容
+                "aria-haspopup": "menu",
+                // 讀屏器描述目前語言
+                "aria-label": "Current language: ".concat((currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.native) || (currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.title)),
                 children: [
-                    (currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.icon) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    showIcons && (currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.icon) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         "aria-hidden": "true",
                         className: "".concat(currentLanguage.icon, " inline-block h-4 w-4")
                     }, void 0, false, {
                         fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                        lineNumber: 90,
+                        lineNumber: 85,
                         columnNumber: 29
                     }, this),
                     showLabels && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         children: (currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.native) || (currentLanguage === null || currentLanguage === void 0 ? void 0 : currentLanguage.title)
                     }, void 0, false, {
                         fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                        lineNumber: 97,
-                        columnNumber: 29
+                        lineNumber: 88,
+                        columnNumber: 40
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
                         className: "h-4 w-4",
                         fill: "none",
                         stroke: "currentColor",
                         viewBox: "0 0 24 24",
+                        "aria-hidden": "true",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
                             strokeLinecap: "round",
                             strokeLinejoin: "round",
@@ -173,108 +177,140 @@ function LanguageSwitcher(param) {
                             d: "M19 9l-7 7-7-7"
                         }, void 0, false, {
                             fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                            lineNumber: 101,
+                            lineNumber: 92,
                             columnNumber: 29
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                        lineNumber: 100,
+                        lineNumber: 91,
                         columnNumber: 25
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                lineNumber: 82,
+                lineNumber: 74,
                 columnNumber: 21
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-            lineNumber: 81,
+            lineNumber: 73,
             columnNumber: 17
-        }, this) : // 內聯版本：顯示所有語言選項
+        }, this) : // 內聯模式：直接列出所有可切換的語言
         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
             className: "flex flex-wrap items-center gap-2",
-            role: "list",
             children: languages.map((lang)=>{
-                // 優先顯示原生語言名稱，否則顯示英文名稱
+                // 顯示標籤：優先顯示原生語言名稱
                 const label = lang.native || lang.title;
-                // 生成語言切換連結，保持當前路徑和查詢參數
+                // 產生「語系無關」的 href，以便由 Link 的 locale 屬性插入目標語系
                 const href = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$locale$2d$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["prepareLanguageSwitcherHref"])(pathname, searchParams);
-                // 判斷是否為當前語言
+                // 是否為當前語言
                 const active = currentLocale === lang.id;
                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                    role: "listitem",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$navigation$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Link"], {
-                        href: href,
-                        locale: lang.id,
-                        className: 'inline-flex items-center gap-2 rounded px-3 py-1 text-sm transition-colors ' + (active ? 'bg-blue-600 text-white' // 當前語言樣式
-                         : 'bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2' // 非當前語言樣式
-                        ),
-                        // 無障礙屬性：標示當前頁面
-                        "aria-current": active ? 'page' : undefined,
-                        // 無障礙屬性：螢幕閱讀器標籤
-                        "aria-label": "Switch to ".concat(lang.title).concat(lang.native ? " (".concat(lang.native, ")") : ''),
-                        // 滑鼠懸停提示
-                        title: "".concat(lang.title).concat(lang.native ? " (".concat(lang.native, ")") : ''),
-                        // SEO 屬性：指定連結的語言
-                        hrefLang: lang.id,
-                        // HTML 語言屬性
-                        lang: lang.id,
+                    children: active ? // 當前語言：不渲染為連結，避免重整同頁與誤點
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "inline-flex items-center gap-2 rounded px-3 py-1 text-sm bg-blue-600 text-white cursor-default",
+                        // 指示目前所處頁面語言
+                        "aria-current": "page",
+                        "aria-label": "Current language: ".concat(label),
                         children: [
-                            lang.icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            showIcons && lang.icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 "aria-hidden": "true",
                                 className: "".concat(lang.icon, " inline-block h-4 w-4")
                             }, void 0, false, {
                                 fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                                lineNumber: 145,
-                                columnNumber: 41
+                                lineNumber: 119,
+                                columnNumber: 68
                             }, this),
                             showLabels && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 children: label
                             }, void 0, false, {
                                 fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                                lineNumber: 152,
-                                columnNumber: 52
+                                lineNumber: 121,
+                                columnNumber: 56
                             }, this),
-                            lang.default && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            showDefaultBadge && lang.default && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "ml-1 rounded bg-blue-500/20 px-1.5 py-0.5 text-[10px]",
+                                "aria-label": "Default language",
+                                children: "default"
+                            }, void 0, false, {
+                                fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
+                                lineNumber: 124,
+                                columnNumber: 45
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "sr-only",
+                                children: "(current)"
+                            }, void 0, false, {
+                                fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
+                                lineNumber: 132,
+                                columnNumber: 41
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
+                        lineNumber: 112,
+                        columnNumber: 37
+                    }, this) : // 其他語言：渲染為可點擊的 Link，交由 Link 的 locale 屬性切換語系
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$navigation$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Link"], {
+                        href: href,
+                        // 透過 locale 指定目標語系；型別上收斂為 routing.locales 的成員
+                        locale: lang.id,
+                        className: "inline-flex items-center gap-2 rounded px-3 py-1 text-sm transition-colors bg-gray-100 text-gray-800 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
+                        // 讀屏器說明：切換到某語言（若有原生名稱則一併說明）
+                        "aria-label": "Switch to ".concat(lang.title).concat(lang.native ? " (".concat(lang.native, ")") : ''),
+                        // 滑鼠提示：與 aria-label 保持一致
+                        title: "".concat(lang.title).concat(lang.native ? " (".concat(lang.native, ")") : ''),
+                        // SEO 輔助：標示此連結目標的語言（可留可不留，hreflang 正式應放在 head alternates）
+                        hrefLang: lang.id,
+                        // HTML 語言屬性，輔助正確渲染語言特性
+                        lang: lang.id,
+                        children: [
+                            showIcons && lang.icon && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                "aria-hidden": "true",
+                                className: "".concat(lang.icon, " inline-block h-4 w-4")
+                            }, void 0, false, {
+                                fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
+                                lineNumber: 151,
+                                columnNumber: 68
+                            }, this),
+                            showLabels && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                children: label
+                            }, void 0, false, {
+                                fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
+                                lineNumber: 153,
+                                columnNumber: 56
+                            }, this),
+                            showDefaultBadge && lang.default && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                 className: "ml-1 rounded bg-blue-500/20 px-1.5 py-0.5 text-[10px]",
                                 "aria-label": "Default language",
                                 children: "default"
                             }, void 0, false, {
                                 fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
                                 lineNumber: 156,
-                                columnNumber: 41
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                className: "sr-only",
-                                children: active ? '(current)' : "Switch to ".concat(lang.title)
-                            }, void 0, false, {
-                                fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                                lineNumber: 165,
-                                columnNumber: 37
+                                columnNumber: 45
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                        lineNumber: 122,
-                        columnNumber: 33
+                        lineNumber: 136,
+                        columnNumber: 37
                     }, this)
                 }, lang.id, false, {
                     fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-                    lineNumber: 121,
+                    lineNumber: 109,
                     columnNumber: 29
                 }, this);
             })
         }, void 0, false, {
             fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-            lineNumber: 108,
+            lineNumber: 99,
             columnNumber: 17
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/features/language/components/LanguageSwitcher.tsx",
-        lineNumber: 74,
+        lineNumber: 70,
         columnNumber: 9
-    }, this);
+    }, this));
 }
 _c = LanguageSwitcher;
 var _c;

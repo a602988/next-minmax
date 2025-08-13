@@ -1,5 +1,13 @@
 module.exports = {
 
+"[externals]/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js [external] (next/dist/compiled/next-server/app-page-turbo.runtime.dev.js, cjs)": ((__turbopack_context__) => {
+
+var { m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("next/dist/compiled/next-server/app-page-turbo.runtime.dev.js", () => require("next/dist/compiled/next-server/app-page-turbo.runtime.dev.js"));
+
+module.exports = mod;
+}}),
 "[externals]/next/dist/server/app-render/work-async-storage.external.js [external] (next/dist/server/app-render/work-async-storage.external.js, cjs)": ((__turbopack_context__) => {
 
 var { m: module, e: exports } = __turbopack_context__;
@@ -478,4 +486,4 @@ function LanguageSwitcherContainer({ className, showLabels = true, variant = 'in
 
 };
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__cdd1146a._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__9ff8f7f2._.js.map

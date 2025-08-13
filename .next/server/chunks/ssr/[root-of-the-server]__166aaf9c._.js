@@ -660,6 +660,58 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$a
 }
 const languageService = new LanguageService();
 }),
+"[project]/src/services/locales.service.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "localesService": ()=>localesService
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)");
+;
+;
+/**
+ * 國家語系對應服務 - 抽象化 API 呼叫
+ * 根據環境變數自動切換 Mock 或正式 API
+ */ class LocalesService extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BaseApiService"] {
+    constructor(){
+        super('國家語系對應');
+    }
+    /**
+     * 取得國家語系對照表
+     * @returns Promise<CountryLocaleMapping>
+     */ async getLocales() {
+        const endpoint = {
+            mock: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.LOCALES,
+            external: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.LOCALES
+        };
+        return this.apiRequest(endpoint);
+    }
+    /**
+     * 根據國家代碼取得對應語系
+     * @param countryCode 國家代碼 (如 "TW", "US")
+     * @returns Promise<string | null>
+     */ async getLocaleByCountry(countryCode) {
+        try {
+            const locales = await this.getLocales();
+            return locales[countryCode] || null;
+        } catch (error) {
+            console.error(`❌ 無法取得國家 ${countryCode} 對應的語系:`, error);
+            return null;
+        }
+    }
+    /**
+     * 覆寫成功日誌，顯示國家數量
+     */ logSuccess(data) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
+            const countryCount = Object.keys(data).length;
+            console.log(`✅ ${this.serviceName}資料載入成功:`, countryCount, '個國家對照');
+        }
+    }
+}
+const localesService = new LocalesService();
+}),
 "[project]/src/services/i18n-integration.service.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -667,20 +719,37 @@ __turbopack_context__.s({
     "I18nIntegrationService": ()=>I18nIntegrationService
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$language$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/language.service.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$locales$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/locales.service.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$routing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/i18n/routing.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/locale.config.ts [app-rsc] (ecmascript)");
 ;
 ;
 ;
+;
 class I18nIntegrationService {
-    static cachedLanguages = null;
-    static lastFetchTime = 0;
-    // 新增：國家→語系快取
-    static cachedCountryLocaleMap = null;
-    static lastLocalesFetchTime = 0;
+    // ==========================================
+    // 語系資料快取
+    // ==========================================
+    /** 快取的語系列表 */ static cachedLanguages = null;
+    /** 語系資料最後更新時間 */ static lastFetchTime = 0;
+    // ==========================================
+    // 地區對應快取
+    // ==========================================
+    /** 快取的國家→語系對應表 */ static cachedCountryLocaleMap = null;
+    /** 地區對應資料最後更新時間 */ static lastLocalesFetchTime = 0;
+    // ==========================================
+    // 語系管理方法
+    // ==========================================
     /**
      * 取得動態語系清單並快取
+     *
+     * 功能：
+     * - 從 API 獲取最新語系列表
+     * - 實現記憶體快取，避免重複請求
+     * - API 失敗時自動降級使用靜態配置
+     *
+     * @returns Promise<Language[]> 語系列表
      */ static async getLanguages() {
         const now = Date.now();
         const cacheExpiry = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].CACHE.TTL * 1000; // 轉為毫秒
@@ -689,6 +758,7 @@ class I18nIntegrationService {
             return this.cachedLanguages;
         }
         try {
+            // 從 API 獲取最新語系資料
             const languages = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$language$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["languageService"].getLanguages();
             this.cachedLanguages = languages;
             this.lastFetchTime = now;
@@ -701,21 +771,68 @@ class I18nIntegrationService {
     }
     /**
      * 將 Language[] 轉換為 next-intl 需要的 locales 陣列
+     *
+     * 用途：橋接動態語系資料與 Next.js 路由系統
+     *
+     * @returns Promise<string[]> 支援的語系代碼陣列
      */ static async getSupportedLocales() {
         const languages = await this.getLanguages();
         return languages.map((lang)=>lang.id);
     }
     /**
      * 取得預設語系
+     *
+     * 邏輯：
+     * 1. 優先使用動態資料中標記為 default 的語系
+     * 2. 找不到時使用配置檔的預設值
+     *
+     * @returns Promise<string> 預設語系代碼
      */ static async getDefaultLocale() {
         const languages = await I18nIntegrationService.getLanguages();
         const defaultLang = languages.find((lang)=>lang.default);
         return defaultLang?.id || __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].DEFAULT_LOCALE;
     }
+    // ==========================================
+    // 地區對應管理方法
+    // ==========================================
+    /**
+     * 取得國家→語系對應表並快取
+     *
+     * 功能：
+     * - 從 API 獲取國家代碼與語系的對應關係
+     * - 用於地理位置偵測後的語系重導
+     * - 支援記憶體快取機制
+     *
+     * 使用場景：
+     * - 中間件根據 IP 地理位置重導語系
+     * - 語系切換器顯示地區相關選項
+     *
+     * @returns Promise<Locale> 國家語系對應表
+     */ static async getCountryLocaleMap() {
+        const now = Date.now();
+        const cacheExpiry = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].CACHE.TTL * 1000;
+        // 檢查快取是否有效
+        if (this.cachedCountryLocaleMap && now - this.lastLocalesFetchTime < cacheExpiry) {
+            return this.cachedCountryLocaleMap;
+        }
+        // 從 API 獲取最新對應表
+        const map = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$locales$2e$service$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["localesService"].getLocales();
+        this.cachedCountryLocaleMap = map;
+        this.lastLocalesFetchTime = now;
+        return map;
+    }
+    // ==========================================
+    // 私有輔助方法
+    // ==========================================
     /**
      * 靜態備援語系資料
-     */ /**
-     * 靜態備援語系資料
+     *
+     * 當 API 不可用時的降級方案：
+     * - 使用 routing.locales 的靜態配置
+     * - 自動生成基本的語系資訊
+     * - 確保系統基本功能不受影響
+     *
+     * @returns Language[] 靜態語系列表
      */ static getStaticFallbackLanguages() {
         return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$routing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["routing"].locales.map((locale, index)=>({
                 id: locale,
@@ -1066,12 +1183,12 @@ async function LocaleLayout({ children, params }) {
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/[locale]/layout.tsx",
-            lineNumber: 148,
+            lineNumber: 146,
             columnNumber: 9
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/[locale]/layout.tsx",
-        lineNumber: 147,
+        lineNumber: 145,
         columnNumber: 9
     }, this);
 }
@@ -1079,4 +1196,4 @@ async function LocaleLayout({ children, params }) {
 
 };
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__ef490ac7._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__166aaf9c._.js.map
