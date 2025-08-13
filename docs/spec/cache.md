@@ -31,12 +31,13 @@
     │   └── request.ts
     │
     ├── lib/
-    │   └── cache/
-    │       ├── types.ts
-    │       ├── memory-adapter.ts
-    │       ├── factory.ts
-    │       └── index.ts
-    │
+    │   ├── cache/
+    │   │   ├── types.ts
+    │   │   ├── memory-adapter.ts
+    │   │   ├── factory.ts
+    │   │   └── index.ts
+    │   └── locale-utils.ts                     # 移除路徑中的語系前綴，取得基底路徑
+
     ├── features/
     │   ├── language/
     │   │   ├── components/

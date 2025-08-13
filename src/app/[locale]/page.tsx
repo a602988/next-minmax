@@ -1,14 +1,13 @@
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { languageService,localesService } from '@/services'; // ✅ 使用統一導出
-import LanguageSwitcher from '@/features/language/components/LanguageSwitcher';
+import { languageService, localesService } from '@/services';
+import { LanguageSwitcherContainer } from '@/features/language';
 
 export default async function HomePage() {
     // 靜態渲染的翻譯資料
     const t = await getTranslations('navigation');
-    const languages = await languageService.getLanguages();
+    const languages = await languageService.getLanguages(); // 在服務端獲取
     const locales = await localesService.getLocales();
-
 
     return (
         <div className="flex flex-col gap-3">
@@ -25,19 +24,24 @@ export default async function HomePage() {
                 <nav className="flex gap-3">
                     {languages.map(lang => (
                         <Link href={`/${lang.id}`} key={lang.id} title={lang.id}>
-                        {lang.title}
+                            {lang.title}
                         </Link>
                     ))}
                 </nav>
-                <LanguageSwitcher className="mb-6" languages={languages} />
 
+                {/* 傳遞語言資料給容器組件 */}
+                <LanguageSwitcherContainer
+                    className="mb-6"
+                    variant="dropdown"
+                    languages={languages}
+                />
             </div>
             <div>
                 <h2>國家預設語系</h2>
                 <ul className="flex gap-3">
                     {Object.entries(locales).map(([countryCode, locale]) => (
                         <li key={countryCode}>
-                            {countryCode} :  {locale}
+                            {countryCode} : {locale}
                         </li>
                     ))}
                 </ul>
