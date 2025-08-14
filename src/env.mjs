@@ -157,6 +157,7 @@ const server = {
  * 這些變數會暴露給瀏覽器，請避免包含敏感資訊
  * 所有變數都必須以 NEXT_PUBLIC_ 前綴開始
  */
+
 const client = {
     // ==========================================
     // 🏗️ 專案基本資訊
@@ -174,6 +175,9 @@ const client = {
 
     /** routing - 語系前綴  預設 不加*/
     NEXT_PUBLIC_LOCALE_PREFIX_MODE: z.enum(['always', 'as-needed', 'never']).default('as-needed'),
+
+    /** routing - 啟用語系檢測 */
+    NEXT_PUBLIC_LOCALE_DETECTION_ENABLED: z.boolean().default(true),
 
     /** API 版本號 */
     NEXT_PUBLIC_API_VERSION: z.string().default("1.0.0"),
@@ -194,6 +198,9 @@ const client = {
     /** 前端多語系功能開關 */
     NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED: z.string().transform((val) => val === "true").default("true"),
 
+    /** 前端國際化功能總開關 */
+    NEXT_PUBLIC_INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
     // ==========================================
     // 🗺️ 地理位置偵測配置
     // 使用者地理位置偵測與重導邏輯設定
@@ -202,22 +209,70 @@ const client = {
     /** 地理位置偵測策略 */
     NEXT_PUBLIC_GEO_DETECTION_STRATEGY: z.enum(["cdn-only", "api-only", "cdn-fallback"]).default("api-only"),
 
+    /** ip 地理偵測功能開關 */
+    NEXT_PUBLIC_GEO_DETECTION_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
     /** 地理重導模式 */
     NEXT_PUBLIC_GEO_REDIRECT_MODE: z.enum(["off", "suggest", "force"]).default("suggest"),
 
+    /** 強制重導開關 */
+    NEXT_PUBLIC_FORCE_REDIRECT: z.string().transform((val) => val === "true").default("false"),
+
     /** CDN 國家標頭名稱 */
     NEXT_PUBLIC_CDN_COUNTRY_HEADER: z.string().default("cf-ipcountry"),
+
+    // ==========================================
+    // 🔄 快取系統配置
+    // 前端快取策略和生存時間
+    // ==========================================
+
+    /** 前端快取功能開關 */
+    NEXT_PUBLIC_CACHE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** 前端 CDN 快取協作開關 */
+    NEXT_PUBLIC_CACHE_CDN_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 前端快取預設生存時間 (秒) */
+    NEXT_PUBLIC_CACHE_DEFAULT_TTL: z.string().transform((val) => parseInt(val)).default("3600"),
 
     // ==========================================
     // ⚙️ 前端功能配置
     // 前端特有的功能開關和配置
     // ==========================================
 
-    /** 前端快取功能開關 */
-    NEXT_PUBLIC_CACHE_ENABLED: z.string().transform((val) => val === "true").default("true"),
-
     /** 開發模式開關 */
     NEXT_PUBLIC_DEV_MODE_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 會員功能開關 */
+    NEXT_PUBLIC_MEMBERSHIP_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 🔧 開發與測試配置
+    // 前端可見的開發工具設定
+    // ==========================================
+
+    /** 前端 Mock API 開關 */
+    NEXT_PUBLIC_USE_MOCK_API: z.string().transform((val) => val === "true").default("true"),
+
+    /** 前端 Mock API 延遲模擬 (毫秒) */
+    NEXT_PUBLIC_MOCK_API_DELAY: z.string().transform((val) => parseInt(val)).default("100"),
+
+    /** 前端錯誤模擬開關 */
+    NEXT_PUBLIC_MOCK_ERROR_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 前端錯誤模擬機率 (0.0-1.0) */
+    NEXT_PUBLIC_MOCK_ERROR_RATE: z.string().transform((val) => parseFloat(val)).default("0.0"),
+
+    // ==========================================
+    // 📊 監控與日誌配置
+    // 前端監控和日誌記錄設定
+    // ==========================================
+
+    /** 前端 API 請求日誌記錄 */
+    NEXT_PUBLIC_API_LOGGING_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 前端效能監控開關 */
+    NEXT_PUBLIC_PERFORMANCE_MONITORING_ENABLED: z.string().transform((val) => val === "true").default("false"),
 
     // ==========================================
     // 🔧 外部服務配置
@@ -226,6 +281,23 @@ const client = {
 
     /** 錯誤追蹤服務 DSN */
     NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
+
+    /** 前端地理位置服務提供商 */
+    NEXT_PUBLIC_GEO_API_PROVIDER: z.enum(["ipapi", "ipinfo", "geoplugin"]).default("geoplugin"),
+
+    // ==========================================
+    // ⏱️ 超時設定
+    // 前端 API 請求超時配置
+    // ==========================================
+
+    /** 前端一般 API 請求超時 (毫秒) */
+    NEXT_PUBLIC_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("30000"),
+
+    /** 前端內容 API 請求超時 (毫秒) */
+    NEXT_PUBLIC_CONTENT_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("60000"),
+
+    /** 前端地理位置 API 超時 (毫秒) */
+    NEXT_PUBLIC_GEO_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("5000"),
 };
 
 // 取得所有 schema 的鍵名

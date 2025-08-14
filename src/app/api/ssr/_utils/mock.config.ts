@@ -1,4 +1,4 @@
-import { LOCALE_CONFIG, type SupportedLocale } from '@/config';
+import { CLIENT_LOCALE_CONFIG, type SupportedLocale } from '@/config';
 
 /**
  * Mock API 專用配置
@@ -27,6 +27,6 @@ export const MOCK_DELAYS = {
     DETAIL: 300,       // 頁面詳細內容
 } as const;
 
-export const SUPPORTED_LANGUAGES = LOCALE_CONFIG.SUPPORTED_LOCALES;
+export const SUPPORTED_LANGUAGES = CLIENT_LOCALE_CONFIG.SUPPORTED_LOCALES;
 export type SupportedLanguage = SupportedLocale;
-export const { isValidLocale } = LOCALE_CONFIG;
+export const { isValidLocale } = CLIENT_LOCALE_CONFIG;

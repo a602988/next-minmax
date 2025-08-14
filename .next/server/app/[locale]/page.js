@@ -10,7 +10,7 @@ runtime.loadChunk("server/chunks/ssr/node_modules_next_dist_client_components_bu
 runtime.loadChunk("server/chunks/ssr/node_modules_next_dist_client_components_builtin_global-error_af93ecd6.js");
 runtime.loadChunk("server/chunks/ssr/_3902c441._.js");
 runtime.loadChunk("server/chunks/ssr/node_modules_63c48d3a._.js");
-runtime.loadChunk("server/chunks/ssr/[root-of-the-server]__43a3c41d._.js");
+runtime.loadChunk("server/chunks/ssr/[root-of-the-server]__f684f37b._.js");
 runtime.loadChunk("server/chunks/ssr/node_modules_be64b46b._.js");
 runtime.loadChunk("server/chunks/ssr/[root-of-the-server]__7ddf3e11._.js");
 runtime.getOrInstantiateRuntimeModule("[project]/.next-internal/server/app/[locale]/page/actions.js [app-rsc] (server actions loader, ecmascript)", CHUNK_PUBLIC_PATH);

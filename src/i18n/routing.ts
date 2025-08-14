@@ -1,5 +1,5 @@
 import { defineRouting } from 'next-intl/routing';
-import { SERVER_LOCALE_CONFIG } from '@/config/locale.server.config';
+import { SERVER_LOCALE_CONFIG } from '@/config/';
 
 export const routing = defineRouting({
     // 支援的語系 - 從環境變數讀取，會被 API 動態覆蓋
