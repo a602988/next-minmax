@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing';
 import { Geist, Geist_Mono } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import { generateHrefLangLinks, generateMultilingualStructuredData } from '@/lib/seo-utils';
-import { I18nIntegrationService } from '@/services/i18n-integration.service';
+import { I18nIntegration } from '@/i18n/i18n-integration';
 import { APP_CONFIG } from '@/config'; // 使用統一的配置
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
@@ -32,7 +32,7 @@ export async function generateMetadata({
     const { locale } = await params;
 
     // 取得語系資料
-    const languages = await I18nIntegrationService.getLanguages();
+    const languages = await I18nIntegration.getLanguages();
     const baseUrl = APP_CONFIG.API.BASE_URL;
 
     // 生成 hreflang 連結

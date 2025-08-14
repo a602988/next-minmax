@@ -5,7 +5,7 @@ import {routing} from '@/i18n/routing';
 import { Geist, Geist_Mono } from "next/font/google";
 import type { Metadata } from 'next'
 import { I18nProvider } from '@/providers/I18nProvider';
-import { I18nIntegrationService } from '@/services/i18n-integration.service';
+import { I18nIntegration } from '@/i18n/i18n-integration';
 import { LOCALE_CONFIG } from '@/config';
 import { Language } from '@/types';
 
@@ -64,7 +64,7 @@ export default async function LocaleLayout({
     let languages: Language[] = [];
     try {
         if (LOCALE_CONFIG.DETECTION.ENABLED) {
-            languages = await I18nIntegrationService.getLanguages();
+            languages = await I18nIntegration.getLanguages();
             console.log(`🌐 SSR 預載語系資料成功: ${languages.length} 個語系`);
         }
     } catch (error) {

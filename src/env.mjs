@@ -40,8 +40,17 @@ const server = {
     /** 專案代碼 */
     PROJECT_CODE: z.string().default("minmax2025"),
 
-    /** 預設語系 */
+    /** routing - 預設語系 */
     DEFAULT_LANGUAGE: z.string().default("zh-TW"),
+
+    /** routing - 支援的語系 */
+    SUPPORTED_LOCALES: z.string().default('zh-TW,en'),
+
+    /** routing - 語系前綴  預設 不加*/
+    LOCALE_PREFIX_MODE: z.enum(['always', 'as-needed', 'never']).default('as-needed'),
+
+    /** routing - 啟用語系檢測 */
+    LOCALE_DETECTION_ENABLED: z.boolean().default(true),
 
     /** 國家子網域對應表 (JSON) {"TW": "tw", "US": "us", "JP": "jp"} */
     COUNTRY_SUBDOMAIN_MAP: z.string().default('{}'),
@@ -157,8 +166,14 @@ const client = {
     /** 專案顯示名稱 */
     NEXT_PUBLIC_PROJECT_NAME: z.string().default("demo測試網站"),
 
-    /** 前端預設語系 */
+    /** routing - 預設語系 */
     NEXT_PUBLIC_DEFAULT_LOCALE: z.string().default("zh-TW"),
+
+    /** routing - 支援的語系 */
+    NEXT_PUBLIC_SUPPORTED_LOCALES: z.string().default('zh-TW,en'),
+
+    /** routing - 語系前綴  預設 不加*/
+    NEXT_PUBLIC_LOCALE_PREFIX_MODE: z.enum(['always', 'as-needed', 'never']).default('as-needed'),
 
     /** API 版本號 */
     NEXT_PUBLIC_API_VERSION: z.string().default("1.0.0"),

@@ -1,15 +1,15 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { I18nIntegrationService } from '@/services/i18n-integration.service';
+import { I18nIntegration } from '@/i18n/i18n-integration';
 import { LanguageSwitcherContainer } from '@/features/language';
 
 
 export default async function Header() {
     // 靜態渲染的翻譯資料
     const t = await getTranslations('navigation');
-    const languages = await I18nIntegrationService.getLanguages();
-    const locales = await I18nIntegrationService.getCountryLocaleMap();
+    const languages = await I18nIntegration.getLanguages();
+    const locales = await I18nIntegration.getLocales();
     return (
         <header className="w-full border-b bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60">
             <div>

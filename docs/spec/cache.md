@@ -27,8 +27,11 @@
     │           │   └── route.ts                #       │  └─ /api/ssr/locales 的路由處理器
     │           └── route.ts                    #       └─ 處理頁面內容的通用 Mock API 端點 (例如 /api/ssr/pages/[slug])  
     ├── i18n/                                   # 應用層整合
-    │   ├── routing.ts
-    │   └── request.ts
+    │   ├── routing.ts                          # 路由配置：定義支援的語系、預設語系和路徑前綴策略
+    │   ├── locale-cookie.ts                    # Cookie 管理：處理使用者語系偏好的 Cookie 讀寫邏輯
+    │   ├── navigation.ts                       # 導航組件：提供國際化的 Link、redirect、useRouter 等導航工具
+    │   ├── i18n-integration.ts                 # 國際化整合服務
+    │   └── request.ts                          # 請求配置：next-intl 的 getRequestConfig，處理 SSR 語系決策和訊息載入
     │
     ├── lib/
     │   ├── cache/                              # 基礎設施層
@@ -37,7 +40,6 @@
     │   │   ├── factory.ts
     │   │   └── index.ts
     │   └── locale-utils.ts                     # 移除路徑中的語系前綴，取得基底路徑
-
     ├── features/
     │   ├── language/
     │   │   ├── components/
@@ -253,3 +255,10 @@
 
 - **Tags（標籤）到底有什麼用？**
   > Tags 提供了一種比 `Key` 更靈活的快取清除方式。例如，當您在 CMS 後台更新了所有「頁尾選單」相關的項目時，您不需要知道所有相關的 `Key`，只需執行一個 `clearByTag('menus')` 的操作，就能精準地讓所有相關快取失效，而不會影響到無關的快取（如 `pages` 或 `languages`），大大降低了全量清除快取所帶來的效能衝擊。
+  >
+
+
+# 開發步驟
+
+1. i18n-integration.ts
+2. request.ts

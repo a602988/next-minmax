@@ -33,6 +33,122 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$routing$2e$ts
 ;
 const { Link, redirect, usePathname, useRouter, getPathname } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$navigation$2f$react$2d$server$2f$createNavigation$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__createNavigation$3e$__["createNavigation"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$routing$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["routing"]);
 }),
+"[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "BaseApiService": ()=>BaseApiService
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
+;
+class BaseApiService {
+    serviceName;
+    constructor(serviceName){
+        this.serviceName = serviceName;
+    }
+    /**
+     * 通用的 API 請求方法
+     * @param endpoint 端點配置 { mock: string, external: string }
+     * @param options 額外的 fetch 選項
+     * @returns Promise<T>
+     */ async apiRequest(endpoint, options = {}) {
+        const url = this.buildApiUrl(endpoint);
+        try {
+            this.logApiCall(url);
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...options.headers
+                },
+                // 只有正式 API 需要超時設定
+                ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK ? {} : {
+                    signal: AbortSignal.timeout(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].TIMEOUT.DEFAULT)
+                },
+                ...options
+            });
+            if (!response.ok) {
+                throw new Error(`${this.serviceName} API 請求失敗: ${response.status} ${response.statusText}`);
+            }
+            const apiResponse = await response.json();
+            // 處理 API 回應格式 { code, message, data }
+            const data = apiResponse.data || apiResponse; // 兼容不同的回應格式
+            this.logSuccess(data);
+            return data;
+        } catch (error) {
+            this.logError(error);
+            throw error;
+        }
+    }
+    /**
+     * 根據環境變數建構 API 網址
+     */ buildApiUrl(endpoint) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK) {
+            // Mock API - 使用內部 Next.js API Routes
+            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].BASE_URL}${endpoint.mock}`;
+        } else {
+            // 正式 API - 使用外部後端 API
+            return `${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].EXTERNAL_BASE_URL}${endpoint.external}`;
+        }
+    }
+    /**
+     * 記錄 API 呼叫日誌
+     */ logApiCall(url) {
+        console.log(`🌐 ${this.serviceName} API 呼叫: ${url} (Mock: ${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].USE_MOCK})`);
+    }
+    /**
+     * 記錄成功日誌 - 子類別可以覆寫自定義格式
+     */ logSuccess(data) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
+            console.log(`✅ ${this.serviceName}資料載入成功`);
+        }
+    }
+    /**
+     * 記錄錯誤日誌
+     */ logError(error) {
+        console.error(`❌ ${this.serviceName} API 呼叫失敗:`, error);
+    }
+}
+}),
+"[project]/src/services/language.service.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "languageService": ()=>languageService
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/services/base/api-service.base.ts [app-rsc] (ecmascript)");
+;
+;
+/**
+ * 支援語系服務 - 抽象化 API 呼叫
+ * 根據環境變數自動切換 Mock 或正式 API
+ */ class LanguageService extends __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$base$2f$api$2d$service$2e$base$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["BaseApiService"] {
+    constructor(){
+        super('支援語系');
+    }
+    /**
+     * 取得支援的語系清單
+     * @returns Promise<Language[]>
+     */ async getLanguages() {
+        const endpoint = {
+            mock: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.MOCK.LANGUAGE,
+            external: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].ENDPOINTS.EXTERNAL.LANGUAGE
+        };
+        return this.apiRequest(endpoint);
+    }
+    /**
+     * 覆寫成功日誌，顯示語系數量
+     */ logSuccess(data) {
+        if (__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["API_CONFIG"].LOGGING) {
+            console.log(`✅ ${this.serviceName}資料載入成功:`, data.length, '個語系');
+        }
+    }
+}
+const languageService = new LanguageService();
+}),
 "[project]/src/lib/cache/types.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -409,7 +525,11 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$server$2f$react$2d$server$2f$getTranslations$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__getTranslations$3e$__ = __turbopack_context__.i("[project]/node_modules/next-intl/dist/esm/development/server/react-server/getTranslations.js [app-rsc] (ecmascript) <export default as getTranslations>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$navigation$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/i18n/navigation.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$i18n$2d$integration$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/i18n/i18n-integration.ts [app-rsc] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '@/services/i18n-integration.service'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$features$2f$language$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/features/language/index.ts [app-rsc] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$features$2f$language$2f$components$2f$LanguageSwitcherContainer$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__LanguageSwitcherContainer$3e$__ = __turbopack_context__.i("[project]/src/features/language/components/LanguageSwitcherContainer.tsx [app-rsc] (ecmascript) <export default as LanguageSwitcherContainer>");
 ;
@@ -420,8 +540,8 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$features$2f$language$
 async function Header() {
     // 靜態渲染的翻譯資料
     const t = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$server$2f$react$2d$server$2f$getTranslations$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$export__default__as__getTranslations$3e$__["getTranslations"])('navigation');
-    const languages = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$i18n$2d$integration$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["I18nIntegration"].getLanguages();
-    const locales = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$i18n$2f$i18n$2d$integration$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["I18nIntegration"].getLocales();
+    const languages = await I18nIntegrationService.getLanguages();
+    const locales = await I18nIntegrationService.getCountryLocaleMap();
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
         className: "w-full border-b bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60",
         children: [
@@ -594,4 +714,4 @@ module.exports = mod;
 
 };
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__7ddf3e11._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__415cc0de._.js.map

@@ -1,8 +1,7 @@
-import { languageService } from './language.service';
-import { localesService } from './locales.service';
+import { languageService } from '@/services/language.service';
+import { localesService } from '@/services/locales.service';
 import { Language } from '@/types';
 import { Locale} from '@/types';
-import { routing } from '@/i18n/routing';
 import { LOCALE_CONFIG } from '@/config';
 
 /**
@@ -21,31 +20,27 @@ import { LOCALE_CONFIG } from '@/config';
  * - SSR/SSG 伺服器端語系資料獲取
  * - 地理位置偵測後的語系重導
  */
-export class I18nIntegrationService {
+export class I18nIntegration {
     // ==========================================
-    // 語系資料快取
+    // 資料快取
     // ==========================================
 
-    /** 快取的語系列表 */
+    /** 語系列表 - 快取 */
     private static cachedLanguages: Language[] | null = null;
-    /** 語系資料最後更新時間 */
+    /** 語系列表 - 最後更新時間 */
     private static lastFetchTime: number = 0;
 
-    // ==========================================
-    // 地區對應快取
-    // ==========================================
-
-    /** 快取的國家→語系對應表 */
+    /** 國家語系對應表 - 快取 */
     private static cachedCountryLocaleMap: Locale | null = null;
-    /** 地區對應資料最後更新時間 */
+    /** 國家語系對應表- 最後更新時間 */
     private static lastLocalesFetchTime: number = 0;
 
     // ==========================================
-    // 語系管理方法
+    // 取得資料快取
     // ==========================================
 
     /**
-     * 取得動態語系清單並快取
+     * 語系清單 - 取得動態並快取
      *
      * 功能：
      * - 從 API 獲取最新語系列表
@@ -55,24 +50,72 @@ export class I18nIntegrationService {
      * @returns Promise<Language[]> 語系列表
      */
     static async getLanguages(): Promise<Language[]> {
+        // 取得現在時間以作為快取效期
         const now = Date.now();
-        const cacheExpiry = LOCALE_CONFIG.CACHE.TTL * 1000; // 轉為毫秒
+        // JavaScript 的 Date.now() 回傳的是毫秒，而配置檔中的 TTL 通常設定為秒，所以需要轉換單位才能正確比較。
+        const cacheExpiry = LOCALE_CONFIG.CACHE.TTL * 1000; // 快取時間 (秒) - 1小時 * 轉為毫秒
 
         // 檢查快取是否有效
+        // 計算距離上次獲取資料經過了多少時間，比較是否小於快取有效期，如果有效，直接返回快取資料
         if (this.cachedLanguages && (now - this.lastFetchTime) < cacheExpiry) {
             return this.cachedLanguages;
         }
 
+        // 如果快取無效，從 API 取得語系列表，並存到快取中
         try {
             // 從 API 獲取最新語系資料
             const languages = await languageService.getLanguages();
+
+            // 儲存到快取中
             this.cachedLanguages = languages;
             this.lastFetchTime = now;
+
             return languages;
         } catch (error) {
             console.warn('📦 無法載入動態語系，使用靜態配置', error);
             // 降級處理：返回靜態配置的語系
             return this.getStaticFallbackLanguages();
+        }
+    }
+
+    /**
+     * 國家語系對應表 - 取得動態並快取
+     *
+     * 功能：
+     * - 從 API 獲取國家代碼與語系的對應關係
+     * - 用於地理位置偵測後的語系重導
+     * - 支援記憶體快取機制
+     *
+     * 使用場景：
+     * - 中間件根據 IP 地理位置重導語系
+     * - 語系切換器顯示地區相關選項
+     *
+     * @returns Promise<Locale> 國家語系對應表
+     */
+    static async getLocales(): Promise<Locale> {
+        // 取得現在時間以作為快取效期
+        const now = Date.now();
+        // JavaScript 的 Date.now() 回傳的是毫秒，而配置檔中的 TTL 通常設定為秒，所以需要轉換單位才能正確比較。
+        const cacheExpiry = LOCALE_CONFIG.CACHE.TTL * 1000;  // 快取時間 (秒) - 1小時 * 轉為毫秒
+
+        // 檢查快取是否有效
+        // 計算距離上次獲取資料經過了多少時間，比較是否小於快取有效期，如果有效，直接返回快取資料
+        if (this.cachedCountryLocaleMap && now - this.lastLocalesFetchTime < cacheExpiry) {
+            return this.cachedCountryLocaleMap;
+        }
+
+        // 如果快取無效，從 API 取得語系列表，並存到快取中
+        try {
+            // 從 API 獲取最新對應表
+            const map = await localesService.getLocales();
+            // 儲存到快取中
+            this.cachedCountryLocaleMap = map;
+            this.lastLocalesFetchTime = now;
+            return map;
+        } catch (error) {
+            console.warn('📦 無法載入地區對應表，使用空對應表', error);
+            // 降級處理：返回空的對應表
+            return {} as Locale;
         }
     }
 
@@ -97,45 +140,14 @@ export class I18nIntegrationService {
      *
      * @returns Promise<string> 預設語系代碼
      */
+
     static async getDefaultLocale(): Promise<string> {
-        const languages = await I18nIntegrationService.getLanguages();
+        const languages = await I18nIntegration.getLanguages();
         const defaultLang = languages.find(lang => lang.default);
         return defaultLang?.id || LOCALE_CONFIG.DEFAULT_LOCALE;
     }
 
-    // ==========================================
-    // 地區對應管理方法
-    // ==========================================
 
-    /**
-     * 取得國家→語系對應表並快取
-     *
-     * 功能：
-     * - 從 API 獲取國家代碼與語系的對應關係
-     * - 用於地理位置偵測後的語系重導
-     * - 支援記憶體快取機制
-     *
-     * 使用場景：
-     * - 中間件根據 IP 地理位置重導語系
-     * - 語系切換器顯示地區相關選項
-     *
-     * @returns Promise<Locale> 國家語系對應表
-     */
-    static async getCountryLocaleMap(): Promise<Locale> {
-        const now = Date.now();
-        const cacheExpiry = LOCALE_CONFIG.CACHE.TTL * 1000;
-
-        // 檢查快取是否有效
-        if (this.cachedCountryLocaleMap && now - this.lastLocalesFetchTime < cacheExpiry) {
-            return this.cachedCountryLocaleMap;
-        }
-
-        // 從 API 獲取最新對應表
-        const map = await localesService.getLocales();
-        this.cachedCountryLocaleMap = map;
-        this.lastLocalesFetchTime = now;
-        return map;
-    }
 
     // ==========================================
     // 私有輔助方法
@@ -145,19 +157,22 @@ export class I18nIntegrationService {
      * 靜態備援語系資料
      *
      * 當 API 不可用時的降級方案：
-     * - 使用 routing.locales 的靜態配置
+     * - 使用 locales.config 的靜態配置
      * - 自動生成基本的語系資訊
      * - 確保系統基本功能不受影響
      *
      * @returns Language[] 靜態語系列表
      */
     private static getStaticFallbackLanguages(): Language[] {
-        return routing.locales.map((locale, index) => ({
+        const locales = LOCALE_CONFIG.SUPPORTED_LOCALES as string[];
+        const defaultLocale = LOCALE_CONFIG.DEFAULT_LOCALE;
+        return locales.map((locale) => ({
             id: locale,
             title: locale.toUpperCase(),
             native: locale.toUpperCase(),
             icon: '🌐',
-            default: locale === routing.defaultLocale
+            default: locale === defaultLocale
         }));
+
     }
 }
