@@ -1,30 +1,7 @@
 /**
- * 快取系統配置檔案
- *
- * **主要職責**：
- * - 統一管理所有快取相關的配置設定
- * - 定義各種資料類型的快取策略（TTL、標籤、描述）
- * - 提供快取鍵值生成和標籤管理的輔助函數
- *
- * **配置內容**：
- * - **基礎設定**：快取開關、CDN協作、預設TTL、快取策略
- * - **Redis設定**：連線配置、鍵值前綴、分隔符號
- * - **資料類型**：8種快取資料類型的完整配置（語言、選單、頁面等）
- *
- * **提供功能**：
- * - 取得特定資料類型的快取配置、TTL、標籤
- * - 根據標籤查找相關的資料類型
- * - 生成統一格式的快取鍵值
- * - 快取配置摘要（用於除錯和監控）
- *
- * **設計特點**：
- * - 單一數據源：所有快取設定集中在 CACHE_DATA_TYPES
- * - 自動同步：TTL 和 TAGS 從主配置自動生成，避免不一致
- * - 類型安全：完整的 TypeScript 類型定義和推斷
- * - 易於維護：新增快取類型只需在一個地方定義
+ * 快取系統客戶端配置檔案
+ * 只包含客戶端可安全使用的快取配置
  */
-
-import { env } from '@/env.mjs';
 
 /**
  * 快取資料類型定義 - 統一管理所有快取相關設定
@@ -66,25 +43,24 @@ const CACHE_DATA_TYPES = {
         description: '使用者資料快取'
     },
     API_RESPONSE: {
-        ttl: env.CACHE_DEFAULT_TTL,
+        ttl: 3600,  // 預設 1小時，服務端會覆蓋
         tags: ['api-response'] as string[],
         description: 'API 回應快取'
     },
-};
+} as const;
 
 /**
- * 快取相關配置
+ * 客戶端快取配置
  */
 export const CACHE_CONFIG = {
-    // 基礎配置
-    ENABLED: env.CACHE_ENABLED,
-    CDN_ENABLED: env.CACHE_CDN_ENABLED,
-    DEFAULT_TTL: env.CACHE_DEFAULT_TTL,
-    STRATEGY: env.I18N_CACHE_STRATEGY,
+    // 基礎配置 (客戶端預設值)
+    ENABLED: true,
+    CDN_ENABLED: false,
+    DEFAULT_TTL: 3600,
+    STRATEGY: 'memory' as const,
 
-    // Redis 配置
+    // Redis 配置 (客戶端不使用)
     REDIS: {
-        URL: undefined,
         PREFIX: 'minmax:',
         KEY_SEPARATOR: ':',
     },
@@ -120,7 +96,7 @@ export const CACHE_CONFIG = {
     },
 } as const;
 
-// 輔助函數
+// 輔助函數和類型定義
 export type CacheDataType = keyof typeof CACHE_DATA_TYPES;
 
 /**

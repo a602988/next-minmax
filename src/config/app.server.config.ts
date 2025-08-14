@@ -1,11 +1,10 @@
-
 import { env } from '@/env.mjs';
 
 /**
- * 應用程式核心配置
- * 整合環境變數與預設值
+ * 應用程式服務端配置
+ * 包含所有服務端專用的配置，包括敏感資訊
  */
-export const APP_CONFIG = {
+export const SERVER_APP_CONFIG = {
     // 專案基本資訊
     PROJECT_NAME: env.PROJECT_CODE, // 專案代碼名稱
 
@@ -68,3 +67,6 @@ export const APP_CONFIG = {
         COUNTRY_SUBDOMAIN_MAP: env.COUNTRY_SUBDOMAIN_MAP, // 國家子網域對應表 (JSON)
     }
 } as const;
+
+// 導出類型
+export type ServerAppConfig = typeof SERVER_APP_CONFIG;

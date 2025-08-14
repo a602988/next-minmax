@@ -1,6 +1,8 @@
-
 import { NextRequest } from 'next/server';
-import { APP_CONFIG, LOCALE_CONFIG, CACHE_CONFIG, type SupportedLocale } from  '@/config';
+import { SERVER_APP_CONFIG } from '@/config/app.server.config';
+import { SERVER_LOCALE_CONFIG } from '@/config/locale.server.config';
+import { SERVER_CACHE_CONFIG } from '@/config/cache.server.config';
+import { type SupportedLocale } from '@/config/locale.config';
 import { env } from '@/env.mjs';
 
 /**
@@ -19,8 +21,8 @@ export function extractStandardParams(request: NextRequest): StandardParams {
 
     return {
         // 優先使用 URL 參數，沒有的話使用統一配置的預設值
-        project: searchParams.get('project') || APP_CONFIG.PROJECT_NAME,
-        language: (searchParams.get('language') as SupportedLocale) || LOCALE_CONFIG.DEFAULT_LOCALE,
+        project: searchParams.get('project') || SERVER_APP_CONFIG.PROJECT_NAME,
+        language: (searchParams.get('language') as SupportedLocale) || SERVER_LOCALE_CONFIG.DEFAULT_LOCALE,
     };
 }
 
@@ -37,7 +39,7 @@ export async function simulateApiDelay(delay: number): Promise<void> {
 /**
  * 建立快取標頭
  */
-export function createCacheHeaders(ttl: number = CACHE_CONFIG.DEFAULT_TTL): Record<string, string> {
+export function createCacheHeaders(ttl: number = SERVER_CACHE_CONFIG.DEFAULT_TTL): Record<string, string> {
     return {
         'Cache-Control': `public, max-age=${ttl}, s-maxage=${ttl}`,
         'Vary': 'Accept-Language, Accept-Encoding',

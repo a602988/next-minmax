@@ -335,53 +335,84 @@ const APP_CONFIG = {
 "use strict";
 
 __turbopack_context__.s({
-    "LOCALE_CONFIG": ()=>LOCALE_CONFIG
+    "CLIENT_LOCALE_CONFIG": ()=>CLIENT_LOCALE_CONFIG,
+    "LOCALE_CONFIG": ()=>LOCALE_CONFIG,
+    "SERVER_LOCALE_CONFIG": ()=>SERVER_LOCALE_CONFIG
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-route] (ecmascript)");
 ;
 /**
- * 統一配置
- * 整合所有語系相關的設定
- */ // 先計算，避免在物件內部互相參考
-const SUPPORTED = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim());
-const CLIENT_SUPPORTED = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim());
-const LOCALE_CONFIG = {
-    // 基本語系設定
-    SUPPORTED_LOCALES: SUPPORTED,
+ * 服務端語系配置
+ * 只能在服務端使用
+ */ const SERVER_CONFIG = {
+    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
     DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].DEFAULT_LANGUAGE,
     LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].LOCALE_PREFIX_MODE,
     FALLBACK_LOCALE: 'zh-TW',
-    // 前端語系配置
-    CLIENT_SUPPORTED_LOCALES: CLIENT_SUPPORTED,
-    CLIENT_DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
-    CLIENT_LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_LOCALE_PREFIX_MODE,
-    MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
-    // 國家與子網域映射
-    COUNTRY_SUBDOMAIN_MAP: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP),
-    // 語系偵測設定
     DETECTION: {
         ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].MULTI_LANGUAGE_ENABLED,
         GEO_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].GEO_DETECTION_ENABLED,
-        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        CDN_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER,
         CACHE_TTL: 3600
     },
-    // 快取配置
     CACHE: {
         STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
         TTL: 3600
     },
-    // 語系驗證函數：檢查語系是否為支援的語系
-    isValidLocale: (locale)=>{
-        return SUPPORTED.includes(locale);
-    },
-    // 取得國家對應的子網域：根據國家代碼取得對應的子網域
-    getSubdomainByCountry: (country)=>{
-        const map = JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP);
-        return map[country] || null;
+    COUNTRY_SUBDOMAIN_MAP: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP)
+};
+/**
+ * 客戶端語系配置
+ * 可以在客戶端和服務端使用
+ */ const CLIENT_CONFIG = {
+    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
+    DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
+    LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_LOCALE_PREFIX_MODE,
+    MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
+    DETECTION: {
+        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
+        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
+        CDN_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER
     }
 };
+const LOCALE_CONFIG = {
+    // 根據執行環境選擇配置源
+    get SUPPORTED_LOCALES () {
+        return ("TURBOPACK compile-time truthy", 1) ? SERVER_CONFIG.SUPPORTED_LOCALES : "TURBOPACK unreachable";
+    },
+    get DEFAULT_LOCALE () {
+        return ("TURBOPACK compile-time truthy", 1) ? SERVER_CONFIG.DEFAULT_LOCALE : "TURBOPACK unreachable";
+    },
+    get LOCALE_PREFIX_MODE () {
+        return ("TURBOPACK compile-time truthy", 1) ? SERVER_CONFIG.LOCALE_PREFIX_MODE : "TURBOPACK unreachable";
+    },
+    get DETECTION () {
+        if ("TURBOPACK compile-time truthy", 1) {
+            return {
+                ENABLED: SERVER_CONFIG.DETECTION.ENABLED,
+                GEO_ENABLED: SERVER_CONFIG.DETECTION.GEO_ENABLED,
+                CACHE_TTL: SERVER_CONFIG.DETECTION.CACHE_TTL,
+                // 客戶端專用屬性在服務端返回 undefined
+                STRATEGY: undefined,
+                REDIRECT_MODE: undefined,
+                CDN_HEADER: undefined
+            };
+        } else //TURBOPACK unreachable
+        ;
+    },
+    // 工具函數
+    isValidLocale: (locale)=>{
+        const locales = ("TURBOPACK compile-time truthy", 1) ? SERVER_CONFIG.SUPPORTED_LOCALES : "TURBOPACK unreachable";
+        return locales.includes(locale);
+    },
+    // 服務端專用函數
+    getSubdomainByCountry: (country)=>{
+        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+        ;
+        return SERVER_CONFIG.COUNTRY_SUBDOMAIN_MAP[country] || null;
+    }
+};
+const SERVER_LOCALE_CONFIG = SERVER_CONFIG;
+const CLIENT_LOCALE_CONFIG = CLIENT_CONFIG;
 }),
 "[project]/src/config/api.config.ts [app-route] (ecmascript)": ((__turbopack_context__) => {
 "use strict";

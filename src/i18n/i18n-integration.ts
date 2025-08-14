@@ -2,7 +2,7 @@ import { languageService } from '@/services/language.service';
 import { localesService } from '@/services/locales.service';
 import { Language } from '@/types';
 import { Locale} from '@/types';
-import { LOCALE_CONFIG } from '@/config';
+import { SERVER_LOCALE_CONFIG } from '@/config/locale.server.config';
 
 /**
  * 國際化整合服務
@@ -53,7 +53,7 @@ export class I18nIntegration {
         // 取得現在時間以作為快取效期
         const now = Date.now();
         // JavaScript 的 Date.now() 回傳的是毫秒，而配置檔中的 TTL 通常設定為秒，所以需要轉換單位才能正確比較。
-        const cacheExpiry = LOCALE_CONFIG.CACHE.TTL * 1000; // 快取時間 (秒) - 1小時 * 轉為毫秒
+        const cacheExpiry = SERVER_LOCALE_CONFIG.CACHE.TTL * 1000; // 快取時間 (秒) - 1小時 * 轉為毫秒
 
         // 檢查快取是否有效
         // 計算距離上次獲取資料經過了多少時間，比較是否小於快取有效期，如果有效，直接返回快取資料
@@ -96,7 +96,7 @@ export class I18nIntegration {
         // 取得現在時間以作為快取效期
         const now = Date.now();
         // JavaScript 的 Date.now() 回傳的是毫秒，而配置檔中的 TTL 通常設定為秒，所以需要轉換單位才能正確比較。
-        const cacheExpiry = LOCALE_CONFIG.CACHE.TTL * 1000;  // 快取時間 (秒) - 1小時 * 轉為毫秒
+        const cacheExpiry = SERVER_LOCALE_CONFIG.CACHE.TTL * 1000;  // 快取時間 (秒) - 1小時 * 轉為毫秒
 
         // 檢查快取是否有效
         // 計算距離上次獲取資料經過了多少時間，比較是否小於快取有效期，如果有效，直接返回快取資料
@@ -140,14 +140,11 @@ export class I18nIntegration {
      *
      * @returns Promise<string> 預設語系代碼
      */
-
     static async getDefaultLocale(): Promise<string> {
         const languages = await I18nIntegration.getLanguages();
         const defaultLang = languages.find(lang => lang.default);
-        return defaultLang?.id || LOCALE_CONFIG.DEFAULT_LOCALE;
+        return defaultLang?.id || SERVER_LOCALE_CONFIG.DEFAULT_LOCALE;
     }
-
-
 
     // ==========================================
     // 私有輔助方法
@@ -164,8 +161,8 @@ export class I18nIntegration {
      * @returns Language[] 靜態語系列表
      */
     private static getStaticFallbackLanguages(): Language[] {
-        const locales = LOCALE_CONFIG.SUPPORTED_LOCALES as string[];
-        const defaultLocale = LOCALE_CONFIG.DEFAULT_LOCALE;
+        const locales = SERVER_LOCALE_CONFIG.SUPPORTED_LOCALES;
+        const defaultLocale = SERVER_LOCALE_CONFIG.DEFAULT_LOCALE;
         return locales.map((locale) => ({
             id: locale,
             title: locale.toUpperCase(),
@@ -173,6 +170,5 @@ export class I18nIntegration {
             icon: '🌐',
             default: locale === defaultLocale
         }));
-
     }
 }

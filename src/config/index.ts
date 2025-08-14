@@ -7,7 +7,7 @@
 export { env } from '../env.mjs';
 
 // 導出應用程式配置
-export * from './app.config';
+export * from './app.client.config';
 
 // 導出語系配置
 export * from './locale.config';
@@ -16,4 +16,4 @@ export * from './locale.config';
 export * from './api.config';
 
 // 導出快取配置
-export * from './cache.config';
+export * from './cache.client.config';

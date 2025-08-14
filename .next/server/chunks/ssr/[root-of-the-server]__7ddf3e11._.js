@@ -122,13 +122,13 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$memory$2d$adapter$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/cache/memory-adapter.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [app-rsc] (ecmascript)");
 ;
 ;
 let singleton = null;
 function getCacheAdapter() {
     if (singleton) return singleton;
-    const strategy = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].STRATEGY; // 'memory' | 'redis' | 'none'
+    const strategy = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].STRATEGY; // 'memory' | 'redis' | 'none'
     if (strategy === 'memory') {
         singleton = new __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$memory$2d$adapter$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["MemoryCacheAdapter"]();
     } else if (strategy === 'redis') {
@@ -180,13 +180,13 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/lib/cache/index.ts [app-rsc] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$factory$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/cache/factory.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [app-rsc] (ecmascript)");
 ;
 ;
 const adapter = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$factory$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getCacheAdapter"])();
-const KEY = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].generateKey('LANGUAGES', 'list');
-const TTL = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TTL.LANGUAGES;
-const TAGS = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TAGS.LANGUAGES;
+const KEY = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].generateKey('LANGUAGES', 'list');
+const TTL = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TTL.LANGUAGES;
+const TAGS = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TAGS.LANGUAGES;
 async function getLanguagesCache() {
     return adapter.get(KEY);
 }

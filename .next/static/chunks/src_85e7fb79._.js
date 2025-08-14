@@ -176,60 +176,88 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 var { k: __turbopack_refresh__, m: module } = __turbopack_context__;
 {
 __turbopack_context__.s({
-    "LOCALE_CONFIG": ()=>LOCALE_CONFIG
+    "CLIENT_LOCALE_CONFIG": ()=>CLIENT_LOCALE_CONFIG,
+    "LOCALE_CONFIG": ()=>LOCALE_CONFIG,
+    "SERVER_LOCALE_CONFIG": ()=>SERVER_LOCALE_CONFIG
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-client] (ecmascript)");
 ;
 /**
- * 統一配置
- * 整合所有語系相關的設定
- */ // 先計算，避免在物件內部互相參考
-const SUPPORTED = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map(_c = (l)=>l.trim());
-_c1 = SUPPORTED;
-const CLIENT_SUPPORTED = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map(_c2 = (l)=>l.trim());
-_c3 = CLIENT_SUPPORTED;
-const LOCALE_CONFIG = {
-    // 基本語系設定
-    SUPPORTED_LOCALES: SUPPORTED,
+ * 服務端語系配置
+ * 只能在服務端使用
+ */ const SERVER_CONFIG = {
+    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
     DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].DEFAULT_LANGUAGE,
     LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].LOCALE_PREFIX_MODE,
     FALLBACK_LOCALE: 'zh-TW',
-    // 前端語系配置
-    CLIENT_SUPPORTED_LOCALES: CLIENT_SUPPORTED,
-    CLIENT_DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
-    CLIENT_LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_LOCALE_PREFIX_MODE,
-    MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
-    // 國家與子網域映射
-    COUNTRY_SUBDOMAIN_MAP: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP),
-    // 語系偵測設定
     DETECTION: {
         ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].MULTI_LANGUAGE_ENABLED,
         GEO_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].GEO_DETECTION_ENABLED,
-        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        CDN_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER,
         CACHE_TTL: 3600
     },
-    // 快取配置
     CACHE: {
         STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
         TTL: 3600
     },
-    // 語系驗證函數：檢查語系是否為支援的語系
-    isValidLocale: (locale)=>{
-        return SUPPORTED.includes(locale);
-    },
-    // 取得國家對應的子網域：根據國家代碼取得對應的子網域
-    getSubdomainByCountry: (country)=>{
-        const map = JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP);
-        return map[country] || null;
+    COUNTRY_SUBDOMAIN_MAP: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP)
+};
+/**
+ * 客戶端語系配置
+ * 可以在客戶端和服務端使用
+ */ const CLIENT_CONFIG = {
+    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
+    DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
+    LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_LOCALE_PREFIX_MODE,
+    MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
+    DETECTION: {
+        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
+        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
+        CDN_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER
     }
 };
-var _c, _c1, _c2, _c3;
-__turbopack_context__.k.register(_c, "SUPPORTED$env.SUPPORTED_LOCALES.split(',').map");
-__turbopack_context__.k.register(_c1, "SUPPORTED");
-__turbopack_context__.k.register(_c2, "CLIENT_SUPPORTED$env.NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map");
-__turbopack_context__.k.register(_c3, "CLIENT_SUPPORTED");
+const LOCALE_CONFIG = {
+    // 根據執行環境選擇配置源
+    get SUPPORTED_LOCALES () {
+        return ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : CLIENT_CONFIG.SUPPORTED_LOCALES;
+    },
+    get DEFAULT_LOCALE () {
+        return ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : CLIENT_CONFIG.DEFAULT_LOCALE;
+    },
+    get LOCALE_PREFIX_MODE () {
+        return ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : CLIENT_CONFIG.LOCALE_PREFIX_MODE;
+    },
+    get DETECTION () {
+        if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
+        ;
+        else {
+            return {
+                ENABLED: true,
+                STRATEGY: CLIENT_CONFIG.DETECTION.STRATEGY,
+                REDIRECT_MODE: CLIENT_CONFIG.DETECTION.REDIRECT_MODE,
+                CDN_HEADER: CLIENT_CONFIG.DETECTION.CDN_HEADER,
+                // 服務端專用屬性在客戶端返回 undefined
+                GEO_ENABLED: undefined,
+                CACHE_TTL: undefined
+            };
+        }
+    },
+    // 工具函數
+    isValidLocale: (locale)=>{
+        const locales = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : CLIENT_CONFIG.SUPPORTED_LOCALES;
+        return locales.includes(locale);
+    },
+    // 服務端專用函數
+    getSubdomainByCountry: (country)=>{
+        if ("TURBOPACK compile-time truthy", 1) {
+            console.warn('getSubdomainByCountry should only be called on server side');
+            return null;
+        }
+        //TURBOPACK unreachable
+        ;
+    }
+};
+const SERVER_LOCALE_CONFIG = SERVER_CONFIG;
+const CLIENT_LOCALE_CONFIG = CLIENT_CONFIG;
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
 }
@@ -248,13 +276,13 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$c
 ;
 const routing = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$routing$2f$defineRouting$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__defineRouting$3e$__["defineRouting"])({
     // 支援的語系 - 從環境變數讀取，會被 API 動態覆蓋
-    locales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].SUPPORTED_LOCALES,
+    locales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].SUPPORTED_LOCALES,
     // 預設語系 - 從環境變數讀取，會被 API 動態覆蓋
-    defaultLocale: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].DEFAULT_LOCALE,
+    defaultLocale: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].DEFAULT_LOCALE,
     // 語系前綴模式 - 從環境變數讀取
-    localePrefix: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].LOCALE_PREFIX_MODE,
+    localePrefix: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].LOCALE_PREFIX_MODE,
     // 啟用語系檢測 - 從環境變數讀取
-    localeDetection: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LOCALE_CONFIG"].DETECTION.ENABLED
+    localeDetection: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].DETECTION.ENABLED
 });
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);

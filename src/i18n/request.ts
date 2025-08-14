@@ -2,7 +2,7 @@ import {getRequestConfig} from 'next-intl/server';
 import {cookies} from 'next/headers';
 import {routing} from './routing';
 import {I18nIntegration} from '@/i18n/i18n-integration';
-import {LOCALE_CONFIG} from '@/config';
+import {SERVER_LOCALE_CONFIG} from '@/config/locale.server.config';
 
 export default getRequestConfig(async ({requestLocale}) => {
     const requested = await requestLocale;
@@ -29,7 +29,7 @@ export default getRequestConfig(async ({requestLocale}) => {
     const cookieLocale = cookieStore.get('NEXT_LOCALE')?.value;
     const candidate =
         requested ||
-        (LOCALE_CONFIG.DETECTION.ENABLED ? cookieLocale : undefined) ||
+        (SERVER_LOCALE_CONFIG.DETECTION.ENABLED ? cookieLocale : undefined) ||
         dynamicDefaultLocale ||
         routing.defaultLocale;
 
@@ -51,7 +51,6 @@ export default getRequestConfig(async ({requestLocale}) => {
     }
 
     if (process.env.NODE_ENV !== 'production') {
-        console.log(`🌍 語系決策: requested=${requested} cookie=${cookieLocale} final=${locale}`);
         console.log(`🌍 語系決策: requested=${requested} cookie=${cookieLocale} final=${locale}`);
     }
 
