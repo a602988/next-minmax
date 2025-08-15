@@ -1,16 +1,18 @@
 import { getCacheAdapter } from '@/lib/cache';
-import { CACHE_CONFIG } from '@/config';
+import { serverCacheConfig } from '@/config';
 import type { Locale } from '@/types/';
 
 const adapter = getCacheAdapter();
-const KEY = CACHE_CONFIG.generateKey('LOCALES', 'country-map');
-const TTL = CACHE_CONFIG.TTL.LOCALES;
-const TAGS = CACHE_CONFIG.TAGS.LOCALES;
+
+// 使用 server 端快取設定（不重複 env，僅取業務邏輯）
+const key = serverCacheConfig.generateKey('locales', 'country-map');
+const ttl = serverCacheConfig.ttl.locales;      // 單位：秒
+const tags = serverCacheConfig.tags.locales;
 
 export async function getLocalesCache(): Promise<Locale | null> {
-    return adapter.get<Locale>(KEY);
+    return adapter.get<Locale>(key);
 }
 
 export async function setLocalesCache(data: Locale): Promise<void> {
-    await adapter.set(KEY, data, { ttl: TTL, tags: TAGS });
+    await adapter.set(key, data, { ttl, tags });
 }

@@ -1,4 +1,4 @@
-(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["chunks/[root-of-the-server]__63f1fa45._.js", {
+(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push(["chunks/[root-of-the-server]__713fdbcb._.js", {
 
 "[externals]/node:buffer [external] (node:buffer, cjs)": ((__turbopack_context__) => {
 
@@ -306,33 +306,22 @@ const SERVER_COMPUTED = {
 "use strict";
 
 __turbopack_context__.s({
-    "SERVER_LOCALE_CONFIG": ()=>SERVER_LOCALE_CONFIG
+    "serverLocaleConfig": ()=>serverLocaleConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [middleware-edge] (ecmascript)");
 ;
-const SERVER_LOCALE_CONFIG = {
-    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
-    DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].DEFAULT_LANGUAGE,
-    LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].LOCALE_PREFIX_MODE,
-    FALLBACK_LOCALE: 'zh-TW',
-    DETECTION: {
-        ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].MULTI_LANGUAGE_ENABLED,
-        GEO_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].GEO_DETECTION_ENABLED,
-        CACHE_TTL: 3600
-    },
-    CACHE: {
-        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
-        TTL: 3600
-    },
-    COUNTRY_SUBDOMAIN_MAP: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP),
-    // 工具函數
+const serverLocaleConfig = {
+    // 衍生：支援語系陣列
+    supportedLocales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
+    // 衍生：國家子網域映射
+    countrySubdomainMap: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP || '{}'),
+    // 工具：語系驗證（使用衍生 supportedLocales）
     isValidLocale: (locale)=>{
-        return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()).includes(locale);
+        return serverLocaleConfig.supportedLocales.includes(locale);
     },
-    // 服務端專用函數
+    // 工具：依國家取子網域（使用衍生 countrySubdomainMap）
     getSubdomainByCountry: (country)=>{
-        const map = JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP);
-        return map[country] || null;
+        return serverLocaleConfig.countrySubdomainMap[country] || null;
     }
 };
 }),
@@ -340,23 +329,16 @@ const SERVER_LOCALE_CONFIG = {
 "use strict";
 
 __turbopack_context__.s({
-    "CLIENT_LOCALE_CONFIG": ()=>CLIENT_LOCALE_CONFIG
+    "clientLocaleConfig": ()=>clientLocaleConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [middleware-edge] (ecmascript)");
 ;
-const CLIENT_LOCALE_CONFIG = {
-    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
-    DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
-    LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_LOCALE_PREFIX_MODE,
-    MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
-    DETECTION: {
-        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        CDN_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER
-    },
-    // 客戶端工具函數
+const clientLocaleConfig = {
+    // 衍生：支援語系陣列
+    supportedLocales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
+    // 工具：驗證語系是否被支援（使用衍生 supportedLocales）
     isValidLocale: (locale)=>{
-        return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()).includes(locale);
+        return clientLocaleConfig.supportedLocales.includes(locale);
     }
 };
 }),
@@ -556,146 +538,80 @@ function getCacheConfigSummary() {
 "use strict";
 
 /**
- * 快取系統服務端配置檔案
- * 包含完整的快取配置，包括環境變數
+ * 快取系統服務端配置（僅業務邏輯）
+ * - 不重複 env：用 getter 直接回傳 env 值
+ * - 保留 server 覆寫 ttl 與鍵規則（generateKey）
+ * - 命名使用小寫（camelCase）
  */ __turbopack_context__.s({
-    "SERVER_CACHE_CONFIG": ()=>SERVER_CACHE_CONFIG,
+    "getCacheStrategy": ()=>getCacheStrategy,
+    "getDefaultTtl": ()=>getDefaultTtl,
     "getServerCacheConfig": ()=>getServerCacheConfig,
     "getServerCacheConfigSummary": ()=>getServerCacheConfigSummary,
-    "getServerCacheTTL": ()=>getServerCacheTTL,
-    "getServerCacheTags": ()=>getServerCacheTags
+    "getServerCacheTags": ()=>getServerCacheTags,
+    "getServerCacheTtl": ()=>getServerCacheTtl,
+    "getServerCacheTtlMs": ()=>getServerCacheTtlMs,
+    "isCacheEnabled": ()=>isCacheEnabled,
+    "isCdnEnabled": ()=>isCdnEnabled,
+    "serverCacheConfig": ()=>serverCacheConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [middleware-edge] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [middleware-edge] (ecmascript)");
 ;
 ;
-/**
- * 快取資料類型定義 - 統一管理所有快取相關設定
- */ const SERVER_CACHE_DATA_TYPES = {
-    LANGUAGES: {
-        ttl: 7200,
-        tags: [
-            'languages',
-            'static-data'
-        ],
-        description: '語言資料快取'
-    },
-    LOCALES: {
-        ttl: 7200,
-        tags: [
-            'locales',
-            'static-data'
-        ],
-        description: '地區設定快取'
-    },
-    MENUS: {
-        ttl: 3600,
-        tags: [
-            'menus',
-            'navigation'
-        ],
-        description: '選單資料快取'
-    },
-    WEB_DATA: {
-        ttl: 3600,
-        tags: [
-            'web-data',
-            'static-data'
-        ],
-        description: '網站資料快取'
-    },
-    PAGES: {
-        ttl: 1800,
-        tags: [
-            'pages',
-            'content'
-        ],
-        description: '頁面內容快取'
-    },
-    GEO_DATA: {
-        ttl: 1800,
-        tags: [
-            'geo-data',
-            'location'
-        ],
-        description: '地理位置資料快取'
-    },
-    USER_DATA: {
-        ttl: 600,
-        tags: [
-            'user-data',
-            'dynamic-data'
-        ],
-        description: '使用者資料快取'
-    },
-    API_RESPONSE: {
-        ttl: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL,
-        tags: [
-            'api-response'
-        ],
-        description: 'API 回應快取'
-    }
+// 服務端覆寫：僅作必要差異（例：apiResponse）
+const serverTtl = {
+    ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["cacheConfig"].ttl,
+    apiResponse: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL
 };
-const SERVER_CACHE_CONFIG = {
-    // 基礎配置 (從環境變數讀取)
-    ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_ENABLED,
-    CDN_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_CDN_ENABLED,
-    DEFAULT_TTL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL,
-    STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
-    // Redis 配置
-    REDIS: {
-        URL: undefined,
-        PREFIX: 'minmax:',
-        KEY_SEPARATOR: ':'
-    },
-    // 從 SERVER_CACHE_DATA_TYPES 自動生成 TTL 和 TAGS
-    TTL: {
-        LANGUAGES: SERVER_CACHE_DATA_TYPES.LANGUAGES.ttl,
-        LOCALES: SERVER_CACHE_DATA_TYPES.LOCALES.ttl,
-        MENUS: SERVER_CACHE_DATA_TYPES.MENUS.ttl,
-        WEB_DATA: SERVER_CACHE_DATA_TYPES.WEB_DATA.ttl,
-        PAGES: SERVER_CACHE_DATA_TYPES.PAGES.ttl,
-        GEO_DATA: SERVER_CACHE_DATA_TYPES.GEO_DATA.ttl,
-        USER_DATA: SERVER_CACHE_DATA_TYPES.USER_DATA.ttl,
-        API_RESPONSE: SERVER_CACHE_DATA_TYPES.API_RESPONSE.ttl
-    },
-    TAGS: {
-        LANGUAGES: SERVER_CACHE_DATA_TYPES.LANGUAGES.tags,
-        LOCALES: SERVER_CACHE_DATA_TYPES.LOCALES.tags,
-        MENUS: SERVER_CACHE_DATA_TYPES.MENUS.tags,
-        WEB_DATA: SERVER_CACHE_DATA_TYPES.WEB_DATA.tags,
-        PAGES: SERVER_CACHE_DATA_TYPES.PAGES.tags,
-        GEO_DATA: SERVER_CACHE_DATA_TYPES.GEO_DATA.tags,
-        USER_DATA: SERVER_CACHE_DATA_TYPES.USER_DATA.tags,
-        API_RESPONSE: SERVER_CACHE_DATA_TYPES.API_RESPONSE.tags
-    },
-    // 快取鍵值生成函數
+const serverTags = {
+    ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["cacheConfig"].tags
+};
+const serverCacheConfig = {
+    // key 規則（沿用 client）
+    redis: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["cacheConfig"].redis,
+    // ttl/tags 聚合（server 覆寫）
+    ttl: serverTtl,
+    tags: serverTags,
+    // 快取鍵值生成（純規則）
     generateKey: (type, identifier, locale)=>{
         const parts = [
-            SERVER_CACHE_CONFIG.REDIS.PREFIX,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["cacheConfig"].redis.prefix,
             type,
             identifier
         ];
         if (locale) parts.push(locale);
-        return parts.join(SERVER_CACHE_CONFIG.REDIS.KEY_SEPARATOR);
+        return parts.join(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["cacheConfig"].redis.keySeparator);
     }
 };
+const isCacheEnabled = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_ENABLED;
+const isCdnEnabled = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_CDN_ENABLED;
+const getDefaultTtl = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL; // 秒
+const getCacheStrategy = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY;
 ;
 function getServerCacheConfig(type) {
-    return SERVER_CACHE_DATA_TYPES[type];
+    const base = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheConfig"])(type);
+    return {
+        type,
+        ttl: serverTtl[type],
+        tags: serverTags[type],
+        description: base.description
+    };
 }
-function getServerCacheTTL(type) {
-    return SERVER_CACHE_DATA_TYPES[type].ttl * 1000;
+function getServerCacheTtl(type) {
+    return serverTtl[type]; // 秒
+}
+function getServerCacheTtlMs(type) {
+    return serverTtl[type] * 1000; // 毫秒
 }
 function getServerCacheTags(type) {
-    return SERVER_CACHE_DATA_TYPES[type].tags;
+    return serverTags[type];
 }
 function getServerCacheConfigSummary() {
-    return Object.entries(SERVER_CACHE_DATA_TYPES).map(([type, config])=>({
+    return Object.keys(serverTtl).map((type)=>({
             type,
-            ttl: `${config.ttl}s (${config.ttl / 60}min)`,
-            tags: config.tags.join(', '),
-            description: config.description
+            ttl: `${serverTtl[type]}s (${serverTtl[type] / 60}min)`,
+            tags: serverTags[type].join(', '),
+            description: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheConfig"])(type).description
         }));
 }
 }),
@@ -751,6 +667,119 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$cl
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/cache.server.config.ts [middleware-edge] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [middleware-edge] (ecmascript) <locals>");
 }),
+"[project]/src/config/locale.config.ts [middleware-edge] (ecmascript) <exports>": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "CLIENT_LOCALE_CONFIG": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["CLIENT_LOCALE_CONFIG"],
+    "getClientLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getClientLocaleConfig"],
+    "getLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getLocaleConfig"]
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/locale.client.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/config/locale.config.ts [middleware-edge] (ecmascript) <locals>");
+}),
+"[project]/src/config/locale.config.ts [middleware-edge] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "CLIENT_LOCALE_CONFIG": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["CLIENT_LOCALE_CONFIG"],
+    "getClientLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getClientLocaleConfig"],
+    "getLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getLocaleConfig"]
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/locale.config.ts [middleware-edge] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__ = __turbopack_context__.i("[project]/src/config/locale.config.ts [middleware-edge] (ecmascript) <exports>");
+}),
+"[project]/src/config/cache.server.config.ts [middleware-edge] (ecmascript) <exports>": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "getAllCacheTags": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getAllCacheTags"],
+    "getCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheConfig"],
+    "getCacheConfigSummary": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheConfigSummary"],
+    "getCacheStrategy": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getCacheStrategy"],
+    "getCacheTagsClient": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheTags"],
+    "getCacheTtlClientMs": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheTtl"],
+    "getDataTypesByTag": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getDataTypesByTag"],
+    "getDefaultTtl": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getDefaultTtl"],
+    "getServerCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getServerCacheConfig"],
+    "getServerCacheConfigSummary": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getServerCacheConfigSummary"],
+    "getServerCacheTags": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getServerCacheTags"],
+    "getServerCacheTtl": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getServerCacheTtl"],
+    "getServerCacheTtlMs": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["getServerCacheTtlMs"],
+    "isCacheEnabled": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["isCacheEnabled"],
+    "isCdnEnabled": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["isCdnEnabled"],
+    "serverCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__["serverCacheConfig"]
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/config/cache.server.config.ts [middleware-edge] (ecmascript) <locals>");
+}),
+"[project]/src/config/cache.server.config.ts [middleware-edge] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "getAllCacheTags": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getAllCacheTags"],
+    "getCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getCacheConfig"],
+    "getCacheConfigSummary": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getCacheConfigSummary"],
+    "getCacheStrategy": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getCacheStrategy"],
+    "getCacheTagsClient": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getCacheTagsClient"],
+    "getCacheTtlClientMs": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getCacheTtlClientMs"],
+    "getDataTypesByTag": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getDataTypesByTag"],
+    "getDefaultTtl": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getDefaultTtl"],
+    "getServerCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getServerCacheConfig"],
+    "getServerCacheConfigSummary": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getServerCacheConfigSummary"],
+    "getServerCacheTags": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getServerCacheTags"],
+    "getServerCacheTtl": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getServerCacheTtl"],
+    "getServerCacheTtlMs": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["getServerCacheTtlMs"],
+    "isCacheEnabled": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["isCacheEnabled"],
+    "isCdnEnabled": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["isCdnEnabled"],
+    "serverCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["serverCacheConfig"]
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/cache.server.config.ts [middleware-edge] (ecmascript) <module evaluation>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__ = __turbopack_context__.i("[project]/src/config/cache.server.config.ts [middleware-edge] (ecmascript) <exports>");
+}),
+"[project]/src/config/index.ts [middleware-edge] (ecmascript) <exports>": ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s({
+    "CLIENT_LOCALE_CONFIG": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["CLIENT_LOCALE_CONFIG"],
+    "SERVER_APP_CONFIG": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$app$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["SERVER_APP_CONFIG"],
+    "SERVER_COMPUTED": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$app$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["SERVER_COMPUTED"],
+    "apiConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["apiConfig"],
+    "appConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$app$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["appConfig"],
+    "cacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["cacheConfig"],
+    "clientLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["clientLocaleConfig"],
+    "getAllCacheTags": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getAllCacheTags"],
+    "getCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheConfig"],
+    "getCacheConfigSummary": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheConfigSummary"],
+    "getCacheStrategy": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheStrategy"],
+    "getCacheTags": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheTags"],
+    "getCacheTagsClient": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheTagsClient"],
+    "getCacheTtl": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheTtl"],
+    "getCacheTtlClientMs": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getCacheTtlClientMs"],
+    "getClientLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getClientLocaleConfig"],
+    "getDataTypesByTag": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getDataTypesByTag"],
+    "getDefaultTtl": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getDefaultTtl"],
+    "getLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getLocaleConfig"],
+    "getServerCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getServerCacheConfig"],
+    "getServerCacheConfigSummary": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getServerCacheConfigSummary"],
+    "getServerCacheTags": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getServerCacheTags"],
+    "getServerCacheTtl": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getServerCacheTtl"],
+    "getServerCacheTtlMs": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["getServerCacheTtlMs"],
+    "isCacheEnabled": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["isCacheEnabled"],
+    "isCdnEnabled": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["isCdnEnabled"],
+    "serverCacheConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["serverCacheConfig"],
+    "serverLocaleConfig": ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["serverLocaleConfig"]
+});
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$api$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/api.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$app$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/app.client.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$app$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/app.server.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/locale.server.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/locale.client.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/locale.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.server.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [middleware-edge] (ecmascript) <locals>");
+}),
 "[project]/src/i18n/routing.ts [middleware-edge] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
@@ -759,18 +788,18 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$routing$2f$defineRouting$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$export__default__as__defineRouting$3e$__ = __turbopack_context__.i("[project]/node_modules/next-intl/dist/esm/development/routing/defineRouting.js [middleware-edge] (ecmascript) <export default as defineRouting>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [middleware-edge] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/locale.server.config.ts [middleware-edge] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [middleware-edge] (ecmascript) <exports>");
 ;
 ;
 const routing = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$routing$2f$defineRouting$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$export__default__as__defineRouting$3e$__["defineRouting"])({
     // 支援的語系 - 從環境變數讀取，會被 API 動態覆蓋
-    locales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].SUPPORTED_LOCALES,
+    locales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["SERVER_LOCALE_CONFIG"].SUPPORTED_LOCALES,
     // 預設語系 - 從環境變數讀取，會被 API 動態覆蓋
-    defaultLocale: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].DEFAULT_LOCALE,
+    defaultLocale: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["SERVER_LOCALE_CONFIG"].DEFAULT_LOCALE,
     // 語系前綴模式 - 從環境變數讀取
-    localePrefix: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].LOCALE_PREFIX_MODE,
+    localePrefix: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["SERVER_LOCALE_CONFIG"].LOCALE_PREFIX_MODE,
     // 啟用語系檢測 - 從環境變數讀取
-    localeDetection: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].DETECTION.ENABLED
+    localeDetection: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__$3c$exports$3e$__["SERVER_LOCALE_CONFIG"].DETECTION.ENABLED
 });
 }),
 "[project]/src/middleware.ts [middleware-edge] (ecmascript)": ((__turbopack_context__) => {
@@ -794,4 +823,4 @@ const config = {
 }),
 }]);
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__63f1fa45._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__713fdbcb._.js.map

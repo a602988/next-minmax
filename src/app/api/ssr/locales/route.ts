@@ -1,38 +1,42 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { localesData } from '../_data/locales.data';
-import { simulateApiDelay, createCacheHeaders, deepClone, extractStandardParams } from '../_utils/api-helpers';
+import { NextResponse } from 'next/server';
+import { languagesData } from '../_data/languages.data';
+import { simulateApiDelay, createCacheHeaders, deepClone } from '../_utils/api-helpers';
 import { MOCK_DELAYS } from '../_utils/mock.config';
-import { API_CONFIG, CACHE_CONFIG } from '@/config';
+import { env } from '@/env.mjs';
+import { getServerCacheTtl } from '@/config/cache.server.config';
+
+// 型別守衛：{ data: unknown[] } 結構
+function hasArrayData(obj: unknown): obj is { data: unknown[] } {
+    return typeof obj === 'object' && obj !== null && 'data' in obj && Array.isArray((obj as { data: unknown }).data);
+}
+
+// 取得語系列表長度（支援 Array 或 {data: Array}）
+function getLanguagesCount(value: unknown): number {
+    if (Array.isArray(value)) return value.length;
+    if (hasArrayData(value)) return value.data.length;
+    return 0;
+}
 
 /**
- * 國家語系對照表 Mock API
- *
- * 🔄 開發階段使用，與正式 API 格式完全一致
- * 🚀 透過環境變數 USE_MOCK_API 控制是否使用此端點
- *
- * 用途：提供國家代碼與語系代碼的對應關係
- * 參數：
- *   - project: 專案代碼
- *   - language: 當前語系
- *
- * 回傳：國家語系對照表，格式為 { "TW": "zh-TW", "US": "en-US" }
+ * 語系清單 Mock API
+ * - 不重複 env，僅在此處做必要業務邏輯
  */
-export async function GET(request: NextRequest) {
-    // 提取標準參數 (使用統一的參數處理)
-    const { project, language } = extractStandardParams(request);
+export async function GET() {
+    await simulateApiDelay(MOCK_DELAYS.LANGUAGES);
 
-    // 開發環境才模擬延遲
-    await simulateApiDelay(MOCK_DELAYS.LOCALES);
+    // 回傳深拷貝，避免外部改動
+    const data = deepClone(languagesData);
 
-    // 回傳深拷貝的資料，避免原始資料被修改
-    const data = deepClone(localesData);
-
-    if (API_CONFIG.LOGGING) {
-        const countryCount = Object.keys(data.data || data).length;
-        console.log(`📍 地區語系資料回應 [${project}/${language}]:`, countryCount, '個國家對照');
+    if (env.API_LOGGING_ENABLED) {
+        console.log(`🌐 語系列表回應：${getLanguagesCount(data)} 筆`);
     }
 
+    const ttlSeconds = getServerCacheTtl('languages');
     return NextResponse.json(data, {
-        headers: createCacheHeaders(CACHE_CONFIG.TTL.LOCALES)
+        headers: createCacheHeaders(ttlSeconds)
     });
+}
+
+export async function POST() {
+    // 未實作
 }

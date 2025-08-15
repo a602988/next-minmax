@@ -1,57 +1,49 @@
 import { env } from '@/env.mjs';
 
 /**
- * API 應用配置層
- * 將環境變數組織成邏輯群組，添加業務邏輯和計算屬性
+ * API 應用配置（只保留業務邏輯）
+ * - 不鏡射 env 值；需要時於此集中處理條件/轉換/群組
+ * - 命名使用小寫（camelCase）
  */
-export const API_CONFIG = {
-    // 基礎配置 - 根據環境變數計算實際使用的端點
-    BASE_URL: env.USE_MOCK_API
-        ? env.NEXT_PUBLIC_API_BASE_URL
-        : env.EXTERNAL_API_BASE_URL,
+export const apiConfig = {
+    // 衍生：根據是否使用 Mock 選擇實際 baseUrl
+    baseUrl: env.USE_MOCK_API ? env.NEXT_PUBLIC_API_BASE_URL : env.EXTERNAL_API_BASE_URL,
 
-    // 超時設定 - 邏輯分組
-    TIMEOUT: {
-        DEFAULT: env.API_TIMEOUT,
-        CONTENT: env.CONTENT_API_TIMEOUT,
-        GEO: env.GEO_API_TIMEOUT,
-    },
-
-    // 重試設定 - 業務邏輯配置
-    RETRY: {
-        ATTEMPTS: 3,
-        DELAY: 1000,
-        EXPONENTIAL_BACKOFF: true,
-    },
-
-    // API 端點 - 根據 Mock 開關動態選擇
-    ENDPOINTS: env.USE_MOCK_API ? {
-        LANGUAGE: '/api/ssr/languages',
-        LOCALES: '/api/ssr/locales',
-        SYSTEM_MENUS: '/api/ssr/system-menus',
-        WEB_DATA: '/api/ssr/web-data',
-        DETAIL: '/api/ssr/detail',
-    } : {
-        LANGUAGE: '/api/v1/languages',
-        LOCALES: '/api/v1/locales',
-        SYSTEM_MENUS: '/api/v1/system-menus',
-        WEB_DATA: '/api/v1/web-data',
-        DETAIL: '/api/v1/detail',
-    },
-
-    // Mock 配置 - 組合相關設定
-    MOCK: {
-        ENABLED: env.USE_MOCK_API,
-        DELAY: env.MOCK_API_DELAY,
-        ERROR_SIMULATION: {
-            ENABLED: env.MOCK_ERROR_ENABLED,
-            RATE: env.MOCK_ERROR_RATE,
+    // 衍生：根據是否使用 Mock 切換端點路徑
+    endpoints: env.USE_MOCK_API
+        ? {
+            language: '/api/ssr/languages',
+            locales: '/api/ssr/locales',
+            systemMenus: '/api/ssr/system-menus',
+            webData: '/api/ssr/web-data',
+            detail: '/api/ssr/detail',
+        }
+        : {
+            language: '/api/v1/languages',
+            locales: '/api/v1/locales',
+            systemMenus: '/api/v1/system-menus',
+            webData: '/api/v1/web-data',
+            detail: '/api/v1/detail',
         },
+
+    // 群組：超時（毫秒）直接取 env，集中使用
+    timeouts: {
+        api: env.API_TIMEOUT,
+        content: env.CONTENT_API_TIMEOUT,
+        geo: env.GEO_API_TIMEOUT,
     },
 
-    // 功能開關組合
-    FEATURES: {
-        LOGGING: env.API_LOGGING_ENABLED,
-        PERFORMANCE_MONITORING: env.PERFORMANCE_MONITORING_ENABLED,
+    // 業務常數：重試策略（如需環境化，於此處加衍生邏輯）
+    retry: {
+        attempts: 3,
+        delay: 1000,
+        exponentialBackoff: true,
     },
+
+    // 業務判斷：是否模擬延遲/錯誤與相關參數
+    shouldSimulateDelay: () => env.USE_MOCK_API && env.MOCK_API_DELAY > 0,
+    getMockDelay: () => env.MOCK_API_DELAY,
+    shouldSimulateError: () => env.MOCK_ERROR_ENABLED && Math.random() < env.MOCK_ERROR_RATE,
 } as const;
+
+export type ApiConfig = typeof apiConfig;

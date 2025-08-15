@@ -16,7 +16,6 @@ export * from './app.server.config';
 // 導出語系配置
 export * from './locale.server.config';
 export * from './locale.client.config';
-export * from './locale.config';
 
 // 導出快取配置
 export * from './cache.client.config';

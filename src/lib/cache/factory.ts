@@ -1,20 +1,20 @@
-// src/lib/cache/factory.ts
-import { MemoryCacheAdapter } from './memory-adapter';
 import type { CacheAdapter } from './types';
-import { CACHE_CONFIG } from '@/config';
+import { MemoryCacheAdapter } from './memory-adapter';
+import { env } from '@/env.mjs';
 
 let singleton: CacheAdapter | null = null;
 
 export function getCacheAdapter(): CacheAdapter {
     if (singleton) return singleton;
 
-    const strategy = CACHE_CONFIG.STRATEGY; // 'memory' | 'redis' | 'none'
+    // 直接讀 env，避免依賴另一層 config 常量
+    const strategy = env.I18N_CACHE_STRATEGY; // 'memory' | 'redis' | 'none'
+
     if (strategy === 'memory') {
         singleton = new MemoryCacheAdapter();
     } else if (strategy === 'redis') {
         // TODO: 之後接 RedisAdapter
         singleton = new MemoryCacheAdapter();
-        // 可先以記憶體代替，待接線時替換
     } else {
         // none：回傳最小 no-op adapter
         singleton = {

@@ -1,4 +1,5 @@
-import { API_CONFIG } from '@/config';
+import { env } from '@/env.mjs';
+import { apiConfig } from '@/config/api.config';
 
 /**
  * API 服務基底類別
@@ -15,7 +16,6 @@ export abstract class BaseApiService {
      * 通用的 API 請求方法
      * @param endpoint 端點配置 { mock: string, external: string }
      * @param options 額外的 fetch 選項
-     * @returns Promise<T>
      */
     protected async apiRequest<T>(
         endpoint: { mock: string; external: string },
@@ -33,9 +33,11 @@ export abstract class BaseApiService {
                     ...options.headers,
                 },
                 // 只有正式 API 需要超時設定
-                ...(API_CONFIG.USE_MOCK ? {} : {
-                    signal: AbortSignal.timeout(API_CONFIG.TIMEOUT.DEFAULT)
-                }),
+                ...(env.USE_MOCK_API
+                    ? {}
+                    : {
+                        signal: AbortSignal.timeout(apiConfig.timeouts.api),
+                    }),
                 ...options,
             });
 
@@ -46,10 +48,9 @@ export abstract class BaseApiService {
             const apiResponse = await response.json();
 
             // 處理 API 回應格式 { code, message, data }
-            const data = apiResponse.data || apiResponse; // 兼容不同的回應格式
+            const data: T = apiResponse.data ?? apiResponse;
 
-            this.logSuccess(data);
-
+            this.logSuccess();
             return data;
         } catch (error) {
             this.logError(error);
@@ -61,35 +62,32 @@ export abstract class BaseApiService {
      * 根據環境變數建構 API 網址
      */
     private buildApiUrl(endpoint: { mock: string; external: string }): string {
-        if (API_CONFIG.USE_MOCK) {
-            // Mock API - 使用內部 Next.js API Routes
-            return `${API_CONFIG.BASE_URL}${endpoint.mock}`;
-        } else {
-            // 正式 API - 使用外部後端 API
-            return `${API_CONFIG.EXTERNAL_BASE_URL}${endpoint.external}`;
-        }
+        // apiConfig.baseUrl 會依 env.USE_MOCK_API 自動對應內外 base
+        // 但 endpoint path 仍依 mock/external 切換
+        const path = env.USE_MOCK_API ? endpoint.mock : endpoint.external;
+        return `${apiConfig.baseUrl}${path}`;
     }
 
     /**
      * 記錄 API 呼叫日誌
      */
     protected logApiCall(url: string): void {
-        console.log(`🌐 ${this.serviceName} API 呼叫: ${url} (Mock: ${API_CONFIG.USE_MOCK})`);
+        console.log(`🌐 ${this.serviceName} API 呼叫: ${url} (mock: ${env.USE_MOCK_API})`);
     }
 
     /**
      * 記錄成功日誌 - 子類別可以覆寫自定義格式
      */
-    protected logSuccess(data: any): void {
-        if (API_CONFIG.LOGGING) {
-            console.log(`✅ ${this.serviceName}資料載入成功`);
+    protected logSuccess(): void {
+        if (env.API_LOGGING_ENABLED) {
+            console.log(`✅ ${this.serviceName} 資料載入成功`);
         }
     }
 
     /**
      * 記錄錯誤日誌
      */
-    protected logError(error: any): void {
+    protected logError(error: unknown): void {
         console.error(`❌ ${this.serviceName} API 呼叫失敗:`, error);
     }
 }

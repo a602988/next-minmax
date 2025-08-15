@@ -2,52 +2,57 @@ import { NextRequest, NextResponse } from 'next/server';
 import { systemMenusData } from '../_data/system-menus.data';
 import { simulateApiDelay, createCacheHeaders, deepClone, extractStandardParams } from '../_utils/api-helpers';
 import { MOCK_DELAYS } from '../_utils/mock.config';
-import { API_CONFIG, CACHE_CONFIG } from '@/config';
+import { env } from '@/env.mjs';
+import { getServerCacheTtl } from '@/config/cache.server.config';
+
+// 最小必要的型別，避免 any
+type MenuNode = {
+    children?: MenuNode[];
+    // 其他欄位不影響計數，可視需求擴充
+};
 
 /**
- * 系統選單 Mock API
- *
- * 🔄 開發階段使用，與正式 API 格式完全一致
- * 🚀 透過環境變數 USE_MOCK_API 控制是否使用此端點
- *
- * 用途：提供網站選單結構資料，包含多層級選單配置
- * 參數：
- *   - project: 專案代碼
- *   - language: 當前語系
- *
- * 回傳：系統選單資料，包含階層結構、連結、選項等完整配置
+ * 遞迴計算選單項目總數（無 any）
  */
-export async function GET(request: NextRequest) {
-    // 提取標準參數 (使用統一的參數處理)
-    const { project, language } = extractStandardParams(request);
-
-    // 開發環境才模擬延遲
-    await simulateApiDelay(MOCK_DELAYS.MENUS);
-
-    // 回傳深拷貝的資料，避免原始資料被修改
-    const data = deepClone(systemMenusData);
-
-    if (API_CONFIG.LOGGING) {
-        const menuCount = data.data?.data?.length || 0;
-        const totalMenuItems = countMenuItems(data.data?.data || []);
-        console.log(`🧭 系統選單資料回應 [${project}/${language}]:`, `${menuCount} 個主選單，共 ${totalMenuItems} 個項目`);
-    }
-
-    return NextResponse.json(data, {
-        headers: createCacheHeaders(CACHE_CONFIG.TTL.MENUS)
-    });
-}
-
-/**
- * 遞迴計算選單項目總數
- */
-function countMenuItems(menus: any[]): number {
+function countMenuItems(menus: readonly MenuNode[]): number {
     let count = 0;
     for (const menu of menus) {
-        count += 1; // 當前項目
-        if (menu.children && Array.isArray(menu.children)) {
-            count += countMenuItems(menu.children); // 遞迴計算子項目
+        count += 1;
+        if (Array.isArray(menu.children) && menu.children.length > 0) {
+            count += countMenuItems(menu.children);
         }
     }
     return count;
+}
+
+/**
+ * 系統選單 Mock API
+ * - 不重複 env，僅做必要業務邏輯
+ * - config 改為使用 env + server cache config 的薄層
+ */
+export async function GET(request: NextRequest) {
+    // 1) 提取標準參數
+    const { project, language } = extractStandardParams(request);
+
+    // 2) 開發環境模擬延遲
+    await simulateApiDelay(MOCK_DELAYS.MENUS);
+
+    // 3) 深拷貝資料，避免修改原始
+    const data = deepClone(systemMenusData);
+
+    // 4) 日誌（受環境開關控制）
+    if (env.API_LOGGING_ENABLED) {
+        // 嘗試支援 data.data?.data 為陣列的結構；否則視為空陣列
+        const menus: MenuNode[] = (data as { data?: { data?: unknown } })?.data?.data as MenuNode[] || [];
+        const menuCount = Array.isArray(menus) ? menus.length : 0;
+        const totalMenuItems = Array.isArray(menus) ? countMenuItems(menus) : 0;
+        console.log(`🧭 系統選單資料回應 [${project}/${language}]: ${menuCount} 個主選單，共 ${totalMenuItems} 個項目`);
+    }
+
+    // 5) 使用服務端快取設定的 TTL（秒）
+    const ttlSeconds = getServerCacheTtl('menus');
+
+    return NextResponse.json(data, {
+        headers: createCacheHeaders(ttlSeconds)
+    });
 }

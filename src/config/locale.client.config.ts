@@ -1,23 +1,19 @@
 import { env } from '@/env.mjs';
 
 /**
- * 客戶端語系配置
- * 可以在客戶端和服務端使用
+ * 客戶端語系配置（僅保留業務邏輯）
+ * 原則：
+ * - 不重複 env.mjs，原始值在使用處直接讀 env.NEXT_PUBLIC_*
+ * - 只做必要的衍生/工具，命名用小寫（camelCase）
  */
-export const CLIENT_LOCALE_CONFIG = {
-    SUPPORTED_LOCALES: env.NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l) => l.trim()),
-    DEFAULT_LOCALE: env.NEXT_PUBLIC_DEFAULT_LOCALE,
-    LOCALE_PREFIX_MODE: env.NEXT_PUBLIC_LOCALE_PREFIX_MODE,
-    MULTI_LANGUAGE_ENABLED: env.NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
+export const clientLocaleConfig = {
+    // 衍生：支援語系陣列
+    supportedLocales: env.NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l) => l.trim()),
 
-    DETECTION: {
-        STRATEGY: env.NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        REDIRECT_MODE: env.NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        CDN_HEADER: env.NEXT_PUBLIC_CDN_COUNTRY_HEADER,
-    },
-
-    // 客戶端工具函數
+    // 工具：驗證語系是否被支援（使用衍生 supportedLocales）
     isValidLocale: (locale: string): boolean => {
-        return env.NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l) => l.trim()).includes(locale);
-    }
+        return clientLocaleConfig.supportedLocales.includes(locale);
+    },
 } as const;
+
+export type ClientLocaleConfig = typeof clientLocaleConfig;

@@ -1,6 +1,7 @@
-import { API_CONFIG } from '@/config';
+import { apiConfig } from '@/config';
 import type { Language } from '@/types';
 import { BaseApiService } from './base/api-service.base';
+import { env } from '@/env.mjs';
 
 /**
  * 支援語系服務 - 抽象化 API 呼叫
@@ -17,8 +18,8 @@ class LanguageService extends BaseApiService {
      */
     async getLanguages(): Promise<Language[]> {
         const endpoint = {
-            mock: API_CONFIG.ENDPOINTS.MOCK.LANGUAGE,
-            external: API_CONFIG.ENDPOINTS.EXTERNAL.LANGUAGE
+            mock:  apiConfig.endpoints.language,
+            external: apiConfig.API_EXTERNAL_LANGUAGE_ENDPOINT
         };
 
         return this.apiRequest<Language[]>(endpoint);
@@ -28,7 +29,7 @@ class LanguageService extends BaseApiService {
      * 覆寫成功日誌，顯示語系數量
      */
     protected logSuccess(data: Language[]): void {
-        if (API_CONFIG.LOGGING) {
+        if (apiConfig.LOGGING) {
             console.log(`✅ ${this.serviceName}資料載入成功:`, data.length, '個語系');
         }
     }

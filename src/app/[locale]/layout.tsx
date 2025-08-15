@@ -6,7 +6,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import type { Metadata, Viewport } from 'next';
 import { generateHrefLangLinks, generateMultilingualStructuredData } from '@/lib/seo-utils';
 import { I18nIntegration } from '@/i18n/i18n-integration';
-import { APP_CONFIG } from '@/config'; // 使用統一的配置
+import { env } from '@/env.mjs';
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
@@ -33,7 +33,7 @@ export async function generateMetadata({
 
     // 取得語系資料
     const languages = await I18nIntegration.getLanguages();
-    const baseUrl = APP_CONFIG.API.BASE_URL;
+    const baseUrl = env.NEXT_PUBLIC_API_BASE_URL;
 
     // 生成 hreflang 連結
     const hrefLangLinks = await generateHrefLangLinks(languages, locale);
