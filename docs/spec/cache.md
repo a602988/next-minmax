@@ -27,11 +27,11 @@
     │           │   └── route.ts                #       │  └─ /api/ssr/locales 的路由處理器
     │           └── route.ts                    #       └─ 處理頁面內容的通用 Mock API 端點 (例如 /api/ssr/pages/[slug])  
     ├── i18n/                                   # 應用層整合
-    │   ├── routing.ts                          # 路由配置：定義支援的語系、預設語系和路徑前綴策略
+    │   ├── routing.ts                          # 路由配置：同步、靜態的「最低保證」語系集合與預設語系，確保路由穩定。
     │   ├── locale-cookie.ts                    # Cookie 管理：處理使用者語系偏好的 Cookie 讀寫邏輯
     │   ├── navigation.ts                       # 導航組件：提供國際化的 Link、redirect、useRouter 等導航工具
-    │   ├── i18n-integration.ts                 # 國際化整合服務
-    │   └── request.ts                          # 請求配置：next-intl 的 getRequestConfig，處理 SSR 語系決策和訊息載入
+    │   ├── i18n-integration.ts                 # 向 API 取得「真實語系來源」的動態資料層，含快取與容錯。
+    │   └── request.ts                          # 請求配置：next-intl 的 getRequestConfig，處理 SSR 語系決策和訊息載入，請求級的「決策中樞」，產出最終 locale 與 messages 交給 next-intl。
     │
     ├── lib/
     │   ├── cache/                              # 基礎設施層

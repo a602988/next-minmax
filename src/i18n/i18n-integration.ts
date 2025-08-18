@@ -4,6 +4,7 @@ import { Language } from '@/types';
 import { Locale} from '@/types';
 import { getServerCacheTtl } from '@/config/cache.server.config';
 import { SERVER_APP_CONFIG } from '@/config/app.server.config';
+import {devLog, devWarn, DevTimer} from '@/lib/dev-logger';
 
 import { env } from '@/env.mjs';
 
@@ -75,7 +76,7 @@ export class I18nIntegration {
 
             return languages;
         } catch (error) {
-            console.warn('📦 無法載入動態語系，使用靜態配置', error);
+            devWarn('無法載入動態語系，使用靜態配置', error);
             // 降級處理：返回靜態配置的語系
             return this.getStaticFallbackLanguages();
         }
@@ -116,7 +117,7 @@ export class I18nIntegration {
             this.lastLocalesFetchTime = now;
             return map;
         } catch (error) {
-            console.warn('📦 無法載入地區對應表，使用空對應表', error);
+            devWarn('無法載入地區對應表，使用空對應表', error);
             // 降級處理：返回空的對應表
             return {} as Locale;
         }

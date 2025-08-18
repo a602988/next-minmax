@@ -20,7 +20,7 @@ const server = {
     // 控制多語系、地理位置偵測及語系重導功能
     // ==========================================
 
-    /** 國際化功能總開關 */
+    /** 前端國家站點判斷 開關 */
     INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("true"),
 
     /** 多語系功能開關 */
@@ -198,7 +198,7 @@ const client = {
     /** 前端多語系功能開關 */
     NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED: z.string().transform((val) => val === "true").default("true"),
 
-    /** 前端國際化功能總開關 */
+    /** 前端國家站點判斷 開關 */
     NEXT_PUBLIC_INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("true"),
 
     // ==========================================
