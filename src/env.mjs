@@ -1,288 +1,323 @@
-// JavaScript
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
 /**
  * 環境變數配置 - 程式碼優先的配置管理
  *
- * 原則：
- * 1) 單一來源：共享預設值與鏡射配對集中定義，避免重複
- * 2) 安全可暴露：只鏡射非敏感、且前端需要的設定
- * 3) 兼容現有：保留既有鍵名與轉型策略，避免破壞行為
+ * 設計原則：
+ * 1. env.mjs 包含所有預設值和業務邏輯配置
+ * 2. .env 檔案只覆寫需要變更或敏感的設定
+ * 3. 開發時依賴預設值，生產時用環境變數覆蓋
  */
 
-/** 共享預設值（單一來源） */
-const SHARED_DEFAULTS = {
-    PROJECT_NAME: "測試網站",
-
-    // 語系與路由
-    DEFAULT_LANGUAGE: "zh-TW",
-    SUPPORTED_LOCALES: "zh-TW",
-    LOCALE_PREFIX_MODE: "as-needed", // 'always' | 'as-needed' | 'never'
-    LOCALE_DETECTION_ENABLED: true,
-
-    // 國際化與站點行為
-    MULTI_LANGUAGE_ENABLED: true,
-    INTERNATIONALIZATION_ENABLED: true,
-    GEO_DETECTION_ENABLED: false,
-    FORCE_REDIRECT: false,
-
-    // Provider 與行為策略
-    GEO_API_PROVIDER: "geoplugin", // 'ipapi' | 'ipinfo' | 'geoplugin'
-
-    // 快取與 CDN
-    CACHE_ENABLED: true,
-    CACHE_CDN_ENABLED: false,
-    CACHE_DEFAULT_TTL: 3600, // 秒
-
-    // 超時（毫秒）
-    API_TIMEOUT: 5000,
-    CONTENT_API_TIMEOUT: 10000,
-    GEO_API_TIMEOUT: 800,
-
-    // 前端顯示/功能
-    API_VERSION: "1.0.0",
-    DEV_MODE_ENABLED: false,
-    MEMBERSHIP_ENABLED: false,
-
-    // 前端 API Base
-    API_BASE_URL: "http://localhost:3000",
-
-    // 監控與日誌
-    API_LOGGING_ENABLED: false,
-    PERFORMANCE_MONITORING_ENABLED: false,
-};
-
 /**
- * 鏡射清單（只定義一次，兩邊自動生成）
- * - serverKey: 伺服器端的鍵名
- * - clientKey: 客戶端對應鍵名（通常為 NEXT_PUBLIC_*）
- * - serverSchema / clientSchema: 明確指定兩邊的 Zod schema（含預設）
- *
- * 注意：遵循現有模式，布林/數字多以字串環境變數轉型，避免行為差異
- */
-const MIRRORS = [
-    // 專案顯示
-    {
-        serverKey: "PROJECT_NAME",
-        clientKey: "NEXT_PUBLIC_PROJECT_NAME",
-        serverSchema: z.string().default(SHARED_DEFAULTS.PROJECT_NAME),
-        clientSchema: z.string().default(SHARED_DEFAULTS.PROJECT_NAME),
-    },
-
-    // 語系與路由
-    {
-        serverKey: "DEFAULT_LANGUAGE",
-        clientKey: "NEXT_PUBLIC_DEFAULT_LOCALE",
-        serverSchema: z.string().default(SHARED_DEFAULTS.DEFAULT_LANGUAGE),
-        clientSchema: z.string().default(SHARED_DEFAULTS.DEFAULT_LANGUAGE),
-    },
-    {
-        serverKey: "SUPPORTED_LOCALES",
-        clientKey: "NEXT_PUBLIC_SUPPORTED_LOCALES",
-        serverSchema: z.string().default(SHARED_DEFAULTS.SUPPORTED_LOCALES),
-        clientSchema: z.string().default(SHARED_DEFAULTS.SUPPORTED_LOCALES),
-    },
-    {
-        serverKey: "LOCALE_PREFIX_MODE",
-        clientKey: "NEXT_PUBLIC_LOCALE_PREFIX_MODE",
-        serverSchema: z.enum(["always", "as-needed", "never"]).default(SHARED_DEFAULTS.LOCALE_PREFIX_MODE),
-        clientSchema: z.enum(["always", "as-needed", "never"]).default(SHARED_DEFAULTS.LOCALE_PREFIX_MODE),
-    },
-    {
-        serverKey: "LOCALE_DETECTION_ENABLED",
-        clientKey: "NEXT_PUBLIC_LOCALE_DETECTION_ENABLED",
-        serverSchema: z.boolean().default(SHARED_DEFAULTS.LOCALE_DETECTION_ENABLED),
-        clientSchema: z.boolean().default(SHARED_DEFAULTS.LOCALE_DETECTION_ENABLED),
-    },
-
-    // 國際化開關
-    {
-        serverKey: "MULTI_LANGUAGE_ENABLED",
-        clientKey: "NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.MULTI_LANGUAGE_ENABLED)),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.MULTI_LANGUAGE_ENABLED)),
-    },
-    {
-        serverKey: "INTERNATIONALIZATION_ENABLED",
-        clientKey: "NEXT_PUBLIC_INTERNATIONALIZATION_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.INTERNATIONALIZATION_ENABLED)),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.INTERNATIONALIZATION_ENABLED)),
-    },
-    {
-        serverKey: "GEO_DETECTION_ENABLED",
-        clientKey: "NEXT_PUBLIC_GEO_DETECTION_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.GEO_DETECTION_ENABLED)),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.GEO_DETECTION_ENABLED)),
-    },
-    {
-        serverKey: "FORCE_REDIRECT",
-        clientKey: "NEXT_PUBLIC_FORCE_REDIRECT",
-        serverSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.FORCE_REDIRECT)),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.FORCE_REDIRECT)),
-    },
-
-    // Provider 與行為策略（providers）
-    {
-        serverKey: "GEO_API_PROVIDER",
-        clientKey: "NEXT_PUBLIC_GEO_API_PROVIDER",
-        serverSchema: z.enum(["ipapi", "ipinfo", "geoplugin"]).default(SHARED_DEFAULTS.GEO_API_PROVIDER),
-        clientSchema: z.enum(["ipapi", "ipinfo", "geoplugin"]).default(SHARED_DEFAULTS.GEO_API_PROVIDER),
-    },
-
-    // 快取
-    {
-        serverKey: "CACHE_ENABLED",
-        clientKey: "NEXT_PUBLIC_CACHE_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.CACHE_ENABLED)),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.CACHE_ENABLED)),
-    },
-    {
-        serverKey: "CACHE_CDN_ENABLED",
-        clientKey: "NEXT_PUBLIC_CACHE_CDN_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.CACHE_CDN_ENABLED)),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.CACHE_CDN_ENABLED)),
-    },
-    {
-        serverKey: "CACHE_DEFAULT_TTL",
-        clientKey: "NEXT_PUBLIC_CACHE_DEFAULT_TTL",
-        serverSchema: z.string().transform((v) => parseInt(v)).default(String(SHARED_DEFAULTS.CACHE_DEFAULT_TTL)),
-        clientSchema: z.string().transform((v) => parseInt(v)).default(String(SHARED_DEFAULTS.CACHE_DEFAULT_TTL)),
-    },
-
-    // 超時
-    {
-        serverKey: "API_TIMEOUT",
-        clientKey: "NEXT_PUBLIC_API_TIMEOUT",
-        serverSchema: z.string().transform((v) => parseInt(v)).default(String(SHARED_DEFAULTS.API_TIMEOUT)),
-        clientSchema: z.string().transform((v) => parseInt(v)).default(String(SHARED_DEFAULTS.API_TIMEOUT * 6)), // 前端較寬鬆：預設 30s
-    },
-    {
-        serverKey: "CONTENT_API_TIMEOUT",
-        clientKey: "NEXT_PUBLIC_CONTENT_API_TIMEOUT",
-        serverSchema: z.string().transform((v) => parseInt(v)).default(String(SHARED_DEFAULTS.CONTENT_API_TIMEOUT)),
-        clientSchema: z.string().transform((v) => parseInt(v)).default(String(SHARED_DEFAULTS.CONTENT_API_TIMEOUT * 6)), // 前端較寬鬆：預設 60s
-    },
-    {
-        serverKey: "GEO_API_TIMEOUT",
-        clientKey: "NEXT_PUBLIC_GEO_API_TIMEOUT",
-        serverSchema: z.string().transform((v) => parseInt(v)).default(String(SHARED_DEFAULTS.GEO_API_TIMEOUT)),
-        clientSchema: z.string().transform((v) => parseInt(v)).default(String(5000)), // 前端預設 5s
-    },
-
-    // 前端顯示/功能
-    {
-        serverKey: "MEMBERSHIP_ENABLED",
-        clientKey: "NEXT_PUBLIC_MEMBERSHIP_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.MEMBERSHIP_ENABLED)),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.MEMBERSHIP_ENABLED)),
-    },
-
-    // 日誌與監控（只鏡射非敏感開關）
-    {
-        serverKey: "API_LOGGING_ENABLED",
-        clientKey: "NEXT_PUBLIC_API_LOGGING_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default("true"), // 伺服器端預設保留原本 true
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.API_LOGGING_ENABLED)),
-    },
-    {
-        serverKey: "PERFORMANCE_MONITORING_ENABLED",
-        clientKey: "NEXT_PUBLIC_PERFORMANCE_MONITORING_ENABLED",
-        serverSchema: z.string().transform((v) => v === "true").default("false"),
-        clientSchema: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.PERFORMANCE_MONITORING_ENABLED)),
-    },
-];
-
-/** 將 MIRRORS 轉為可展開的 server/client 片段 */
-function buildMirrorPatches(mirrors) {
-    /** @type {Record<string, import('zod').ZodTypeAny>} */
-    const serverPatch = {};
-    /** @type {Record<string, import('zod').ZodTypeAny>} */
-    const clientPatch = {};
-
-    for (const m of mirrors) {
-        serverPatch[m.serverKey] = m.serverSchema;
-        clientPatch[m.clientKey] = m.clientSchema;
-    }
-    return { serverPatch, clientPatch };
-}
-
-const { serverPatch: mirroredServer, clientPatch: mirroredClient } = buildMirrorPatches(MIRRORS);
-
-/**
- * 伺服器端環境變數配置（非鏡射或僅伺服器使用的項目仍在此維護）
+ * 伺服器端環境變數配置
+ * 這些變數只在伺服器端使用，確保安全性，不會暴露給客戶端
  */
 const server = {
-    // —— 鏡射項（自動生成） ——
-    ...mirroredServer,
+    // ==========================================
+    // 國際化與語系配置
+    // 控制多語系、地理位置偵測及語系重導功能
+    // ==========================================
 
-    // —— 僅伺服器使用或不需鏡射 ——
-    // 專案核心
+    /** 前端國家站點判斷 開關 */
+    INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 多語系功能開關 */
+    MULTI_LANGUAGE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** ip 地理偵測功能開關 */
+    GEO_DETECTION_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 強制重導開關 */
+    FORCE_REDIRECT: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 專案核心配置
+    // 專案基本資訊與預設語系設定
+    // ==========================================
+
+    /** 專案代碼 */
     PROJECT_CODE: z.string().default("minmax2025"),
 
-    // 國家子網域對應表
-    COUNTRY_SUBDOMAIN_MAP: z.string().default("{}"),
+    /** routing - 預設語系 */
+    DEFAULT_LANGUAGE: z.string().default("zh-TW"),
 
-    // 快取策略（伺服器專用）
+    /** routing - 支援的語系 */
+    SUPPORTED_LOCALES: z.string().default('zh-TW'),
+
+    /** routing - 語系前綴  預設 不加*/
+    LOCALE_PREFIX_MODE: z.enum(['always', 'as-needed', 'never']).default('as-needed'),
+
+    /** routing - 啟用語系檢測 */
+    LOCALE_DETECTION_ENABLED: z.boolean().default(true),
+
+    /** 國家子網域對應表 (JSON) {"TW": "tw", "US": "us", "JP": "jp"} */
+    COUNTRY_SUBDOMAIN_MAP: z.string().default('{}'),
+
+    // ==========================================
+    // 🔄 快取系統配置
+    // 控制整體快取策略和生存時間
+    // ==========================================
+
+    /** 快取系統總開關 */
+    CACHE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** CDN 快取協作開關 */
+    CACHE_CDN_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 國際化快取策略 */
     I18N_CACHE_STRATEGY: z.enum(["memory", "redis", "none"]).default("memory"),
 
-    // API 與外部服務（伺服器專用）
+    /** 快取預設生存時間 (秒) */
+    CACHE_DEFAULT_TTL: z.string().transform((val) => parseInt(val)).default("3600"),
+
+    // ==========================================
+    // API 與外部服務配置
+    // API 網址、超時設定及第三方服務配置
+    // ==========================================
+
+    /** 外部後端 API 基礎網址 */
     EXTERNAL_API_BASE_URL: z.string().default("https://v5.jeffy.test"),
 
-    // 開發與測試（伺服器專用）
-    USE_MOCK_API: z.string().transform((v) => v === "true").default("true"),
-    MOCK_API_DELAY: z.string().transform((v) => parseInt(v)).default("100"),
-    MOCK_ERROR_ENABLED: z.string().transform((v) => v === "true").default("false"),
-    MOCK_ERROR_RATE: z.string().transform((v) => parseFloat(v)).default("0.0"),
+    /** 一般 API 請求超時 (毫秒) */
+    API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("5000"),
 
-    // 敏感資訊（請放 .env，並勿鏡射到 client）
-    // DATABASE_URL: z.string().optional(),
-    // REDIS_URL: z.string().optional(),
-    // API_SECRET_KEY: z.string().optional(),
+    /** 內容 API 請求超時 (毫秒) */
+    CONTENT_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("10000"),
+
+    /** 地理位置 API 超時 (毫秒) */
+    GEO_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("800"),
+
+    /** 地理位置服務提供商 */
+    GEO_API_PROVIDER: z.enum(["ipapi", "ipinfo", "geoplugin"]).default("geoplugin"),
+
+    // ==========================================
+    // 開發與測試配置
+    // Mock API、錯誤模擬及開發工具設定
+    // ==========================================
+
+    /** Mock API 開關 */
+    USE_MOCK_API: z.string().transform((val) => val === "true").default("true"),
+
+    /** Mock API 延遲模擬 (毫秒) */
+    MOCK_API_DELAY: z.string().transform((val) => parseInt(val)).default("100"),
+
+    /** 錯誤模擬開關 */
+    MOCK_ERROR_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 錯誤模擬機率 (0.0-1.0) */
+    MOCK_ERROR_RATE: z.string().transform((val) => parseFloat(val)).default("0.0"),
+
+    // ==========================================
+    // 監控與日誌配置
+    // API 日誌記錄及效能監控開關
+    // ==========================================
+
+    /** API 請求日誌記錄 */
+    API_LOGGING_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** 效能監控開關 */
+    PERFORMANCE_MONITORING_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 功能開關
+    // 各項業務功能的開關控制
+    // ==========================================
+
+    /** 會員功能開關 */
+    MEMBERSHIP_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 🔐 敏感資訊
+    // 資料庫、API 金鑰等敏感資料，僅在 .env 中設定
+    // ==========================================
+
+    /** 資料庫連線字串 */
+    //DATABASE_URL: z.string().optional(),
+
+    /** Redis 連線字串 */
+    //REDIS_URL: z.string().optional(),
+
+    /** API 密鑰 */
+    //API_SECRET_KEY: z.string().optional(),
+
+    /** JWT 簽名密鑰 */
     // JWT_SECRET: z.string().optional(),
-    // ADMIN_API_KEY: z.string().optional(),
-    // GEO_API_KEY: z.string().optional(),
+
+    /** 管理員 API 金鑰 */
+    //ADMIN_API_KEY: z.string().optional(),
+
+    /** 地理位置服務 API 金鑰 */
+    //GEO_API_KEY: z.string().optional(),
 };
 
 /**
- * 客戶端環境變數配置（所有鍵必須 NEXT_PUBLIC_ 前綴）
+ * 客戶端環境變數配置
+ * 這些變數會暴露給瀏覽器，請避免包含敏感資訊
+ * 所有變數都必須以 NEXT_PUBLIC_ 前綴開始
  */
+
 const client = {
-    // —— 鏡射項（自動生成） ——
-    ...mirroredClient,
+    // ==========================================
+    // 🏗️ 專案基本資訊
+    // 前端顯示用的專案資訊和基礎配置
+    // ==========================================
 
-    // —— 僅前端使用或不需鏡射 ——
-    NEXT_PUBLIC_API_VERSION: z.string().default(SHARED_DEFAULTS.API_VERSION),
+    /** 專案顯示名稱 */
+    NEXT_PUBLIC_PROJECT_NAME: z.string().default("測試網站"),
 
-    // 前端 API 基礎網址（只暴露前端版本）
-    NEXT_PUBLIC_API_BASE_URL: z.string().default(SHARED_DEFAULTS.API_BASE_URL),
+    /** routing - 預設語系 */
+    NEXT_PUBLIC_DEFAULT_LOCALE: z.string().default("zh-TW"),
 
-    // 地理偵測策略（前端顯示/行為）
+    /** routing - 支援的語系 */
+    NEXT_PUBLIC_SUPPORTED_LOCALES: z.string().default('zh-TW'),
+
+    /** routing - 語系前綴  預設 不加*/
+    NEXT_PUBLIC_LOCALE_PREFIX_MODE: z.enum(['always', 'as-needed', 'never']).default('as-needed'),
+
+    /** routing - 啟用語系檢測 */
+    NEXT_PUBLIC_LOCALE_DETECTION_ENABLED: z.boolean().default(true),
+
+    /** API 版本號 */
+    NEXT_PUBLIC_API_VERSION: z.string().default("1.0.0"),
+
+    // ==========================================
+    // 🌐 API 與服務配置
+    // 客戶端 API 呼叫相關設定
+    // ==========================================
+
+    /** 前端 API 基礎網址 */
+    NEXT_PUBLIC_API_BASE_URL: z.string().default("http://localhost:3000"),
+
+    // ==========================================
+    // 🌍 國際化功能開關
+    // 前端國際化相關的功能控制
+    // ==========================================
+
+    /** 前端多語系功能開關 */
+    NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** 前端國家站點判斷 開關 */
+    NEXT_PUBLIC_INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    // ==========================================
+    // 🗺️ 地理位置偵測配置
+    // 使用者地理位置偵測與重導邏輯設定
+    // ==========================================
+
+    /** 地理位置偵測策略 */
     NEXT_PUBLIC_GEO_DETECTION_STRATEGY: z.enum(["cdn-only", "api-only", "cdn-fallback"]).default("api-only"),
 
-    // 前端開發/測試
-    NEXT_PUBLIC_DEV_MODE_ENABLED: z.string().transform((v) => v === "true").default(String(SHARED_DEFAULTS.DEV_MODE_ENABLED)),
-    NEXT_PUBLIC_USE_MOCK_API: z.string().transform((v) => v === "true").default("true"),
-    NEXT_PUBLIC_MOCK_API_DELAY: z.string().transform((v) => parseInt(v)).default("100"),
-    NEXT_PUBLIC_MOCK_ERROR_ENABLED: z.string().transform((v) => v === "true").default("false"),
-    NEXT_PUBLIC_MOCK_ERROR_RATE: z.string().transform((v) => parseFloat(v)).default("0.0"),
+    /** ip 地理偵測功能開關 */
+    NEXT_PUBLIC_GEO_DETECTION_ENABLED: z.string().transform((val) => val === "true").default("false"),
 
-    // 外部服務公開配置
+    /** 地理重導模式 */
+    NEXT_PUBLIC_GEO_REDIRECT_MODE: z.enum(["off", "suggest", "force"]).default("suggest"),
+
+    /** 強制重導開關 */
+    NEXT_PUBLIC_FORCE_REDIRECT: z.string().transform((val) => val === "true").default("false"),
+
+    /** CDN 國家標頭名稱 */
+    NEXT_PUBLIC_CDN_COUNTRY_HEADER: z.string().default("cf-ipcountry"),
+
+    // ==========================================
+    // 🔄 快取系統配置
+    // 前端快取策略和生存時間
+    // ==========================================
+
+    /** 前端快取功能開關 */
+    NEXT_PUBLIC_CACHE_ENABLED: z.string().transform((val) => val === "true").default("true"),
+
+    /** 前端 CDN 快取協作開關 */
+    NEXT_PUBLIC_CACHE_CDN_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 前端快取預設生存時間 (秒) */
+    NEXT_PUBLIC_CACHE_DEFAULT_TTL: z.string().transform((val) => parseInt(val)).default("3600"),
+
+    // ==========================================
+    // ⚙️ 前端功能配置
+    // 前端特有的功能開關和配置
+    // ==========================================
+
+    /** 開發模式開關 */
+    NEXT_PUBLIC_DEV_MODE_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 會員功能開關 */
+    NEXT_PUBLIC_MEMBERSHIP_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 🔧 開發與測試配置
+    // 前端可見的開發工具設定
+    // ==========================================
+
+    /** 前端 Mock API 開關 */
+    NEXT_PUBLIC_USE_MOCK_API: z.string().transform((val) => val === "true").default("true"),
+
+    /** 前端 Mock API 延遲模擬 (毫秒) */
+    NEXT_PUBLIC_MOCK_API_DELAY: z.string().transform((val) => parseInt(val)).default("100"),
+
+    /** 前端錯誤模擬開關 */
+    NEXT_PUBLIC_MOCK_ERROR_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 前端錯誤模擬機率 (0.0-1.0) */
+    NEXT_PUBLIC_MOCK_ERROR_RATE: z.string().transform((val) => parseFloat(val)).default("0.0"),
+
+    // ==========================================
+    // 📊 監控與日誌配置
+    // 前端監控和日誌記錄設定
+    // ==========================================
+
+    /** 前端 API 請求日誌記錄 */
+    NEXT_PUBLIC_API_LOGGING_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    /** 前端效能監控開關 */
+    NEXT_PUBLIC_PERFORMANCE_MONITORING_ENABLED: z.string().transform((val) => val === "true").default("false"),
+
+    // ==========================================
+    // 🔧 外部服務配置
+    // 第三方服務的公開配置項目
+    // ==========================================
+
+    /** 錯誤追蹤服務 DSN */
     NEXT_PUBLIC_SENTRY_DSN: z.string().optional(),
 
-    // CDN 國家標頭名稱（前端讀取）
-    NEXT_PUBLIC_CDN_COUNTRY_HEADER: z.string().default("cf-ipcountry"),
+    /** 前端地理位置服務提供商 */
+    NEXT_PUBLIC_GEO_API_PROVIDER: z.enum(["ipapi", "ipinfo", "geoplugin"]).default("geoplugin"),
+
+    // ==========================================
+    // ⏱️ 超時設定
+    // 前端 API 請求超時配置
+    // ==========================================
+
+    /** 前端一般 API 請求超時 (毫秒) */
+    NEXT_PUBLIC_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("30000"),
+
+    /** 前端內容 API 請求超時 (毫秒) */
+    NEXT_PUBLIC_CONTENT_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("60000"),
+
+    /** 前端地理位置 API 超時 (毫秒) */
+    NEXT_PUBLIC_GEO_API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("5000"),
 };
 
-// 建構 runtimeEnv
+// 取得所有 schema 的鍵名
 const serverKeys = Object.keys(server);
 const clientKeys = Object.keys(client);
 
 export const env = createEnv({
     server,
     client,
+
+    /**
+     * 運行時環境變數映射
+     * 精確地從 process.env 映射我們定義的變數
+     */
     runtimeEnv: {
-        ...Object.fromEntries(serverKeys.map((k) => [k, process.env[k]])),
-        ...Object.fromEntries(clientKeys.map((k) => [k, process.env[k]])),
+        ...Object.fromEntries(
+            serverKeys.map(key => [key, process.env[key]])
+        ),
+        ...Object.fromEntries(
+            clientKeys.map(key => [key, process.env[key]])
+        ),
     },
 });

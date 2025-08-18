@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/env-.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/env--.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/env.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/env.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/dev-logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dev-logger.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/base/api-service.base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/base/api-service.base.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/locales.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/locales.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +124,7 @@
       <workItem from="1755171007491" duration="7863000" />
       <workItem from="1755485340521" duration="800000" />
       <workItem from="1755488012411" duration="10564000" />
-      <workItem from="1755509573843" duration="1819000" />
+      <workItem from="1755509573843" duration="5150000" />
     </task>
     <servers />
   </component>
@@ -144,6 +147,12 @@
           <url>file://$PROJECT_DIR$/src/app/[locale]/layout.tsx</url>
           <line>6</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/services/base/api-service.base.ts</url>
+          <line>28</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
