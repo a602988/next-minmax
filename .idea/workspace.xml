@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/dev-logger.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/env-.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/spec/cache.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/cache.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/locale.server.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/locale.server.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/env.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/env.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/i18n-integration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/i18n-integration.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/request.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n/routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/routing.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +23,12 @@
     &quot;assignee&quot;: &quot;a602988&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
-    &quot;accountId&quot;: &quot;9f6eecd6-a281-490f-8010-6a13656f8514&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/a602988/next-minmax.git",
+    "accountId": "4efeec24-a74f-40d9-88a1-2ccfcee2d088"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -60,7 +54,7 @@
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/linchian/Documents/GitHub/next-minmax/src/i18n",
+    "last_opened_file_path": "/Users/chianlin/Documents/GitHub/next-minmax/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -68,17 +62,17 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "junie.application.models",
     "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/chianlin/Documents/GitHub/next-minmax/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/i18n" />
       <recent name="$PROJECT_DIR$/src/config" />
       <recent name="$PROJECT_DIR$/docs" />
       <recent name="$PROJECT_DIR$/src/features/language/types" />
-      <recent name="$PROJECT_DIR$/src/features/locales" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/i18n" />
@@ -127,6 +121,7 @@
       <workItem from="1755171007491" duration="7863000" />
       <workItem from="1755485340521" duration="800000" />
       <workItem from="1755488012411" duration="10564000" />
+      <workItem from="1755509573843" duration="1819000" />
     </task>
     <servers />
   </component>
@@ -147,8 +142,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/app/[locale]/layout.tsx</url>
-          <line>12</line>
-          <properties lambdaOrdinal="-1" />
+          <line>6</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
