@@ -1,5 +1,6 @@
-import { API_CONFIG } from '@/config';
 import { BaseApiService } from './base/api-service.base';
+import { env } from '@/env.mjs';
+import { apiConfig } from '@/config/api.config';
 
 // 定義系統選單項目型別
 interface SystemMenuItem {
@@ -29,12 +30,19 @@ class SystemMenuService extends BaseApiService {
      * @returns Promise<SystemMenuItem[]>
      */
     async getSystemMenu(): Promise<SystemMenuItem[]> {
-        const endpoint = {
-            mock: API_CONFIG.ENDPOINTS.MOCK.SYSTEM_MENUS,
-            external: API_CONFIG.ENDPOINTS.EXTERNAL.SYSTEM_MENUS
-        };
+        // 端點會依 env.USE_MOCK_API 在上層建構 URL 時切換
+        const endpoints = apiConfig.endpoints;
+        const url = endpoints.systemMenus;
 
-        return this.apiRequest<SystemMenuItem[]>(endpoint);
+        // 若 BaseApiService.apiRequest 需要 mock/external 格式，兩者給相同當前有效端點即可
+        const endpoint = { mock: url, external: url };
+
+        const data = await this.apiRequest<SystemMenuItem[]>(endpoint);
+
+        // 額外輸出統計（不覆寫 base 的 logSuccess 簽名）
+        this.logMenuStats(data);
+
+        return data;
     }
 
     /**
@@ -57,7 +65,7 @@ class SystemMenuService extends BaseApiService {
      * @param parentId 上層選單 ID
      * @returns Promise<SystemMenuItem[]>
      */
-    async ㄓㄜ(parentId: string): Promise<SystemMenuItem[]> {
+    async getChildrenByParentId(parentId: string): Promise<SystemMenuItem[]> {
         try {
             const allMenus = await this.getSystemMenu();
             return allMenus.filter(menu => menu.parentId === parentId);
@@ -82,19 +90,18 @@ class SystemMenuService extends BaseApiService {
         }
     }
 
-    /**
-     * 覆寫成功日誌，顯示選單項目統計
-     */
-    protected logSuccess(data: SystemMenuItem[]): void {
-        if (API_CONFIG.LOGGING) {
-            const level1Count = data.filter(menu => menu.level === 1).length;
-            const level2Count = data.filter(menu => menu.level === 2).length;
+    // ... existing code ...
+    private logMenuStats(data: SystemMenuItem[]): void {
+        if (!env.API_LOGGING_ENABLED) return;
+        const level1Count = data.filter(menu => menu.level === 1).length;
+        const level2Count = data.filter(menu => menu.level === 2).length;
 
-            console.log(`✅ ${this.serviceName}資料載入成功:`,
-                `總計 ${data.length} 個選單項目 (第一層:${level1Count}, 第二層:${level2Count})`
-            );
-        }
+        console.log(
+            `✅ ${this.serviceName}資料載入成功:`,
+            `總計 ${data.length} 個選單項目 (第一層:${level1Count}, 第二層:${level2Count})`
+        );
     }
+    // ... existing code ...
 }
 
 // 匯出單例實例

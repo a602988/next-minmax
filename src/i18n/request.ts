@@ -2,7 +2,7 @@ import {getRequestConfig} from 'next-intl/server';
 import {cookies} from 'next/headers';
 import {routing} from './routing';
 import {I18nIntegration} from '@/i18n/i18n-integration';
-import {SERVER_LOCALE_CONFIG} from '@/config/locale.server.config';
+import { env } from '@/env.mjs';
 
 export default getRequestConfig(async ({requestLocale}) => {
     const requested = await requestLocale;
@@ -29,7 +29,7 @@ export default getRequestConfig(async ({requestLocale}) => {
     const cookieLocale = cookieStore.get('NEXT_LOCALE')?.value;
     const candidate =
         requested ||
-        (SERVER_LOCALE_CONFIG.DETECTION.ENABLED ? cookieLocale : undefined) ||
+        (env.LOCALE_DETECTION_ENABLED ? cookieLocale : undefined) ||
         dynamicDefaultLocale ||
         routing.defaultLocale;
 

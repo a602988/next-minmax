@@ -1,14 +1,16 @@
-import { API_CONFIG } from '@/config';
 import { BaseApiService } from './base/api-service.base';
+import { apiConfig } from '@/config/api.config';
+import { env } from '@/env.mjs';
 
-// 定義 Locales 型別 (國家語系對照表)
-interface CountryLocaleMapping {
+// 國家語系對照表
+export interface CountryLocaleMapping {
     [countryCode: string]: string; // 例如: { "TW": "zh-TW", "US": "en-US" }
 }
 
 /**
  * 國家語系對應服務 - 抽象化 API 呼叫
- * 根據環境變數自動切換 Mock 或正式 API
+ * - 不重複 env：基底類別負責超時與 baseUrl 邏輯
+ * - 本類別只決定端點 path 與成功日誌格式
  */
 class LocalesService extends BaseApiService {
     constructor() {
@@ -17,21 +19,24 @@ class LocalesService extends BaseApiService {
 
     /**
      * 取得國家語系對照表
-     * @returns Promise<CountryLocaleMapping>
      */
     async getLocales(): Promise<CountryLocaleMapping> {
         const endpoint = {
-            mock: API_CONFIG.ENDPOINTS.MOCK.LOCALES,
-            external: API_CONFIG.ENDPOINTS.EXTERNAL.LOCALES
+            mock: apiConfig.endpoints.locales,
+            external: apiConfig.endpoints.locales,
         };
 
-        return this.apiRequest<CountryLocaleMapping>(endpoint);
+        const data = await this.apiRequest<CountryLocaleMapping>(endpoint);
+
+        if (env.API_LOGGING_ENABLED) {
+            console.log(`✅ ${this.serviceName}資料載入成功:`, Object.keys(data).length, '個國家對照');
+        }
+
+        return data;
     }
 
     /**
      * 根據國家代碼取得對應語系
-     * @param countryCode 國家代碼 (如 "TW", "US")
-     * @returns Promise<string | null>
      */
     async getLocaleByCountry(countryCode: string): Promise<string | null> {
         try {
@@ -42,17 +47,6 @@ class LocalesService extends BaseApiService {
             return null;
         }
     }
-
-    /**
-     * 覆寫成功日誌，顯示國家數量
-     */
-    protected logSuccess(data: CountryLocaleMapping): void {
-        if (API_CONFIG.LOGGING) {
-            const countryCount = Object.keys(data).length;
-            console.log(`✅ ${this.serviceName}資料載入成功:`, countryCount, '個國家對照');
-        }
-    }
 }
 
-// 匯出單例實例
 export const localesService = new LocalesService();

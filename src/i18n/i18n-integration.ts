@@ -2,7 +2,9 @@ import { languageService } from '@/services/language.service';
 import { localesService } from '@/services/locales.service';
 import { Language } from '@/types';
 import { Locale} from '@/types';
-import { getServerCacheTtl,serverLocaleConfig} from '@/config/';
+import { getServerCacheTtl } from '@/config/cache.server.config';
+import { SERVER_APP_CONFIG } from '@/config/app.server.config';
+
 import { env } from '@/env.mjs';
 
 /**
@@ -162,7 +164,7 @@ export class I18nIntegration {
      * @returns Language[] 靜態語系列表
      */
     private static getStaticFallbackLanguages(): Language[] {
-        const locales = serverLocaleConfig.supportedLocales;
+        const locales = SERVER_APP_CONFIG.i18n.supportedLocales;
         const defaultLocale = env.DEFAULT_LANGUAGE;
         return locales.map((locale) => ({
             id: locale,
@@ -172,4 +174,5 @@ export class I18nIntegration {
             default: locale === defaultLocale
         }));
     }
+
 }
