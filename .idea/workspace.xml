@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/env--.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/spec/geo.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/geo/cookies/geo-cookies.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/geo/providers/geoplugin.provider.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/geo/services/geo.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/geo/strategy/geo-strategy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/geo/types/geo.types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/features/locales/utils/resolve-suggested-language.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/env.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/env.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/dev-logger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/dev-logger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/base/api-service.base.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/base/api-service.base.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/locales.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/locales.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/spec/web-entry-flow.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/web-entry-flow.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/cache/factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cache/factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/cache/memory-adapter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cache/memory-adapter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,12 +32,12 @@
     &quot;assignee&quot;: &quot;a602988&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/a602988/next-minmax.git",
-    "accountId": "4efeec24-a74f-40d9-88a1-2ccfcee2d088"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/a602988/next-minmax.git&quot;,
+    &quot;accountId&quot;: &quot;9f6eecd6-a281-490f-8010-6a13656f8514&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -47,28 +53,28 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/chianlin/Documents/GitHub/next-minmax/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "junie.application.models",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/chianlin/Documents/GitHub/next-minmax/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/chianlin/Documents/GitHub/next-minmax/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/linchian/Documents/GitHub/next-minmax/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -125,6 +131,8 @@
       <workItem from="1755485340521" duration="800000" />
       <workItem from="1755488012411" duration="10564000" />
       <workItem from="1755509573843" duration="5150000" />
+      <workItem from="1755571008052" duration="499000" />
+      <workItem from="1755571537399" duration="10224000" />
     </task>
     <servers />
   </component>
@@ -151,7 +159,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/services/base/api-service.base.ts</url>
           <line>28</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
