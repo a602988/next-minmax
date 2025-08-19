@@ -7,3 +7,5 @@
 `取得建議的語言代碼` `getSuggestedLanguage`
 會是由 features/locales中於ssr初始化存在快取記憶體中的 國家預設語系資料中去比對
 那麼會是在這裡寫嗎
+
+middleware 放入使用者ip取得國家中

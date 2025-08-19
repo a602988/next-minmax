@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e38fb103-ad4f-404c-9fbc-023d82623405" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/spec/geo.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/geo/cookies/geo-cookies.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/geo/providers/geoplugin.provider.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/geo/services/geo.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/geo/strategy/geo-strategy.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/geo/types/geo.types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/features/locales/utils/resolve-suggested-language.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/spec/web-entry-flow.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/spec/web-entry-flow.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/cache/factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cache/factory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/cache/memory-adapter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/cache/memory-adapter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +123,7 @@
       <workItem from="1755488012411" duration="10564000" />
       <workItem from="1755509573843" duration="5150000" />
       <workItem from="1755571008052" duration="499000" />
-      <workItem from="1755571537399" duration="10224000" />
+      <workItem from="1755571537399" duration="12042000" />
     </task>
     <servers />
   </component>
