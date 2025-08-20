@@ -43,28 +43,59 @@ __turbopack_context__.s({});
 "[project]/src/lib/cache/memory-adapter.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
-// src/lib/cache/memory-adapter.ts 記憶體快取實作（Map + TTL + Tag 索引）
-__turbopack_context__.s({
+/**
+ * 記憶體快取適配器實作
+ *
+ * 基於 JavaScript Map 實作的記憶體快取系統，支援 TTL（生存時間）和標籤索引功能。
+ * 適合開發環境或小型應用使用，資料存儲在應用程式記憶體中，重啟後會遺失。
+ *
+ * 主要特性：
+ * - TTL 支援：可設定快取項目的過期時間
+ * - 標籤索引：支援按標籤批量刪除快取項目
+ * - 自動清理：讀取時自動清理過期項目
+ * - 型別安全：支援泛型，確保型別安全
+ *
+ * 注意事項：
+ * - 記憶體使用量會隨快取項目增加而增長
+ * - 應用程式重啟後所有快取資料會遺失
+ * - 適合單機部署，不支援分散式快取
+ */ __turbopack_context__.s({
     "MemoryCacheAdapter": ()=>MemoryCacheAdapter
 });
 class MemoryCacheAdapter {
-    store = new Map();
-    tagIndex = new Map();
-    async get(key) {
+    /** 主要存儲結構：鍵值 -> 快取項目 */ store = new Map();
+    /** 標籤索引：標籤 -> 包含該標籤的鍵值集合 */ tagIndex = new Map();
+    /**
+     * 取得快取值
+     *
+     * @template T 快取值的型別
+     * @param key 快取鍵值
+     * @returns 快取的值，如果不存在或已過期則回傳 null
+     */ async get(key) {
         const item = this.store.get(key);
         if (!item) return null;
+        // 檢查是否過期，過期則自動清理
         if (item.expireAt && Date.now() > item.expireAt) {
             this.evict(key, item);
             return null;
         }
         return item.value;
     }
-    async set(key, value, options) {
+    /**
+     * 設定快取值
+     *
+     * @template T 快取值的型別
+     * @param key 快取鍵值
+     * @param value 要快取的值
+     * @param options 快取選項，包含 TTL 和標籤
+     */ async set(key, value, options) {
         const ttlSec = options?.ttl ?? 0;
         const expireAt = ttlSec > 0 ? Date.now() + ttlSec * 1000 : undefined;
         const tags = new Set(options?.tags ?? []);
+        // 如果鍵值已存在，先清理舊的標籤索引
         const old = this.store.get(key);
         if (old) this.unindexTags(key, old.tags);
+        // 設定新值並建立標籤索引
         this.store.set(key, {
             value,
             expireAt,
@@ -72,42 +103,84 @@ class MemoryCacheAdapter {
         });
         this.indexTags(key, tags);
     }
-    async del(key) {
+    /**
+     * 刪除指定鍵值的快取
+     *
+     * @param key 要刪除的快取鍵值
+     */ async del(key) {
         const item = this.store.get(key);
         if (!item) return;
+        // 清理標籤索引並刪除項目
         this.unindexTags(key, item.tags);
         this.store.delete(key);
     }
-    async delByTag(tag) {
+    /**
+     * 按標籤批量刪除快取
+     *
+     * 刪除所有包含指定標籤的快取項目，常用於相關資料的批量失效。
+     *
+     * @param tag 要刪除的標籤
+     */ async delByTag(tag) {
         const keys = this.tagIndex.get(tag);
         if (!keys) return;
+        // 遍歷所有包含該標籤的鍵值並刪除
         for (const key of keys){
             const item = this.store.get(key);
             if (!item) continue;
             this.unindexTags(key, item.tags);
             this.store.delete(key);
         }
+        // 清理標籤索引
         this.tagIndex.delete(tag);
     }
-    async clear() {
+    /**
+     * 清空所有快取
+     *
+     * 刪除所有快取項目和標籤索引，重置快取狀態。
+     */ async clear() {
         this.store.clear();
         this.tagIndex.clear();
     }
-    evict(key, item) {
+    /**
+     * 清理過期項目
+     *
+     * 內部方法，用於清理過期的快取項目和相關的標籤索引。
+     *
+     * @private
+     * @param key 要清理的鍵值
+     * @param item 要清理的快取項目
+     */ evict(key, item) {
         this.unindexTags(key, item.tags);
         this.store.delete(key);
     }
-    indexTags(key, tags) {
+    /**
+     * 建立標籤索引
+     *
+     * 為指定鍵值的標籤建立反向索引，用於支援按標籤查詢和刪除。
+     *
+     * @private
+     * @param key 鍵值
+     * @param tags 標籤集合
+     */ indexTags(key, tags) {
         for (const tag of tags){
             if (!this.tagIndex.has(tag)) this.tagIndex.set(tag, new Set());
             this.tagIndex.get(tag).add(key);
         }
     }
-    unindexTags(key, tags) {
+    /**
+     * 清理標籤索引
+     *
+     * 從標籤索引中移除指定鍵值的關聯，如果標籤下沒有其他鍵值則刪除該標籤。
+     *
+     * @private
+     * @param key 鍵值
+     * @param tags 標籤集合
+     */ unindexTags(key, tags) {
         for (const tag of tags){
             const set = this.tagIndex.get(tag);
             if (!set) continue;
             set.delete(key);
+            // 如果標籤下沒有其他鍵值，刪除該標籤索引
             if (set.size === 0) this.tagIndex.delete(tag);
         }
     }
@@ -116,27 +189,40 @@ class MemoryCacheAdapter {
 "[project]/src/lib/cache/factory.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
-// src/lib/cache/factory.ts
-__turbopack_context__.s({
+/**
+ * 快取適配器工廠模組
+ *
+ * 此模組提供統一的快取適配器建立介面，根據環境變數配置動態選擇快取策略。
+ * 支援記憶體快取、Redis 快取或無快取模式，並使用單例模式確保整個應用程式
+ * 共用同一個快取實例，避免重複初始化和資源浪費。
+ *
+ * 支援的快取策略：
+ * - memory: 使用記憶體快取，適合開發環境或小型應用
+ * - redis: 使用 Redis 快取，適合生產環境或分散式部署（待實作）
+ * - none: 無快取模式，所有操作都是 no-op，適合測試或特殊場景
+ */ __turbopack_context__.s({
     "getCacheAdapter": ()=>getCacheAdapter
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$memory$2d$adapter$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/cache/memory-adapter.ts [app-rsc] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-rsc] (ecmascript)");
 ;
 ;
+// 單例實例，確保整個應用程式共用同一個快取適配器
 let singleton = null;
 function getCacheAdapter() {
+    // 如果已有實例，直接回傳，避免重複建立
     if (singleton) return singleton;
-    const strategy = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].STRATEGY; // 'memory' | 'redis' | 'none'
+    // 直接讀 env，避免依賴另一層 config 常量
+    const strategy = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY; // 'memory' | 'redis' | 'none'
     if (strategy === 'memory') {
+        // 記憶體快取：適合開發環境，資料存在應用程式記憶體中
         singleton = new __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$memory$2d$adapter$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["MemoryCacheAdapter"]();
     } else if (strategy === 'redis') {
+        // Redis 快取：適合生產環境，支援分散式快取
         // TODO: 之後接 RedisAdapter
         singleton = new __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$memory$2d$adapter$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["MemoryCacheAdapter"]();
-    // 可先以記憶體代替，待接線時替換
     } else {
-        // none：回傳最小 no-op adapter
+        // 無快取模式：所有操作都是 no-op，適合測試或禁用快取的場景
         singleton = {
             async get () {
                 return null;
@@ -171,7 +257,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$index
 "[project]/src/features/language/lib/language.cache.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
-// src/features/language/infrastructure/language.cache.ts
 __turbopack_context__.s({
     "clearLanguagesCache": ()=>clearLanguagesCache,
     "getLanguagesCache": ()=>getLanguagesCache,
@@ -180,24 +265,26 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/lib/cache/index.ts [app-rsc] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$factory$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/lib/cache/factory.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-rsc] (ecmascript) <module evaluation>");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/src/config/cache.server.config.ts [app-rsc] (ecmascript) <locals>");
 ;
 ;
 const adapter = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$cache$2f$factory$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getCacheAdapter"])();
-const KEY = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].generateKey('LANGUAGES', 'list');
-const TTL = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TTL.LANGUAGES;
-const TAGS = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["CACHE_CONFIG"].TAGS.LANGUAGES;
+// 使用 server 端快取設定（不重複 env，僅取業務邏輯）
+// 注意：type 一律使用小寫鍵（languages）
+const key = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["serverCacheConfig"].generateKey('languages', 'list');
+const ttl = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["serverCacheConfig"].ttl.languages; // 單位：秒
+const tags = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$server$2e$config$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__["serverCacheConfig"].tags.languages;
 async function getLanguagesCache() {
-    return adapter.get(KEY);
+    return adapter.get(key);
 }
 async function setLanguagesCache(data) {
-    await adapter.set(KEY, data, {
-        ttl: TTL,
-        tags: TAGS
+    await adapter.set(key, data, {
+        ttl,
+        tags
     });
 }
 async function clearLanguagesCache() {
-    await adapter.del(KEY);
+    await adapter.del(key);
 } // 若之後要清除整個類別：adapter.delByTag('languages')
 }),
 "[project]/src/features/language/services/language.repository.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {

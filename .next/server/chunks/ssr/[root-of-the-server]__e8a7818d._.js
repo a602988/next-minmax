@@ -30,7 +30,7 @@ async function HomePage() {
         className: "page flex flex-col gap-3"
     }, void 0, false, {
         fileName: "[project]/src/app/[locale]/page.tsx",
-        lineNumber: 7,
+        lineNumber: 6,
         columnNumber: 9
     }, this);
 }

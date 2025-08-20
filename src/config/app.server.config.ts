@@ -3,6 +3,7 @@ import { env } from '@/env.mjs';
 /**
  * 服務端應用配置層
  * 只包含真正需要業務邏輯處理的配置
+ * ⚠️ 此檔案只能在伺服器端使用
  */
 export const SERVER_APP_CONFIG = {
     // 國際化配置 - 數據轉換
@@ -13,7 +14,7 @@ export const SERVER_APP_CONFIG = {
 
     // API 配置 - 條件邏輯
     api: {
-        baseUrl: env.USE_MOCK_API ? env.NEXT_PUBLIC_API_BASE_URL : env.EXTERNAL_API_BASE_URL,
+        baseUrl: env.USE_MOCK_API ? env.API_BASE_URL : env.API_BASE_URL,
     },
 } as const;
 

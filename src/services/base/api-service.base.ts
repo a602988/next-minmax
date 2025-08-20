@@ -1,5 +1,5 @@
 import { env } from '@/env.mjs';
-import { apiConfig } from '@/config/api.config';
+import { apiConfig } from '@/config/';
 import {
     devLog,
     devWarn,
@@ -47,7 +47,7 @@ export abstract class BaseApiService {
                     'Content-Type': 'application/json',
                     ...options.headers,
                 },
-                ...(env.USE_MOCK_API
+                ...(env.NEXT_PUBLIC_USE_MOCK_API
                     ? {}
                     : {
                         signal: AbortSignal.timeout(apiConfig.timeouts.api),
@@ -107,7 +107,7 @@ export abstract class BaseApiService {
                 // 請求超時
                 devWarn(`API 請求超時: ${this.serviceName}`, {
                     url,
-                    timeout: env.USE_MOCK_API ? 'N/A' : `${apiConfig.timeouts.api}ms`,
+                    timeout: env.NEXT_PUBLIC_USE_MOCK_API ? 'N/A' : `${apiConfig.timeouts.api}ms`,
                     suggestion: '考慮增加超時時間或檢查網路狀況'
                 });
             } else if (error instanceof SyntaxError) {
@@ -138,7 +138,7 @@ export abstract class BaseApiService {
      * 根據環境變數建構 API 網址
      */
     private buildApiUrl(endpoint: { mock: string; external: string }): string {
-        const path = env.USE_MOCK_API ? endpoint.mock : endpoint.external;
+        const path = env.NEXT_PUBLIC_USE_MOCK_API ? endpoint.mock : endpoint.external;
         const fullUrl = `${apiConfig.baseUrl}${path}`;
 
         // 開發環境顯示 URL 建構過程
@@ -146,7 +146,7 @@ export abstract class BaseApiService {
             baseUrl: apiConfig.baseUrl,
             path,
             fullUrl,
-            useMock: env.USE_MOCK_API
+            useMock: env.NEXT_PUBLIC_USE_MOCK_API
         });
 
         return fullUrl;
@@ -157,7 +157,7 @@ export abstract class BaseApiService {
      */
     protected logApiCall(url: string): void {
         // 業務日誌：使用統一的 apiLog 函數
-        apiLog(`${this.serviceName} API 呼叫: ${url} (mock: ${env.USE_MOCK_API})`);
+        apiLog(`${this.serviceName} API 呼叫: ${url} (mock: ${env.NEXT_PUBLIC_USE_MOCK_API})`);
 
         // 開發日誌：僅開發環境，提供更詳細的資訊
         devLog(`啟動 ${this.serviceName} API 請求: ${url}`);

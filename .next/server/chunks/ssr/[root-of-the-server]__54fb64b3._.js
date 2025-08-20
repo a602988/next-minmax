@@ -34,339 +34,225 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$t3$2d$oss$
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__ = __turbopack_context__.i("[project]/node_modules/zod/v4/classic/external.js [app-ssr] (ecmascript) <export * as z>");
 ;
 ;
-/**
- * 環境變數配置 - 程式碼優先的配置管理
- *
- * 設計原則：
- * 1. env.mjs 包含所有預設值和業務邏輯配置
- * 2. .env 檔案只覆寫需要變更或敏感的設定
- * 3. 開發時依賴預設值，生產時用環境變數覆蓋
- */ /**
- * 伺服器端環境變數配置
- * 這些變數只在伺服器端使用，確保安全性，不會暴露給客戶端
- */ const server = {
-    // ==========================================
-    // 國際化與語系配置
-    // 控制多語系、地理位置偵測及語系重導功能
-    // ==========================================
-    /** 國際化功能總開關 */ INTERNATIONALIZATION_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("true"),
-    /** 多語系功能開關 */ MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("true"),
-    /** ip 地理偵測功能開關 */ GEO_DETECTION_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("false"),
-    /** 強制重導開關 */ FORCE_REDIRECT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("false"),
-    // ==========================================
-    // 專案核心配置
-    // 專案基本資訊與預設語系設定
-    // ==========================================
-    /** 專案代碼 */ PROJECT_CODE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("minmax2025"),
-    /** routing - 預設語系 */ DEFAULT_LANGUAGE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("zh-TW"),
-    /** routing - 支援的語系 */ SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('zh-TW,en'),
-    /** routing - 語系前綴  預設 不加*/ LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
-        'always',
-        'as-needed',
-        'never'
-    ]).default('as-needed'),
-    /** routing - 啟用語系檢測 */ LOCALE_DETECTION_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].boolean().default(true),
-    /** 國家子網域對應表 (JSON) {"TW": "tw", "US": "us", "JP": "jp"} */ COUNTRY_SUBDOMAIN_MAP: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('{}'),
-    // ==========================================
-    // 🔄 快取系統配置
-    // 控制整體快取策略和生存時間
-    // ==========================================
-    /** 快取系統總開關 */ CACHE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("true"),
-    /** CDN 快取協作開關 */ CACHE_CDN_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("false"),
-    /** 國際化快取策略 */ I18N_CACHE_STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
-        "memory",
-        "redis",
-        "none"
-    ]).default("memory"),
-    /** 快取預設生存時間 (秒) */ CACHE_DEFAULT_TTL: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>parseInt(val)).default("3600"),
-    // ==========================================
-    // API 與外部服務配置
-    // API 網址、超時設定及第三方服務配置
-    // ==========================================
-    /** 外部後端 API 基礎網址 */ EXTERNAL_API_BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("https://v5.jeffy.test"),
-    /** 一般 API 請求超時 (毫秒) */ API_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>parseInt(val)).default("5000"),
-    /** 內容 API 請求超時 (毫秒) */ CONTENT_API_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>parseInt(val)).default("10000"),
-    /** 地理位置 API 超時 (毫秒) */ GEO_API_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>parseInt(val)).default("800"),
-    /** 地理位置服務提供商 */ GEO_API_PROVIDER: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
-        "ipapi",
-        "ipinfo",
-        "geoplugin"
-    ]).default("geoplugin"),
-    // ==========================================
-    // 開發與測試配置
-    // Mock API、錯誤模擬及開發工具設定
-    // ==========================================
-    /** Mock API 開關 */ USE_MOCK_API: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("true"),
-    /** Mock API 延遲模擬 (毫秒) */ MOCK_API_DELAY: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>parseInt(val)).default("100"),
-    /** 錯誤模擬開關 */ MOCK_ERROR_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("false"),
-    /** 錯誤模擬機率 (0.0-1.0) */ MOCK_ERROR_RATE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>parseFloat(val)).default("0.0"),
-    // ==========================================
-    // 監控與日誌配置
-    // API 日誌記錄及效能監控開關
-    // ==========================================
-    /** API 請求日誌記錄 */ API_LOGGING_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("true"),
-    /** 效能監控開關 */ PERFORMANCE_MONITORING_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("false"),
-    // ==========================================
-    // 功能開關
-    // 各項業務功能的開關控制
-    // ==========================================
-    /** 會員功能開關 */ MEMBERSHIP_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("false")
-};
-/**
- * 客戶端環境變數配置
- * 這些變數會暴露給瀏覽器，請避免包含敏感資訊
- * 所有變數都必須以 NEXT_PUBLIC_ 前綴開始
- */ const client = {
-    // ==========================================
-    // 🏗️ 專案基本資訊
-    // 前端顯示用的專案資訊和基礎配置
-    // ==========================================
-    /** 專案顯示名稱 */ NEXT_PUBLIC_PROJECT_NAME: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("demo測試網站"),
-    /** routing - 預設語系 */ NEXT_PUBLIC_DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("zh-TW"),
-    /** routing - 支援的語系 */ NEXT_PUBLIC_SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('zh-TW,en'),
-    /** routing - 語系前綴  預設 不加*/ NEXT_PUBLIC_LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
-        'always',
-        'as-needed',
-        'never'
-    ]).default('as-needed'),
-    /** API 版本號 */ NEXT_PUBLIC_API_VERSION: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("1.0.0"),
-    // ==========================================
-    // 🌐 API 與服務配置
-    // 客戶端 API 呼叫相關設定
-    // ==========================================
-    /** 前端 API 基礎網址 */ NEXT_PUBLIC_API_BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("http://localhost:3000"),
-    // ==========================================
-    // 🌍 國際化功能開關
-    // 前端國際化相關的功能控制
-    // ==========================================
-    /** 前端多語系功能開關 */ NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("true"),
-    // ==========================================
-    // 🗺️ 地理位置偵測配置
-    // 使用者地理位置偵測與重導邏輯設定
-    // ==========================================
-    /** 地理位置偵測策略 */ NEXT_PUBLIC_GEO_DETECTION_STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
-        "cdn-only",
-        "api-only",
-        "cdn-fallback"
-    ]).default("api-only"),
-    /** 地理重導模式 */ NEXT_PUBLIC_GEO_REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
-        "off",
-        "suggest",
-        "force"
-    ]).default("suggest"),
-    /** CDN 國家標頭名稱 */ NEXT_PUBLIC_CDN_COUNTRY_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("cf-ipcountry"),
-    // ==========================================
-    // ⚙️ 前端功能配置
-    // 前端特有的功能開關和配置
-    // ==========================================
-    /** 前端快取功能開關 */ NEXT_PUBLIC_CACHE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("true"),
-    /** 開發模式開關 */ NEXT_PUBLIC_DEV_MODE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().transform((val)=>val === "true").default("false"),
-    // ==========================================
-    // 🔧 外部服務配置
-    // 第三方服務的公開配置項目
-    // ==========================================
-    /** 錯誤追蹤服務 DSN */ NEXT_PUBLIC_SENTRY_DSN: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().optional()
-};
-// 取得所有 schema 的鍵名
-const serverKeys = Object.keys(server);
-const clientKeys = Object.keys(client);
 const env = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$t3$2d$oss$2f$env$2d$nextjs$2f$dist$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["createEnv"])({
-    server,
-    client,
     /**
-     * 運行時環境變數映射
-     * 精確地從 process.env 映射我們定義的變數
-     */ runtimeEnv: {
-        ...Object.fromEntries(serverKeys.map((key)=>[
-                key,
-                process.env[key]
-            ])),
-        ...Object.fromEntries(clientKeys.map((key)=>[
-                key,
-                process.env[key]
-            ]))
-    }
+     * 伺服器端專用環境變數。
+     * 這些變數「不會」暴露給客戶端，適合放置敏感資訊如 API 金鑰。
+     */ server: {
+        // ==========================================
+        // 專案核心配置 - 伺服器端專用
+        // ==========================================
+        PROJECT_CODE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("minmax2025"),
+        COUNTRY_SUBDOMAIN_MAP: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('{}'),
+        // ==========================================
+        // API 與外部服務配置 - 伺服器端專用
+        // ==========================================
+        API_BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().url().default("https://v5.jeffy.test"),
+        I18N_CACHE_STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
+            "memory",
+            "redis",
+            "none"
+        ]).default("memory")
+    },
+    /**
+     * 客戶端環境變數。
+     * 必須以 `NEXT_PUBLIC_` 開頭，這些變數會被打包進客戶端的 JavaScript bundle 中。
+     * 絕對不要在此處放置任何敏感資訊。
+     */ client: {
+        // ==========================================
+        // 🏗️ 專案基本資訊 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_PROJECT_NAME: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("測試網站"),
+        NEXT_PUBLIC_API_VERSION: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("1.0.0"),
+        // ==========================================
+        // 🌍 國際化與語系配置 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("zh-TW"),
+        NEXT_PUBLIC_SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default('zh-TW'),
+        NEXT_PUBLIC_LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
+            'always',
+            'as-needed',
+            'never'
+        ]).default('as-needed'),
+        NEXT_PUBLIC_LOCALE_DETECTION_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(true),
+        NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(true),
+        NEXT_PUBLIC_INTERNATIONALIZATION_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(true),
+        // ==========================================
+        // 🗺️ 地理位置偵測配置 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_GEO_DETECTION_STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
+            "cdn-only",
+            "api-only",
+            "cdn-fallback"
+        ]).default("api-only"),
+        NEXT_PUBLIC_GEO_DETECTION_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        NEXT_PUBLIC_GEO_REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
+            "off",
+            "suggest",
+            "force"
+        ]).default("suggest"),
+        NEXT_PUBLIC_FORCE_REDIRECT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        NEXT_PUBLIC_CDN_COUNTRY_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().default("cf-ipcountry"),
+        NEXT_PUBLIC_GEO_API_PROVIDER: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].enum([
+            "ipapi",
+            "ipinfo",
+            "geoplugin"
+        ]).default("geoplugin"),
+        NEXT_PUBLIC_GEO_API_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.number().default(5000),
+        // ==========================================
+        // 🔄 快取系統配置 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_CACHE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(true),
+        NEXT_PUBLIC_CACHE_CDN_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        NEXT_PUBLIC_CACHE_DEFAULT_TTL: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.number().default(3600),
+        // ==========================================
+        // ⚙️ 功能開關 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_DEV_MODE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        NEXT_PUBLIC_MEMBERSHIP_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        // ==========================================
+        // 🔧 開發與測試配置 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_USE_MOCK_API: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(true),
+        NEXT_PUBLIC_MOCK_API_DELAY: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.number().default(100),
+        NEXT_PUBLIC_MOCK_ERROR_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        NEXT_PUBLIC_MOCK_ERROR_RATE: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.number().min(0).max(1).default(0.0),
+        // ==========================================
+        // 📊 監控與日誌配置 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_API_LOGGING_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        NEXT_PUBLIC_PERFORMANCE_MONITORING_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.boolean().default(false),
+        // ==========================================
+        // ⏱️ 超時設定 (來自共享配置)
+        // ==========================================
+        NEXT_PUBLIC_API_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.number().default(30000),
+        NEXT_PUBLIC_CONTENT_API_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].coerce.number().default(60000),
+        // ==========================================
+        // 🌐 API 與服務配置 - 客戶端專用
+        // ==========================================
+        NEXT_PUBLIC_API_BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().url().default("http://localhost:3000/api/ssr/"),
+        // ==========================================
+        // 🔧 外部服務配置 - 客戶端專用
+        // ==========================================
+        NEXT_PUBLIC_SENTRY_DSN: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__z$3e$__["z"].string().url().optional()
+    },
+    /**
+     * 運行時的環境變數來源。
+     * 對於 Next.js，這應該總是 `process.env`。
+     * createEnv 會自動處理 server-side 和 client-side 的變數分離。
+     */ runtimeEnv: process.env
 });
 }),
 "[project]/src/config/api.config.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s({
-    "API_CONFIG": ()=>API_CONFIG
+    "apiConfig": ()=>apiConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-ssr] (ecmascript)");
 ;
-const API_CONFIG = {
-    // 基礎配置
-    BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_BASE_URL,
-    EXTERNAL_BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].EXTERNAL_API_BASE_URL,
-    PROJECT_NAME: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].PROJECT_CODE,
-    // 超時設定
-    TIMEOUT: {
-        DEFAULT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].API_TIMEOUT,
-        CONTENT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CONTENT_API_TIMEOUT,
-        GEO: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].GEO_API_TIMEOUT
+const apiConfig = {
+    // 衍生：根據是否使用 Mock 選擇實際 baseUrl
+    baseUrl: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_USE_MOCK_API ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_BASE_URL : __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].API_BASE_URL,
+    // 衍生：根據是否使用 Mock 切換端點路徑
+    endpoints: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_USE_MOCK_API ? {
+        language: 'languages',
+        locales: 'locales',
+        systemMenus: 'system-menus',
+        webData: 'web-data',
+        detail: 'detail'
+    } : {
+        language: '/api/v1/languages',
+        locales: '/api/v1/locales',
+        systemMenus: '/api/v1/system-menus',
+        webData: '/api/v1/web-data',
+        detail: '/api/v1/detail'
     },
-    // 重試設定
-    RETRY: {
-        ATTEMPTS: 3,
-        DELAY: 1000,
-        EXPONENTIAL_BACKOFF: true
+    // 群組：超時（毫秒）直接取 env，集中使用
+    timeouts: {
+        api: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_TIMEOUT,
+        content: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CONTENT_API_TIMEOUT,
+        geo: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_API_TIMEOUT
     },
-    // 模式設定
-    USE_MOCK: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].USE_MOCK_API,
-    LOGGING: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].API_LOGGING_ENABLED,
-    // API 端點 - Mock 與正式版本統一管理
-    ENDPOINTS: {
-        // Mock API 端點 (Next.js API Routes)
-        MOCK: {
-            LANGUAGE: '/api/ssr/languages',
-            LOCALES: '/api/ssr/locales',
-            SYSTEM_MENUS: '/api/ssr/system-menus',
-            WEB_DATA: '/api/ssr/web-data',
-            DETAIL: '/api/ssr/detail'
-        },
-        // 正式 API 端點 (外部後端)
-        EXTERNAL: {
-            LANGUAGE: '/api/v1/languages',
-            LOCALES: '/api/v1/locales',
-            SYSTEM_MENUS: '/api/v1/system-menus',
-            WEB_DATA: '/api/v1/web-data',
-            DETAIL: '/api/v1/detail'
-        }
-    }
+    // 業務常數：重試策略（如需環境化，於此處加衍生邏輯）
+    retry: {
+        attempts: 3,
+        delay: 1000,
+        exponentialBackoff: true
+    },
+    // 業務判斷：是否模擬延遲/錯誤與相關參數
+    shouldSimulateDelay: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_USE_MOCK_API && __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MOCK_API_DELAY > 0,
+    getMockDelay: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MOCK_API_DELAY,
+    shouldSimulateError: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MOCK_ERROR_ENABLED && Math.random() < __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MOCK_ERROR_RATE
 };
 }),
 "[project]/src/config/app.client.config.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s({
-    "APP_CONFIG": ()=>APP_CONFIG
+    "appConfig": ()=>appConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-ssr] (ecmascript)");
 ;
-const APP_CONFIG = {
-    // 專案基本資訊
-    PROJECT_NAME: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].PROJECT_CODE,
-    // API 配置 (僅前端可用)
-    API: {
-        BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_BASE_URL,
-        TIMEOUT: 30000
-    },
-    // 功能開關 (僅前端相關)
-    FEATURES: {
-        MULTI_LANGUAGE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
-        DEV_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEV_MODE_ENABLED
-    },
-    // 地理位置配置 (僅前端相關)
-    GEO: {
-        DETECTION_STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        CDN_COUNTRY_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER
-    },
-    // 語系配置 (僅前端相關)
-    LOCALE: {
-        CLIENT_DEFAULT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
-        MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED
-    }
+const appConfig = {
+    // 衍生：API 超時（毫秒），若無設定則回退 30000
+    apiTimeout: typeof __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_TIMEOUT === 'number' ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_TIMEOUT : Number.parseInt(String(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_TIMEOUT ?? ''), 10) || 30000,
+    // 衍生：i18n 啟用（客戶端視角）的布林正規化
+    i18nEnabled: typeof __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED === 'boolean' ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED : String(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED).toLowerCase() === 'true'
 };
 }),
 "[project]/src/config/app.server.config.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s({
-    "SERVER_APP_CONFIG": ()=>SERVER_APP_CONFIG
+    "SERVER_APP_CONFIG": ()=>SERVER_APP_CONFIG,
+    "SERVER_COMPUTED": ()=>SERVER_COMPUTED
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-ssr] (ecmascript)");
 ;
 const SERVER_APP_CONFIG = {
-    // 專案基本資訊
-    PROJECT_NAME: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].PROJECT_CODE,
-    // API 配置
-    API: {
-        BASE_URL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_API_BASE_URL,
-        EXTERNAL_URL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].EXTERNAL_API_BASE_URL,
-        TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].API_TIMEOUT,
-        CONTENT_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CONTENT_API_TIMEOUT,
-        GEO_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].GEO_API_TIMEOUT
+    // 國際化配置 - 數據轉換
+    i18n: {
+        supportedLocales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((locale)=>locale.trim()),
+        countrySubdomainMap: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP || '{}')
     },
-    // 功能開關
-    FEATURES: {
-        INTERNATIONALIZATION: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].INTERNATIONALIZATION_ENABLED,
-        GEO_DETECTION: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].GEO_DETECTION_ENABLED,
-        FORCE_REDIRECT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].FORCE_REDIRECT,
-        MULTI_LANGUAGE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MULTI_LANGUAGE_ENABLED,
-        MEMBERSHIP: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MEMBERSHIP_ENABLED,
-        CACHE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_ENABLED
-    },
-    // 快取配置
-    CACHE: {
-        ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_ENABLED,
-        CDN_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_CDN_ENABLED,
-        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
-        DEFAULT_TTL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL
-    },
-    // 地理位置配置
-    GEO: {
-        DETECTION_STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        CDN_COUNTRY_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER,
-        API_PROVIDER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].GEO_API_PROVIDER,
-        API_TIMEOUT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].GEO_API_TIMEOUT
-    },
-    // Mock 與測試配置
-    MOCK: {
-        USE_MOCK_API: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].USE_MOCK_API,
-        API_DELAY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MOCK_API_DELAY,
-        ERROR_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MOCK_ERROR_ENABLED,
-        ERROR_RATE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MOCK_ERROR_RATE
-    },
-    // 開發與監控
-    DEV: {
-        API_LOGGING: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].API_LOGGING_ENABLED,
-        PERFORMANCE_MONITORING: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].PERFORMANCE_MONITORING_ENABLED,
-        DEV_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEV_MODE_ENABLED
-    },
-    // 語系配置
-    LOCALE: {
-        DEFAULT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].DEFAULT_LANGUAGE,
-        CLIENT_DEFAULT: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
-        MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
-        COUNTRY_SUBDOMAIN_MAP: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP
+    // API 配置 - 條件邏輯
+    api: {
+        baseUrl: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].USE_MOCK_API ? __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].API_BASE_URL : __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].API_BASE_URL
     }
+};
+const SERVER_COMPUTED = {
+    /** 是否啟用完整國際化功能（伺服端視角） */ isI18nEnabled: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].INTERNATIONALIZATION_ENABLED && __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MULTI_LANGUAGE_ENABLED,
+    /** 檢查是否支援特定語系 */ isLocaleSupported: (locale)=>SERVER_APP_CONFIG.i18n.supportedLocales.includes(locale),
+    /** 是否應該模擬 API 延遲 */ shouldSimulateDelay: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].USE_MOCK_API && __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MOCK_API_DELAY > 0,
+    /** 是否應該模擬錯誤 */ shouldSimulateError: ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MOCK_ERROR_ENABLED && Math.random() < __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MOCK_ERROR_RATE
 };
 }),
 "[project]/src/config/locale.server.config.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s({
-    "SERVER_LOCALE_CONFIG": ()=>SERVER_LOCALE_CONFIG
+    "serverLocaleConfig": ()=>serverLocaleConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-ssr] (ecmascript)");
 ;
-const SERVER_LOCALE_CONFIG = {
-    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
-    DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].DEFAULT_LANGUAGE,
-    LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].LOCALE_PREFIX_MODE,
-    FALLBACK_LOCALE: 'zh-TW',
-    DETECTION: {
-        ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].MULTI_LANGUAGE_ENABLED,
-        GEO_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].GEO_DETECTION_ENABLED,
-        CACHE_TTL: 3600
-    },
-    CACHE: {
-        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
-        TTL: 3600
-    },
-    COUNTRY_SUBDOMAIN_MAP: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP),
-    // 工具函數
+const serverLocaleConfig = {
+    // 衍生：支援語系陣列
+    supportedLocales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
+    // 工具：語系驗證（使用衍生 supportedLocales）
     isValidLocale: (locale)=>{
-        return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].SUPPORTED_LOCALES.split(',').map((l)=>l.trim()).includes(locale);
+        return serverLocaleConfig.supportedLocales.includes(locale);
     },
-    // 服務端專用函數
+    // 工具：取得有效的預設語系
+    getValidDefaultLocale: ()=>{
+        const envDefault = __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].DEFAULT_LANGUAGE;
+        return serverLocaleConfig.supportedLocales.includes(envDefault) ? envDefault : serverLocaleConfig.supportedLocales[0];
+    },
+    // 衍生：國家子網域映射
+    countrySubdomainMap: JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP || '{}'),
+    // 工具：依國家取子網域（使用衍生 countrySubdomainMap）
     getSubdomainByCountry: (country)=>{
-        const map = JSON.parse(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].COUNTRY_SUBDOMAIN_MAP);
-        return map[country] || null;
+        return serverLocaleConfig.countrySubdomainMap[country] || null;
     }
 };
 }),
@@ -374,23 +260,16 @@ const SERVER_LOCALE_CONFIG = {
 "use strict";
 
 __turbopack_context__.s({
-    "CLIENT_LOCALE_CONFIG": ()=>CLIENT_LOCALE_CONFIG
+    "clientLocaleConfig": ()=>clientLocaleConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-ssr] (ecmascript)");
 ;
-const CLIENT_LOCALE_CONFIG = {
-    SUPPORTED_LOCALES: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
-    DEFAULT_LOCALE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_DEFAULT_LOCALE,
-    LOCALE_PREFIX_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_LOCALE_PREFIX_MODE,
-    MULTI_LANGUAGE_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_MULTI_LANGUAGE_ENABLED,
-    DETECTION: {
-        STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_DETECTION_STRATEGY,
-        REDIRECT_MODE: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_GEO_REDIRECT_MODE,
-        CDN_HEADER: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_CDN_COUNTRY_HEADER
-    },
-    // 客戶端工具函數
+const clientLocaleConfig = {
+    // 衍生：支援語系陣列
+    supportedLocales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()),
+    // 工具：驗證語系是否被支援（使用衍生 supportedLocales）
     isValidLocale: (locale)=>{
-        return __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].NEXT_PUBLIC_SUPPORTED_LOCALES.split(',').map((l)=>l.trim()).includes(locale);
+        return clientLocaleConfig.supportedLocales.includes(locale);
     }
 };
 }),
@@ -398,21 +277,26 @@ const CLIENT_LOCALE_CONFIG = {
 "use strict";
 
 /**
- * 快取系統客戶端配置檔案
- * 只包含客戶端可安全使用的快取配置
- */ /**
- * 快取資料類型定義 - 統一管理所有快取相關設定
- */ __turbopack_context__.s({
-    "CACHE_CONFIG": ()=>CACHE_CONFIG,
+ * 快取系統客戶端配置檔案（僅業務邏輯）
+ */ // redis 相關鍵格式（客戶端僅作 key 規則使用，不連線）
+__turbopack_context__.s({
+    "cacheConfig": ()=>cacheConfig,
     "getAllCacheTags": ()=>getAllCacheTags,
     "getCacheConfig": ()=>getCacheConfig,
     "getCacheConfigSummary": ()=>getCacheConfigSummary,
-    "getCacheTTL": ()=>getCacheTTL,
     "getCacheTags": ()=>getCacheTags,
+    "getCacheTtl": ()=>getCacheTtl,
     "getDataTypesByTag": ()=>getDataTypesByTag
 });
-const CACHE_DATA_TYPES = {
-    LANGUAGES: {
+const redisConfig = {
+    prefix: 'minmax:',
+    keySeparator: ':'
+};
+/**
+ * 快取資料類型定義 - 統一管理所有快取相關設定
+ * - 僅保留客戶端需要的預設 ttl/tags/描述
+ */ const cacheDataTypes = {
+    languages: {
         ttl: 7200,
         tags: [
             'languages',
@@ -420,7 +304,7 @@ const CACHE_DATA_TYPES = {
         ],
         description: '語言資料快取'
     },
-    LOCALES: {
+    locales: {
         ttl: 7200,
         tags: [
             'locales',
@@ -428,7 +312,7 @@ const CACHE_DATA_TYPES = {
         ],
         description: '地區設定快取'
     },
-    MENUS: {
+    menus: {
         ttl: 3600,
         tags: [
             'menus',
@@ -436,7 +320,7 @@ const CACHE_DATA_TYPES = {
         ],
         description: '選單資料快取'
     },
-    WEB_DATA: {
+    webData: {
         ttl: 3600,
         tags: [
             'web-data',
@@ -444,7 +328,7 @@ const CACHE_DATA_TYPES = {
         ],
         description: '網站資料快取'
     },
-    PAGES: {
+    pages: {
         ttl: 1800,
         tags: [
             'pages',
@@ -452,7 +336,7 @@ const CACHE_DATA_TYPES = {
         ],
         description: '頁面內容快取'
     },
-    GEO_DATA: {
+    geoData: {
         ttl: 1800,
         tags: [
             'geo-data',
@@ -460,7 +344,7 @@ const CACHE_DATA_TYPES = {
         ],
         description: '地理位置資料快取'
     },
-    USER_DATA: {
+    userData: {
         ttl: 600,
         tags: [
             'user-data',
@@ -468,7 +352,7 @@ const CACHE_DATA_TYPES = {
         ],
         description: '使用者資料快取'
     },
-    API_RESPONSE: {
+    apiResponse: {
         ttl: 3600,
         tags: [
             'api-response'
@@ -476,69 +360,66 @@ const CACHE_DATA_TYPES = {
         description: 'API 回應快取'
     }
 };
-const CACHE_CONFIG = {
-    // 基礎配置 (客戶端預設值)
-    ENABLED: true,
-    CDN_ENABLED: false,
-    DEFAULT_TTL: 3600,
-    STRATEGY: 'memory',
-    // Redis 配置 (客戶端不使用)
-    REDIS: {
-        PREFIX: 'minmax:',
-        KEY_SEPARATOR: ':'
+const cacheConfig = {
+    // 基礎配置（客戶端預設值）
+    enabled: true,
+    cdnEnabled: false,
+    defaultTtl: 3600,
+    strategy: 'memory',
+    // key 規則（僅作為 key 生成規範）
+    redis: redisConfig,
+    // 從 cacheDataTypes 自動生成 ttl 與 tags 映射
+    ttl: {
+        languages: cacheDataTypes.languages.ttl,
+        locales: cacheDataTypes.locales.ttl,
+        menus: cacheDataTypes.menus.ttl,
+        webData: cacheDataTypes.webData.ttl,
+        pages: cacheDataTypes.pages.ttl,
+        geoData: cacheDataTypes.geoData.ttl,
+        userData: cacheDataTypes.userData.ttl,
+        apiResponse: cacheDataTypes.apiResponse.ttl
     },
-    // 從 CACHE_DATA_TYPES 自動生成 TTL 和 TAGS
-    TTL: {
-        LANGUAGES: CACHE_DATA_TYPES.LANGUAGES.ttl,
-        LOCALES: CACHE_DATA_TYPES.LOCALES.ttl,
-        MENUS: CACHE_DATA_TYPES.MENUS.ttl,
-        WEB_DATA: CACHE_DATA_TYPES.WEB_DATA.ttl,
-        PAGES: CACHE_DATA_TYPES.PAGES.ttl,
-        GEO_DATA: CACHE_DATA_TYPES.GEO_DATA.ttl,
-        USER_DATA: CACHE_DATA_TYPES.USER_DATA.ttl,
-        API_RESPONSE: CACHE_DATA_TYPES.API_RESPONSE.ttl
+    tags: {
+        languages: cacheDataTypes.languages.tags,
+        locales: cacheDataTypes.locales.tags,
+        menus: cacheDataTypes.menus.tags,
+        webData: cacheDataTypes.webData.tags,
+        pages: cacheDataTypes.pages.tags,
+        geoData: cacheDataTypes.geoData.tags,
+        userData: cacheDataTypes.userData.tags,
+        apiResponse: cacheDataTypes.apiResponse.tags
     },
-    TAGS: {
-        LANGUAGES: CACHE_DATA_TYPES.LANGUAGES.tags,
-        LOCALES: CACHE_DATA_TYPES.LOCALES.tags,
-        MENUS: CACHE_DATA_TYPES.MENUS.tags,
-        WEB_DATA: CACHE_DATA_TYPES.WEB_DATA.tags,
-        PAGES: CACHE_DATA_TYPES.PAGES.tags,
-        GEO_DATA: CACHE_DATA_TYPES.GEO_DATA.tags,
-        USER_DATA: CACHE_DATA_TYPES.USER_DATA.tags,
-        API_RESPONSE: CACHE_DATA_TYPES.API_RESPONSE.tags
-    },
-    // 快取鍵值生成函數
+    // 快取鍵值生成（不依賴自身物件，避免初始化順序問題）
     generateKey: (type, identifier, locale)=>{
         const parts = [
-            CACHE_CONFIG.REDIS.PREFIX,
+            redisConfig.prefix,
             type,
             identifier
         ];
         if (locale) parts.push(locale);
-        return parts.join(CACHE_CONFIG.REDIS.KEY_SEPARATOR);
+        return parts.join(redisConfig.keySeparator);
     }
 };
 function getCacheConfig(type) {
-    return CACHE_DATA_TYPES[type];
+    return cacheDataTypes[type];
 }
-function getCacheTTL(type) {
-    return CACHE_DATA_TYPES[type].ttl * 1000;
+function getCacheTtl(type) {
+    return cacheDataTypes[type].ttl * 1000;
 }
 function getCacheTags(type) {
-    return CACHE_DATA_TYPES[type].tags;
+    return cacheDataTypes[type].tags;
 }
 function getDataTypesByTag(tag) {
-    return Object.entries(CACHE_DATA_TYPES).filter(([_, config])=>config.tags.includes(tag)).map(([key])=>key);
+    return Object.entries(cacheDataTypes).filter(([_, config])=>config.tags.includes(tag)).map(([key])=>key);
 }
 function getAllCacheTags() {
-    const allTags = Object.values(CACHE_DATA_TYPES).flatMap((config)=>config.tags);
+    const allTags = Object.values(cacheDataTypes).flatMap((config)=>config.tags);
     return [
         ...new Set(allTags)
     ];
 }
 function getCacheConfigSummary() {
-    return Object.entries(CACHE_DATA_TYPES).map(([type, config])=>({
+    return Object.entries(cacheDataTypes).map(([type, config])=>({
             type,
             ttl: `${config.ttl}s (${config.ttl / 60}min)`,
             tags: config.tags.join(', '),
@@ -550,146 +431,80 @@ function getCacheConfigSummary() {
 "use strict";
 
 /**
- * 快取系統服務端配置檔案
- * 包含完整的快取配置，包括環境變數
+ * 快取系統服務端配置（僅業務邏輯）
+ * - 不重複 env：用 getter 直接回傳 env 值
+ * - 保留 server 覆寫 ttl 與鍵規則（generateKey）
+ * - 命名使用小寫（camelCase）
  */ __turbopack_context__.s({
-    "SERVER_CACHE_CONFIG": ()=>SERVER_CACHE_CONFIG,
+    "getCacheStrategy": ()=>getCacheStrategy,
+    "getDefaultTtl": ()=>getDefaultTtl,
     "getServerCacheConfig": ()=>getServerCacheConfig,
     "getServerCacheConfigSummary": ()=>getServerCacheConfigSummary,
-    "getServerCacheTTL": ()=>getServerCacheTTL,
-    "getServerCacheTags": ()=>getServerCacheTags
+    "getServerCacheTags": ()=>getServerCacheTags,
+    "getServerCacheTtl": ()=>getServerCacheTtl,
+    "getServerCacheTtlMs": ()=>getServerCacheTtlMs,
+    "isCacheEnabled": ()=>isCacheEnabled,
+    "isCdnEnabled": ()=>isCdnEnabled,
+    "serverCacheConfig": ()=>serverCacheConfig
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/cache.client.config.ts [app-ssr] (ecmascript)");
 ;
 ;
-/**
- * 快取資料類型定義 - 統一管理所有快取相關設定
- */ const SERVER_CACHE_DATA_TYPES = {
-    LANGUAGES: {
-        ttl: 7200,
-        tags: [
-            'languages',
-            'static-data'
-        ],
-        description: '語言資料快取'
-    },
-    LOCALES: {
-        ttl: 7200,
-        tags: [
-            'locales',
-            'static-data'
-        ],
-        description: '地區設定快取'
-    },
-    MENUS: {
-        ttl: 3600,
-        tags: [
-            'menus',
-            'navigation'
-        ],
-        description: '選單資料快取'
-    },
-    WEB_DATA: {
-        ttl: 3600,
-        tags: [
-            'web-data',
-            'static-data'
-        ],
-        description: '網站資料快取'
-    },
-    PAGES: {
-        ttl: 1800,
-        tags: [
-            'pages',
-            'content'
-        ],
-        description: '頁面內容快取'
-    },
-    GEO_DATA: {
-        ttl: 1800,
-        tags: [
-            'geo-data',
-            'location'
-        ],
-        description: '地理位置資料快取'
-    },
-    USER_DATA: {
-        ttl: 600,
-        tags: [
-            'user-data',
-            'dynamic-data'
-        ],
-        description: '使用者資料快取'
-    },
-    API_RESPONSE: {
-        ttl: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL,
-        tags: [
-            'api-response'
-        ],
-        description: 'API 回應快取'
-    }
+// 服務端覆寫：僅作必要差異（例：apiResponse）
+const serverTtl = {
+    ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cacheConfig"].ttl,
+    apiResponse: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL
 };
-const SERVER_CACHE_CONFIG = {
-    // 基礎配置 (從環境變數讀取)
-    ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_ENABLED,
-    CDN_ENABLED: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_CDN_ENABLED,
-    DEFAULT_TTL: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL,
-    STRATEGY: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY,
-    // Redis 配置
-    REDIS: {
-        URL: undefined,
-        PREFIX: 'minmax:',
-        KEY_SEPARATOR: ':'
-    },
-    // 從 SERVER_CACHE_DATA_TYPES 自動生成 TTL 和 TAGS
-    TTL: {
-        LANGUAGES: SERVER_CACHE_DATA_TYPES.LANGUAGES.ttl,
-        LOCALES: SERVER_CACHE_DATA_TYPES.LOCALES.ttl,
-        MENUS: SERVER_CACHE_DATA_TYPES.MENUS.ttl,
-        WEB_DATA: SERVER_CACHE_DATA_TYPES.WEB_DATA.ttl,
-        PAGES: SERVER_CACHE_DATA_TYPES.PAGES.ttl,
-        GEO_DATA: SERVER_CACHE_DATA_TYPES.GEO_DATA.ttl,
-        USER_DATA: SERVER_CACHE_DATA_TYPES.USER_DATA.ttl,
-        API_RESPONSE: SERVER_CACHE_DATA_TYPES.API_RESPONSE.ttl
-    },
-    TAGS: {
-        LANGUAGES: SERVER_CACHE_DATA_TYPES.LANGUAGES.tags,
-        LOCALES: SERVER_CACHE_DATA_TYPES.LOCALES.tags,
-        MENUS: SERVER_CACHE_DATA_TYPES.MENUS.tags,
-        WEB_DATA: SERVER_CACHE_DATA_TYPES.WEB_DATA.tags,
-        PAGES: SERVER_CACHE_DATA_TYPES.PAGES.tags,
-        GEO_DATA: SERVER_CACHE_DATA_TYPES.GEO_DATA.tags,
-        USER_DATA: SERVER_CACHE_DATA_TYPES.USER_DATA.tags,
-        API_RESPONSE: SERVER_CACHE_DATA_TYPES.API_RESPONSE.tags
-    },
-    // 快取鍵值生成函數
+const serverTags = {
+    ...__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cacheConfig"].tags
+};
+const serverCacheConfig = {
+    // key 規則（沿用 client）
+    redis: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cacheConfig"].redis,
+    // ttl/tags 聚合（server 覆寫）
+    ttl: serverTtl,
+    tags: serverTags,
+    // 快取鍵值生成（純規則）
     generateKey: (type, identifier, locale)=>{
         const parts = [
-            SERVER_CACHE_CONFIG.REDIS.PREFIX,
+            __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cacheConfig"].redis.prefix,
             type,
             identifier
         ];
         if (locale) parts.push(locale);
-        return parts.join(SERVER_CACHE_CONFIG.REDIS.KEY_SEPARATOR);
+        return parts.join(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cacheConfig"].redis.keySeparator);
     }
 };
+const isCacheEnabled = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_ENABLED;
+const isCdnEnabled = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_CDN_ENABLED;
+const getDefaultTtl = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].CACHE_DEFAULT_TTL; // 秒
+const getCacheStrategy = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].I18N_CACHE_STRATEGY;
 ;
 function getServerCacheConfig(type) {
-    return SERVER_CACHE_DATA_TYPES[type];
+    const base = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getCacheConfig"])(type);
+    return {
+        type,
+        ttl: serverTtl[type],
+        tags: serverTags[type],
+        description: base.description
+    };
 }
-function getServerCacheTTL(type) {
-    return SERVER_CACHE_DATA_TYPES[type].ttl * 1000;
+function getServerCacheTtl(type) {
+    return serverTtl[type]; // 秒
+}
+function getServerCacheTtlMs(type) {
+    return serverTtl[type] * 1000; // 毫秒
 }
 function getServerCacheTags(type) {
-    return SERVER_CACHE_DATA_TYPES[type].tags;
+    return serverTags[type];
 }
 function getServerCacheConfigSummary() {
-    return Object.entries(SERVER_CACHE_DATA_TYPES).map(([type, config])=>({
+    return Object.keys(serverTtl).map((type)=>({
             type,
-            ttl: `${config.ttl}s (${config.ttl / 60}min)`,
-            tags: config.tags.join(', '),
-            description: config.description
+            ttl: `${serverTtl[type]}s (${serverTtl[type] / 60}min)`,
+            tags: serverTags[type].join(', '),
+            description: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$cache$2e$client$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getCacheConfig"])(type).description
         }));
 }
 }),
@@ -751,17 +566,19 @@ __turbopack_context__.s({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$routing$2f$defineRouting$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__defineRouting$3e$__ = __turbopack_context__.i("[project]/node_modules/next-intl/dist/esm/development/routing/defineRouting.js [app-ssr] (ecmascript) <export default as defineRouting>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$index$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$module__evaluation$3e$__ = __turbopack_context__.i("[project]/src/config/index.ts [app-ssr] (ecmascript) <module evaluation>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/config/locale.server.config.ts [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/env.mjs [app-ssr] (ecmascript)");
+;
 ;
 ;
 const routing = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$intl$2f$dist$2f$esm$2f$development$2f$routing$2f$defineRouting$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__defineRouting$3e$__["defineRouting"])({
     // 支援的語系 - 從環境變數讀取，會被 API 動態覆蓋
-    locales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].SUPPORTED_LOCALES,
-    // 預設語系 - 從環境變數讀取，會被 API 動態覆蓋
-    defaultLocale: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].DEFAULT_LOCALE,
+    locales: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["serverLocaleConfig"].supportedLocales,
+    // 預設語系 - 先用 env，若不在支援清單內則回退第一個
+    defaultLocale: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["serverLocaleConfig"].getValidDefaultLocale(),
     // 語系前綴模式 - 從環境變數讀取
-    localePrefix: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].LOCALE_PREFIX_MODE,
+    localePrefix: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].LOCALE_PREFIX_MODE,
     // 啟用語系檢測 - 從環境變數讀取
-    localeDetection: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$config$2f$locale$2e$server$2e$config$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["SERVER_LOCALE_CONFIG"].DETECTION.ENABLED
+    localeDetection: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$env$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["env"].LOCALE_DETECTION_ENABLED
 });
 }),
 "[project]/src/i18n/navigation.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {

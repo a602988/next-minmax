@@ -21,7 +21,7 @@ const server = {
     // ==========================================
 
     /** 前端國家站點判斷 開關 */
-    INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("true"),
+    INTERNATIONALIZATION_ENABLED: z.string().transform((val) => val === "true").default("false"),
 
     /** 多語系功能開關 */
     MULTI_LANGUAGE_ENABLED: z.string().transform((val) => val === "true").default("true"),
@@ -78,7 +78,7 @@ const server = {
     // ==========================================
 
     /** 外部後端 API 基礎網址 */
-    EXTERNAL_API_BASE_URL: z.string().default("https://v5.jeffy.test"),
+    API_BASE_URL: z.string().default("https://v5.jeffy.test"),
 
     /** 一般 API 請求超時 (毫秒) */
     API_TIMEOUT: z.string().transform((val) => parseInt(val)).default("5000"),
@@ -126,7 +126,7 @@ const server = {
     // ==========================================
 
     /** 會員功能開關 */
-   MEMBERSHIP_ENABLED: z.string().transform((val) => val === "true").default("false"),
+    MEMBERSHIP_ENABLED: z.string().transform((val) => val === "true").default("false"),
 
     // ==========================================
     // 🔐 敏感資訊
@@ -143,7 +143,7 @@ const server = {
     //API_SECRET_KEY: z.string().optional(),
 
     /** JWT 簽名密鑰 */
-   // JWT_SECRET: z.string().optional(),
+    // JWT_SECRET: z.string().optional(),
 
     /** 管理員 API 金鑰 */
     //ADMIN_API_KEY: z.string().optional(),
@@ -188,7 +188,7 @@ const client = {
     // ==========================================
 
     /** 前端 API 基礎網址 */
-    NEXT_PUBLIC_API_BASE_URL: z.string().default("http://localhost:3000"),
+    NEXT_PUBLIC_API_BASE_URL: z.string().default("http://localhost:3000/api/ssr/"),
 
     // ==========================================
     // 🌍 國際化功能開關

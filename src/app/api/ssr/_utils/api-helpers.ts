@@ -7,7 +7,7 @@ type SupportedLocale = string;
 /**
  * 模組級衍生：支援語系清單（從 env 轉換一次即可）
  */
-const supportedLocales: SupportedLocale[] = env.SUPPORTED_LOCALES
+const supportedLocales: SupportedLocale[] = env.NEXT_PUBLIC_SUPPORTED_LOCALES
     .split(',')
     .map((l) => l.trim() as SupportedLocale);
 
